@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Blåtur Istanbul</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blåtur">
+<meta name="theme-color" content="#E30A17">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="ikon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{
+  --red:#E30A17; --red-dark:#8f0710; --dark:#0f1720; --ink:#1c2530;
+  --muted:#6b7885; --line:#e4e8ec; --bg:#f5f7f9; --card:#fff;
+  --ok:#1f8a5b; --warn:#c8962e;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bot:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+body{padding-bottom:calc(66px + var(--safe-bot))}
+
+header{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 60%,#ff3b46 100%);
+  color:#fff;padding:calc(14px + var(--safe-top)) 18px 16px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-30px;top:-30px;width:150px;height:150px;
+  border-radius:50%;background:rgba(255,255,255,.08)}
+header h1{margin:0;font-size:21px;letter-spacing:-.3px;position:relative}
+header .sub{margin:3px 0 0;font-size:13px;opacity:.93;position:relative}
+.nedtelling{margin-top:12px;display:flex;gap:8px;position:relative}
+.nt{background:rgba(255,255,255,.16);border-radius:10px;padding:7px 0;flex:1;text-align:center;
+  backdrop-filter:blur(4px)}
+.nt b{display:block;font-size:19px;line-height:1.1;font-variant-numeric:tabular-nums}
+.nt span{font-size:10px;text-transform:uppercase;letter-spacing:.7px;opacity:.85}
+
+main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
+.tab{display:none}.tab.on{display:block;animation:inn .18s ease}
+@keyframes inn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.kort{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(15,23,32,.05)}
+.kort h2{margin:0 0 10px;font-size:16px;letter-spacing:-.2px}
+.kort h3{margin:16px 0 8px;font-size:14px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.7px}
+
+.dag{margin:20px 0 10px;font-size:13px;font-weight:700;color:var(--red);
+  text-transform:uppercase;letter-spacing:1px}
+.dag:first-child{margin-top:4px}
+.post{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:12px 14px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
+.post.uthevet{border-color:var(--red);border-width:2px;background:#fffbfb}
+.post.ikkebekreftet{opacity:.72;border-style:dashed}
+.post .tid{font-size:15px;font-weight:700;min-width:52px;font-variant-numeric:tabular-nums;
+  padding-top:1px;letter-spacing:-.3px}
+.post .inn{flex:1;min-width:0}
+.post .tit{font-weight:650;font-size:15px;line-height:1.3}
+.post .std{font-size:12.5px;color:var(--muted);margin-top:2px}
+.post .det{font-size:13.5px;line-height:1.5;margin-top:7px;color:#39434f}
+.post .ikon{font-size:19px;line-height:1}
+.merke{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.6px;padding:2px 7px;border-radius:20px;margin-top:7px}
+.m-ok{background:#e8f5ee;color:var(--ok)}
+.m-plan{background:#f0f2f5;color:var(--muted)}
+.m-ikke{background:#fdf3e3;color:var(--warn)}
+.kartlenke{display:inline-block;margin-top:8px;font-size:13px;color:var(--red);
+  text-decoration:none;font-weight:600}
+
+.varsel{border-radius:14px;padding:12px 14px;margin-bottom:10px;font-size:14px;line-height:1.5}
+.v-viktig{background:#fff1f2;border:1px solid #f5c2c7}
+.v-info{background:#eef6fd;border:1px solid #c9e0f5}
+.v-gøy{background:#fdf6e3;border:1px solid #f0dfae}
+.varsel .meta{font-size:11.5px;color:var(--muted);margin-top:6px}
+
+#kart{height:62vh;min-height:340px;border-radius:14px;border:1px solid var(--line);z-index:1}
+.filtre{margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:6px 12px;border-radius:16px;border:1px solid var(--line);background:#fff;
+  font-size:13px;cursor:pointer;user-select:none}
+.chip.on{color:#fff;border-color:transparent}
+
+.qwrap{text-align:center}
+.qframe{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 16px}
+.qkat{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--red);font-weight:700}
+.qteller{font-size:12px;color:var(--muted);margin-top:4px}
+.qsp{font-size:19px;font-weight:650;line-height:1.35;margin:16px 0 18px;letter-spacing:-.2px}
+.qalt{display:block;width:100%;padding:14px;margin-bottom:9px;border-radius:12px;
+  border:1.5px solid var(--line);background:#fff;font-size:15.5px;text-align:left;
+  cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
+.qalt:active{transform:scale(.985)}
+.qalt.riktig{background:#e8f5ee;border-color:var(--ok);color:#14603f;font-weight:600}
+.qalt.feil{background:#fdecee;border-color:var(--red);color:#8f0710}
+.qalt:disabled{cursor:default}
+.qfork{font-size:14px;line-height:1.5;background:#f7f9fa;border-radius:12px;
+  padding:12px;margin-top:12px;text-align:left}
+.knapp{background:var(--red);color:#fff;border:none;border-radius:12px;padding:14px 26px;
+  font-size:16px;font-weight:650;font-family:inherit;cursor:pointer;margin-top:14px;width:100%}
+.knapp.sek{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.score{font-size:46px;font-weight:800;color:var(--red);letter-spacing:-2px;line-height:1}
+.stolpe{height:8px;background:#eef1f4;border-radius:6px;overflow:hidden;margin:14px 0}
+.stolpe i{display:block;height:100%;background:var(--red);border-radius:6px;transition:.3s}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:8px 0;border-bottom:1px solid #f0f2f5;vertical-align:top;line-height:1.45}
+td:first-child{font-weight:600;width:38%;padding-right:12px}
+tr:last-child td{border-bottom:none}
+
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;
+  padding-bottom:var(--safe-bot);z-index:1000}
+nav button{flex:1;border:none;background:none;padding:9px 0 7px;font-family:inherit;
+  font-size:10.5px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:3px}
+nav button.on{color:var(--red);font-weight:650}
+nav .ni{font-size:21px;line-height:1}
+
+.status{position:fixed;top:calc(var(--safe-top) + 8px);right:12px;background:rgba(15,23,32,.82);
+  color:#fff;font-size:11px;padding:5px 11px;border-radius:20px;z-index:2000;
+  opacity:0;transition:.3s;pointer-events:none}
+.status.vis{opacity:1}
+.fot{text-align:center;font-size:11.5px;color:var(--muted);padding:16px 0 4px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="status" id="status"></div>
+
+<header>
+  <h1>🇹🇷 Blåtur Istanbul</h1>
+  <p class="sub" id="datoer">11.–13. september 2026</p>
+  <div class="nedtelling" id="nedtelling"></div>
+</header>
+
+<main>
+  <!-- PROGRAM -->
+  <div class="tab on" id="t-program">
+    <div id="program"></div>
+    <div class="fot" id="fot"></div>
+  </div>
+
+  <!-- KART -->
+  <div class="tab" id="t-kart">
+    <div class="filtre" id="filtre"></div>
+    <div id="kart"></div>
+    <div class="fot">Trykk en markør for detaljer og veibeskrivelse.<br>Kartdata: OpenStreetMap</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="tab" id="t-quiz">
+    <div class="qwrap" id="quiz"></div>
+  </div>
+
+  <!-- NYTT -->
+  <div class="tab" id="t-nytt">
+    <div id="oppslag"></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="tab" id="t-info">
+    <div id="info"></div>
+  </div>
+</main>
+
+<nav>
+  <button class="on" data-t="program"><span class="ni">📋</span>Program</button>
+  <button data-t="kart"><span class="ni">🗺️</span>Kart</button>
+  <button data-t="quiz"><span class="ni">🎯</span>Quiz</button>
+  <button data-t="nytt"><span class="ni">📣</span>Nytt</button>
+  <button data-t="info"><span class="ni">ℹ️</span>Info</button>
+</nav>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ============================================================
+   Blåtur Istanbul — app v1
+   All tekst og alt innhold ligger i data.json.
+   Denne filen skal du normalt ikke endre.
+   ============================================================ */
+
+let DATA = null;
+let sisteVersjon = null;
+let kartLaget = false;
+let kartRef = null, markorer = [], aktiveKat = new Set();
+
+const $ = s => document.querySelector(s);
+const el = (t, c, h) => { const e = document.createElement(t); if(c) e.className = c; if(h !== undefined) e.innerHTML = h; return e; };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- Henting av data ---------- */
+async function hentData(forste) {
+  try {
+    const r = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const ny = await r.json();
+
+    if (!forste && sisteVersjon !== null && ny.versjon !== sisteVersjon) {
+      visStatus('✨ Oppdatert');
+      if (navigator.vibrate) navigator.vibrate(60);
+    }
+    sisteVersjon = ny.versjon;
+    DATA = ny;
+    tegnAlt();
+    lagreLokalt(ny);
+  } catch (e) {
+    const lagret = localStorage.getItem('blatur-data');
+    if (lagret && !DATA) { DATA = JSON.parse(lagret); tegnAlt(); visStatus('📴 Offline'); }
+  }
+}
+function lagreLokalt(d) { try { localStorage.setItem('blatur-data', JSON.stringify(d)); } catch(e){} }
+function visStatus(t) {
+  const s = $('#status'); s.textContent = t; s.classList.add('vis');
+  setTimeout(() => s.classList.remove('vis'), 2600);
+}
+
+/* ---------- Nedtelling ---------- */
+function tegnNedtelling() {
+  const boks = $('#nedtelling');
+  if (!DATA?.tur?.avreise) return;
+  const mal = new Date(DATA.tur.avreise), na = new Date();
+  let d = Math.floor((mal - na) / 86400000);
+  if (d < 0) { boks.innerHTML = '<div class="nt" style="flex:1"><b>Vi er her! 🇹🇷</b></div>'; return; }
+  const t = Math.floor((mal - na) / 3600000) % 24;
+  const m = Math.floor((mal - na) / 60000) % 60;
+  boks.innerHTML =
+    `<div class="nt"><b>${d}</b><span>dager</span></div>` +
+    `<div class="nt"><b>${t}</b><span>timer</span></div>` +
+    `<div class="nt"><b>${m}</b><span>min</span></div>`;
+}
+
+/* ---------- Program ---------- */
+function tegnProgram() {
+  const boks = $('#program'); boks.innerHTML = '';
+  (DATA.program || []).forEach(dag => {
+    boks.appendChild(el('div', 'dag', esc(dag.dag)));
+    (dag.poster || []).forEach(p => {
+      const kl = 'post' + (p.uthevet ? ' uthevet' : '') + (p.status === 'ikke-bekreftet' ? ' ikkebekreftet' : '');
+      const d = el('div', kl);
+      let merke = '';
+      if (p.status === 'bekreftet') merke = '<span class="merke m-ok">✓ Bekreftet</span>';
+      else if (p.status === 'ikke-bekreftet') merke = '<span class="merke m-ikke">Ikke bekreftet</span>';
+      else merke = '<span class="merke m-plan">Planlagt</span>';
+
+      let kart = '';
+      if (p.kart) kart = `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>`;
+
+      d.innerHTML =
+        `<div class="tid">${esc(p.tid)}</div>` +
+        `<div class="inn">` +
+          `<div class="tit">${p.ikon ? p.ikon + ' ' : ''}${esc(p.tittel)}</div>` +
+          (p.sted ? `<div class="std">${esc(p.sted)}</div>` : '') +
+          (p.detalj ? `<div class="det">${esc(p.detalj)}</div>` : '') +
+          merke + kart +
+        `</div>`;
+      boks.appendChild(d);
+    });
+  });
+
+  boks.querySelectorAll('[data-kart]').forEach(a => {
+    a.onclick = ev => {
+      ev.preventDefault();
+      bytt('kart');
+      setTimeout(() => {
+        const s = (DATA.steder || []).find(x => x.id === a.dataset.kart);
+        if (s && kartRef) {
+          kartRef.setView([s.lat, s.lon], 16);
+          const m = markorer.find(x => x.__s.id === s.id);
+          if (m) m.openPopup();
+        }
+      }, 350);
+    };
+  });
+
+  $('#fot').innerHTML = `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
+}
+
+/* ---------- Kart ---------- */
+const FARGER = { Base:'#111827', Program:'#E30A17', Uteliv:'#c8962e', Sightseeing:'#1f8a5b', Mat:'#0a5cb5', Transport:'#5d6b7a' };
+
+function tegnKart() {
+  if (!kartLaget) {
+    kartRef = L.map('kart', { zoomControl: true }).setView([41.020, 28.985], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(kartRef);
+    kartLaget = true;
+  }
+  markorer.forEach(m => kartRef.removeLayer(m));
+  markorer = [];
+
+  const hotell = (DATA.steder || []).find(s => s.id === 'hotell') || { lat: 41.0246, lon: 28.9755 };
+  const kats = [...new Set((DATA.steder || []).map(s => s.kat))];
+  if (!aktiveKat.size) kats.forEach(k => aktiveKat.add(k));
+
+  const f = $('#filtre'); f.innerHTML = '';
+  kats.forEach(k => {
+    const c = el('span', 'chip' + (aktiveKat.has(k) ? ' on' : ''), esc(k));
+    if (aktiveKat.has(k)) c.style.background = FARGER[k] || '#333';
+    c.onclick = () => { aktiveKat.has(k) ? aktiveKat.delete(k) : aktiveKat.add(k); tegnKart(); };
+    f.appendChild(c);
+  });
+
+  (DATA.steder || []).filter(s => aktiveKat.has(s.kat)).forEach(s => {
+    const farge = FARGER[s.kat] || '#333';
+    const stor = s.kat === 'Program' || s.kat === 'Base';
+    const st = stor ? 20 : 14;
+    const ikon = L.divIcon({
+      className: '', iconSize: [st, st], iconAnchor: [st/2, st/2],
+      html: `<div style="width:${st}px;height:${st}px;border-radius:50%;background:${farge};
+        border:${stor ? '3px solid #ffd24a' : '2px solid #fff'};box-shadow:0 1px 5px rgba(0,0,0,.4)"></div>`
+    });
+    const gmaps = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}`;
+    const gange = `https://www.google.com/maps/dir/?api=1&origin=${hotell.lat},${hotell.lon}&destination=${s.lat},${s.lon}&travelmode=walking`;
+    const m = L.marker([s.lat, s.lon], { icon: ikon, title: s.navn }).bindPopup(
+      `<div style="min-width:200px;font-family:-apple-system,sans-serif">
+        <div style="font-weight:700;font-size:14.5px;margin-bottom:3px">${esc(s.navn)}</div>
+        <div style="font-size:12.5px;line-height:1.45;margin-bottom:9px;color:#39434f">${esc(s.notat || '')}</div>
+        <a href="${gmaps}" target="_blank" style="font-size:13px;color:#E30A17;font-weight:600">Åpne i Maps</a> &nbsp;·&nbsp;
+        <a href="${gange}" target="_blank" style="font-size:13px;color:#E30A17;font-weight:600">Gå dit</a>
+      </div>`);
+    m.__s = s; m.addTo(kartRef); markorer.push(m);
+  });
+  setTimeout(() => kartRef.invalidateSize(), 120);
+}
+
+/* ---------- Quiz ---------- */
+let qIdx = 0, qScore = 0, qSvart = false, qStartet = false;
+
+function tegnQuiz() {
+  const boks = $('#quiz');
+  const sp = DATA.quiz || [];
+  if (!sp.length) { boks.innerHTML = '<div class="kort">Ingen spørsmål ennå.</div>'; return; }
+
+  if (!qStartet) {
+    const best = localStorage.getItem('blatur-best');
+    boks.innerHTML =
+      `<div class="qframe">
+        <div style="font-size:52px">🎯</div>
+        <h2 style="margin:10px 0 6px;font-size:21px">Blåtur-quizen</h2>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.55;margin:0">
+          ${sp.length} spørsmål om Istanbul, turen og litt mat og drikke.<br>
+          Poengene er dine egne — les dem høyt for de andre.</p>
+        ${best ? `<p style="font-size:13.5px;color:var(--muted);margin-top:12px">Din beste: <b>${esc(best)}</b> av ${sp.length}</p>` : ''}
+        <button class="knapp" onclick="startQuiz()">Start quizen</button>
+      </div>`;
+    return;
+  }
+
+  if (qIdx >= sp.length) {
+    const pst = Math.round(qScore / sp.length * 100);
+    const best = parseInt(localStorage.getItem('blatur-best') || '0', 10);
+    if (qScore > best) localStorage.setItem('blatur-best', qScore);
+    let dom = 'Du klarer deg.';
+    if (pst === 100) dom = 'Feilfritt. Du har lest planen.';
+    else if (pst >= 80) dom = 'Sterkt. Du er klar for Istanbul.';
+    else if (pst >= 50) dom = 'Godkjent — så vidt.';
+    else dom = 'Du spanderer første runde.';
+    boks.innerHTML =
+      `<div class="qframe">
+        <div class="score">${qScore}/${sp.length}</div>
+        <div class="stolpe"><i style="width:${pst}%"></i></div>
+        <p style="font-size:16px;font-weight:600;margin:8px 0 2px">${dom}</p>
+        <p style="color:var(--muted);font-size:14px">${pst} % riktig${qScore > best ? ' · ny personlig rekord 🏆' : ''}</p>
+        <button class="knapp" onclick="startQuiz()">Prøv igjen</button>
+        <button class="knapp sek" onclick="qStartet=false;tegnQuiz()">Tilbake</button>
+      </div>`;
+    return;
+  }
+
+  const q = sp[qIdx];
+  boks.innerHTML =
+    `<div class="qframe">
+      <div class="qkat">${esc(q.kategori || 'Spørsmål')}</div>
+      <div class="qteller">Spørsmål ${qIdx + 1} av ${sp.length} · ${qScore} riktige</div>
+      <div class="stolpe"><i style="width:${qIdx / sp.length * 100}%"></i></div>
+      <div class="qsp">${esc(q.sporsmal)}</div>
+      <div id="qalt"></div>
+      <div id="qfork"></div>
+    </div>`;
+
+  const alt = $('#qalt');
+  (q.alternativer || []).forEach((a, i) => {
+    const b = el('button', 'qalt', esc(a));
+    b.onclick = () => svar(i);
+    alt.appendChild(b);
+  });
+}
+
+function startQuiz() { qIdx = 0; qScore = 0; qSvart = false; qStartet = true; tegnQuiz(); }
+
+function svar(i) {
+  if (qSvart) return;
+  qSvart = true;
+  const q = DATA.quiz[qIdx];
+  const knapper = document.querySelectorAll('#qalt .qalt');
+  knapper.forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.riktig) b.classList.add('riktig');
+    else if (j === i) b.classList.add('feil');
+  });
+  if (i === q.riktig) { qScore++; if (navigator.vibrate) navigator.vibrate(40); }
+  else if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+
+  $('#qfork').innerHTML =
+    `<div class="qfork">${i === q.riktig ? '✅ ' : '❌ '}${esc(q.forklaring || '')}</div>
+     <button class="knapp" onclick="neste()">${qIdx + 1 >= DATA.quiz.length ? 'Se resultatet' : 'Neste spørsmål'}</button>`;
+}
+
+function neste() { qIdx++; qSvart = false; tegnQuiz(); }
+
+/* ---------- Oppslag ---------- */
+function tegnOppslag() {
+  const boks = $('#oppslag'); boks.innerHTML = '';
+  const o = DATA.oppslag || [];
+  if (!o.length) { boks.innerHTML = '<div class="kort">Ingenting nytt akkurat nå.</div>'; return; }
+  o.forEach(x => {
+    const kl = 'varsel v-' + (x.type === 'viktig' ? 'viktig' : x.type === 'gøy' ? 'gøy' : 'info');
+    boks.appendChild(el('div', kl,
+      `<div>${esc(x.tekst)}</div><div class="meta">${esc(x.tid || '')}${x.av ? ' · ' + esc(x.av) : ''}</div>`));
+  });
+}
+
+/* ---------- Info ---------- */
+function tegnInfo() {
+  const boks = $('#info'); boks.innerHTML = '';
+  (DATA.info || []).forEach(gr => {
+    const k = el('div', 'kort');
+    k.appendChild(el('h2', null, esc(gr.tittel)));
+    const t = el('table');
+    (gr.rader || []).forEach(r => t.appendChild(el('tr', null, `<td>${esc(r[0])}</td><td>${esc(r[1])}</td>`)));
+    k.appendChild(t);
+    boks.appendChild(k);
+  });
+  if ((DATA.gjengen || []).length) {
+    const k = el('div', 'kort');
+    k.appendChild(el('h2', null, 'Gjengen'));
+    const t = el('table');
+    DATA.gjengen.forEach(p => t.appendChild(el('tr', null, `<td>${esc(p.navn)}</td><td>${esc(p.rolle || '')}</td>`)));
+    k.appendChild(t); boks.appendChild(k);
+  }
+}
+
+/* ---------- Faner ---------- */
+function bytt(navn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  $('#t-' + navn).classList.add('on');
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === navn));
+  if (navn === 'kart') tegnKart();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => bytt(b.dataset.t));
+
+/* ---------- Tegn alt ---------- */
+function tegnAlt() {
+  if (!DATA) return;
+  $('#datoer').textContent = (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '');
+  document.title = DATA.tur?.tittel || 'Blåtur';
+  tegnNedtelling(); tegnProgram(); tegnOppslag(); tegnInfo();
+  if (!qStartet) tegnQuiz();
+  if ($('#t-kart').classList.contains('on')) tegnKart();
+}
+
+/* ---------- Offline ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+window.addEventListener('online',  () => { visStatus('📶 Tilbake på nett'); hentData(false); });
+window.addEventListener('offline', () => visStatus('📴 Offline — lagret versjon'));
+
+/* ---------- Start ---------- */
+hentData(true);
+setInterval(() => hentData(false), 30000);
+setInterval(tegnNedtelling, 30000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) hentData(false); });
+</script>
+</body>
+</html>

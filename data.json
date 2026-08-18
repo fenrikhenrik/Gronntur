@@ -1,0 +1,560 @@
+{
+  "versjon": 2,
+  "sistOppdatert": "18. august 21:00",
+  "oppdatertAv": "Henrik",
+  "tur": {
+    "tittel": "Blåtur Istanbul",
+    "datoer": "11.–13. september 2026",
+    "avreise": "2026-09-11T07:15:00+02:00",
+    "hotell": {
+      "navn": "Cheers Porthouse Otel",
+      "adresse": "Mumhane Cd. 31, Karaköy",
+      "lat": 41.0246,
+      "lon": 28.9755
+    }
+  },
+  "oppslag": [
+    {
+      "type": "gøy",
+      "tid": "18. august",
+      "tekst": "Navnene er inne, quizen er testet og appen virker nå uten dekning også. Se om du slår Henrik på quizen.",
+      "av": "Erik Bruland"
+    },
+    {
+      "type": "viktig",
+      "tid": "18. august",
+      "tekst": "Appen er live. Legg den på hjemskjermen: Del-knappen i Safari → «Legg til på Hjem-skjerm». Da slipper du å lete etter lenken.",
+      "av": "Henrik"
+    },
+    {
+      "type": "info",
+      "tid": "18. august",
+      "tekst": "Programmet under viser bare det som faktisk er booket og betalt. Resten kommer etter hvert som det bekreftes.",
+      "av": "Erik Bruland"
+    }
+  ],
+  "program": [
+    {
+      "dag": "Fredag 11. september",
+      "poster": [
+        {
+          "tid": "07:15",
+          "tittel": "TK1748 Oslo → Istanbul",
+          "sted": "Oslo Lufthavn",
+          "detalj": "Lander IST 12:10. Vær på flyplassen i god tid — dette er turens mest sårbare punkt.",
+          "status": "bekreftet",
+          "ikon": "✈️"
+        },
+        {
+          "tid": "14:15",
+          "tittel": "Innsjekk Cheers Porthouse",
+          "sted": "Mumhane Cd. 31, Karaköy",
+          "detalj": "Legg igjen bagasjen, ikke sett dere ned. Vi skal videre.",
+          "status": "bekreftet",
+          "ikon": "🏨",
+          "kart": "hotell"
+        },
+        {
+          "tid": "15:45",
+          "tittel": "Uber til hamam",
+          "sted": "Fra hotellet",
+          "detalj": "Elleve mann = tre biler. Bestill alle tre samtidig fra resepsjonen, ikke fra fortauet.",
+          "status": "bekreftet",
+          "ikon": "🚕",
+          "kart": "hamam"
+        },
+        {
+          "tid": "16:15",
+          "tittel": "Hamam — Gedik Paşa",
+          "sted": "Hamam Sk. 65, Fatih",
+          "detalj": "45 minutters skrubb og skum. Hele hamamen er vår alene, og alle elleve behandles samtidig. Bygget i 1475. €70 pr. mann, betalt.",
+          "status": "bekreftet",
+          "ikon": "🧖",
+          "kart": "hamam"
+        },
+        {
+          "tid": "18:00",
+          "tittel": "Dusj og skift på hotellet",
+          "sted": "Cheers Porthouse",
+          "detalj": "Ta med jakke. Vi er på vannet 19:05, og september-kvelder på Bosporos er kjøligere enn dagen.",
+          "status": "bekreftet",
+          "ikon": "🚿"
+        },
+        {
+          "tid": "18:50",
+          "tittel": "OPPMØTE I RESEPSJONEN",
+          "sted": "Cheers Porthouse",
+          "detalj": "Ferdig dusjet og skiftet. Båten går 19:05 og venter ikke. Dette er kveldens eneste harde oppmøte.",
+          "status": "bekreftet",
+          "ikon": "⏰",
+          "uthevet": true
+        },
+        {
+          "tid": "19:05",
+          "tittel": "Matturné i Kadıköy",
+          "sted": "Ferge fra Karaköy-kaia",
+          "detalj": "Turkish Flavours. Svensktalende guide møter oss på Kadıköy-kaia 19:35. Smaksprøver gjennom markedet og sittende meyhane-middag. Seks enheter alkohol inkludert. €125 pr. mann, betalt.",
+          "status": "bekreftet",
+          "ikon": "🍢",
+          "kart": "kaia"
+        },
+        {
+          "tid": "23:00",
+          "tittel": "Videre i Kadıköy",
+          "sted": "Kadife Sokak",
+          "detalj": "Bargata, 8–10 min gange fra markedet. Vi spør guiden hva hun anbefaler. Taxi hjem senere — tre biler.",
+          "status": "planlagt",
+          "ikon": "🍺",
+          "kart": "kadife"
+        }
+      ]
+    },
+    {
+      "dag": "Lørdag 12. september",
+      "poster": [
+        {
+          "tid": "Formiddag",
+          "tittel": "Gamlebyen med guide",
+          "sted": "Møter oss på hotellet",
+          "detalj": "Blå moské og Hagia Sofia. Tilbud mottatt fra Real Istanbul Tours — ikke bekreftet ennå.",
+          "status": "ikke-bekreftet",
+          "ikon": "🕌",
+          "kart": "blaa"
+        },
+        {
+          "tid": "16:45",
+          "tittel": "Ned til kaia",
+          "sted": "Karaköy",
+          "detalj": "Ferdig kledd for kvelden. Vi er ikke innom hotellet igjen før natten.",
+          "status": "bekreftet",
+          "ikon": "🚶",
+          "kart": "kaia"
+        },
+        {
+          "tid": "17:00",
+          "tittel": "Privat yacht på Bosporos",
+          "sted": "Luma Yacht",
+          "detalj": "To timer på vannet i ettermiddagslys. Solnedgang 19:18. Ingen skal bade — dette er drikke på dekk. €320 for hele båten, betalt.",
+          "status": "bekreftet",
+          "ikon": "🛥️",
+          "uthevet": true,
+          "kart": "kaia"
+        },
+        {
+          "tid": "19:30",
+          "tittel": "Skybar",
+          "sted": "Sky Karaköy",
+          "detalj": "Rett fra båten. Samme gate som hotellet. Rooftop-tradisjonen er dekket.",
+          "status": "planlagt",
+          "ikon": "🌆",
+          "kart": "sky"
+        },
+        {
+          "tid": "21:00",
+          "tittel": "Biffmiddag",
+          "sted": "Ikke bestemt",
+          "detalj": "Vi jobber med å få privat rom. Sted kommer.",
+          "status": "ikke-bekreftet",
+          "ikon": "🥩"
+        }
+      ]
+    },
+    {
+      "dag": "Søndag 13. september",
+      "poster": [
+        {
+          "tid": "07:15",
+          "tittel": "Avreise fra hotellet",
+          "sted": "Cheers Porthouse",
+          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen. Turens mest sårbare punkt — ikke løs dette i en app på fortauet.",
+          "status": "bekreftet",
+          "ikon": "🚐"
+        },
+        {
+          "tid": "11:15",
+          "tittel": "Fly hjem fra SAW",
+          "sted": "Sabiha Gökçen",
+          "detalj": "Regn 60–90 min fra Karaköy.",
+          "status": "bekreftet",
+          "ikon": "✈️"
+        }
+      ]
+    }
+  ],
+  "steder": [
+    {
+      "id": "hotell",
+      "navn": "Cheers Porthouse Otel",
+      "kat": "Base",
+      "lat": 41.0246,
+      "lon": 28.9755,
+      "notat": "Mumhane Cd. 31, Karaköy. Basen."
+    },
+    {
+      "id": "hamam",
+      "navn": "Gedik Paşa Hamamı",
+      "kat": "Program",
+      "lat": 41.0075,
+      "lon": 28.9642,
+      "notat": "Fredag 16:15–17:00. Hamam Sk. 65, Fatih."
+    },
+    {
+      "id": "kaia",
+      "navn": "Karaköy vapur iskelesi",
+      "kat": "Program",
+      "lat": 41.0217,
+      "lon": 28.9767,
+      "notat": "Fergen til Kadıköy fredag 19:05. Båten lørdag 17:00."
+    },
+    {
+      "id": "kadikoy",
+      "navn": "Kadıköy-kaia",
+      "kat": "Program",
+      "lat": 40.9925,
+      "lon": 29.0234,
+      "notat": "Guiden møter oss her fredag 19:35. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "kadife",
+      "navn": "Kadife Sokak (Bargata)",
+      "kat": "Uteliv",
+      "lat": 40.9895,
+      "lon": 29.0275,
+      "notat": "Fredag etter middagen. Karga og Bina tar imot store gjenger."
+    },
+    {
+      "id": "sky",
+      "navn": "Sky Karaköy",
+      "kat": "Uteliv",
+      "lat": 41.022,
+      "lon": 28.976,
+      "notat": "Lørdag 19:30. Mumhane Cd. 26 — samme gate som hotellet."
+    },
+    {
+      "id": "ayasofya",
+      "navn": "Hagia Sofia",
+      "kat": "Sightseeing",
+      "lat": 41.00833,
+      "lon": 28.98,
+      "notat": "Lørdag formiddag. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "blaa",
+      "navn": "Blå moské",
+      "kat": "Sightseeing",
+      "lat": 41.0053851,
+      "lon": 28.9768247,
+      "notat": "Lørdag formiddag. Dekk knær og skuldre."
+    },
+    {
+      "id": "galata",
+      "navn": "Galatatårnet",
+      "kat": "Sightseeing",
+      "lat": 41.025658,
+      "lon": 28.974155,
+      "notat": "7 min gange fra hotellet. Kveldsøkt til 23:00. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "namli",
+      "navn": "Namlı Gurme",
+      "kat": "Mat",
+      "lat": 41.0245,
+      "lon": 28.9757,
+      "notat": "Lunsj fredag. Samme gate som hotellet. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "gullu",
+      "navn": "Karaköy Güllüoğlu",
+      "kat": "Mat",
+      "lat": 41.0225,
+      "lon": 28.9743,
+      "notat": "Baklava. 1 min fra hotellet. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "tophane",
+      "navn": "Tophane trikkestopp (T1)",
+      "kat": "Transport",
+      "lat": 41.0263,
+      "lon": 28.98,
+      "notat": "3 min fra hotellet. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "karakoytrikk",
+      "navn": "Karaköy trikkestopp (T1)",
+      "kat": "Transport",
+      "lat": 41.0243,
+      "lon": 28.9744,
+      "notat": "T1 mot Sultanahmet. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "galatabro",
+      "navn": "Galatabroen",
+      "kat": "Transport",
+      "lat": 41.02,
+      "lon": 28.97306,
+      "notat": "15 min gange til gamlebyen. (Referanse — ikke et fast programpunkt.)"
+    }
+  ],
+  "info": [
+    {
+      "tittel": "Hotellet",
+      "rader": [
+        [
+          "Cheers Porthouse Otel",
+          "Mumhane Cd. 31, Karaköy"
+        ],
+        [
+          "Innsjekk",
+          "Fredag fra 14:00"
+        ],
+        [
+          "Utsjekk",
+          "Søndag, transport 07:15"
+        ]
+      ]
+    },
+    {
+      "tittel": "Fly",
+      "rader": [
+        [
+          "Ned",
+          "TK1748 · OSL 07:15 → IST 12:10 · fredag"
+        ],
+        [
+          "Hjem",
+          "SAW 11:15 · søndag"
+        ]
+      ]
+    },
+    {
+      "tittel": "Taxi og Uber",
+      "rader": [
+        [
+          "Uber i Tyrkia",
+          "Bestiller lisensiert gul taxi. Bruk appen framfor å vinke."
+        ],
+        [
+          "Elleve mann",
+          "Tre biler. Bestill alle samtidig."
+        ],
+        [
+          "Krev taksameter",
+          "Avvis fastpris-tilbud på gata."
+        ]
+      ]
+    },
+    {
+      "tittel": "Godt å vite",
+      "rader": [
+        [
+          "Valuta",
+          "₺1 ≈ NOK 0,197 · €1 ≈ NOK 10,90 (18. aug)"
+        ],
+        [
+          "Moskeer",
+          "Dekk knær og skuldre. Det håndheves."
+        ],
+        [
+          "Data",
+          "Skaff eSIM eller roaming før avreise."
+        ],
+        [
+          "Alkohol i butikk",
+          "Selges ikke mellom 22:00 og 06:00. Barer serverer som normalt."
+        ]
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "kategori": "Istanbul",
+      "sporsmal": "Hvor mange innbyggere har Istanbul, omtrent?",
+      "alternativer": [
+        "6 millioner",
+        "10 millioner",
+        "16 millioner",
+        "24 millioner"
+      ],
+      "riktig": 2,
+      "forklaring": "Rundt 16 millioner — Europas største by, og større enn hele Norden til sammen."
+    },
+    {
+      "kategori": "Istanbul",
+      "sporsmal": "Istanbul ligger i to verdensdeler. Hvilke?",
+      "alternativer": [
+        "Europa og Afrika",
+        "Europa og Asia",
+        "Asia og Afrika",
+        "Europa og Midtøsten"
+      ],
+      "riktig": 1,
+      "forklaring": "Bosporosstredet deler byen mellom Europa og Asia. Fredag kveld krysser vi til den asiatiske siden."
+    },
+    {
+      "kategori": "Turen",
+      "sporsmal": "Hvilket år ble hamamen vi skal til bygget?",
+      "alternativer": [
+        "1475",
+        "1610",
+        "1741",
+        "1856"
+      ],
+      "riktig": 0,
+      "forklaring": "Gedik Paşa Hamamı, 1475 — altså 22 år etter at byen falt. Eldre enn absolutt alt hjemme."
+    },
+    {
+      "kategori": "Turen",
+      "sporsmal": "Hva heter hotellet vårt?",
+      "alternativer": [
+        "Cheers Porthouse",
+        "Karaköy Rooms",
+        "Galata House",
+        "Mumhane Suites"
+      ],
+      "riktig": 0,
+      "forklaring": "Cheers Porthouse Otel, Mumhane Cd. 31. Lær adressen — den er nyttig i en taxi kl. 02."
+    },
+    {
+      "kategori": "Turen",
+      "sporsmal": "Når er oppmøte i resepsjonen fredag kveld?",
+      "alternativer": [
+        "18:00",
+        "18:30",
+        "18:50",
+        "19:05"
+      ],
+      "riktig": 2,
+      "forklaring": "18:50, ferdig skiftet. Fergen går 19:05 og venter ikke på noen."
+    },
+    {
+      "kategori": "Mat og drikke",
+      "sporsmal": "Hva er rakı laget av?",
+      "alternativer": [
+        "Bygg",
+        "Anis og druer",
+        "Poteter",
+        "Ris"
+      ],
+      "riktig": 1,
+      "forklaring": "Druedestillat smakt med anis. Blir melkehvit med vann — derav kallenavnet «løvemelk»."
+    },
+    {
+      "kategori": "Mat og drikke",
+      "sporsmal": "Hva er «meze»?",
+      "alternativer": [
+        "En grillrett",
+        "Små forretter til deling",
+        "En type brød",
+        "Dessert"
+      ],
+      "riktig": 1,
+      "forklaring": "Små retter som settes på bordet til deling. Fredag kveld blir det mange av dem."
+    },
+    {
+      "kategori": "Mat og drikke",
+      "sporsmal": "Hva er en «ocakbaşı»?",
+      "alternativer": [
+        "En fiskerestaurant",
+        "En grill du sitter rundt",
+        "Et bakeri",
+        "En vinbar"
+      ],
+      "riktig": 1,
+      "forklaring": "Bokstavelig «ved ildstedet» — kullgrillen står midt i lokalet og du sitter rundt den."
+    },
+    {
+      "kategori": "Istanbul",
+      "sporsmal": "Hva het Istanbul før 1930?",
+      "alternativer": [
+        "Bysants",
+        "Konstantinopel",
+        "Anatolia",
+        "Trakia"
+      ],
+      "riktig": 1,
+      "forklaring": "Konstantinopel — og før det igjen Bysants. Navnet Istanbul ble offisielt i 1930."
+    },
+    {
+      "kategori": "Istanbul",
+      "sporsmal": "Hvor lang er Bosporosstredet, omtrent?",
+      "alternativer": [
+        "10 km",
+        "30 km",
+        "60 km",
+        "120 km"
+      ],
+      "riktig": 1,
+      "forklaring": "Rundt 30 km fra Marmarahavet til Svartehavet. Vi ser en liten del av den lørdag."
+    },
+    {
+      "kategori": "Turen",
+      "sporsmal": "Hva er inkludert i matturnéen fredag, utover maten?",
+      "alternativer": [
+        "Ingenting",
+        "Fergen",
+        "Seks enheter alkohol og fergen",
+        "Taxi hjem"
+      ],
+      "riktig": 2,
+      "forklaring": "Seks enheter alkohol pr. mann og fergeturen. Derfor ble den dyreste turen valgt."
+    },
+    {
+      "kategori": "Mat og drikke",
+      "sporsmal": "Hva er «kese» i en hamam?",
+      "alternativer": [
+        "En såpe",
+        "En grov skrubbevott",
+        "Et håndkle",
+        "En massasjeolje"
+      ],
+      "riktig": 1,
+      "forklaring": "Skrubbevotten. Den fjerner mer hud enn du tror er tilrådelig, og det er hele poenget."
+    }
+  ],
+  "gjengen": [
+    {
+      "navn": "Henrik",
+      "rolle": "Arrangør"
+    },
+    {
+      "navn": "Bruland",
+      "rolle": "Arrangør"
+    },
+    {
+      "navn": "Sødal",
+      "rolle": ""
+    },
+    {
+      "navn": "Jonsson",
+      "rolle": ""
+    },
+    {
+      "navn": "Gunnar",
+      "rolle": ""
+    },
+    {
+      "navn": "Martin",
+      "rolle": ""
+    },
+    {
+      "navn": "Andy",
+      "rolle": ""
+    },
+    {
+      "navn": "Anders",
+      "rolle": ""
+    },
+    {
+      "navn": "Sondre",
+      "rolle": ""
+    },
+    {
+      "navn": "Johan",
+      "rolle": ""
+    },
+    {
+      "navn": "Lars",
+      "rolle": ""
+    }
+  ]
+}
