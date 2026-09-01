@@ -1,6 +1,6 @@
 {
-  "versjon": 5,
-  "sistOppdatert": "1. september 09:35",
+  "versjon": 7,
+  "sistOppdatert": "1. september 09:55",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -261,7 +261,7 @@
       "kat": "Program",
       "lat": 40.9925,
       "lon": 29.0234,
-      "notat": "Guiden møter oss her fredag 19:35. (Referanse — ikke et fast programpunkt.)"
+      "notat": "Guiden møter oss her fredag 19:35."
     },
     {
       "id": "kadife",
@@ -274,10 +274,10 @@
     {
       "id": "sky",
       "navn": "Sky Karaköy",
-      "kat": "Uteliv",
+      "kat": "Program",
       "lat": 41.022,
       "lon": 28.976,
-      "notat": "Lørdag 19:30. Mumhane Cd. 26 — samme gate som hotellet."
+      "notat": "Lørdag 19:30–20:20. Mumhane Cd. 26 — samme gate som hotellet. Vi drar 20:20."
     },
     {
       "id": "ayasofya",
@@ -285,7 +285,7 @@
       "kat": "Sightseeing",
       "lat": 41.00833,
       "lon": 28.98,
-      "notat": "Lørdag formiddag. (Referanse — ikke et fast programpunkt.)"
+      "notat": "Lørdag formiddag."
     },
     {
       "id": "blaa",
@@ -301,15 +301,15 @@
       "kat": "Sightseeing",
       "lat": 41.025658,
       "lon": 28.974155,
-      "notat": "7 min gange fra hotellet. Kveldsøkt til 23:00. (Referanse — ikke et fast programpunkt.)"
+      "notat": "7 min gange fra hotellet. Kveldsøkt til 23:00."
     },
     {
       "id": "namli",
       "navn": "Namlı Gurme",
-      "kat": "Mat",
+      "kat": "Program",
       "lat": 41.0245,
       "lon": 28.9757,
-      "notat": "Lunsj fredag. Samme gate som hotellet. (Referanse — ikke et fast programpunkt.)"
+      "notat": "Lunsj fredag 14:30. Samme gate som hotellet. Ingen reservasjon nødvendig."
     },
     {
       "id": "gullu",
@@ -317,7 +317,7 @@
       "kat": "Mat",
       "lat": 41.0225,
       "lon": 28.9743,
-      "notat": "Baklava. 1 min fra hotellet. (Referanse — ikke et fast programpunkt.)"
+      "notat": "Baklava. 1 min fra hotellet."
     },
     {
       "id": "tophane",
@@ -325,7 +325,7 @@
       "kat": "Transport",
       "lat": 41.0263,
       "lon": 28.98,
-      "notat": "3 min fra hotellet. (Referanse — ikke et fast programpunkt.)"
+      "notat": "3 min fra hotellet."
     },
     {
       "id": "karakoytrikk",
@@ -333,7 +333,7 @@
       "kat": "Transport",
       "lat": 41.0243,
       "lon": 28.9744,
-      "notat": "T1 mot Sultanahmet. (Referanse — ikke et fast programpunkt.)"
+      "notat": "T1 mot Sultanahmet."
     },
     {
       "id": "galatabro",
@@ -341,7 +341,7 @@
       "kat": "Transport",
       "lat": 41.02,
       "lon": 28.97306,
-      "notat": "15 min gange til gamlebyen. (Referanse — ikke et fast programpunkt.)"
+      "notat": "15 min gange til gamlebyen."
     },
     {
       "id": "nusret",
@@ -374,6 +374,30 @@
       "lat": 41.0175,
       "lon": 28.972,
       "notat": "Lunsj lørdag ved Eminönü. Utsikt over Gyllne Horn."
+    },
+    {
+      "id": "ist",
+      "navn": "Istanbul Havalimanı (IST)",
+      "kat": "Program",
+      "lat": 41.2753,
+      "lon": 28.7519,
+      "notat": "Landing fredag 12:10. Minibuss til hotellet, ca. 50 min."
+    },
+    {
+      "id": "saw",
+      "navn": "Sabiha Gökçen (SAW)",
+      "kat": "Program",
+      "lat": 40.8986,
+      "lon": 29.3092,
+      "notat": "Hjemreise søndag 11:15. Ut fra hotellet 07:15 — regn 60–90 min."
+    },
+    {
+      "id": "luma",
+      "navn": "Luma Yacht — kaia",
+      "kat": "Program",
+      "lat": 41.0217,
+      "lon": 28.9767,
+      "notat": "Lørdag 17:00–19:00. Vær på kaia 16:45, ferdig kledd for kvelden."
     }
   ],
   "info": [
@@ -658,5 +682,68 @@
       "navn": "Lars",
       "rolle": ""
     }
-  ]
+  ],
+  "co2": {
+    "tittel": "Klimaavtrykk 🌍",
+    "ingress": "Et ærlig estimat for hele turen, med høydeeffekten regnet inn — altså at utslipp sluppet ut i 10 kilometers høyde varmer nesten dobbelt så mye som de samme utslippene på bakken. Flyet er 96 % av regnestykket. Alt vi gjør nede i Istanbul er marginalt i sammenligning.",
+    "hoved": {
+      "tall": "1 215 kg",
+      "tekst": "CO₂e per mann · 13,4 tonn for gjengen"
+    },
+    "rader": [
+      [
+        "Fly Oslo–Istanbul t/r",
+        "1 173 kg per mann · 12,9 tonn for gjengen"
+      ],
+      [
+        "Hotell, 2 netter",
+        "30 kg per mann"
+      ],
+      [
+        "Yacht, 2 timer",
+        "7 kg per mann"
+      ],
+      [
+        "Taxi, minibuss og ferge",
+        "5 kg per mann"
+      ],
+      [
+        "Tilsvarer i bensinbil",
+        "7 100 km per mann — Oslo–Roma tur/retur, og et godt stykke til"
+      ],
+      [
+        "For gjengen samlet",
+        "78 600 km — nesten to ganger rundt jorda"
+      ],
+      [
+        "Tilsvarer i storfekjøtt",
+        "12 kg per mann · 134 kg for gjengen"
+      ],
+      [
+        "Sagt på en annen måte",
+        "Én biffmiddag på 300 g er ca. 30 kg CO₂e. Turen tilsvarer 41 slike per mann."
+      ],
+      [
+        "Andel av et årsforbruk",
+        "Ca. 17 % av det en nordmann slipper ut på et helt år — på 48 timer"
+      ]
+    ],
+    "fot": "Faktorer: fly 0,126 kg CO₂e per personkilometer (DEFRA 2026, kortdistanse økonomi) ganget med 1,9 for høydeeffekt, i tråd med DEFRAs egen praksis. Bensinbil 0,17 kg/km. Storfekjøtt 99,5 kg CO₂e/kg (Poore & Nemecek 2018). Flydistanse 4 909 km tur/retur per mann. Estimat, ikke fasit — men størrelsesordenen stemmer."
+  },
+  "vaer": {
+    "tittel": "Værmelding",
+    "lat": 41.0246,
+    "lon": 28.9755,
+    "dager": [
+      {
+        "dato": "2026-09-07",
+        "navn": "Mandag"
+      },
+      {
+        "dato": "2026-09-08",
+        "navn": "Tirsdag"
+      }
+    ],
+    "notat": "TEST — datoene er satt til mandag og tirsdag denne uken for å sjekke at meldingen virker. Endres til 2026-09-11 og 2026-09-12 når meldingen rekker fram, ca. 10 dager før. Hentes live fra Open-Meteo hver gang du åpner Info."
+  }
 }

@@ -120,6 +120,14 @@ nav .ni{font-size:21px;line-height:1}
   color:#fff;font-size:11px;padding:5px 11px;border-radius:20px;z-index:2000;
   opacity:0;transition:.3s;pointer-events:none}
 .status.vis{opacity:1}
+.vaer{display:flex;gap:10px;margin-top:4px}
+.vd{flex:1;background:#f7f9fa;border-radius:12px;padding:12px 8px;text-align:center;border:1px solid var(--line)}
+.vd .dag{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700}
+.vd .sym{font-size:30px;line-height:1.25;margin:2px 0}
+.vd .tmp{font-size:19px;font-weight:700;letter-spacing:-.5px}
+.vd .tmp small{font-size:13px;font-weight:500;color:var(--muted)}
+.vd .txt{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.vlaster{font-size:13.5px;color:var(--muted);padding:8px 0}
 .fot{text-align:center;font-size:11.5px;color:var(--muted);padding:16px 0 4px;line-height:1.6}
 </style>
 </head>
@@ -430,12 +438,85 @@ function tegnInfo() {
     k.appendChild(t);
     boks.appendChild(k);
   });
+  if (DATA.co2) tegnCo2(boks);
+
   if ((DATA.gjengen || []).length) {
     const k = el('div', 'kort');
     k.appendChild(el('h2', null, 'Gjengen'));
     const t = el('table');
     DATA.gjengen.forEach(p => t.appendChild(el('tr', null, `<td>${esc(p.navn)}</td><td>${esc(p.rolle || '')}</td>`)));
     k.appendChild(t); boks.appendChild(k);
+  }
+}
+
+/* ---------- CO2 ---------- */
+function tegnCo2(boks) {
+  const c = DATA.co2;
+  const k = el('div', 'kort');
+  k.appendChild(el('h2', null, esc(c.tittel || 'Klimaavtrykk')));
+  if (c.ingress) k.appendChild(el('p', null,
+    `<span style="font-size:14px;line-height:1.55;color:#39434f">${esc(c.ingress)}</span>`));
+
+  if (c.hoved) {
+    const h = el('div', null,
+      `<div style="text-align:center;padding:14px 0 6px">
+        <div style="font-size:42px;font-weight:800;color:var(--red);letter-spacing:-1.5px;line-height:1">${esc(c.hoved.tall)}</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:2px">${esc(c.hoved.tekst)}</div>
+      </div>`);
+    k.appendChild(h);
+  }
+  const t = el('table');
+  (c.rader || []).forEach(r => t.appendChild(el('tr', null, `<td>${esc(r[0])}</td><td>${esc(r[1])}</td>`)));
+  k.appendChild(t);
+  if (c.fot) k.appendChild(el('div', null,
+    `<div style="font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:10px">${esc(c.fot)}</div>`));
+  boks.appendChild(k);
+}
+
+/* ---------- Vær (live fra Open-Meteo) ---------- */
+const VSYM = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',
+  61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+const VTXT = {0:'Klart',1:'Stort sett klart',2:'Delvis skyet',3:'Skyet',45:'Tåke',48:'Tåke',
+  51:'Lett yr',53:'Yr',55:'Kraftig yr',61:'Lett regn',63:'Regn',65:'Kraftig regn',
+  80:'Regnbyger',81:'Regnbyger',82:'Kraftige byger',95:'Torden',96:'Torden',99:'Torden'};
+
+async function tegnVaer(boks) {
+  const v = DATA.vaer;
+  const k = el('div', 'kort');
+  k.appendChild(el('h2', null, esc(v.tittel || 'Værmelding')));
+  const inn = el('div', null, '<div class="vlaster">Henter værmelding …</div>');
+  k.appendChild(inn);
+  boks.appendChild(k);
+
+  try {
+    const u = `https://api.open-meteo.com/v1/forecast?latitude=${v.lat}&longitude=${v.lon}` +
+      `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+      `&timezone=Europe%2FIstanbul&forecast_days=16`;
+    const r = await fetch(u);
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    const idx = {};
+    d.daily.time.forEach((t, i) => idx[t] = i);
+
+    let html = '<div class="vaer">';
+    let mangler = 0;
+    (v.dager || []).forEach(dag => {
+      const i = idx[dag.dato];
+      if (i === undefined) { mangler++; return; }
+      const kode = d.daily.weather_code[i];
+      html += `<div class="vd">
+        <div class="dag">${esc(dag.navn)}</div>
+        <div class="sym">${VSYM[kode] || '🌡️'}</div>
+        <div class="tmp">${Math.round(d.daily.temperature_2m_max[i])}°<small> / ${Math.round(d.daily.temperature_2m_min[i])}°</small></div>
+        <div class="txt">${VTXT[kode] || ''}<br>${d.daily.precipitation_probability_max[i] ?? 0} % nedbør</div>
+      </div>`;
+    });
+    html += '</div>';
+    if (mangler) html += `<div class="vlaster">Meldingen rekker ikke helt fram ennå — den kommer ca. 10 dager før.</div>`;
+    if (v.notat) html += `<div style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:10px">${esc(v.notat)}</div>`;
+    inn.innerHTML = html;
+  } catch (e) {
+    inn.innerHTML = '<div class="vlaster">Fikk ikke tak i værmeldingen. Prøv igjen når du er på nett.</div>';
   }
 }
 
@@ -455,6 +536,7 @@ function tegnAlt() {
   $('#datoer').textContent = (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '');
   document.title = DATA.tur?.tittel || 'Blåtur';
   tegnNedtelling(); tegnProgram(); tegnOppslag(); tegnInfo();
+  if (DATA.vaer) tegnVaer($('#info'));
   if (!qStartet) tegnQuiz();
   if ($('#t-kart').classList.contains('on')) tegnKart();
 }
