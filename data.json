@@ -1,6 +1,6 @@
 {
-  "versjon": 2,
-  "sistOppdatert": "18. august 21:00",
+  "versjon": 5,
+  "sistOppdatert": "1. september 09:35",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -15,22 +15,34 @@
   },
   "oppslag": [
     {
+      "type": "info",
+      "tid": "31. august",
+      "tekst": "Lørdag etter middagen: tre biler til Asmalımescit ca. midnatt, så tar vi det derfra. Ingen dørkontroll, og hjem er 8 minutters gange — ingen trenger å ordne taxi.",
+      "av": "Henrik"
+    },
+    {
       "type": "gøy",
-      "tid": "18. august",
-      "tekst": "Navnene er inne, quizen er testet og appen virker nå uten dekning også. Se om du slår Henrik på quizen.",
-      "av": "Erik Bruland"
+      "tid": "31. august",
+      "tekst": "Middagen lørdag er booket: eget rom, fast meny og fri drikke hele kvelden. Ingen regning å splitte på elleve. Spar litt plass.",
+      "av": "Henrik"
+    },
+    {
+      "type": "viktig",
+      "tid": "31. august",
+      "tekst": "Lørdag: vi forlater skybaren 20:20 for å rekke bordet 21:00. Ikke bestill en runde til 20:15.",
+      "av": "Bruland"
+    },
+    {
+      "type": "info",
+      "tid": "31. august",
+      "tekst": "Mobildata er ordnet — du får en QR-kode av oss på flyplassen. Du trenger ikke gjøre noe på forhånd.",
+      "av": "Henrik"
     },
     {
       "type": "viktig",
       "tid": "18. august",
       "tekst": "Appen er live. Legg den på hjemskjermen: Del-knappen i Safari → «Legg til på Hjem-skjerm». Da slipper du å lete etter lenken.",
       "av": "Henrik"
-    },
-    {
-      "type": "info",
-      "tid": "18. august",
-      "tekst": "Programmet under viser bare det som faktisk er booket og betalt. Resten kommer etter hvert som det bekreftes.",
-      "av": "Erik Bruland"
     }
   ],
   "program": [
@@ -53,6 +65,15 @@
           "status": "bekreftet",
           "ikon": "🏨",
           "kart": "hotell"
+        },
+        {
+          "tid": "14:30",
+          "tittel": "Lunsj — Namlı Gurme",
+          "sted": "Mumhane Cd., samme gate som hotellet",
+          "detalj": "Rask og lett, ikke stor. Vi har bare ca. 70 minutter, og kvelden er smaksprøver PLUSS sittende middag med seks enheter alkohol. Spar plass. Baklava hos Karaköy Güllüoğlu på veien tilbake for den som vil.",
+          "status": "planlagt",
+          "ikon": "🥙",
+          "kart": "namli"
         },
         {
           "tid": "15:45",
@@ -122,6 +143,15 @@
           "kart": "blaa"
         },
         {
+          "tid": "13:30",
+          "tittel": "Lunsj ved basarene",
+          "sted": "Eminönü",
+          "detalj": "Guideturen slutter ved Krydderbasaren. Hamdi ved Eminönü er det opplagte — utsikt over Gyllne Horn og vant til store selskaper. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden.",
+          "status": "ikke-bekreftet",
+          "ikon": "🍽️",
+          "kart": "hamdi"
+        },
+        {
           "tid": "16:45",
           "tittel": "Ned til kaia",
           "sted": "Karaköy",
@@ -144,18 +174,37 @@
           "tid": "19:30",
           "tittel": "Skybar",
           "sted": "Sky Karaköy",
-          "detalj": "Rett fra båten. Samme gate som hotellet. Rooftop-tradisjonen er dekket.",
+          "detalj": "Rett fra båten. Samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden.",
           "status": "planlagt",
           "ikon": "🌆",
           "kart": "sky"
         },
         {
+          "tid": "20:20",
+          "tittel": "Tre biler til middagen",
+          "sted": "Fra Sky Karaköy",
+          "detalj": "Til Nusr-Et ETILER, Nisbetiye Cd. 87 — ikke Maçka Palas. 20–30 min kjøring. Bestill bilene 20:10 mens vi fortsatt sitter.",
+          "status": "bekreftet",
+          "ikon": "🚕"
+        },
+        {
           "tid": "21:00",
-          "tittel": "Biffmiddag",
-          "sted": "Ikke bestemt",
-          "detalj": "Vi jobber med å få privat rom. Sted kommer.",
-          "status": "ikke-bekreftet",
-          "ikon": "🥩"
+          "tittel": "Middag — Nusr-Et",
+          "sted": "Nusr-Et Etiler · Nisbetiye Cd. 87",
+          "detalj": "Eget rom kun for oss, Crazy Feast-meny og fri drikke. Alt er betalt på forhånd — ingen regning å splitte, ingen som teller runder. Ta med tre biler fra skybaren.",
+          "status": "bekreftet",
+          "ikon": "🥩",
+          "uthevet": true,
+          "kart": "nusret"
+        },
+        {
+          "tid": "00:00",
+          "tittel": "Videre til bargatene",
+          "sted": "Asmalımescit, Beyoğlu",
+          "detalj": "Tre biler fra Nusr-Et, 15–20 min. Bestill dem mens vi sitter. Ingen dørkontroll og ingen bordbestilling — vi går bare inn et sted. Nevizade ligger 5 min unna hvis vi vil videre. Hjem er 8 min gange ned til hotellet, så ingen trenger taxi. Avtal én bar som base før vi sprer oss.",
+          "status": "planlagt",
+          "ikon": "🍻",
+          "kart": "asmali"
         }
       ]
     },
@@ -293,6 +342,38 @@
       "lat": 41.02,
       "lon": 28.97306,
       "notat": "15 min gange til gamlebyen. (Referanse — ikke et fast programpunkt.)"
+    },
+    {
+      "id": "nusret",
+      "navn": "Nusr-Et",
+      "kat": "Program",
+      "lat": 41.0847,
+      "lon": 29.0334,
+      "notat": "Middag lørdag 21:00. Eget rom. 20–30 min med bil fra Karaköy."
+    },
+    {
+      "id": "asmali",
+      "navn": "Asmalımescit (bargata)",
+      "kat": "Uteliv",
+      "lat": 41.0305,
+      "lon": 28.9748,
+      "notat": "Lørdag fra 00:00. Ingen dørkontroll. 8 min gange hjem til hotellet."
+    },
+    {
+      "id": "nevizade",
+      "navn": "Nevizade Sokak",
+      "kat": "Uteliv",
+      "lat": 41.0334,
+      "lon": 28.9767,
+      "notat": "5 min gange fra Asmalımescit. Meyhaner og fasıl-musikk. 13 min hjem."
+    },
+    {
+      "id": "hamdi",
+      "navn": "Hamdi Restaurant",
+      "kat": "Mat",
+      "lat": 41.0175,
+      "lon": 28.972,
+      "notat": "Lunsj lørdag ved Eminönü. Utsikt over Gyllne Horn."
     }
   ],
   "info": [
@@ -340,6 +421,27 @@
         [
           "Krev taksameter",
           "Avvis fastpris-tilbud på gata."
+        ]
+      ]
+    },
+    {
+      "tittel": "Mobil og data",
+      "rader": [
+        [
+          "eSIM",
+          "Du får QR-kode av Henrik eller Bruland ved gaten. Skann den — ingenting brukes før du slår den på."
+        ],
+        [
+          "Ved landing",
+          "Innstillinger → Mobil → slå på Tyrkia-eSIM-en."
+        ],
+        [
+          "Norsk nummer",
+          "Behold det aktivt for SMS og anrop, men skru AV dataroaming på den norske linjen."
+        ],
+        [
+          "Hvorfor",
+          "Tyrkia er utenfor EU. Vanlig roaming blir dyrt."
         ]
       ]
     },
