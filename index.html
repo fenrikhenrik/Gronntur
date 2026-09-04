@@ -80,6 +80,17 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .chip{padding:6px 12px;border-radius:16px;border:1px solid var(--line);background:#fff;
   font-size:13px;cursor:pointer;user-select:none}
 .chip.on{color:#fff;border-color:transparent}
+.gpsknapp{width:100%;padding:12px 14px;margin-bottom:10px;border-radius:12px;
+  border:1px solid var(--line);background:#fff;font:inherit;font-size:14.5px;font-weight:650;
+  color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.gpsknapp.pa{background:var(--red);border-color:transparent;color:#fff}
+.gpsmelding{font-size:12.5px;line-height:1.45;color:var(--muted);margin:-4px 0 10px}
+.gpsmelding.feil{color:var(--warn)}
+@keyframes gpspuls{0%{transform:scale(1);opacity:.85}70%{transform:scale(2.6);opacity:0}100%{opacity:0}}
+.gpspunkt{width:18px;height:18px;border-radius:50%;background:#1a73e8;border:3px solid #fff;
+  box-shadow:0 1px 6px rgba(0,0,0,.45);position:relative}
+.gpspunkt::after{content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:rgba(26,115,232,.45);animation:gpspuls 2s ease-out infinite}
 
 .qwrap{text-align:center}
 .qframe{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 16px}
@@ -151,6 +162,8 @@ nav .ni{font-size:21px;line-height:1}
   <!-- KART -->
   <div class="tab" id="t-kart">
     <div class="filtre" id="filtre"></div>
+    <button class="gpsknapp" id="gpsknapp" type="button">📍 Vis hvor jeg er</button>
+    <div class="gpsmelding" id="gpsmelding" hidden></div>
     <div id="kart"></div>
     <div class="fot">Trykk en markør for detaljer og veibeskrivelse.<br>Kartdata: OpenStreetMap</div>
   </div>
@@ -191,6 +204,7 @@ let DATA = null;
 let sisteVersjon = null;
 let kartLaget = false;
 let kartRef = null, markorer = [], aktiveKat = new Set();
+let gpsVakt = null, gpsMarkor = null, gpsSirkel = null, gpsFulgt = true;
 
 const $ = s => document.querySelector(s);
 const el = (t, c, h) => { const e = document.createElement(t); if(c) e.className = c; if(h !== undefined) e.innerHTML = h; return e; };
@@ -289,6 +303,7 @@ const FARGER = { Base:'#111827', Program:'#E30A17', Uteliv:'#c8962e', Sightseein
 function tegnKart() {
   if (!kartLaget) {
     kartRef = L.map('kart', { zoomControl: true }).setView([41.020, 28.985], 13);
+    kartRef.on('dragstart', () => { gpsFulgt = false; });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(kartRef);
     kartLaget = true;
   }
@@ -328,6 +343,81 @@ function tegnKart() {
     m.__s = s; m.addTo(kartRef); markorer.push(m);
   });
   setTimeout(() => kartRef.invalidateSize(), 120);
+}
+
+/* ---------- Hvor er jeg? ----------
+   Posisjonen kommer fra telefonens egen GPS og krever ikke nett — men
+   bakgrunnskartet gjør det. Uten dekning ser du prikken din bevege seg
+   mellom markørene på grå bakgrunn, og det holder for å finne veien hjem.
+   Krever HTTPS. Ingenting lagres og ingenting sendes videre. */
+function gpsMelding(tekst, erFeil) {
+  const m = $('#gpsmelding');
+  if (!m) return;
+  m.textContent = tekst || '';
+  m.classList.toggle('feil', !!erFeil);
+  m.hidden = !tekst;
+}
+
+function stoppGps() {
+  if (gpsVakt !== null) { navigator.geolocation.clearWatch(gpsVakt); gpsVakt = null; }
+  if (gpsMarkor) { kartRef.removeLayer(gpsMarkor); gpsMarkor = null; }
+  if (gpsSirkel) { kartRef.removeLayer(gpsSirkel); gpsSirkel = null; }
+  $('#gpsknapp').classList.remove('pa');
+  $('#gpsknapp').textContent = '📍 Vis hvor jeg er';
+  gpsMelding('');
+}
+
+function startGps() {
+  if (!navigator.geolocation) {
+    gpsMelding('Telefonen din gir ikke appen tilgang til posisjon.', true);
+    return;
+  }
+  const knapp = $('#gpsknapp');
+  knapp.classList.add('pa');
+  knapp.textContent = '📍 Følger posisjonen din — trykk for å slå av';
+  gpsMelding('Leter etter satellitter …');
+  gpsFulgt = true;
+
+  gpsVakt = navigator.geolocation.watchPosition(pos => {
+    const lat = pos.coords.latitude, lon = pos.coords.longitude;
+    const nyaktig = Math.round(pos.coords.accuracy || 0);
+
+    if (!gpsMarkor) {
+      gpsMarkor = L.marker([lat, lon], {
+        zIndexOffset: 1000,
+        icon: L.divIcon({ className: '', iconSize: [18, 18], iconAnchor: [9, 9],
+                          html: '<div class="gpspunkt"></div>' })
+      }).addTo(kartRef);
+      gpsSirkel = L.circle([lat, lon], { radius: nyaktig, color: '#1a73e8', weight: 1,
+                                         fillColor: '#1a73e8', fillOpacity: .12 }).addTo(kartRef);
+      kartRef.setView([lat, lon], 16);
+    } else {
+      gpsMarkor.setLatLng([lat, lon]);
+      gpsSirkel.setLatLng([lat, lon]).setRadius(nyaktig);
+      /* Slutter å hoppe etter deg så snart du drar i kartet selv. */
+      if (gpsFulgt) kartRef.panTo([lat, lon]);
+    }
+
+    const h = (DATA.steder || []).find(s => s.id === 'hotell');
+    let avstand = '';
+    if (h) {
+      const meter = kartRef.distance([lat, lon], [h.lat, h.lon]);
+      avstand = meter < 1000
+        ? ' · ' + Math.round(meter) + ' m til hotellet'
+        : ' · ' + (meter / 1000).toFixed(1).replace('.', ',') + ' km til hotellet';
+    }
+    gpsMelding('Nøyaktig innenfor ca. ' + nyaktig + ' meter' + avstand);
+  }, feil => {
+    const tekst = feil.code === 1
+      ? 'Du har sagt nei til posisjon. Slå den på under Innstillinger → Safari → Posisjon.'
+      : feil.code === 3
+        ? 'Fikk ikke tak i posisjonen. Prøv igjen ute, gjerne bort fra høye bygg.'
+        : 'Posisjonen er ikke tilgjengelig akkurat nå.';
+    gpsMelding(tekst, true);
+    knapp.classList.remove('pa');
+    knapp.textContent = '📍 Vis hvor jeg er';
+    if (gpsVakt !== null) { navigator.geolocation.clearWatch(gpsVakt); gpsVakt = null; }
+  }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
 }
 
 /* ---------- Quiz ---------- */
@@ -480,6 +570,8 @@ const VTXT = {0:'Klart',1:'Stort sett klart',2:'Delvis skyet',3:'Skyet',45:'Tåk
   51:'Lett yr',53:'Yr',55:'Kraftig yr',61:'Lett regn',63:'Regn',65:'Kraftig regn',
   80:'Regnbyger',81:'Regnbyger',82:'Kraftige byger',95:'Torden',96:'Torden',99:'Torden'};
 
+let vaerCache = null, vaerTid = 0;
+
 async function tegnVaer(boks) {
   const v = DATA.vaer;
   const k = el('div', 'kort');
@@ -487,6 +579,15 @@ async function tegnVaer(boks) {
   const inn = el('div', null, '<div class="vlaster">Henter værmelding …</div>');
   k.appendChild(inn);
   boks.appendChild(k);
+
+  /* tegnAlt kjører ved hver datahenting, altså hvert 30. sekund. Uten dette
+     minnet ville værmeldingen blitt hentet like ofte — unødvendig trafikk og
+     en synlig blink hver halve minutt. 30 minutter er ferskt nok for en
+     døgnmelding. */
+  if (vaerCache && Date.now() - vaerTid < 1800000) {
+    inn.innerHTML = vaerCache;
+    return;
+  }
 
   try {
     const u = `https://api.open-meteo.com/v1/forecast?latitude=${v.lat}&longitude=${v.lon}` +
@@ -514,6 +615,7 @@ async function tegnVaer(boks) {
     html += '</div>';
     if (mangler) html += `<div class="vlaster">Meldingen rekker ikke helt fram ennå — den kommer ca. 10 dager før.</div>`;
     if (v.notat) html += `<div style="font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:10px">${esc(v.notat)}</div>`;
+    vaerCache = html; vaerTid = Date.now();
     inn.innerHTML = html;
   } catch (e) {
     inn.innerHTML = '<div class="vlaster">Fikk ikke tak i værmeldingen. Prøv igjen når du er på nett.</div>';
@@ -529,6 +631,11 @@ function bytt(navn) {
   window.scrollTo(0, 0);
 }
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => bytt(b.dataset.t));
+
+$('#gpsknapp').onclick = () => {
+  if (!kartLaget) tegnKart();
+  gpsVakt !== null ? stoppGps() : startGps();
+};
 
 /* ---------- Tegn alt ---------- */
 function tegnAlt() {
@@ -558,3 +665,6 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) hent
 </script>
 </body>
 </html>
+
+
+{"data":{"file":{"fileExtension":".html","hashes":{"quickXorHash":"FXkE0W2qGG4A94D3tEjSQU82vs0="},"mimeType":"text/html"},"id":"012RDBCJIJK743VRJFO5CYPKPC3ISTLAKE","name":"index.html","parentReference":{"driveId":"b!DBeBdEWalUWe46eLu7bUJRunW8F0wkRDhYNfviKJ-BxvYy0gKa0eTYc53P0uYX7Z","driveType":"business","id":"012RDBCJOZOYAU6PE33JDL543X7B7G5CGJ","name":"blatur-app","path":"/drives/b!DBeBdEWalUWe46eLu7bUJRunW8F0wkRDhYNfviKJ-BxvYy0gKa0eTYc53P0uYX7Z/root:/Documents/Cowork/Tasks/istanbul-tur-oppdatert-itinerary-og-2026-08-17/output/blatur-app","siteId":"7481170c-9a45-4595-9ee3-a78bbbb6d425"}},"status":"complete"}

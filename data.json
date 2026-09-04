@@ -1,6 +1,6 @@
 {
-  "versjon": 7,
-  "sistOppdatert": "1. september 09:55",
+  "versjon": 9,
+  "sistOppdatert": "4. september 22:45",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -120,6 +120,14 @@
           "kart": "kaia"
         },
         {
+          "tid": "20:00",
+          "tittel": "Beşiktaş — hospitality-billett",
+          "sted": "Undersøkes",
+          "detalj": "Vi ser på hospitality-billetter til Beşiktaş fredag 20:00. MERK: dette kolliderer rett med matturnéen, som er betalt (€125 pr. mann) og går 19:05–ca. 23:00. Skal kampen bli noe av, må matturnéen flyttes eller avlyses — det er ikke mulig å rekke begge.",
+          "status": "ikke-bekreftet",
+          "ikon": "⚽"
+        },
+        {
           "tid": "23:00",
           "tittel": "Videre i Kadıköy",
           "sted": "Kadife Sokak",
@@ -146,7 +154,7 @@
           "tid": "13:30",
           "tittel": "Lunsj ved basarene",
           "sted": "Eminönü",
-          "detalj": "Guideturen slutter ved Krydderbasaren. Hamdi ved Eminönü er det opplagte — utsikt over Gyllne Horn og vant til store selskaper. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden.",
+          "detalj": "Guideturen slutter ved Krydderbasaren. Hamdi ved Eminönü er det opplagte — utsikt over Gyllne Horn og vant til store selskaper. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden. STATUS: Henrik har forsøkt å få tak i to steder for lørdagslunsjen, Namlı og Lokantas. Ingen svar ennå.",
           "status": "ikke-bekreftet",
           "ikon": "🍽️",
           "kart": "hamdi"
@@ -174,7 +182,7 @@
           "tid": "19:30",
           "tittel": "Skybar",
           "sted": "Sky Karaköy",
-          "detalj": "Rett fra båten. Samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden.",
+          "detalj": "Rett fra båten. Samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden. STATUS: Henrik har tatt kontakt via Instagram. Telefonnummeret svarte verken på SMS eller WhatsApp, så det er foreløpig eneste kanal inn.",
           "status": "planlagt",
           "ikon": "🌆",
           "kart": "sky"
@@ -736,14 +744,14 @@
     "lon": 28.9755,
     "dager": [
       {
-        "dato": "2026-09-07",
-        "navn": "Mandag"
+        "dato": "2026-09-11",
+        "navn": "Fredag"
       },
       {
-        "dato": "2026-09-08",
-        "navn": "Tirsdag"
+        "dato": "2026-09-12",
+        "navn": "Lørdag"
       }
     ],
-    "notat": "TEST — datoene er satt til mandag og tirsdag denne uken for å sjekke at meldingen virker. Endres til 2026-09-11 og 2026-09-12 når meldingen rekker fram, ca. 10 dager før. Hentes live fra Open-Meteo hver gang du åpner Info."
+    "notat": "Turens to hele dager. Meldingen hentes live fra Open-Meteo hver gang du åpner Info, så tallene er ferske uten at noen trenger å oppdatere noe. Søndag står ikke oppført — da reiser dere 07:15."
   }
 }
