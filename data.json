@@ -1,6 +1,6 @@
 {
-  "versjon": 14,
-  "sistOppdatert": "5. september 08:40",
+  "versjon": 15,
+  "sistOppdatert": "5. september 08:35",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -14,6 +14,12 @@
     }
   },
   "oppslag": [
+    {
+      "type": "info",
+      "tid": "5. september",
+      "tekst": "Skybaren lørdag er avklart: Sky Karaköy tar ikke bordbestilling, vi bare går opp. Vi går rett fra båten ca. 19:10 i stedet for 19:30 — da får vi en drøy time i stedet for tre kvarter. Fullt? Da går vi til The Bank Roof Bar, 8–10 min unna. Er den også full, drar vi rett til middagen. Uansett hva som skjer: vi er i bilene 20:20.",
+      "av": "Henrik"
+    },
     {
       "type": "info",
       "tid": "31. august",
@@ -162,12 +168,12 @@
           "detalj": "To timer på vannet i ettermiddagslys. Solnedgang 19:18. Ingen skal bade — dette er drikke på dekk."
         },
         {
-          "tid": "19:30",
+          "tid": "19:10",
           "tittel": "Skybar",
-          "sted": "Sky Karaköy",
+          "sted": "Sky Karaköy · Mumhane Cd. 26",
           "ikon": "🌆",
           "kart": "sky",
-          "detalj": "Rett fra båten, samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden."
+          "detalj": "Rett fra båten — baren ligger 3–4 minutter fra kaia, så vi går opp med én gang i stedet for å vente. Sky Karaköy tar ikke bordbestilling; man bare møter opp. Åpent 17:00–24:00. VIKTIG: vi drar 20:20 uansett hvor vi står. Bestill bilene 20:10, og be om regningen samtidig med runden. Er det fullt: vi går til The Bank Roof Bar, 8–10 min unna. Er også den full, drar vi rett til middagen — drikken der er alt gjort opp, så vi taper ingenting på å komme litt før."
         },
         {
           "tid": "20:20",
@@ -264,6 +270,14 @@
       "lat": 41.022,
       "lon": 28.976,
       "notat": "Lørdag 19:30–20:20. Mumhane Cd. 26 — samme gate som hotellet. Vi drar 20:20."
+    },
+    {
+      "id": "bank",
+      "navn": "The Bank Roof Bar",
+      "kat": "Uteliv",
+      "lat": 41.0225,
+      "lon": 28.9722,
+      "notat": "Plan B lørdag hvis Sky Karaköy er full. Bankalar Cd. 5, 8–10 min gange fra kaia. Åpent 12:00–02:00. Utsikt mot gamlebyen og Gyllne Horn."
     },
     {
       "id": "ayasofya",
@@ -473,6 +487,14 @@
         [
           "Alkohol i butikk",
           "Selges ikke mellom 22:00 og 06:00. Barer serverer som normalt."
+        ],
+        [
+          "Skybar lørdag",
+          "Sky Karaköy, Mumhane Cd. 26. Ingen bordbestilling — vi går bare opp. Åpent 17:00–24:00. +90 533 384 79 33"
+        ],
+        [
+          "Hvis skybaren er full",
+          "The Bank Roof Bar, Bankalar Cd. 5, 8–10 min gange. Åpent 12:00–02:00. +90 212 283 00 55"
         ]
       ]
     }
