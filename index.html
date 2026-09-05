@@ -53,7 +53,6 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .post{background:var(--card);border:1px solid var(--line);border-radius:14px;
   padding:12px 14px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
 .post.uthevet{border-color:var(--red);border-width:2px;background:#fffbfb}
-.post.ikkebekreftet{opacity:.72;border-style:dashed}
 .post .tid{font-size:15px;font-weight:700;min-width:52px;font-variant-numeric:tabular-nums;
   padding-top:1px;letter-spacing:-.3px}
 .post .inn{flex:1;min-width:0}
@@ -61,11 +60,6 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .post .std{font-size:12.5px;color:var(--muted);margin-top:2px}
 .post .det{font-size:13.5px;line-height:1.5;margin-top:7px;color:#39434f}
 .post .ikon{font-size:19px;line-height:1}
-.merke{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.6px;padding:2px 7px;border-radius:20px;margin-top:7px}
-.m-ok{background:#e8f5ee;color:var(--ok)}
-.m-plan{background:#f0f2f5;color:var(--muted)}
-.m-ikke{background:#fdf3e3;color:var(--warn)}
 .kartlenke{display:inline-block;margin-top:8px;font-size:13px;color:var(--red);
   text-decoration:none;font-weight:600}
 
@@ -140,6 +134,28 @@ nav .ni{font-size:21px;line-height:1}
 .vd .txt{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35}
 .vlaster{font-size:13.5px;color:var(--muted);padding:8px 0}
 .fot{text-align:center;font-size:11.5px;color:var(--muted);padding:16px 0 4px;line-height:1.6}
+
+.laas{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 20px;text-align:center}
+.laas .ikon{font-size:52px;line-height:1}
+.laas h2{margin:12px 0 8px;font-size:20px}
+.laas p{color:var(--muted);font-size:14.5px;line-height:1.55;margin:0 0 18px}
+.kodefelt{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--line);
+  font-size:17px;font-family:inherit;text-align:center;letter-spacing:1px;background:#fff;color:var(--ink)}
+.kodefeil{color:var(--red);font-size:13.5px;font-weight:600;margin-top:10px;min-height:18px}
+
+.qkort{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:10px;
+  font-family:inherit;cursor:pointer;color:var(--ink)}
+.qkort .qi{font-size:31px;line-height:1;width:38px;text-align:center;flex:none}
+.qkort .qt{font-weight:650;font-size:15.5px}
+.qkort .qm{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.qkort .qs{font-size:19px;flex:none;opacity:.5}
+.qkort.ferdig{border-color:#bfe3d0;background:#f6fcf9}
+.lagliste{margin:4px 0 0}
+.lagkort{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:8px;text-align:left}
+.lagkort b{font-size:14px}
+.lagkort div{font-size:13.5px;color:#39434f;margin-top:3px;line-height:1.45}
+.lagkort.ditt{border-color:var(--red);background:#fff6f6}
 </style>
 </head>
 <body>
@@ -153,10 +169,15 @@ nav .ni{font-size:21px;line-height:1}
 </header>
 
 <main>
-  <!-- PROGRAM -->
-  <div class="tab on" id="t-program">
-    <div id="program"></div>
+  <!-- FREDAG -->
+  <div class="tab on" id="t-fre">
+    <div id="program-fre"></div>
     <div class="fot" id="fot"></div>
+  </div>
+
+  <!-- LØRDAG OG SØNDAG -->
+  <div class="tab" id="t-lor">
+    <div id="program-lor"></div>
   </div>
 
   <!-- KART -->
@@ -173,22 +194,18 @@ nav .ni{font-size:21px;line-height:1}
     <div class="qwrap" id="quiz"></div>
   </div>
 
-  <!-- NYTT -->
-  <div class="tab" id="t-nytt">
-    <div id="oppslag"></div>
-  </div>
-
   <!-- INFO -->
   <div class="tab" id="t-info">
     <div id="info"></div>
+    <div id="oppslag"></div>
   </div>
 </main>
 
 <nav>
-  <button class="on" data-t="program"><span class="ni">📋</span>Program</button>
+  <button class="on" data-t="fre"><span class="ni">📋</span>Fre</button>
+  <button data-t="lor"><span class="ni">🔒</span>Lør</button>
   <button data-t="kart"><span class="ni">🗺️</span>Kart</button>
   <button data-t="quiz"><span class="ni">🎯</span>Quiz</button>
-  <button data-t="nytt"><span class="ni">📣</span>Nytt</button>
   <button data-t="info"><span class="ni">ℹ️</span>Info</button>
 </nav>
 
@@ -209,6 +226,49 @@ let gpsVakt = null, gpsMarkor = null, gpsSirkel = null, gpsFulgt = true;
 const $ = s => document.querySelector(s);
 const el = (t, c, h) => { const e = document.createElement(t); if(c) e.className = c; if(h !== undefined) e.innerHTML = h; return e; };
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- Låser ----------
+   Én nøkkel pr. låst del. Åpnet én gang = åpen resten av turen, så ingen
+   trenger å taste koden på nytt hver gang de bytter fane. */
+let apnet = new Set();
+try { apnet = new Set(JSON.parse(localStorage.getItem('blatur-apnet') || '[]')); } catch (e) {}
+const erApnet = n => apnet.has(n);
+function apne(n) {
+  apnet.add(n);
+  try { localStorage.setItem('blatur-apnet', JSON.stringify([...apnet])); } catch (e) {}
+}
+const kodeOk = (gitt, fasit) =>
+  String(gitt || '').trim().toLowerCase() === String(fasit || '').trim().toLowerCase();
+
+/* Felles låseskjerm. naar den aapnes kjoerer callback. */
+function tegnLaas(boks, cfg, nokkel, etterpa) {
+  boks.innerHTML =
+    `<div class="laas">
+      <div class="ikon">${cfg.ikon || '🔒'}</div>
+      <h2>${esc(cfg.tittel || 'Låst')}</h2>
+      <p>${esc(cfg.tekst || '')}</p>
+      <input class="kodefelt" id="kodefelt" type="text" inputmode="text"
+             autocomplete="off" autocorrect="off" autocapitalize="none"
+             spellcheck="false" placeholder="Kode">
+      <div class="kodefeil" id="kodefeil"></div>
+      <button class="knapp" id="kodeknapp">Lås opp</button>
+    </div>`;
+  const felt = boks.querySelector('#kodefelt');
+  const feil = boks.querySelector('#kodefeil');
+  const prov = () => {
+    if (kodeOk(felt.value, cfg.kode)) {
+      apne(nokkel);
+      if (navigator.vibrate) navigator.vibrate(50);
+      etterpa();
+    } else {
+      feil.textContent = 'Feil kode. Spør Henrik eller Bruland.';
+      felt.value = '';
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    }
+  };
+  boks.querySelector('#kodeknapp').onclick = prov;
+  felt.onkeydown = e => { if (e.key === 'Enter') prov(); };
+}
 
 /* ---------- Henting av data ---------- */
 async function hentData(forste) {
@@ -251,29 +311,35 @@ function tegnNedtelling() {
     `<div class="nt"><b>${m}</b><span>min</span></div>`;
 }
 
-/* ---------- Program ---------- */
-function tegnProgram() {
-  const boks = $('#program'); boks.innerHTML = '';
-  (DATA.program || []).forEach(dag => {
+/* ---------- Program ----------
+   Programmet er delt i to bolker. «fre» er alltid åpen. «lor» ligger bak
+   kode, slik at ingen ser hele helgen med én gang.
+   Merk: verken pris eller bekreftet-status vises her — det er arrangørenes
+   arbeidsdata og hører hjemme i planen, ikke i appen. */
+function tegnProgram(bolk) {
+  const boks = $('#program-' + bolk);
+  if (!boks) return;
+  const laas = (DATA.laas || {})[bolk];
+
+  if (laas && !erApnet('bolk-' + bolk)) {
+    tegnLaas(boks, laas, 'bolk-' + bolk, () => tegnProgram(bolk));
+    return;
+  }
+
+  boks.innerHTML = '';
+  (DATA.program || []).filter(d => (d.bolk || 'fre') === bolk).forEach(dag => {
     boks.appendChild(el('div', 'dag', esc(dag.dag)));
     (dag.poster || []).forEach(p => {
-      const kl = 'post' + (p.uthevet ? ' uthevet' : '') + (p.status === 'ikke-bekreftet' ? ' ikkebekreftet' : '');
-      const d = el('div', kl);
-      let merke = '';
-      if (p.status === 'bekreftet') merke = '<span class="merke m-ok">✓ Bekreftet</span>';
-      else if (p.status === 'ikke-bekreftet') merke = '<span class="merke m-ikke">Ikke bekreftet</span>';
-      else merke = '<span class="merke m-plan">Planlagt</span>';
-
-      let kart = '';
-      if (p.kart) kart = `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>`;
-
+      const d = el('div', 'post' + (p.uthevet ? ' uthevet' : ''));
+      const kart = p.kart
+        ? `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>` : '';
       d.innerHTML =
         `<div class="tid">${esc(p.tid)}</div>` +
         `<div class="inn">` +
           `<div class="tit">${p.ikon ? p.ikon + ' ' : ''}${esc(p.tittel)}</div>` +
           (p.sted ? `<div class="std">${esc(p.sted)}</div>` : '') +
           (p.detalj ? `<div class="det">${esc(p.detalj)}</div>` : '') +
-          merke + kart +
+          kart +
         `</div>`;
       boks.appendChild(d);
     });
@@ -284,17 +350,20 @@ function tegnProgram() {
       ev.preventDefault();
       bytt('kart');
       setTimeout(() => {
-        const s = (DATA.steder || []).find(x => x.id === a.dataset.kart);
-        if (s && kartRef) {
-          kartRef.setView([s.lat, s.lon], 16);
-          const m = markorer.find(x => x.__s.id === s.id);
+        const st = (DATA.steder || []).find(x => x.id === a.dataset.kart);
+        if (st && kartRef) {
+          kartRef.setView([st.lat, st.lon], 16);
+          const m = markorer.find(x => x.__s.id === st.id);
           if (m) m.openPopup();
         }
       }, 350);
     };
   });
 
-  $('#fot').innerHTML = `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
+  if (bolk === 'fre') {
+    $('#fot').innerHTML =
+      `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
+  }
 }
 
 /* ---------- Kart ---------- */
@@ -420,54 +489,117 @@ function startGps() {
   }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
 }
 
-/* ---------- Quiz ---------- */
-let qIdx = 0, qScore = 0, qSvart = false, qStartet = false;
+/* ---------- Quiz ----------
+   Fem quizer, hver med egen kode og eget lagoppsett. Rekkefølgen er:
+   liste → kode → lagoppsett → spørsmål → resultat.
+   Poeng lagres pr. quiz, slik at laget kan lese opp sitt eget resultat. */
+let aktivQuiz = null, qIdx = 0, qScore = 0, qSvart = false, qVisning = 'liste';
+
+const quizNokkel = id => 'quiz-' + id;
+const quizResultat = id => {
+  const v = localStorage.getItem('blatur-res-' + id);
+  return v === null ? null : parseInt(v, 10);
+};
 
 function tegnQuiz() {
   const boks = $('#quiz');
-  const sp = DATA.quiz || [];
-  if (!sp.length) { boks.innerHTML = '<div class="kort">Ingen spørsmål ennå.</div>'; return; }
+  const quizer = DATA.quizer || [];
+  if (!quizer.length) { boks.innerHTML = '<div class="kort">Ingen quizer ennå.</div>'; return; }
 
-  if (!qStartet) {
-    const best = localStorage.getItem('blatur-best');
+  /* --- Liste over quizene --- */
+  if (qVisning === 'liste') {
+    const info = DATA.quizinfo;
     boks.innerHTML =
-      `<div class="qframe">
-        <div style="font-size:52px">🎯</div>
-        <h2 style="margin:10px 0 6px;font-size:21px">Blåtur-quizen</h2>
-        <p style="color:var(--muted);font-size:14.5px;line-height:1.55;margin:0">
-          ${sp.length} spørsmål om Istanbul, turen og litt mat og drikke.<br>
-          Poengene er dine egne — les dem høyt for de andre.</p>
-        ${best ? `<p style="font-size:13.5px;color:var(--muted);margin-top:12px">Din beste: <b>${esc(best)}</b> av ${sp.length}</p>` : ''}
-        <button class="knapp" onclick="startQuiz()">Start quizen</button>
-      </div>`;
+      (info ? `<div class="kort"><h2>${esc(info.tittel)}</h2>
+        <div style="font-size:14px;line-height:1.55;color:#39434f">${esc(info.tekst)}</div></div>` : '') +
+      '<div id="qliste"></div>';
+    const liste = $('#qliste');
+    quizer.forEach(qz => {
+      const res = quizResultat(qz.id);
+      const apen = erApnet(quizNokkel(qz.id));
+      const b = el('button', 'qkort' + (res !== null ? ' ferdig' : ''));
+      b.innerHTML =
+        `<div class="qi">${apen ? (qz.ikon || '🎯') : '🔒'}</div>
+         <div style="flex:1">
+           <div class="qt">${esc(qz.tittel)}</div>
+           <div class="qm">${res !== null
+              ? 'Ferdig · ' + res + ' av ' + qz.sporsmal.length + ' riktige'
+              : (apen ? qz.sporsmal.length + ' spørsmål · klar' : 'Låst · krever kode')}</div>
+         </div>
+         <div class="qs">›</div>`;
+      b.onclick = () => { aktivQuiz = qz.id; qVisning = apen ? 'lag' : 'kode'; tegnQuiz(); };
+      liste.appendChild(b);
+    });
     return;
   }
 
+  const qz = quizer.find(x => x.id === aktivQuiz);
+  if (!qz) { qVisning = 'liste'; tegnQuiz(); return; }
+
+  /* --- Kodelås --- */
+  if (qVisning === 'kode') {
+    tegnLaas(boks, {
+      ikon: qz.ikon || '🔒',
+      tittel: qz.tittel,
+      tekst: 'Denne quizen åpnes med en kode. Den får dere når runden starter.',
+      kode: qz.kode
+    }, quizNokkel(qz.id), () => { qVisning = 'lag'; tegnQuiz(); });
+    const tilbake = el('button', 'knapp sek', 'Tilbake');
+    tilbake.onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+    boks.appendChild(tilbake);
+    return;
+  }
+
+  /* --- Lagoppsett --- */
+  if (qVisning === 'lag') {
+    const lag = qz.lag || [];
+    boks.innerHTML =
+      `<div class="qframe">
+        <div style="font-size:46px">${qz.ikon || '🎯'}</div>
+        <h2 style="margin:8px 0 4px;font-size:21px">${esc(qz.tittel)}</h2>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 4px">${esc(qz.ingress || '')}</p>
+        <p style="font-size:13.5px;color:var(--muted);margin:14px 0 8px"><b>Lagene for denne quizen</b><br>
+          Finn navnet ditt. Laget svarer sammen — bli enige før dere trykker.</p>
+        <div class="lagliste">${lag.map(l =>
+          `<div class="lagkort"><b>${esc(l.navn)}</b><div>${l.medlemmer.map(esc).join(' · ')}</div></div>`).join('')}</div>
+        <button class="knapp" id="qstart">Start quizen</button>
+        <button class="knapp sek" id="qtilbake">Tilbake</button>
+      </div>`;
+    $('#qstart').onclick = () => { qIdx = 0; qScore = 0; qSvart = false; qVisning = 'spill'; tegnQuiz(); };
+    $('#qtilbake').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+    return;
+  }
+
+  const sp = qz.sporsmal || [];
+
+  /* --- Resultat --- */
   if (qIdx >= sp.length) {
     const pst = Math.round(qScore / sp.length * 100);
-    const best = parseInt(localStorage.getItem('blatur-best') || '0', 10);
-    if (qScore > best) localStorage.setItem('blatur-best', qScore);
-    let dom = 'Du klarer deg.';
-    if (pst === 100) dom = 'Feilfritt. Du har lest planen.';
-    else if (pst >= 80) dom = 'Sterkt. Du er klar for Istanbul.';
-    else if (pst >= 50) dom = 'Godkjent — så vidt.';
-    else dom = 'Du spanderer første runde.';
+    try { localStorage.setItem('blatur-res-' + qz.id, qScore); } catch (e) {}
+    let dom = 'Godkjent — så vidt.';
+    if (pst === 100) dom = 'Feilfritt. Ingen tror på dere.';
+    else if (pst >= 80) dom = 'Sterkt. Laget kan noe.';
+    else if (pst >= 50) dom = 'Midt på treet. Det holder ikke til pallen.';
+    else dom = 'Laget spanderer neste runde.';
     boks.innerHTML =
       `<div class="qframe">
         <div class="score">${qScore}/${sp.length}</div>
         <div class="stolpe"><i style="width:${pst}%"></i></div>
         <p style="font-size:16px;font-weight:600;margin:8px 0 2px">${dom}</p>
-        <p style="color:var(--muted);font-size:14px">${pst} % riktig${qScore > best ? ' · ny personlig rekord 🏆' : ''}</p>
-        <button class="knapp" onclick="startQuiz()">Prøv igjen</button>
-        <button class="knapp sek" onclick="qStartet=false;tegnQuiz()">Tilbake</button>
+        <p style="color:var(--muted);font-size:14px">${pst} % riktig i ${esc(qz.tittel)}</p>
+        <button class="knapp" id="qigjen">Prøv igjen</button>
+        <button class="knapp sek" id="qtillisten">Til de andre quizene</button>
       </div>`;
+    $('#qigjen').onclick = () => { qIdx = 0; qScore = 0; qSvart = false; tegnQuiz(); };
+    $('#qtillisten').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
     return;
   }
 
+  /* --- Spørsmål --- */
   const q = sp[qIdx];
   boks.innerHTML =
     `<div class="qframe">
-      <div class="qkat">${esc(q.kategori || 'Spørsmål')}</div>
+      <div class="qkat">${esc(qz.tittel)}</div>
       <div class="qteller">Spørsmål ${qIdx + 1} av ${sp.length} · ${qScore} riktige</div>
       <div class="stolpe"><i style="width:${qIdx / sp.length * 100}%"></i></div>
       <div class="qsp">${esc(q.sporsmal)}</div>
@@ -483,14 +615,13 @@ function tegnQuiz() {
   });
 }
 
-function startQuiz() { qIdx = 0; qScore = 0; qSvart = false; qStartet = true; tegnQuiz(); }
-
 function svar(i) {
   if (qSvart) return;
   qSvart = true;
-  const q = DATA.quiz[qIdx];
-  const knapper = document.querySelectorAll('#qalt .qalt');
-  knapper.forEach((b, j) => {
+  const qz = (DATA.quizer || []).find(x => x.id === aktivQuiz);
+  const sp = qz.sporsmal;
+  const q = sp[qIdx];
+  document.querySelectorAll('#qalt .qalt').forEach((b, j) => {
     b.disabled = true;
     if (j === q.riktig) b.classList.add('riktig');
     else if (j === i) b.classList.add('feil');
@@ -500,16 +631,16 @@ function svar(i) {
 
   $('#qfork').innerHTML =
     `<div class="qfork">${i === q.riktig ? '✅ ' : '❌ '}${esc(q.forklaring || '')}</div>
-     <button class="knapp" onclick="neste()">${qIdx + 1 >= DATA.quiz.length ? 'Se resultatet' : 'Neste spørsmål'}</button>`;
+     <button class="knapp" id="qneste">${qIdx + 1 >= sp.length ? 'Se resultatet' : 'Neste spørsmål'}</button>`;
+  $('#qneste').onclick = () => { qIdx++; qSvart = false; tegnQuiz(); };
 }
-
-function neste() { qIdx++; qSvart = false; tegnQuiz(); }
 
 /* ---------- Oppslag ---------- */
 function tegnOppslag() {
   const boks = $('#oppslag'); boks.innerHTML = '';
   const o = DATA.oppslag || [];
-  if (!o.length) { boks.innerHTML = '<div class="kort">Ingenting nytt akkurat nå.</div>'; return; }
+  if (!o.length) return;
+  boks.appendChild(el('div', 'dag', '📣 Nytt'));
   o.forEach(x => {
     const kl = 'varsel v-' + (x.type === 'viktig' ? 'viktig' : x.type === 'gøy' ? 'gøy' : 'info');
     boks.appendChild(el('div', kl,
@@ -628,6 +759,7 @@ function bytt(navn) {
   $('#t-' + navn).classList.add('on');
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === navn));
   if (navn === 'kart') tegnKart();
+  if (navn === 'fre' || navn === 'lor') tegnProgram(navn);
   window.scrollTo(0, 0);
 }
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => bytt(b.dataset.t));
@@ -642,9 +774,13 @@ function tegnAlt() {
   if (!DATA) return;
   $('#datoer').textContent = (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '');
   document.title = DATA.tur?.tittel || 'Blåtur';
-  tegnNedtelling(); tegnProgram(); tegnOppslag(); tegnInfo();
+  tegnNedtelling();
+  tegnProgram('fre');
+  tegnProgram('lor');
+  tegnInfo();
   if (DATA.vaer) tegnVaer($('#info'));
-  if (!qStartet) tegnQuiz();
+  tegnOppslag();
+  if (qVisning === 'liste') tegnQuiz();
   if ($('#t-kart').classList.contains('on')) tegnKart();
 }
 

@@ -1,6 +1,6 @@
 {
-  "versjon": 9,
-  "sistOppdatert": "4. september 22:45",
+  "versjon": 10,
+  "sistOppdatert": "5. september 07:45",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -48,192 +48,170 @@
   "program": [
     {
       "dag": "Fredag 11. september",
+      "bolk": "fre",
       "poster": [
         {
           "tid": "07:15",
           "tittel": "TK1748 Oslo → Istanbul",
-          "sted": "Oslo Lufthavn",
-          "detalj": "Lander IST 12:10. Vær på flyplassen i god tid — dette er turens mest sårbare punkt.",
-          "status": "bekreftet",
-          "ikon": "✈️"
+          "sted": "Oslo lufthavn Gardermoen",
+          "ikon": "✈️",
+          "detalj": "Lander i Istanbul 12:10. Vær på flyplassen i god tid — dette er turens mest sårbare punkt."
         },
         {
           "tid": "14:15",
           "tittel": "Innsjekk Cheers Porthouse",
           "sted": "Mumhane Cd. 31, Karaköy",
-          "detalj": "Legg igjen bagasjen, ikke sett dere ned. Vi skal videre.",
-          "status": "bekreftet",
           "ikon": "🏨",
-          "kart": "hotell"
+          "kart": "hotell",
+          "detalj": "Legg igjen bagasjen, ikke sett dere ned. Vi skal videre."
         },
         {
           "tid": "14:30",
-          "tittel": "Lunsj — Namlı Gurme",
-          "sted": "Mumhane Cd., samme gate som hotellet",
-          "detalj": "Rask og lett, ikke stor. Vi har bare ca. 70 minutter, og kvelden er smaksprøver PLUSS sittende middag med seks enheter alkohol. Spar plass. Baklava hos Karaköy Güllüoğlu på veien tilbake for den som vil.",
-          "status": "planlagt",
+          "tittel": "Lunsj i Karaköy",
+          "sted": "Namlı Gurme — samme gate som hotellet",
           "ikon": "🥙",
-          "kart": "namli"
+          "kart": "namli",
+          "detalj": "Rask og lett. Vi har ca. 70 minutter, og kvelden er smaksprøver pluss sittende middag. Spar plass. Baklava hos Karaköy Güllüoğlu på veien tilbake for den som vil."
         },
         {
           "tid": "15:45",
           "tittel": "Uber til hamam",
           "sted": "Fra hotellet",
-          "detalj": "Elleve mann = tre biler. Bestill alle tre samtidig fra resepsjonen, ikke fra fortauet.",
-          "status": "bekreftet",
           "ikon": "🚕",
-          "kart": "hamam"
+          "kart": "hamam",
+          "detalj": "Elleve mann = tre biler. Bestill alle tre samtidig fra resepsjonen, ikke fra fortauet."
         },
         {
           "tid": "16:15",
           "tittel": "Hamam — Gedik Paşa",
           "sted": "Hamam Sk. 65, Fatih",
-          "detalj": "45 minutters skrubb og skum. Hele hamamen er vår alene, og alle elleve behandles samtidig. Bygget i 1475. €70 pr. mann, betalt.",
-          "status": "bekreftet",
           "ikon": "🧖",
-          "kart": "hamam"
+          "kart": "hamam",
+          "detalj": "45 minutters skrubb og skum. Hele hamamen er vår alene, og alle elleve behandles samtidig. Bygget i 1475."
         },
         {
           "tid": "18:00",
           "tittel": "Dusj og skift på hotellet",
           "sted": "Cheers Porthouse",
-          "detalj": "Ta med jakke. Vi er på vannet 19:05, og september-kvelder på Bosporos er kjøligere enn dagen.",
-          "status": "bekreftet",
-          "ikon": "🚿"
+          "ikon": "🚿",
+          "detalj": "Ta med jakke. Vi er på vannet 19:05, og september-kvelder på Bosporos er kjøligere enn dagen."
         },
         {
           "tid": "18:50",
           "tittel": "OPPMØTE I RESEPSJONEN",
           "sted": "Cheers Porthouse",
-          "detalj": "Ferdig dusjet og skiftet. Båten går 19:05 og venter ikke. Dette er kveldens eneste harde oppmøte.",
-          "status": "bekreftet",
           "ikon": "⏰",
-          "uthevet": true
+          "uthevet": true,
+          "detalj": "Ferdig dusjet og skiftet. Båten går 19:05 og venter ikke. Dette er kveldens eneste harde oppmøte."
         },
         {
           "tid": "19:05",
           "tittel": "Matturné i Kadıköy",
           "sted": "Ferge fra Karaköy-kaia",
-          "detalj": "Turkish Flavours. Svensktalende guide møter oss på Kadıköy-kaia 19:35. Smaksprøver gjennom markedet og sittende meyhane-middag. Seks enheter alkohol inkludert. €125 pr. mann, betalt.",
-          "status": "bekreftet",
           "ikon": "🍢",
-          "kart": "kaia"
-        },
-        {
-          "tid": "20:00",
-          "tittel": "Beşiktaş — hospitality-billett",
-          "sted": "Undersøkes",
-          "detalj": "Vi ser på hospitality-billetter til Beşiktaş fredag 20:00. MERK: dette kolliderer rett med matturnéen, som er betalt (€125 pr. mann) og går 19:05–ca. 23:00. Skal kampen bli noe av, må matturnéen flyttes eller avlyses — det er ikke mulig å rekke begge.",
-          "status": "ikke-bekreftet",
-          "ikon": "⚽"
+          "kart": "kaia",
+          "uthevet": true,
+          "detalj": "Turkish Flavours. Svensktalende guide møter oss på Kadıköy-kaia 19:35. Smaksprøver gjennom markedet og sittende meyhane-middag. Drikke er inkludert."
         },
         {
           "tid": "23:00",
           "tittel": "Videre i Kadıköy",
           "sted": "Kadife Sokak",
-          "detalj": "Bargata, 8–10 min gange fra markedet. Vi spør guiden hva hun anbefaler. Taxi hjem senere — tre biler.",
-          "status": "planlagt",
           "ikon": "🍺",
-          "kart": "kadife"
+          "kart": "kadife",
+          "detalj": "Bargata, 8–10 min gange fra markedet. Vi spør guiden hva hun anbefaler. Taxi hjem senere — tre biler."
         }
       ]
     },
     {
       "dag": "Lørdag 12. september",
+      "bolk": "lor",
       "poster": [
         {
-          "tid": "Formiddag",
+          "tid": "10:15",
           "tittel": "Gamlebyen med guide",
-          "sted": "Møter oss på hotellet",
-          "detalj": "Blå moské og Hagia Sofia. Tilbud mottatt fra Real Istanbul Tours — ikke bekreftet ennå.",
-          "status": "ikke-bekreftet",
+          "sted": "Yunus møter oss i lobbyen",
           "ikon": "🕌",
-          "kart": "blaa"
+          "kart": "blaa",
+          "uthevet": true,
+          "detalj": "Real Istanbul Tours. Vi tar trikken sammen fra Karaköy. Blå moské først — den må vi rekke før middagsbønnen — deretter Hagia Sofia i ro og mak. Headset til alle, så alle hører guiden. Turen ender ved Krydderbasaren rundt 13:15."
         },
         {
           "tid": "13:30",
           "tittel": "Lunsj ved basarene",
           "sted": "Eminönü",
-          "detalj": "Guideturen slutter ved Krydderbasaren. Hamdi ved Eminönü er det opplagte — utsikt over Gyllne Horn og vant til store selskaper. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden. STATUS: Henrik har forsøkt å få tak i to steder for lørdagslunsjen, Namlı og Lokantas. Ingen svar ennå.",
-          "status": "ikke-bekreftet",
           "ikon": "🍽️",
-          "kart": "hamdi"
+          "kart": "hamdi",
+          "detalj": "Vi spiser der guideturen slutter. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden."
         },
         {
           "tid": "16:45",
           "tittel": "Ned til kaia",
           "sted": "Karaköy",
-          "detalj": "Ferdig kledd for kvelden. Vi er ikke innom hotellet igjen før natten.",
-          "status": "bekreftet",
           "ikon": "🚶",
-          "kart": "kaia"
+          "kart": "kaia",
+          "detalj": "Ferdig kledd for kvelden. Vi er ikke innom hotellet igjen før natten."
         },
         {
           "tid": "17:00",
           "tittel": "Privat yacht på Bosporos",
           "sted": "Luma Yacht",
-          "detalj": "To timer på vannet i ettermiddagslys. Solnedgang 19:18. Ingen skal bade — dette er drikke på dekk. €320 for hele båten, betalt.",
-          "status": "bekreftet",
           "ikon": "🛥️",
+          "kart": "kaia",
           "uthevet": true,
-          "kart": "kaia"
+          "detalj": "To timer på vannet i ettermiddagslys. Solnedgang 19:18. Ingen skal bade — dette er drikke på dekk."
         },
         {
           "tid": "19:30",
           "tittel": "Skybar",
           "sted": "Sky Karaköy",
-          "detalj": "Rett fra båten. Samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden. STATUS: Henrik har tatt kontakt via Instagram. Telefonnummeret svarte verken på SMS eller WhatsApp, så det er foreløpig eneste kanal inn.",
-          "status": "planlagt",
           "ikon": "🌆",
-          "kart": "sky"
+          "kart": "sky",
+          "detalj": "Rett fra båten, samme gate som hotellet. VIKTIG: vi drar 20:20 — bordet er 21:00 og det er 20–30 min kjøring. Bestill bilene 20:10, og be om regningen samtidig med runden."
         },
         {
           "tid": "20:20",
           "tittel": "Tre biler til middagen",
           "sted": "Fra Sky Karaköy",
-          "detalj": "Til Nusr-Et ETILER, Nisbetiye Cd. 87 — ikke Maçka Palas. 20–30 min kjøring. Bestill bilene 20:10 mens vi fortsatt sitter.",
-          "status": "bekreftet",
-          "ikon": "🚕"
+          "ikon": "🚕",
+          "detalj": "Til Nusr-Et Etiler, Nisbetiye Cd. 87 — ikke Maçka Palas. 20–30 min kjøring. Bestill bilene 20:10 mens vi fortsatt sitter."
         },
         {
           "tid": "21:00",
           "tittel": "Middag — Nusr-Et",
           "sted": "Nusr-Et Etiler · Nisbetiye Cd. 87",
-          "detalj": "Eget rom kun for oss, Crazy Feast-meny og fri drikke. Alt er betalt på forhånd — ingen regning å splitte, ingen som teller runder. Ta med tre biler fra skybaren.",
-          "status": "bekreftet",
           "ikon": "🥩",
+          "kart": "nusret",
           "uthevet": true,
-          "kart": "nusret"
+          "detalj": "Eget rom kun for oss, Crazy Feast-meny og fri drikke. Alt er gjort opp på forhånd — ingen regning å splitte, ingen som teller runder."
         },
         {
           "tid": "00:00",
           "tittel": "Videre til bargatene",
           "sted": "Asmalımescit, Beyoğlu",
-          "detalj": "Tre biler fra Nusr-Et, 15–20 min. Bestill dem mens vi sitter. Ingen dørkontroll og ingen bordbestilling — vi går bare inn et sted. Nevizade ligger 5 min unna hvis vi vil videre. Hjem er 8 min gange ned til hotellet, så ingen trenger taxi. Avtal én bar som base før vi sprer oss.",
-          "status": "planlagt",
           "ikon": "🍻",
-          "kart": "asmali"
+          "kart": "asmali",
+          "detalj": "Tre biler fra Nusr-Et, 15–20 min. Bestill dem mens vi sitter. Ingen dørkontroll og ingen bordbestilling — vi går bare inn et sted. Hjem er 8 min gange ned til hotellet. Avtal én bar som base før vi sprer oss."
         }
       ]
     },
     {
       "dag": "Søndag 13. september",
+      "bolk": "lor",
       "poster": [
         {
           "tid": "07:15",
           "tittel": "Avreise fra hotellet",
           "sted": "Cheers Porthouse",
-          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen. Turens mest sårbare punkt — ikke løs dette i en app på fortauet.",
-          "status": "bekreftet",
-          "ikon": "🚐"
+          "ikon": "🚐",
+          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen. Turens mest sårbare punkt — vær nede i tide."
         },
         {
           "tid": "11:15",
           "tittel": "Fly hjem fra SAW",
           "sted": "Sabiha Gökçen",
-          "detalj": "Regn 60–90 min fra Karaköy.",
-          "status": "bekreftet",
-          "ikon": "✈️"
+          "ikon": "✈️",
+          "detalj": "Regn 60–90 min fra Karaköy."
         }
       ]
     }
@@ -499,152 +477,6 @@
       ]
     }
   ],
-  "quiz": [
-    {
-      "kategori": "Istanbul",
-      "sporsmal": "Hvor mange innbyggere har Istanbul, omtrent?",
-      "alternativer": [
-        "6 millioner",
-        "10 millioner",
-        "16 millioner",
-        "24 millioner"
-      ],
-      "riktig": 2,
-      "forklaring": "Rundt 16 millioner — Europas største by, og større enn hele Norden til sammen."
-    },
-    {
-      "kategori": "Istanbul",
-      "sporsmal": "Istanbul ligger i to verdensdeler. Hvilke?",
-      "alternativer": [
-        "Europa og Afrika",
-        "Europa og Asia",
-        "Asia og Afrika",
-        "Europa og Midtøsten"
-      ],
-      "riktig": 1,
-      "forklaring": "Bosporosstredet deler byen mellom Europa og Asia. Fredag kveld krysser vi til den asiatiske siden."
-    },
-    {
-      "kategori": "Turen",
-      "sporsmal": "Hvilket år ble hamamen vi skal til bygget?",
-      "alternativer": [
-        "1475",
-        "1610",
-        "1741",
-        "1856"
-      ],
-      "riktig": 0,
-      "forklaring": "Gedik Paşa Hamamı, 1475 — altså 22 år etter at byen falt. Eldre enn absolutt alt hjemme."
-    },
-    {
-      "kategori": "Turen",
-      "sporsmal": "Hva heter hotellet vårt?",
-      "alternativer": [
-        "Cheers Porthouse",
-        "Karaköy Rooms",
-        "Galata House",
-        "Mumhane Suites"
-      ],
-      "riktig": 0,
-      "forklaring": "Cheers Porthouse Otel, Mumhane Cd. 31. Lær adressen — den er nyttig i en taxi kl. 02."
-    },
-    {
-      "kategori": "Turen",
-      "sporsmal": "Når er oppmøte i resepsjonen fredag kveld?",
-      "alternativer": [
-        "18:00",
-        "18:30",
-        "18:50",
-        "19:05"
-      ],
-      "riktig": 2,
-      "forklaring": "18:50, ferdig skiftet. Fergen går 19:05 og venter ikke på noen."
-    },
-    {
-      "kategori": "Mat og drikke",
-      "sporsmal": "Hva er rakı laget av?",
-      "alternativer": [
-        "Bygg",
-        "Anis og druer",
-        "Poteter",
-        "Ris"
-      ],
-      "riktig": 1,
-      "forklaring": "Druedestillat smakt med anis. Blir melkehvit med vann — derav kallenavnet «løvemelk»."
-    },
-    {
-      "kategori": "Mat og drikke",
-      "sporsmal": "Hva er «meze»?",
-      "alternativer": [
-        "En grillrett",
-        "Små forretter til deling",
-        "En type brød",
-        "Dessert"
-      ],
-      "riktig": 1,
-      "forklaring": "Små retter som settes på bordet til deling. Fredag kveld blir det mange av dem."
-    },
-    {
-      "kategori": "Mat og drikke",
-      "sporsmal": "Hva er en «ocakbaşı»?",
-      "alternativer": [
-        "En fiskerestaurant",
-        "En grill du sitter rundt",
-        "Et bakeri",
-        "En vinbar"
-      ],
-      "riktig": 1,
-      "forklaring": "Bokstavelig «ved ildstedet» — kullgrillen står midt i lokalet og du sitter rundt den."
-    },
-    {
-      "kategori": "Istanbul",
-      "sporsmal": "Hva het Istanbul før 1930?",
-      "alternativer": [
-        "Bysants",
-        "Konstantinopel",
-        "Anatolia",
-        "Trakia"
-      ],
-      "riktig": 1,
-      "forklaring": "Konstantinopel — og før det igjen Bysants. Navnet Istanbul ble offisielt i 1930."
-    },
-    {
-      "kategori": "Istanbul",
-      "sporsmal": "Hvor lang er Bosporosstredet, omtrent?",
-      "alternativer": [
-        "10 km",
-        "30 km",
-        "60 km",
-        "120 km"
-      ],
-      "riktig": 1,
-      "forklaring": "Rundt 30 km fra Marmarahavet til Svartehavet. Vi ser en liten del av den lørdag."
-    },
-    {
-      "kategori": "Turen",
-      "sporsmal": "Hva er inkludert i matturnéen fredag, utover maten?",
-      "alternativer": [
-        "Ingenting",
-        "Fergen",
-        "Seks enheter alkohol og fergen",
-        "Taxi hjem"
-      ],
-      "riktig": 2,
-      "forklaring": "Seks enheter alkohol pr. mann og fergeturen. Derfor ble den dyreste turen valgt."
-    },
-    {
-      "kategori": "Mat og drikke",
-      "sporsmal": "Hva er «kese» i en hamam?",
-      "alternativer": [
-        "En såpe",
-        "En grov skrubbevott",
-        "Et håndkle",
-        "En massasjeolje"
-      ],
-      "riktig": 1,
-      "forklaring": "Skrubbevotten. Den fjerner mer hud enn du tror er tilrådelig, og det er hele poenget."
-    }
-  ],
   "gjengen": [
     {
       "navn": "Henrik",
@@ -753,5 +585,889 @@
       }
     ],
     "notat": "Turens to hele dager. Meldingen hentes live fra Open-Meteo hver gang du åpner Info, så tallene er ferske uten at noen trenger å oppdatere noe. Søndag står ikke oppført — da reiser dere 07:15."
+  },
+  "laas": {
+    "lor": {
+      "tittel": "Lørdag og søndag",
+      "ikon": "🔒",
+      "tekst": "Denne delen åpnes underveis. Koden får dere av Henrik eller Bruland når tiden er inne.",
+      "kode": "Anna69"
+    }
+  },
+  "quizer": [
+    {
+      "id": "tyrkisk-historie",
+      "tittel": "Tyrkisk historie",
+      "ikon": "🏛️",
+      "ingress": "Fra osmanerne til republikken. Tolv spørsmål, økende vanskelighetsgrad.",
+      "kode": "Anna69",
+      "sporsmal": [
+        {
+          "sporsmal": "Hvilket år ble Republikken Tyrkia opprettet?",
+          "alternativer": [
+            "1908",
+            "1918",
+            "1923",
+            "1938"
+          ],
+          "riktig": 2,
+          "forklaring": "29. oktober 1923. Dagen er fortsatt nasjonaldag og heter Cumhuriyet Bayramı."
+        },
+        {
+          "sporsmal": "Hvem var republikkens første president?",
+          "alternativer": [
+            "İsmet İnönü",
+            "Mustafa Kemal Atatürk",
+            "Enver Pasha",
+            "Celâl Bayar"
+          ],
+          "riktig": 1,
+          "forklaring": "Atatürk — etternavnet ble tildelt ham i 1934 og betyr «tyrkernes far»."
+        },
+        {
+          "sporsmal": "Hvilket rike gikk forut for republikken?",
+          "alternativer": [
+            "Det bysantinske riket",
+            "Det persiske riket",
+            "Det osmanske riket",
+            "Det seljukkiske riket"
+          ],
+          "riktig": 2,
+          "forklaring": "Det osmanske riket varte i over 600 år, fra ca. 1299 til 1922."
+        },
+        {
+          "sporsmal": "Hva er Tyrkias hovedstad?",
+          "alternativer": [
+            "Istanbul",
+            "Izmir",
+            "Bursa",
+            "Ankara"
+          ],
+          "riktig": 3,
+          "forklaring": "Ankara, valgt i 1923. Istanbul er største by, men har ikke vært hovedstad siden osmansk tid."
+        },
+        {
+          "sporsmal": "Hvilket alfabet gikk Tyrkia over til i 1928?",
+          "alternativer": [
+            "Det latinske",
+            "Det kyrilliske",
+            "Det greske",
+            "Det arabiske"
+          ],
+          "riktig": 0,
+          "forklaring": "Fra arabisk til latinsk skrift. Atatürk reiste rundt med tavle og kritt for å lære folk det nye alfabetet."
+        },
+        {
+          "sporsmal": "Hvilken sultan erobret Konstantinopel i 1453?",
+          "alternativer": [
+            "Süleyman den store",
+            "Mehmed II",
+            "Selim I",
+            "Bayezid I"
+          ],
+          "riktig": 1,
+          "forklaring": "Mehmed II, bare 21 år gammel. Han fikk tilnavnet Fatih — Erobreren."
+        },
+        {
+          "sporsmal": "Hvilken sultan regnes som osmanernes storhetstid på 1500-tallet?",
+          "alternativer": [
+            "Osman I",
+            "Murad IV",
+            "Süleyman den store",
+            "Abdülhamid II"
+          ],
+          "riktig": 2,
+          "forklaring": "Süleyman regjerte 1520–1566. Tyrkerne kaller ham Kanuni — Lovgiveren."
+        },
+        {
+          "sporsmal": "Hvilket slag ga Atatürk hans militære gjennombrudd i 1915?",
+          "alternativer": [
+            "Gallipoli",
+            "Ankara",
+            "Manzikert",
+            "Lepanto"
+          ],
+          "riktig": 0,
+          "forklaring": "Gallipoli, på tyrkisk Çanakkale. Britene og ANZAC-styrkene ble slått tilbake."
+        },
+        {
+          "sporsmal": "Hvilken fredsavtale fastsatte republikkens grenser i 1923?",
+          "alternativer": [
+            "Sèvres",
+            "Lausanne",
+            "Versailles",
+            "Trianon"
+          ],
+          "riktig": 1,
+          "forklaring": "Lausanne-traktaten erstattet den langt hardere Sèvres-avtalen fra 1920."
+        },
+        {
+          "sporsmal": "Hva het det osmanske eliteinfanteriet?",
+          "alternativer": [
+            "Sipahiene",
+            "Mamelukkene",
+            "Janitsjarene",
+            "Bashi-bazouk"
+          ],
+          "riktig": 2,
+          "forklaring": "Janitsjarene var sultanens livgarde i nesten 500 år, til korpset ble oppløst i 1826."
+        },
+        {
+          "sporsmal": "Hvilket år fikk tyrkiske kvinner stemmerett ved nasjonale valg?",
+          "alternativer": [
+            "1918",
+            "1934",
+            "1946",
+            "1961"
+          ],
+          "riktig": 1,
+          "forklaring": "1934 — før både Frankrike og Italia."
+        },
+        {
+          "sporsmal": "Hva var osmanernes hovedstad rett før Konstantinopel?",
+          "alternativer": [
+            "Bursa",
+            "Konya",
+            "Edirne",
+            "Söğüt"
+          ],
+          "riktig": 2,
+          "forklaring": "Edirne, kjent i Europa som Adrianopel. Før det igjen var det Bursa."
+        }
+      ],
+      "lag": [
+        {
+          "navn": "Lag 1 · Boğaziçi",
+          "medlemmer": [
+            "Andy",
+            "Sondre",
+            "Lars"
+          ]
+        },
+        {
+          "navn": "Lag 2 · Galata",
+          "medlemmer": [
+            "Anders",
+            "Martin",
+            "Jonsson"
+          ]
+        },
+        {
+          "navn": "Lag 3 · Kadıköy",
+          "medlemmer": [
+            "Henrik",
+            "Gunnar",
+            "Bruland"
+          ]
+        },
+        {
+          "navn": "Lag 4 · Karaköy",
+          "medlemmer": [
+            "Johan",
+            "Sødal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "istanbuls-historie",
+      "tittel": "Istanbuls historie",
+      "ikon": "🕌",
+      "ingress": "Byen vi står i. Byzantion, Konstantinopel, Istanbul.",
+      "kode": "Anna69",
+      "sporsmal": [
+        {
+          "sporsmal": "Hvilket sund deler Istanbul i to?",
+          "alternativer": [
+            "Dardanellene",
+            "Bosporos",
+            "Gibraltarstredet",
+            "Øresund"
+          ],
+          "riktig": 1,
+          "forklaring": "Bosporos skiller Europa fra Asia. Byen ligger på begge sider."
+        },
+        {
+          "sporsmal": "Hva het byen før den het Istanbul?",
+          "alternativer": [
+            "Smyrna",
+            "Antiokia",
+            "Konstantinopel",
+            "Trapezunt"
+          ],
+          "riktig": 2,
+          "forklaring": "Konstantinopel, oppkalt etter keiser Konstantin."
+        },
+        {
+          "sporsmal": "Hvilket år falt Konstantinopel til osmanerne?",
+          "alternativer": [
+            "1204",
+            "1326",
+            "1453",
+            "1492"
+          ],
+          "riktig": 2,
+          "forklaring": "29. mai 1453, etter 53 dagers beleiring."
+        },
+        {
+          "sporsmal": "Hva het byen i antikken, før Konstantinopel?",
+          "alternativer": [
+            "Byzantion",
+            "Troja",
+            "Efesos",
+            "Nikea"
+          ],
+          "riktig": 0,
+          "forklaring": "Byzantion, grunnlagt av greske kolonister rundt 660 f.Kr."
+        },
+        {
+          "sporsmal": "Hvilken keiser gjorde byen til hovedstad i år 330?",
+          "alternativer": [
+            "Justinian I",
+            "Konstantin den store",
+            "Theodosius",
+            "Basileios II"
+          ],
+          "riktig": 1,
+          "forklaring": "Konstantin den store flyttet Romerrikets hovedstad hit."
+        },
+        {
+          "sporsmal": "Hva ble Hagia Sofia opprinnelig bygget som?",
+          "alternativer": [
+            "Moské",
+            "Palass",
+            "Kirke",
+            "Bibliotek"
+          ],
+          "riktig": 2,
+          "forklaring": "Kirke. Den var verdens største katedral i nesten tusen år."
+        },
+        {
+          "sporsmal": "Hvilken keiser sto bak Hagia Sofia slik den står i dag?",
+          "alternativer": [
+            "Konstantin",
+            "Justinian I",
+            "Heraklios",
+            "Leo III"
+          ],
+          "riktig": 1,
+          "forklaring": "Justinian I, ferdig i 537. Han skal ha utbrutt: «Salomo, jeg har overgått deg.»"
+        },
+        {
+          "sporsmal": "Hva heter Storbasaren på tyrkisk?",
+          "alternativer": [
+            "Mısır Çarşısı",
+            "Kapalıçarşı",
+            "Beyazıt Meydanı",
+            "Sultanahmet"
+          ],
+          "riktig": 1,
+          "forklaring": "Kapalıçarşı — «den overdekte basaren». Rundt 4 000 butikker."
+        },
+        {
+          "sporsmal": "Hvem bygde Galatatårnet slik det står i dag?",
+          "alternativer": [
+            "Osmanerne",
+            "Venetianerne",
+            "Genoveserne",
+            "Korsfarerne"
+          ],
+          "riktig": 2,
+          "forklaring": "Genoveserne, i 1348. Det het da Kristustårnet."
+        },
+        {
+          "sporsmal": "Hva heter vika som skiller gamlebyen fra Galata?",
+          "alternativer": [
+            "Det gyllne horn",
+            "Marmarabukta",
+            "Bosporosbukta",
+            "Kadıköybukta"
+          ],
+          "riktig": 0,
+          "forklaring": "Det gyllne horn, på tyrkisk Haliç. Hotellet vårt ligger like ved."
+        },
+        {
+          "sporsmal": "Hvilket opprør nesten veltet keiser Justinian i år 532?",
+          "alternativer": [
+            "Ikonoklasmen",
+            "Nika-opprøret",
+            "Janitsjaropprøret",
+            "Det fjerde korstog"
+          ],
+          "riktig": 1,
+          "forklaring": "Nika-opprøret. Halve byen brant — og Hagia Sofia ble bygget på ruinene etterpå."
+        },
+        {
+          "sporsmal": "Hvilket år ble «Istanbul» det offisielle navnet i internasjonal post?",
+          "alternativer": [
+            "1453",
+            "1876",
+            "1930",
+            "1950"
+          ],
+          "riktig": 2,
+          "forklaring": "1930. Postverket returnerte brev adressert til Konstantinopel."
+        }
+      ],
+      "lag": [
+        {
+          "navn": "Lag 1 · Boğaziçi",
+          "medlemmer": [
+            "Anders",
+            "Lars",
+            "Jonsson"
+          ]
+        },
+        {
+          "navn": "Lag 2 · Galata",
+          "medlemmer": [
+            "Gunnar",
+            "Sødal",
+            "Sondre"
+          ]
+        },
+        {
+          "navn": "Lag 3 · Kadıköy",
+          "medlemmer": [
+            "Andy",
+            "Martin",
+            "Johan"
+          ]
+        },
+        {
+          "navn": "Lag 4 · Karaköy",
+          "medlemmer": [
+            "Bruland",
+            "Henrik"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tyrkisk-fotball",
+      "tittel": "Tyrkisk fotball",
+      "ikon": "⚽",
+      "ingress": "Süper Lig, derbyer og VM 2002.",
+      "kode": "Anna69",
+      "sporsmal": [
+        {
+          "sporsmal": "Hvilke farger spiller Galatasaray i?",
+          "alternativer": [
+            "Svart og hvit",
+            "Gul og rød",
+            "Gul og blå",
+            "Rød og hvit"
+          ],
+          "riktig": 1,
+          "forklaring": "Gul og rød. Klubben ble stiftet i 1905 av elever ved Galatasaray-lyceet."
+        },
+        {
+          "sporsmal": "Hvilke farger har Beşiktaş?",
+          "alternativer": [
+            "Svart og hvit",
+            "Gul og rød",
+            "Blå og hvit",
+            "Grønn og hvit"
+          ],
+          "riktig": 0,
+          "forklaring": "Svart og hvit. Beşiktaş er Tyrkias eldste klubb, fra 1903."
+        },
+        {
+          "sporsmal": "På hvilken side av Bosporos ligger Fenerbahçe?",
+          "alternativer": [
+            "Europeisk side",
+            "Asiatisk side",
+            "Begge",
+            "På en øy"
+          ],
+          "riktig": 1,
+          "forklaring": "Asiatisk side, i Kadıköy — der vi er fredag kveld."
+        },
+        {
+          "sporsmal": "Hva heter Tyrkias øverste fotballiga?",
+          "alternativer": [
+            "Süper Lig",
+            "Türkiye Ligi",
+            "Primera Türk",
+            "Bundesliga TR"
+          ],
+          "riktig": 0,
+          "forklaring": "Süper Lig, grunnlagt i 1959."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk klubb vant UEFA-cupen i 2000?",
+          "alternativer": [
+            "Fenerbahçe",
+            "Beşiktaş",
+            "Galatasaray",
+            "Trabzonspor"
+          ],
+          "riktig": 2,
+          "forklaring": "Galatasaray slo Arsenal i finalen — fortsatt den eneste europeiske tittelen til en tyrkisk klubb."
+        },
+        {
+          "sporsmal": "Hvor endte Tyrkia i VM 2002?",
+          "alternativer": [
+            "Vant",
+            "Andreplass",
+            "Tredjeplass",
+            "Kvartfinale"
+          ],
+          "riktig": 2,
+          "forklaring": "Bronse — landets beste VM noen gang."
+        },
+        {
+          "sporsmal": "Hvem scoret VMs raskeste mål, etter 11 sekunder i 2002?",
+          "alternativer": [
+            "Hakan Şükür",
+            "İlhan Mansız",
+            "Rüştü Reçber",
+            "Emre Belözoğlu"
+          ],
+          "riktig": 0,
+          "forklaring": "Hakan Şükür, i bronsefinalen mot Sør-Korea. Rekorden står fortsatt."
+        },
+        {
+          "sporsmal": "Hvilket stadion i Istanbul huset Champions League-finalen i 2005?",
+          "alternativer": [
+            "Şükrü Saracoğlu",
+            "Atatürk olympiastadion",
+            "Ali Sami Yen",
+            "Tüpraş Stadyumu"
+          ],
+          "riktig": 1,
+          "forklaring": "Atatürk olympiastadion — kvelden Liverpool snudde 0–3 mot Milan."
+        },
+        {
+          "sporsmal": "Hva kalles derbyet mellom Galatasaray og Fenerbahçe?",
+          "alternativer": [
+            "Det evige derby",
+            "Det interkontinentale derby",
+            "Bosporos-derbyet",
+            "Det gyllne derby"
+          ],
+          "riktig": 1,
+          "forklaring": "Kıtalar Arası Derbi — fordi klubbene ligger på hver sin verdensdel."
+        },
+        {
+          "sporsmal": "Hvem var Tyrkias keeper og profil i VM 2002?",
+          "alternativer": [
+            "Volkan Demirel",
+            "Rüştü Reçber",
+            "Sinan Bolat",
+            "Mert Günok"
+          ],
+          "riktig": 1,
+          "forklaring": "Rüştü Reçber, lett kjennelig på den svarte stripen under øynene."
+        },
+        {
+          "sporsmal": "Hvilken verdensmester fra 2014 med tyrkiske røtter spilte senere for Fenerbahçe?",
+          "alternativer": [
+            "Ilkay Gündoğan",
+            "Emre Can",
+            "Mesut Özil",
+            "Nuri Şahin"
+          ],
+          "riktig": 2,
+          "forklaring": "Mesut Özil kom til Fenerbahçe i 2021 etter årene i Arsenal."
+        },
+        {
+          "sporsmal": "Hvilken klubb har flest seriemesterskap i Tyrkia?",
+          "alternativer": [
+            "Fenerbahçe",
+            "Beşiktaş",
+            "Trabzonspor",
+            "Galatasaray"
+          ],
+          "riktig": 3,
+          "forklaring": "Galatasaray leder statistikken, tett fulgt av Fenerbahçe."
+        }
+      ],
+      "lag": [
+        {
+          "navn": "Lag 1 · Boğaziçi",
+          "medlemmer": [
+            "Bruland",
+            "Martin",
+            "Andy"
+          ]
+        },
+        {
+          "navn": "Lag 2 · Galata",
+          "medlemmer": [
+            "Henrik",
+            "Lars",
+            "Gunnar"
+          ]
+        },
+        {
+          "navn": "Lag 3 · Kadıköy",
+          "medlemmer": [
+            "Anders",
+            "Sødal",
+            "Sondre"
+          ]
+        },
+        {
+          "navn": "Lag 4 · Karaköy",
+          "medlemmer": [
+            "Johan",
+            "Jonsson"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tyrkisk-okonomi",
+      "tittel": "Tyrkisk økonomi",
+      "ikon": "📈",
+      "ingress": "Lira, hasselnøtter og seks nuller som forsvant.",
+      "kode": "Anna69",
+      "sporsmal": [
+        {
+          "sporsmal": "Hva heter Tyrkias valuta?",
+          "alternativer": [
+            "Tyrkisk dinar",
+            "Tyrkisk lira",
+            "Tyrkisk drakme",
+            "Tyrkisk pund"
+          ],
+          "riktig": 1,
+          "forklaring": "Tyrkisk lira. Regn med at prisene ser mye større ut enn de er."
+        },
+        {
+          "sporsmal": "Hvilket symbol brukes for tyrkisk lira?",
+          "alternativer": [
+            "₺",
+            "₽",
+            "₴",
+            "₹"
+          ],
+          "riktig": 0,
+          "forklaring": "₺ — designet ble valgt gjennom en konkurranse i 2012."
+        },
+        {
+          "sporsmal": "Hvilken by er Tyrkias økonomiske sentrum?",
+          "alternativer": [
+            "Ankara",
+            "Izmir",
+            "Istanbul",
+            "Antalya"
+          ],
+          "riktig": 2,
+          "forklaring": "Istanbul står for rundt en tredjedel av landets samlede verdiskaping."
+        },
+        {
+          "sporsmal": "Hvor mange nuller strøk Tyrkia fra liraen i 2005?",
+          "alternativer": [
+            "Tre",
+            "Seks",
+            "Ni",
+            "To"
+          ],
+          "riktig": 1,
+          "forklaring": "Seks. Én million gamle lira ble til én ny lira."
+        },
+        {
+          "sporsmal": "Hva er Tyrkia verdens største eksportør av?",
+          "alternativer": [
+            "Kaffe",
+            "Hasselnøtter",
+            "Ris",
+            "Bomull"
+          ],
+          "riktig": 1,
+          "forklaring": "Hasselnøtter — rundt to tredjedeler av verdensproduksjonen kommer fra Svartehavskysten."
+        },
+        {
+          "sporsmal": "Hvilket tyrkisk flyselskap flyr til flest land i verden?",
+          "alternativer": [
+            "Pegasus",
+            "SunExpress",
+            "Turkish Airlines",
+            "AtlasGlobal"
+          ],
+          "riktig": 2,
+          "forklaring": "Turkish Airlines har i mange år hatt flest destinasjonsland av alle flyselskap."
+        },
+        {
+          "sporsmal": "Hvilket tyrkisk konsern eier det tyske merket Grundig?",
+          "alternativer": [
+            "Koç / Arçelik",
+            "Sabancı",
+            "Zorlu",
+            "Doğuş"
+          ],
+          "riktig": 0,
+          "forklaring": "Arçelik, en del av Koç-konsernet. De eier også Beko."
+        },
+        {
+          "sporsmal": "Hva er Tyrkias forhold til EU?",
+          "alternativer": [
+            "Fullt medlem",
+            "Kandidatland",
+            "Har aldri søkt",
+            "Meldte seg ut"
+          ],
+          "riktig": 1,
+          "forklaring": "Kandidatland siden 1999. Forhandlingene har stått stille i mange år."
+        },
+        {
+          "sporsmal": "Hva heter børsen i Istanbul?",
+          "alternativer": [
+            "Istanbul Exchange",
+            "Borsa İstanbul",
+            "Türk Menkul",
+            "IST Market"
+          ],
+          "riktig": 1,
+          "forklaring": "Borsa İstanbul, i sin nåværende form fra 2013."
+        },
+        {
+          "sporsmal": "Hvilken type avtale har Tyrkia hatt med EU siden 1996?",
+          "alternativer": [
+            "Frihandelsavtale",
+            "Tollunion",
+            "EØS-avtale",
+            "Ingen"
+          ],
+          "riktig": 1,
+          "forklaring": "En tollunion — varer flyter nesten fritt, men landbruk og tjenester står utenfor."
+        },
+        {
+          "sporsmal": "Hvilket år rammet finanskrisen som førte Tyrkia inn i et IMF-program?",
+          "alternativer": [
+            "1994",
+            "2001",
+            "2008",
+            "2018"
+          ],
+          "riktig": 1,
+          "forklaring": "2001. Krisen la grunnlaget for både redenomineringen i 2005 og et helt nytt banktilsyn."
+        },
+        {
+          "sporsmal": "Hvilken bransje er Tyrkia størst i Europa på, målt i produksjon?",
+          "alternativer": [
+            "Bilproduksjon",
+            "TV-apparater",
+            "Skipsbygging",
+            "Legemidler"
+          ],
+          "riktig": 1,
+          "forklaring": "TV-apparater. Rundt halvparten av alle TV-er som selges i Europa er produsert i Tyrkia."
+        }
+      ],
+      "lag": [
+        {
+          "navn": "Lag 1 · Boğaziçi",
+          "medlemmer": [
+            "Sødal",
+            "Martin",
+            "Anders"
+          ]
+        },
+        {
+          "navn": "Lag 2 · Galata",
+          "medlemmer": [
+            "Johan",
+            "Henrik",
+            "Sondre"
+          ]
+        },
+        {
+          "navn": "Lag 3 · Kadıköy",
+          "medlemmer": [
+            "Lars",
+            "Andy",
+            "Bruland"
+          ]
+        },
+        {
+          "navn": "Lag 4 · Karaköy",
+          "medlemmer": [
+            "Gunnar",
+            "Jonsson"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kjente-tyrkere",
+      "tittel": "Kjente tyrkiske personer",
+      "ikon": "⭐",
+      "ingress": "Arkitekter, poeter, forskere — og en kokk vi skal besøke.",
+      "kode": "Anna69",
+      "sporsmal": [
+        {
+          "sporsmal": "Hvem grunnla Republikken Tyrkia?",
+          "alternativer": [
+            "Enver Pasha",
+            "Mustafa Kemal Atatürk",
+            "Süleyman Demirel",
+            "Turgut Özal"
+          ],
+          "riktig": 1,
+          "forklaring": "Atatürk. Portrettet hans henger i så godt som hvert eneste offentlige rom i landet."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk forfatter fikk Nobelprisen i litteratur i 2006?",
+          "alternativer": [
+            "Yaşar Kemal",
+            "Orhan Pamuk",
+            "Nâzım Hikmet",
+            "Elif Şafak"
+          ],
+          "riktig": 1,
+          "forklaring": "Orhan Pamuk. «Istanbul — minner og byen» er hans hyllest til hjembyen."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk kokk ble verdenskjent som «Salt Bae»?",
+          "alternativer": [
+            "Nusret Gökçe",
+            "Mehmet Gürs",
+            "Somer Sivrioğlu",
+            "Vedat Milor"
+          ],
+          "riktig": 0,
+          "forklaring": "Nusret Gökçe. Vi spiser på restauranten hans lørdag kveld."
+        },
+        {
+          "sporsmal": "Hvem er den osmanske arkitekten bak Süleymaniye-moskeen?",
+          "alternativer": [
+            "Mimar Sinan",
+            "Sedefkâr Mehmed Ağa",
+            "Davud Ağa",
+            "Kemaleddin Bey"
+          ],
+          "riktig": 0,
+          "forklaring": "Mimar Sinan, sjefsarkitekt under Süleyman. Han sto bak nesten 400 byggverk."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk sanger kalles ofte «tyrkisk pops dronning»?",
+          "alternativer": [
+            "Ajda Pekkan",
+            "Sezen Aksu",
+            "Tarkan",
+            "Barış Manço"
+          ],
+          "riktig": 1,
+          "forklaring": "Sezen Aksu, kalt Minik Serçe — den lille spurven."
+        },
+        {
+          "sporsmal": "Hvilken osmansk reisende skrev det store reiseverket Seyahatnâme på 1600-tallet?",
+          "alternativer": [
+            "Piri Reis",
+            "Evliya Çelebi",
+            "Kâtip Çelebi",
+            "İbn Battuta"
+          ],
+          "riktig": 1,
+          "forklaring": "Evliya Çelebi reiste i over 40 år og skrev ti bind om det han så."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk sjøfarer laget et berømt verdenskart i 1513?",
+          "alternativer": [
+            "Barbarossa",
+            "Piri Reis",
+            "Turgut Reis",
+            "Seydi Ali Reis"
+          ],
+          "riktig": 1,
+          "forklaring": "Piri Reis. Kartet viser Sør-Amerikas kyst med en nøyaktighet som fortsatt diskuteres."
+        },
+        {
+          "sporsmal": "Hvilken sufi-poet fra 1200-tallet er gravlagt i Konya?",
+          "alternativer": [
+            "Yunus Emre",
+            "Hacı Bektaş",
+            "Rumi",
+            "Nasreddin Hodja"
+          ],
+          "riktig": 2,
+          "forklaring": "Rumi, på tyrkisk Mevlânâ. De virvlende dervisjene følger hans orden."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk legende skal ha fløyet fra Galatatårnet på 1600-tallet?",
+          "alternativer": [
+            "Hezârfen Ahmed Çelebi",
+            "Lagâri Hasan",
+            "Evliya Çelebi",
+            "Takiyüddin"
+          ],
+          "riktig": 0,
+          "forklaring": "Hezârfen Ahmed Çelebi skal ha glidd over Bosporos med kunstige vinger. Historien er Evliya Çelebis."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk-tysk forsker var sentral i utviklingen av BioNTechs koronavaksine?",
+          "alternativer": [
+            "Uğur Şahin",
+            "Aziz Sancar",
+            "Feryal Özel",
+            "Ali Erdemir"
+          ],
+          "riktig": 0,
+          "forklaring": "Uğur Şahin, sammen med Özlem Türeci. Begge har tyrkisk bakgrunn."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk forsker fikk Nobelprisen i kjemi i 2015?",
+          "alternativer": [
+            "Uğur Şahin",
+            "Aziz Sancar",
+            "Oktay Sinanoğlu",
+            "Cahit Arf"
+          ],
+          "riktig": 1,
+          "forklaring": "Aziz Sancar, for arbeidet med hvordan celler reparerer DNA."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk regissør vant Gullpalmen i Cannes i 2014?",
+          "alternativer": [
+            "Fatih Akın",
+            "Nuri Bilge Ceylan",
+            "Ferzan Özpetek",
+            "Deniz Gamze Ergüven"
+          ],
+          "riktig": 1,
+          "forklaring": "Nuri Bilge Ceylan for «Kış Uykusu» — Vintersøvn."
+        }
+      ],
+      "lag": [
+        {
+          "navn": "Lag 1 · Boğaziçi",
+          "medlemmer": [
+            "Lars",
+            "Sødal",
+            "Sondre"
+          ]
+        },
+        {
+          "navn": "Lag 2 · Galata",
+          "medlemmer": [
+            "Anders",
+            "Bruland",
+            "Jonsson"
+          ]
+        },
+        {
+          "navn": "Lag 3 · Kadıköy",
+          "medlemmer": [
+            "Andy",
+            "Henrik",
+            "Martin"
+          ]
+        },
+        {
+          "navn": "Lag 4 · Karaköy",
+          "medlemmer": [
+            "Gunnar",
+            "Johan"
+          ]
+        }
+      ]
+    }
+  ],
+  "quizinfo": {
+    "tittel": "Slik fungerer quizen",
+    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Dere spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz, så du havner sammen med noen nye hver gang. Laget må bli enige om ett svar før dere trykker. Hver quiz åpnes med en kode dere får av Henrik eller Bruland."
   }
 }
