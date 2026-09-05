@@ -194,6 +194,16 @@ nav .ni{font-size:21px;line-height:1}
 .lbfot{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:11px;text-align:center}
 .lbnullstill{background:none;border:none;font-family:inherit;font-size:11.5px;color:var(--muted);
   text-decoration:underline;cursor:pointer;padding:6px 0 0}
+
+.kodeboks{background:#f7f9fa;border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:16px}
+.kodetit{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+.kodeverdi{font-size:28px;font-weight:800;letter-spacing:2px;color:var(--red);margin:7px 0 12px;
+  font-variant-numeric:tabular-nums}
+.kodehjelp{font-size:12px;color:var(--muted);line-height:1.5;margin-top:9px}
+.manuell{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.manuell label{font-size:12.5px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:5px}
+.manuell select{width:100%;padding:12px;border-radius:11px;border:1.5px solid var(--line);
+  background:#fff;font-size:16px;font-family:inherit;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -286,14 +296,14 @@ function tegnLaas(boks, cfg, nokkel, etterpa) {
       <div class="ikon">${cfg.ikon || '🔒'}</div>
       <h2>${esc(cfg.tittel || 'Låst')}</h2>
       <p>${esc(cfg.tekst || '')}</p>
-      <input class="kodefelt" id="kodefelt" type="text" inputmode="text"
+      <input class="kodefelt" type="text" inputmode="text"
              autocomplete="off" autocorrect="off" autocapitalize="none"
              spellcheck="false" placeholder="Kode">
-      <div class="kodefeil" id="kodefeil"></div>
-      <button class="knapp" id="kodeknapp">Lås opp</button>
+      <div class="kodefeil"></div>
+      <button class="knapp kodeknapp">Lås opp</button>
     </div>`;
-  const felt = boks.querySelector('#kodefelt');
-  const feil = boks.querySelector('#kodefeil');
+  const felt = boks.querySelector('.kodefelt');
+  const feil = boks.querySelector('.kodefeil');
   const prov = () => {
     if (kodeOk(felt.value, cfg.kode)) {
       apne(nokkel);
@@ -305,7 +315,7 @@ function tegnLaas(boks, cfg, nokkel, etterpa) {
       if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
     }
   };
-  boks.querySelector('#kodeknapp').onclick = prov;
+  boks.querySelector('.kodeknapp').onclick = prov;
   felt.onkeydown = e => { if (e.key === 'Enter') prov(); };
 }
 
@@ -361,6 +371,10 @@ function tegnProgram(bolk) {
   const laas = (DATA.laas || {})[bolk];
 
   if (laas && !erApnet('bolk-' + bolk)) {
+    /* Appen henter data hvert 30. sekund. Uten denne sperren ville
+       låseskjermen blitt tegnet på nytt midt i at noen taster koden,
+       og det de har skrevet ville forsvunnet. */
+    if (boks.querySelector('.kodefelt')) return;
     tegnLaas(boks, laas, 'bolk-' + bolk, () => tegnProgram(bolk));
     return;
   }
@@ -528,34 +542,133 @@ function startGps() {
   }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
 }
 
-/* ---------- Poengtavle ----------
-   Poengene et lag får, godskrives hvert medlem. Fordi lagene er ulike i
-   hver runde, blir totalen personlig selv om svarene er felles.
-   Alt ligger på denne telefonen — quizmaster-telefonen er fasit. */
-let poeng = {};
-try { poeng = JSON.parse(localStorage.getItem('blatur-poeng') || '{}'); } catch (e) {}
+/* ---------- Resultater og koder ----------
+   Ett resultat = én quiz + ett lag + poengsum. Alt lagres slik, og
+   personlige totaler regnes ut fra det. Da kan et helt resultat sendes
+   som en kort kode over SMS, uten server og uten manuell hoderegning.
+
+   Resultatkode   Q<quiz><lag>-<poeng>-<sjekk>     f.eks. Q13-08-N
+   Tavlekode      T-<15 bokstaver>-<sjekk>         hele stillingen
+
+   Sjekkbokstaven fanger opp skrivefeil, så en kode som er tastet feil
+   blir avvist i stedet for å gi noen poeng de ikke har. */
+const KODEBOK = 'ABCDEFGHJKLMNPQRSTUVWXYZ';   /* uten I og O — de forveksles med 1 og 0 */
+const IKKE_SPILT = 'Z';
+
+let resultater = {};
+try { resultater = JSON.parse(localStorage.getItem('blatur-res') || '{}'); } catch (e) {}
 let lbApen = true;
 
-function lagrePoeng() {
-  try { localStorage.setItem('blatur-poeng', JSON.stringify(poeng)); } catch (e) {}
+const resNokkel = (quizId, lagIdx) => quizId + '|' + lagIdx;
+
+function lagreResultater() {
+  try { localStorage.setItem('blatur-res', JSON.stringify(resultater)); } catch (e) {}
 }
-function settPoeng(quizId, medlemmer, score) {
-  (medlemmer || []).forEach(n => {
-    poeng[n] = poeng[n] || {};
-    poeng[n][quizId] = score;
-  });
-  lagrePoeng();
+function settResultat(quizId, lagIdx, score) {
+  resultater[resNokkel(quizId, lagIdx)] = score;
+  lagreResultater();
 }
-function lagPoeng(quizId, medlemmer) {
-  const n = (medlemmer || [])[0];
-  const v = poeng[n] && poeng[n][quizId];
+function hentResultat(quizId, lagIdx) {
+  const v = resultater[resNokkel(quizId, lagIdx)];
   return v === undefined ? null : v;
 }
+
+function sjekkTegn(s) {
+  let sum = 0;
+  for (let i = 0; i < s.length; i++) sum += s.charCodeAt(i) * (i + 3);
+  return KODEBOK[sum % KODEBOK.length];
+}
+const normaliser = t => String(t || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+function lagResultatkode(quizIdx, lagIdx, score) {
+  const kropp = 'Q' + (quizIdx + 1) + (lagIdx + 1) + String(score).padStart(2, '0');
+  return kropp + sjekkTegn(kropp);
+}
+function visKode(k) {
+  return k[0] === 'Q'
+    ? k.slice(0, 3) + '-' + k.slice(3, 5) + '-' + k.slice(5)
+    : k[0] + '-' + k.slice(1, -1) + '-' + k.slice(-1);
+}
+function lagTavlekode() {
+  let kropp = 'T';
+  (DATA.quizer || []).forEach(qz => {
+    (qz.lag || []).forEach((l, j) => {
+      const p = hentResultat(qz.id, j);
+      kropp += (p === null ? IKKE_SPILT : KODEBOK[p]);
+    });
+  });
+  return kropp + sjekkTegn(kropp);
+}
+
+/* Returnerer {type:'resultat'|'tavle', ...} eller {feil:'...'} */
+function lesKode(tekst) {
+  const k = normaliser(tekst);
+  if (!k) return { feil: 'Skriv inn koden først.' };
+  const kropp = k.slice(0, -1), sjekk = k.slice(-1);
+  const quizer = DATA.quizer || [];
+
+  if (k[0] === 'Q') {
+    if (k.length !== 6) return { feil: 'Koden skal ha formen Q13-08-N. Sjekk at alt kom med.' };
+    if (sjekkTegn(kropp) !== sjekk) return { feil: 'Koden stemmer ikke. Én bokstav eller ett tall er feil.' };
+    const qi = parseInt(k[1], 10) - 1, li = parseInt(k[2], 10) - 1, sc = parseInt(k.slice(3, 5), 10);
+    const qz = quizer[qi];
+    if (!qz || !qz.lag[li]) return { feil: 'Koden peker på en quiz eller et lag som ikke finnes.' };
+    if (sc > qz.sporsmal.length) return { feil: 'Poengsummen er høyere enn antall spørsmål.' };
+    return { type: 'resultat', quizIdx: qi, lagIdx: li, score: sc, quiz: qz, lag: qz.lag[li] };
+  }
+
+  if (k[0] === 'T') {
+    const antall = quizer.reduce((a, q) => a + q.lag.length, 0);
+    if (k.length !== antall + 2) return { feil: 'Tavlekoden er ikke komplett. Be om den på nytt.' };
+    if (sjekkTegn(kropp) !== sjekk) return { feil: 'Tavlekoden stemmer ikke. Noe er tastet feil.' };
+    const nye = {}; let n = 0, p = 1, ugyldig = false;
+    quizer.forEach(qz => qz.lag.forEach((l, j) => {
+      const c = k[p++];
+      if (c !== IKKE_SPILT) {
+        const v = KODEBOK.indexOf(c);
+        if (v < 0 || v > qz.sporsmal.length) { ugyldig = true; return; }
+        nye[resNokkel(qz.id, j)] = v; n++;
+      }
+    }));
+    if (ugyldig) return { feil: 'Tavlekoden inneholder en ugyldig verdi.' };
+    return { type: 'tavle', nye: nye, antall: n };
+  }
+  return { feil: 'Ukjent kode. Den skal begynne med Q eller T.' };
+}
+
+async function delTekst(tekst) {
+  try {
+    if (navigator.share) { await navigator.share({ text: tekst }); return 'delt'; }
+  } catch (e) { return 'avbrutt'; }
+  try {
+    await navigator.clipboard.writeText(tekst);
+    return 'kopiert';
+  } catch (e) { return 'nei'; }
+}
+
+/* ---------- Poengtavle ----------
+   Poengene et lag får, godskrives hvert medlem. Fordi lagene er ulike i
+   hver runde, blir totalen personlig selv om svarene er felles. */
 function total(navn) {
-  return Object.values(poeng[navn] || {}).reduce((a, b) => a + b, 0);
+  let sum = 0;
+  (DATA.quizer || []).forEach(qz => {
+    (qz.lag || []).forEach((l, j) => {
+      if (l.medlemmer.includes(navn)) {
+        const p = hentResultat(qz.id, j);
+        if (p !== null) sum += p;
+      }
+    });
+  });
+  return sum;
 }
 function antallRunder(navn) {
-  return Object.keys(poeng[navn] || {}).length;
+  let n = 0;
+  (DATA.quizer || []).forEach(qz => {
+    (qz.lag || []).forEach((l, j) => {
+      if (l.medlemmer.includes(navn) && hentResultat(qz.id, j) !== null) n++;
+    });
+  });
+  return n;
 }
 
 /* Standard konkurranserangering: lik sum gir delt plass. */
@@ -566,8 +679,7 @@ function rangering() {
   let forrige = null, plass = 0;
   folk.forEach((f, i) => {
     if (forrige === null || f.sum !== forrige) plass = i + 1;
-    f.plass = plass;
-    forrige = f.sum;
+    f.plass = plass; forrige = f.sum;
   });
   return folk;
 }
@@ -579,30 +691,27 @@ function tegnTavle() {
   if (!folk.length) { boks.innerHTML = ''; return; }
 
   const spilt = folk.some(f => f.runder > 0);
-  const pil = lbApen ? 'Skjul ▾' : 'Vis ▸';
   let h = `<div class="lb"><div class="lbtopp" id="lbtopp">
-      <h2>🏆 Stillingen</h2><span class="pil">${pil}</span></div>`;
+      <h2>🏆 Stillingen</h2><span class="pil">${lbApen ? 'Skjul ▾' : 'Vis ▸'}</span></div>`;
 
   if (!lbApen) {
-    const l = folk[0];
-    h += `<div class="lbnull">Leder: <b>${esc(l.navn)}</b> med ${l.sum} poeng.</div></div>`;
+    h += `<div class="lbnull">Leder: <b>${esc(folk[0].navn)}</b> med ${folk[0].sum} poeng.</div></div>`;
     boks.innerHTML = h;
     $('#lbtopp').onclick = () => { lbApen = !lbApen; tegnTavle(); };
     return;
   }
 
   if (!spilt) {
-    h += `<div class="lbnull">Ingen har spilt ennå. Tavlen fyller seg ut med én gang
-          første lag begynner å svare — dere trenger ikke gjøre noe.</div>`;
+    h += `<div class="lbnull">Ingen resultater lagt inn ennå. Tavlen fyller seg ut
+          etter hvert som lagene sender inn kodene sine.</div>`;
   }
 
-  /* Pallen: 2. plass til venstre, 1. i midten, 3. til høyre. */
   const pall = folk.slice(0, 3);
   if (pall.length === 3) {
     const kol = [
-      { f: pall[1], kl: 'p2', m: '🥈', n: 2 },
-      { f: pall[0], kl: 'p1', m: '🥇', n: 1 },
-      { f: pall[2], kl: 'p3', m: '🥉', n: 3 }
+      { f: pall[1], kl: 'p2', m: '🥈' },
+      { f: pall[0], kl: 'p1', m: '🥇' },
+      { f: pall[2], kl: 'p3', m: '🥉' }
     ];
     h += '<div class="pall">' + kol.map(k =>
       `<div class="pl ${k.kl}">
@@ -613,7 +722,6 @@ function tegnTavle() {
        </div>`).join('') + '</div>';
   }
 
-  /* Plass 4 til nest sist. */
   const midt = folk.slice(3, Math.max(3, folk.length - 1));
   if (midt.length) {
     h += '<div>' + midt.map(f =>
@@ -624,7 +732,6 @@ function tegnTavle() {
        </div>`).join('') + '</div>';
   }
 
-  /* Sisteplassen. */
   if (folk.length > 3) {
     const siste = folk[folk.length - 1];
     h += `<div class="lanterne">
@@ -638,25 +745,28 @@ function tegnTavle() {
   }
 
   const maks = (DATA.quizer || []).reduce((a, q) => a + q.sporsmal.length, 0);
-  h += `<div class="lbfot">Poeng fra laget godskrives alle tre. Maks ${maks} poeng totalt.<br>
-        <button class="lbnullstill" id="lbnull">Nullstill alle poeng</button></div></div>`;
+  h += `<div class="lbfot">Maks ${maks} poeng totalt. Tavlen viser det som er lagt inn på denne telefonen.<br>
+        <button class="lbnullstill" id="lbdel">Del stillingen</button> ·
+        <button class="lbnullstill" id="lbnull">Nullstill</button></div></div>`;
 
   boks.innerHTML = h;
   $('#lbtopp').onclick = () => { lbApen = !lbApen; tegnTavle(); };
-  const nb = $('#lbnull');
-  if (nb) nb.onclick = () => {
-    if (confirm('Nullstille poengene for alle ni? Dette kan ikke angres.')) {
-      poeng = {}; lagrePoeng();
-      try { (DATA.quizer || []).forEach(q => localStorage.removeItem('blatur-res-' + q.id)); } catch (e) {}
-      tegnTavle(); tegnQuiz();
+  $('#lbdel').onclick = async () => {
+    const kode = lagTavlekode();
+    const r = await delTekst('Blåtur-quiz — stillingen så langt.\nLegg inn denne i appen under «Legg inn resultat»:\n' + visKode(kode));
+    if (r === 'kopiert') visStatus('📋 Kopiert');
+    else if (r === 'nei') alert('Tavlekode:\n\n' + visKode(kode));
+  };
+  $('#lbnull').onclick = () => {
+    if (confirm('Nullstille alle resultater? Dette kan ikke angres.')) {
+      resultater = {}; lagreResultater(); tegnTavle(); tegnQuiz();
     }
   };
 }
 
-/* ---------- Quiz ----------
-   Fem quizer, hver med egen kode og eget lagoppsett.
-   Rekkefølge: liste → kode → velg lag → spørsmål → resultat → neste lag. */
-let aktivQuiz = null, aktivtLag = null, qIdx = 0, qScore = 0, qSvart = false, qVisning = 'liste';
+/* ---------- Quiz ---------- */
+let aktivQuiz = null, aktivtLag = null, aktivtLagIdx = null;
+let qIdx = 0, qScore = 0, qSvart = false, qVisning = 'liste';
 
 const quizNokkel = id => 'quiz-' + id;
 
@@ -666,18 +776,101 @@ function tegnQuiz() {
   tegnTavle();
   if (!quizer.length) { boks.innerHTML = '<div class="kort">Ingen quizer ennå.</div>'; return; }
 
+  /* --- Legg inn resultat fra en annen telefon --- */
+  if (qVisning === 'innlegg') {
+    lbApen = true; tegnTavle();
+    boks.innerHTML =
+      `<div class="kort">
+        <h2>Legg inn resultat</h2>
+        <div style="font-size:14px;line-height:1.55;color:#39434f;margin-bottom:12px">
+          Lim inn koden laget sendte deg. Den ser slik ut: <b>Q13-08-N</b>.
+          En tavlekode fra en annen telefon begynner med <b>T</b> og virker her også.</div>
+        <input class="kodefelt" id="resfelt" type="text" inputmode="text" autocomplete="off"
+               autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="Q13-08-N">
+        <div class="kodefeil" id="resfeil"></div>
+        <button class="knapp" id="resles">Les inn koden</button>
+      </div>
+      <div class="kort">
+        <h2>Eller legg inn manuelt</h2>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--muted);margin-bottom:10px">
+          Hvis koden er borte i gruppechatten.</div>
+        <div class="manuell">
+          <label>Quiz<select id="mQuiz">${quizer.map((q, i) =>
+            `<option value="${i}">${esc(q.tittel)}</option>`).join('')}</select></label>
+          <label>Lag<select id="mLag"></select></label>
+          <label>Poeng<select id="mPoeng"></select></label>
+        </div>
+        <button class="knapp sek" id="mLagre">Lagre resultatet</button>
+      </div>
+      <button class="knapp sek" id="restilbake">Tilbake</button>`;
+
+    const felt = $('#resfelt'), feil = $('#resfeil');
+    const les = () => {
+      const r = lesKode(felt.value);
+      if (r.feil) { feil.textContent = r.feil; return; }
+      if (r.type === 'resultat') {
+        const gammel = hentResultat(r.quiz.id, r.lagIdx);
+        const tekst = `${r.quiz.tittel}\n${r.lag.navn} (${r.lag.medlemmer.join(', ')})\n` +
+          `${r.score} av ${r.quiz.sporsmal.length} poeng` +
+          (gammel !== null ? `\n\nDette laget står allerede med ${gammel} poeng. Overskrive?` : '\n\nLegge inn?');
+        if (confirm(tekst)) {
+          settResultat(r.quiz.id, r.lagIdx, r.score);
+          visStatus('✅ Lagt inn');
+          qVisning = 'liste'; tegnQuiz();
+        }
+      } else {
+        if (confirm(`Tavlekode med ${r.antall} resultater.\n\nDette erstatter stillingen på denne telefonen. Fortsette?`)) {
+          resultater = r.nye; lagreResultater();
+          visStatus('✅ Stillingen oppdatert');
+          qVisning = 'liste'; tegnQuiz();
+        }
+      }
+    };
+    $('#resles').onclick = les;
+    felt.onkeydown = e => { if (e.key === 'Enter') les(); };
+
+    const mQuiz = $('#mQuiz'), mLag = $('#mLag'), mPoeng = $('#mPoeng');
+    const tall = f => { const v = parseInt(f.value, 10); return isNaN(v) ? 0 : v; };
+    const fyllLag = () => {
+      const qz = quizer[tall(mQuiz)] || quizer[0];
+      mLag.innerHTML = (qz.lag || []).map((l, j) =>
+        `<option value="${j}">${esc(l.navn)}</option>`).join('');
+      mPoeng.innerHTML = Array.from({ length: qz.sporsmal.length + 1 }, (_, i) =>
+        `<option value="${i}">${i}</option>`).join('');
+    };
+    mQuiz.onchange = fyllLag;
+    fyllLag();
+    $('#mLagre').onclick = () => {
+      const qz = quizer[tall(mQuiz)] || quizer[0];
+      const li = tall(mLag), sc = tall(mPoeng);
+      const l = qz.lag[li];
+      if (!l) return;
+      const gammel = hentResultat(qz.id, li);
+      if (confirm(`${qz.tittel}\n${l.navn} (${l.medlemmer.join(', ')})\n${sc} poeng` +
+          (gammel !== null ? `\n\nErstatter ${gammel} poeng.` : ''))) {
+        settResultat(qz.id, li, sc);
+        visStatus('✅ Lagt inn');
+        qVisning = 'liste'; tegnQuiz();
+      }
+    };
+    $('#restilbake').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+    return;
+  }
+
   /* --- Oversikt --- */
   if (qVisning === 'liste') {
     lbApen = true; tegnTavle();
     const info = DATA.quizinfo;
     boks.innerHTML =
-      (info ? `<div class="kort"><h2>${esc(info.tittel)}</h2>
+      `<button class="knapp" id="qinnlegg" style="margin-top:0">＋ Legg inn resultat</button>` +
+      (info ? `<div class="kort" style="margin-top:12px"><h2>${esc(info.tittel)}</h2>
         <div style="font-size:14px;line-height:1.55;color:#39434f">${esc(info.tekst)}</div></div>` : '') +
       '<div id="qliste"></div>';
+    $('#qinnlegg').onclick = () => { qVisning = 'innlegg'; tegnQuiz(); };
     const liste = $('#qliste');
     quizer.forEach(qz => {
       const apen = erApnet(quizNokkel(qz.id));
-      const ferdige = (qz.lag || []).filter(l => lagPoeng(qz.id, l.medlemmer) !== null).length;
+      const ferdige = (qz.lag || []).filter((l, j) => hentResultat(qz.id, j) !== null).length;
       const b = el('button', 'qkort' + (ferdige === (qz.lag || []).length ? ' ferdig' : ''));
       b.innerHTML =
         `<div class="qi">${apen ? (qz.ikon || '🎯') : '🔒'}</div>
@@ -696,6 +889,7 @@ function tegnQuiz() {
 
   const qz = quizer.find(x => x.id === aktivQuiz);
   if (!qz) { qVisning = 'liste'; tegnQuiz(); return; }
+  const quizIdx = quizer.indexOf(qz);
 
   /* --- Kodelås --- */
   if (qVisning === 'kode') {
@@ -719,19 +913,20 @@ function tegnQuiz() {
         <div style="font-size:44px;line-height:1">${qz.ikon || '🎯'}</div>
         <h2 style="margin:8px 0 4px;font-size:20px">${esc(qz.tittel)}</h2>
         <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0">${esc(qz.ingress || '')}</p>
-        <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0"><b>Hvilket lag svarer nå?</b><br>
-          Trykk på laget. Poengene går til alle tre.</p>
+        <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0"><b>Hvilket lag er dere?</b><br>
+          Finn laget ditt og trykk. Poengene deles av alle tre.</p>
       </div>
       <div id="lagvalg"></div>`;
     const boksL = $('#lagvalg');
-    (qz.lag || []).forEach(l => {
-      const p = lagPoeng(qz.id, l.medlemmer);
+    (qz.lag || []).forEach((l, j) => {
+      const p = hentResultat(qz.id, j);
       const b = el('button', 'lagkort lagvelg' + (p !== null ? ' spilt' : ''));
       b.innerHTML = `<b>${esc(l.navn)}</b><div>${l.medlemmer.map(esc).join(' · ')}</div>` +
         (p !== null ? `<div style="font-size:12.5px;color:var(--ok);font-weight:700;margin-top:5px">
-            ✓ Spilt · ${p} av ${qz.sporsmal.length} riktige — trykk for å spille om igjen</div>` : '');
+            ✓ ${p} av ${qz.sporsmal.length} riktige — trykk for å spille om igjen</div>` : '');
       b.onclick = () => {
-        aktivtLag = l; qIdx = 0; qScore = 0; qSvart = false; qVisning = 'spill'; tegnQuiz();
+        aktivtLag = l; aktivtLagIdx = j;
+        qIdx = 0; qScore = 0; qSvart = false; qVisning = 'spill'; tegnQuiz();
       };
       boksL.appendChild(b);
     });
@@ -743,30 +938,46 @@ function tegnQuiz() {
 
   const sp = qz.sporsmal || [];
 
-  /* --- Resultat --- */
+  /* --- Resultat med delekode --- */
   if (qIdx >= sp.length) {
+    /* Resultatet føres først når runden faktisk er fullført. Et lag som
+       avbryter midtveis skal ikke stå på tavlen med en halv poengsum. */
+    if (aktivtLagIdx !== null) settResultat(qz.id, aktivtLagIdx, qScore);
     lbApen = true; tegnTavle();
     const pst = Math.round(qScore / sp.length * 100);
     let dom = 'Godkjent — så vidt.';
-    if (pst === 100) dom = 'Feilfritt. Ingen tror på dere.';
+    if (pst === 100) dom = 'Feilfritt. Ingen kommer til å tro på dere.';
     else if (pst >= 80) dom = 'Sterkt. Laget kan noe.';
     else if (pst >= 50) dom = 'Midt på treet. Det holder ikke til pallen.';
     else dom = 'Laget spanderer neste runde.';
+    if (aktivtLagIdx === null) { qVisning = 'lag'; tegnQuiz(); return; }
+    const kode = lagResultatkode(quizIdx, aktivtLagIdx, qScore);
     boks.innerHTML =
       `<div class="qframe">
         <div class="score">${qScore}/${sp.length}</div>
         <div class="stolpe"><i style="width:${pst}%"></i></div>
         <p style="font-size:16px;font-weight:600;margin:8px 0 2px">${dom}</p>
         <p style="color:var(--muted);font-size:14px">${esc(aktivtLag ? aktivtLag.navn : '')} · ${esc(qz.tittel)}</p>
-        <button class="knapp" id="qnestelag">Neste lag</button>
+        <div class="kodeboks">
+          <div class="kodetit">Send denne til Henrik</div>
+          <div class="kodeverdi" id="reskode">${visKode(kode)}</div>
+          <button class="knapp" id="ressend">📤 Send resultatet</button>
+          <div class="kodehjelp">Uten dekning: skriv koden ned. Den er alt Henrik trenger.</div>
+        </div>
         <button class="knapp sek" id="qtillisten">Til de andre quizene</button>
       </div>`;
-    $('#qnestelag').onclick = () => { qVisning = 'lag'; tegnQuiz(); };
+    $('#ressend').onclick = async () => {
+      const tekst = `Blåtur-quiz · ${qz.tittel} · ${aktivtLag.navn}\n` +
+        `${qScore} av ${sp.length} poeng.\nKode: ${visKode(kode)}`;
+      const r = await delTekst(tekst);
+      if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i SMS');
+      else if (r === 'nei') alert(tekst);
+    };
     $('#qtillisten').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
     return;
   }
 
-  /* --- Spørsmål. Tavlen legger seg sammen så spørsmålet får plass. --- */
+  /* --- Spørsmål --- */
   const q = sp[qIdx];
   boks.innerHTML =
     `<div class="qframe">
@@ -777,7 +988,6 @@ function tegnQuiz() {
       <div id="qalt"></div>
       <div id="qfork"></div>
     </div>`;
-
   const alt = $('#qalt');
   (q.alternativer || []).forEach((a, i) => {
     const b = el('button', 'qalt', esc(a));
@@ -790,8 +1000,7 @@ function svar(i) {
   if (qSvart) return;
   qSvart = true;
   const qz = (DATA.quizer || []).find(x => x.id === aktivQuiz);
-  const sp = qz.sporsmal;
-  const q = sp[qIdx];
+  const sp = qz.sporsmal, q = sp[qIdx];
   document.querySelectorAll('#qalt .qalt').forEach((b, j) => {
     b.disabled = true;
     if (j === q.riktig) b.classList.add('riktig');
@@ -799,13 +1008,6 @@ function svar(i) {
   });
   if (i === q.riktig) { qScore++; if (navigator.vibrate) navigator.vibrate(40); }
   else if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
-
-  /* Her skjer sanntidsoppdateringen: poengsummen skrives til laget med
-     én gang, og tavlen tegnes på nytt før neste spørsmål vises. */
-  if (aktivtLag) {
-    settPoeng(qz.id, aktivtLag.medlemmer, qScore);
-    tegnTavle();
-  }
 
   $('#qfork').innerHTML =
     `<div class="qfork">${i === q.riktig ? '✅ ' : '❌ '}${esc(q.forklaring || '')}</div>

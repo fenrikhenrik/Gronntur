@@ -1,6 +1,6 @@
 {
-  "versjon": 11,
-  "sistOppdatert": "5. september 08:05",
+  "versjon": 14,
+  "sistOppdatert": "5. september 08:40",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -989,7 +989,7 @@
             "Trabzonspor"
           ],
           "riktig": 2,
-          "forklaring": "Galatasaray slo Arsenal i finalen — fortsatt den eneste europeiske tittelen til en tyrkisk klubb."
+          "forklaring": "Galatasaray slo Arsenal i finalen — den største bragden i tyrkisk klubbfotball."
         },
         {
           "sporsmal": "Hvor endte Tyrkia i VM 2002?",
@@ -1106,111 +1106,111 @@
         {
           "sporsmal": "Hva heter Tyrkias valuta?",
           "alternativer": [
-            "Tyrkisk dinar",
             "Tyrkisk lira",
+            "Tyrkisk dinar",
             "Tyrkisk drakme",
             "Tyrkisk pund"
           ],
-          "riktig": 1,
+          "riktig": 0,
           "forklaring": "Tyrkisk lira. Regn med at prisene ser mye større ut enn de er."
         },
         {
           "sporsmal": "Hvilket symbol brukes for tyrkisk lira?",
           "alternativer": [
-            "₺",
+            "₹",
             "₽",
             "₴",
-            "₹"
+            "₺"
           ],
-          "riktig": 0,
+          "riktig": 3,
           "forklaring": "₺ — designet ble valgt gjennom en konkurranse i 2012."
         },
         {
           "sporsmal": "Hvilken by er Tyrkias økonomiske sentrum?",
           "alternativer": [
             "Ankara",
-            "Izmir",
             "Istanbul",
+            "Izmir",
             "Antalya"
           ],
-          "riktig": 2,
+          "riktig": 1,
           "forklaring": "Istanbul står for rundt en tredjedel av landets samlede verdiskaping."
         },
         {
           "sporsmal": "Hvor mange nuller strøk Tyrkia fra liraen i 2005?",
           "alternativer": [
             "Tre",
-            "Seks",
             "Ni",
+            "Seks",
             "To"
           ],
-          "riktig": 1,
+          "riktig": 2,
           "forklaring": "Seks. Én million gamle lira ble til én ny lira."
         },
         {
           "sporsmal": "Hva er Tyrkia verdens største eksportør av?",
           "alternativer": [
             "Kaffe",
-            "Hasselnøtter",
+            "Bomull",
             "Ris",
-            "Bomull"
+            "Hasselnøtter"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Hasselnøtter — rundt to tredjedeler av verdensproduksjonen kommer fra Svartehavskysten."
         },
         {
           "sporsmal": "Hvilket tyrkisk flyselskap flyr til flest land i verden?",
           "alternativer": [
-            "Pegasus",
-            "SunExpress",
             "Turkish Airlines",
+            "SunExpress",
+            "Pegasus",
             "AtlasGlobal"
           ],
-          "riktig": 2,
+          "riktig": 0,
           "forklaring": "Turkish Airlines har i mange år hatt flest destinasjonsland av alle flyselskap."
         },
         {
           "sporsmal": "Hvilket tyrkisk konsern eier det tyske merket Grundig?",
           "alternativer": [
-            "Koç / Arçelik",
             "Sabancı",
+            "Koç / Arçelik",
             "Zorlu",
             "Doğuş"
           ],
-          "riktig": 0,
+          "riktig": 1,
           "forklaring": "Arçelik, en del av Koç-konsernet. De eier også Beko."
         },
         {
           "sporsmal": "Hva er Tyrkias forhold til EU?",
           "alternativer": [
             "Fullt medlem",
-            "Kandidatland",
+            "Meldte seg ut",
             "Har aldri søkt",
-            "Meldte seg ut"
+            "Kandidatland"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Kandidatland siden 1999. Forhandlingene har stått stille i mange år."
         },
         {
           "sporsmal": "Hva heter børsen i Istanbul?",
           "alternativer": [
             "Istanbul Exchange",
-            "Borsa İstanbul",
+            "IST Market",
             "Türk Menkul",
-            "IST Market"
+            "Borsa İstanbul"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Borsa İstanbul, i sin nåværende form fra 2013."
         },
         {
           "sporsmal": "Hvilken type avtale har Tyrkia hatt med EU siden 1996?",
           "alternativer": [
             "Frihandelsavtale",
-            "Tollunion",
             "EØS-avtale",
+            "Tollunion",
             "Ingen"
           ],
-          "riktig": 1,
+          "riktig": 2,
           "forklaring": "En tollunion — varer flyter nesten fritt, men landbruk og tjenester står utenfor."
         },
         {
@@ -1227,13 +1227,13 @@
         {
           "sporsmal": "Hvilken bransje er Tyrkia størst i Europa på, målt i produksjon?",
           "alternativer": [
-            "Bilproduksjon",
             "TV-apparater",
+            "Bilproduksjon",
             "Skipsbygging",
             "Legemidler"
           ],
-          "riktig": 1,
-          "forklaring": "TV-apparater. Rundt halvparten av alle TV-er som selges i Europa er produsert i Tyrkia."
+          "riktig": 0,
+          "forklaring": "Tyrkia er Europas største produsent av TV-apparater, med Vestel og Beko i spissen."
         }
       ],
       "lag": [
@@ -1274,22 +1274,22 @@
           "sporsmal": "Hvem grunnla Republikken Tyrkia?",
           "alternativer": [
             "Enver Pasha",
-            "Mustafa Kemal Atatürk",
+            "Turgut Özal",
             "Süleyman Demirel",
-            "Turgut Özal"
+            "Mustafa Kemal Atatürk"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Atatürk. Portrettet hans henger i så godt som hvert eneste offentlige rom i landet."
         },
         {
           "sporsmal": "Hvilken tyrkisk forfatter fikk Nobelprisen i litteratur i 2006?",
           "alternativer": [
             "Yaşar Kemal",
-            "Orhan Pamuk",
+            "Elif Şafak",
             "Nâzım Hikmet",
-            "Elif Şafak"
+            "Orhan Pamuk"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Orhan Pamuk. «Istanbul — minner og byen» er hans hyllest til hjembyen."
         },
         {
@@ -1328,67 +1328,67 @@
         {
           "sporsmal": "Hvilken osmansk reisende skrev det store reiseverket Seyahatnâme på 1600-tallet?",
           "alternativer": [
-            "Piri Reis",
             "Evliya Çelebi",
+            "Piri Reis",
             "Kâtip Çelebi",
             "İbn Battuta"
           ],
-          "riktig": 1,
+          "riktig": 0,
           "forklaring": "Evliya Çelebi reiste i over 40 år og skrev ti bind om det han så."
         },
         {
           "sporsmal": "Hvilken tyrkisk sjøfarer laget et berømt verdenskart i 1513?",
           "alternativer": [
             "Barbarossa",
-            "Piri Reis",
+            "Seydi Ali Reis",
             "Turgut Reis",
-            "Seydi Ali Reis"
+            "Piri Reis"
           ],
-          "riktig": 1,
+          "riktig": 3,
           "forklaring": "Piri Reis. Kartet viser Sør-Amerikas kyst med en nøyaktighet som fortsatt diskuteres."
         },
         {
           "sporsmal": "Hvilken sufi-poet fra 1200-tallet er gravlagt i Konya?",
           "alternativer": [
             "Yunus Emre",
-            "Hacı Bektaş",
             "Rumi",
+            "Hacı Bektaş",
             "Nasreddin Hodja"
           ],
-          "riktig": 2,
+          "riktig": 1,
           "forklaring": "Rumi, på tyrkisk Mevlânâ. De virvlende dervisjene følger hans orden."
         },
         {
           "sporsmal": "Hvilken tyrkisk legende skal ha fløyet fra Galatatårnet på 1600-tallet?",
           "alternativer": [
-            "Hezârfen Ahmed Çelebi",
+            "Takiyüddin",
             "Lagâri Hasan",
             "Evliya Çelebi",
-            "Takiyüddin"
+            "Hezârfen Ahmed Çelebi"
           ],
-          "riktig": 0,
+          "riktig": 3,
           "forklaring": "Hezârfen Ahmed Çelebi skal ha glidd over Bosporos med kunstige vinger. Historien er Evliya Çelebis."
         },
         {
           "sporsmal": "Hvilken tyrkisk-tysk forsker var sentral i utviklingen av BioNTechs koronavaksine?",
           "alternativer": [
-            "Uğur Şahin",
-            "Aziz Sancar",
             "Feryal Özel",
+            "Aziz Sancar",
+            "Uğur Şahin",
             "Ali Erdemir"
           ],
-          "riktig": 0,
+          "riktig": 2,
           "forklaring": "Uğur Şahin, sammen med Özlem Türeci. Begge har tyrkisk bakgrunn."
         },
         {
           "sporsmal": "Hvilken tyrkisk forsker fikk Nobelprisen i kjemi i 2015?",
           "alternativer": [
-            "Uğur Şahin",
             "Aziz Sancar",
+            "Uğur Şahin",
             "Oktay Sinanoğlu",
             "Cahit Arf"
           ],
-          "riktig": 1,
+          "riktig": 0,
           "forklaring": "Aziz Sancar, for arbeidet med hvordan celler reparerer DNA."
         },
         {
@@ -1433,7 +1433,7 @@
   ],
   "quizinfo": {
     "tittel": "Slik fungerer quizen",
-    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre. Lagene er trukket tilfeldig og er ulike fra quiz til quiz, så du havner sammen med nye folk hver runde. Laget blir enige om ett svar før dere trykker. Poengene laget får, går til alle tre på laget — og tavlen øverst oppdaterer seg med én gang. Henrik og Bruland spiller ikke; de holder quizmaster-telefonen og deler ut kodene."
+    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz. Laget spiller på én telefon og blir enige om ett svar før dere trykker. Når runden er ferdig får dere en kort kode. Send den til Henrik på SMS, så legger han den inn og stillingen oppdaterer seg. Poengene deles av alle tre på laget."
   },
   "deltakere": [
     "Sødal",
