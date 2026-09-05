@@ -204,11 +204,75 @@ nav .ni{font-size:21px;line-height:1}
 .manuell label{font-size:12.5px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:5px}
 .manuell select{width:100%;padding:12px;border-radius:11px;border:1.5px solid var(--line);
   background:#fff;font-size:16px;font-family:inherit;color:var(--ink)}
+
+/* ---- Avsløringen: startskjermen før turen er røpet ---- */
+#avsloring{position:fixed;inset:0;z-index:3000;background:var(--dark);color:#fff;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:calc(var(--safe-top) + 26px) 18px calc(var(--safe-bot) + 26px)}
+#avsloring[hidden]{display:none}
+.avswrap{max-width:520px;margin:0 auto}
+.avstit{font-size:25px;font-weight:800;letter-spacing:-.6px;text-align:center;margin:0 0 8px}
+.avsing{font-size:14.5px;line-height:1.6;color:#aab4c0;text-align:center;margin:0 0 8px}
+.avsteller{font-size:12px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+  color:#7d8896;text-align:center;margin-bottom:20px}
+
+.avsrad{display:flex;gap:12px;align-items:flex-start;margin-bottom:11px}
+.avsboks{width:44px;height:44px;flex:none;border-radius:10px;border:2px solid #333f4d;
+  background:#182230;display:flex;align-items:center;justify-content:center;
+  font-size:23px;font-weight:800;color:#3f4b5a;transition:.25s}
+.avsboks.lost{background:var(--red);border-color:var(--red);color:#fff}
+.avsinn{flex:1;min-width:0;padding-top:1px}
+.avssp{font-size:14.5px;line-height:1.45;color:#e4e9ee}
+.avsrad.lost .avssp{color:#7d8896}
+.avssvar{font-size:13px;font-weight:700;color:#fff;margin-top:3px;letter-spacing:.5px}
+.avsskriv{display:flex;gap:7px;margin-top:7px}
+.avsfelt{flex:1;min-width:0;padding:10px 12px;border-radius:9px;border:1.5px solid #333f4d;
+  background:#0d151f;color:#fff;font-size:16px;font-family:inherit;text-transform:uppercase}
+.avsfelt::placeholder{color:#4a5665;text-transform:none}
+.avsok{flex:none;padding:10px 15px;border-radius:9px;border:none;background:var(--red);
+  color:#fff;font-size:14.5px;font-weight:700;font-family:inherit;cursor:pointer}
+.avshjelp{background:none;border:none;color:#7d8896;font-size:12.5px;font-family:inherit;
+  text-decoration:underline;cursor:pointer;padding:6px 0 0}
+.avsfeil{color:#ff8a95;font-size:12.5px;font-weight:600;margin-top:5px}
+
+.avsfasit{text-align:center;padding:22px 0 6px}
+.avsord{font-size:33px;font-weight:800;letter-spacing:5px;color:var(--red);margin:14px 0 6px}
+.avsdato{font-size:15px;color:#aab4c0;margin-bottom:4px}
+.avshopp{display:block;margin:20px auto 0;background:none;border:none;color:#55606e;
+  font-size:12px;font-family:inherit;text-decoration:underline;cursor:pointer}
+
+/* ---- Steg 1: gjettekonkurransen ---- */
+.gnavn{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 4px}
+.gnavn button{padding:11px 15px;border-radius:11px;border:1.5px solid #333f4d;background:#182230;
+  color:#e4e9ee;font-size:15px;font-family:inherit;font-weight:600;cursor:pointer}
+.gnavn button.valgt{background:var(--red);border-color:var(--red);color:#fff}
+#gkart{height:46vh;min-height:270px;border-radius:14px;border:2px solid #333f4d;
+  margin:16px 0 10px;background:#182230;z-index:1}
+.gnal{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  background:var(--red);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.gstatus{font-size:13.5px;line-height:1.5;color:#aab4c0;text-align:center;min-height:20px;margin-bottom:12px}
+.gkode{background:#182230;border:1px solid #333f4d;border-radius:14px;padding:16px;text-align:center;margin-top:14px}
+.gkodetit{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#7d8896}
+.gkodeverdi{font-size:27px;font-weight:800;letter-spacing:2px;color:var(--red);margin:7px 0 12px}
+
+/* ---- Steg 2b: sette sammen bokstavene ---- */
+.abrikker{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 6px}
+.abrikke{width:42px;height:48px;border-radius:10px;border:2px solid #333f4d;background:#182230;
+  color:#fff;font-size:22px;font-weight:800;font-family:inherit;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0}
+.abrikke.brukt{opacity:.22;cursor:default}
+.aslisser{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0 4px;min-height:52px}
+.asliss{width:38px;height:46px;border-radius:9px;border:2px dashed #3f4b5a;background:#0d151f;
+  display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800;color:#fff}
+.asliss.fylt{border-style:solid;border-color:var(--red);background:#1c2530}
+.afeil .asliss.fylt{border-color:#ff8a95}
 </style>
 </head>
 <body>
 
 <div class="status" id="status"></div>
+
+<div id="avsloring" hidden></div>
 
 <header>
   <h1>🇹🇷 Blåtur Istanbul</h1>
@@ -542,6 +606,285 @@ function startGps() {
   }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
 }
 
+/* ---------- Avsløringen ----------
+   Startskjerm som ligger over alt annet til den er ferdig. To steg:
+
+   1. Gjettekonkurransen. Sett en nål der du tror turen går. Ingen svar
+      gis — bare en kode du sender Henrik. Rangeringen kommer etterpå.
+   2. Bokstavjakten. Åtte spørsmål gir åtte bokstaver i tilfeldig
+      rekkefølge, som skal settes sammen til reisemålet.
+
+   Ferdig én gang = borte for godt på den telefonen. */
+let avsSteg = null;
+let avsLost = [], avsBom = {}, avsValgt = [], avsAnagramFeil = false;
+let gjettNavn = null, gjettPunkt = null, gjettKart = null, gjettNal = null;
+
+try { avsLost = JSON.parse(localStorage.getItem('blatur-avs') || '[]'); } catch (e) {}
+
+const avsFerdig = () => { try { return localStorage.getItem('blatur-avslort') === 'ja'; } catch (e) { return false; } };
+const gjettGjort = () => { try { return !!localStorage.getItem('blatur-mittgjett'); } catch (e) { return false; } };
+function avsLagre() { try { localStorage.setItem('blatur-avs', JSON.stringify(avsLost)); } catch (e) {} }
+
+function normaliserSvar(t) {
+  return String(t || '').toUpperCase()
+    .replace(/Æ/g, 'AE').replace(/Ø/g, 'O').replace(/Å/g, 'A')
+    .replace(/[^A-Z0-9]/g, '');
+}
+const avsBokstav = r => normaliserSvar(r.svar)[r.pos] || '?';
+
+/* Kode med gjettet: G + person + avstand + kontrollbokstav.
+   Avstanden skrives i 24-tallssystem, ikke som tall — ellers kunne den
+   som fikk koden lese sitt eget resultat før avsløringen. */
+function lagGjettkode(personIdx, km) {
+  let n = Math.max(0, Math.min(13823, Math.round(km)));
+  const kropp = 'G' + KODEBOK[personIdx] +
+    KODEBOK[Math.floor(n / 576)] + KODEBOK[Math.floor(n / 24) % 24] + KODEBOK[n % 24];
+  return kropp + sjekkTegn(kropp);
+}
+
+function tegnAvsloring(tvungen) {
+  const boks = $('#avsloring');
+  if (!boks) return;
+  const a = DATA && DATA.avsloring;
+  if (!a || !a.aktiv || avsFerdig()) { boks.hidden = true; return; }
+  boks.hidden = false;
+
+  /* Appen henter data hvert 30. sekund. Uten denne sperren ville skjermen
+     blitt tegnet på nytt midt i at noen skriver eller peker på kartet. */
+  if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart'))) return;
+
+  const g = a.gjett || {};
+  if (avsSteg === null) avsSteg = (g.aktiv && !gjettGjort()) ? 'gjett' : 'ord';
+
+  if (avsSteg === 'gjett') return tegnGjett(boks, a, g);
+  return tegnBokstavjakt(boks, a);
+}
+
+/* ---------- Steg 1: hvor tror du turen går? ---------- */
+function tegnGjett(boks, a, g) {
+  const folk = DATA.deltakere || [];
+  boks.innerHTML =
+    `<div class="avswrap">
+      <div class="avstit">${esc(g.tittel || 'Hvor tror du turen går?')}</div>
+      <div class="avsing">${esc(g.ingress || '')}</div>
+      <div class="avsteller">Steg 1 av 2</div>
+      <div style="font-size:13.5px;color:#aab4c0;text-align:center">Hvem gjetter?</div>
+      <div class="gnavn" id="gnavn"></div>
+      <div id="gkart"></div>
+      <div class="gstatus" id="gstatus">Velg navnet ditt, og trykk på kartet der du tror vi skal.</div>
+      <button class="knapp" id="glaas">Lås inn gjettet</button>
+      <button class="avshopp" id="ghopp">Hopp over — jeg vet hvor vi skal</button>
+    </div>`;
+
+  const navnBoks = $('#gnavn');
+  folk.forEach(n => {
+    const b = el('button', gjettNavn === n ? 'valgt' : '', esc(n));
+    b.onclick = () => { gjettNavn = n; tegnGjett(boks, a, g); };
+    navnBoks.appendChild(b);
+  });
+
+  gjettKart = L.map('gkart', { zoomControl: true, worldCopyJump: false })
+    .setView(g.senter || [50, 15], g.zoom || 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { maxZoom: 12, minZoom: 3, attribution: '&copy; OpenStreetMap' }).addTo(gjettKart);
+  setTimeout(() => gjettKart.invalidateSize(), 120);
+
+  const nalIkon = L.divIcon({ className: '', iconSize: [22, 22], iconAnchor: [11, 22],
+    html: '<div class="gnal"></div>' });
+
+  if (gjettPunkt) gjettNal = L.marker(gjettPunkt, { icon: nalIkon }).addTo(gjettKart);
+
+  gjettKart.on('click', ev => {
+    gjettPunkt = [ev.latlng.lat, ev.latlng.lng];
+    if (gjettNal) gjettKart.removeLayer(gjettNal);
+    gjettNal = L.marker(gjettPunkt, { icon: nalIkon }).addTo(gjettKart);
+    $('#gstatus').textContent = gjettNavn
+      ? 'Nålen står. Flytt den så mye du vil — den teller først når du låser inn.'
+      : 'Nålen står. Velg navnet ditt før du låser inn.';
+  });
+
+  $('#glaas').onclick = () => {
+    if (!gjettNavn) { $('#gstatus').textContent = 'Velg navnet ditt først.'; return; }
+    if (!gjettPunkt) { $('#gstatus').textContent = 'Trykk på kartet der du tror vi skal.'; return; }
+    const f = (DATA.avsloring.gjett || {}).fasit || {};
+    const km = gjettKart.distance(gjettPunkt, [f.lat, f.lon]) / 1000;
+    const idx = (DATA.deltakere || []).indexOf(gjettNavn);
+    const kode = lagGjettkode(idx, km);
+    try {
+      localStorage.setItem('blatur-mittgjett', JSON.stringify(
+        { navn: gjettNavn, lat: gjettPunkt[0], lon: gjettPunkt[1], km: Math.round(km), kode: kode }));
+    } catch (e) {}
+    if (navigator.vibrate) navigator.vibrate(60);
+    tegnGjettKvittert(boks, kode);
+  };
+
+  $('#ghopp').onclick = () => {
+    if (confirm('Hoppe over? Da er reisemålet røpet.')) {
+      try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
+      boks.hidden = true;
+    }
+  };
+}
+
+function tegnGjettKvittert(boks, kode) {
+  gjettKart = null;
+  boks.innerHTML =
+    `<div class="avswrap avsfasit">
+      <div style="font-size:46px;line-height:1">📍</div>
+      <div class="avstit" style="margin-top:10px">Gjettet er låst</div>
+      <div class="avsing">Du får ikke vite hvor nær du var før alt er avslørt.
+        Send koden til Henrik, så setter han opp rangeringen.</div>
+      <div class="gkode">
+        <div class="gkodetit">Send denne til Henrik</div>
+        <div class="gkodeverdi">${esc(visKode(kode))}</div>
+        <button class="knapp" id="gsend">📤 Send gjettet</button>
+      </div>
+      <button class="knapp sek" id="gvidere" style="margin-top:16px">Videre til neste oppgave</button>
+    </div>`;
+  $('#gsend').onclick = async () => {
+    const mitt = JSON.parse(localStorage.getItem('blatur-mittgjett') || '{}');
+    const tekst = `Blåtur — mitt gjett\n${mitt.navn}\nKode: ${visKode(kode)}`;
+    const r = await delTekst(tekst);
+    if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i SMS');
+    else if (r === 'nei') alert(tekst);
+  };
+  $('#gvidere').onclick = () => { avsSteg = 'ord'; tegnAvsloring(true); };
+}
+
+/* ---------- Steg 2: åtte bokstaver som skal settes sammen ---------- */
+function tegnBokstavjakt(boks, a) {
+  const k = a.kryssord || {};
+  const rader = k.rader || [];
+  if (!rader.length) { boks.hidden = true; return; }
+  const antall = rader.length;
+  const lost = rader.filter((r, i) => avsLost[i]).length;
+
+  /* --- Alle bokstavene funnet: sett dem sammen --- */
+  if (lost === antall) {
+    const bokstaver = rader.map(avsBokstav);
+    let h = `<div class="avswrap">
+        <div class="avstit">${esc(k.fasittittel || 'Åtte bokstaver')}</div>
+        <div class="avsing">${esc(k.fasitingress || 'Sett dem sammen. Hva blir det?')}</div>
+        <div class="aslisser${avsAnagramFeil ? ' afeil' : ''}" id="aslisser"></div>
+        <div class="abrikker" id="abrikker"></div>
+        <div class="gstatus" id="astatus">${avsAnagramFeil ? 'Ikke helt. Prøv en annen rekkefølge.' : ''}</div>
+        <button class="knapp sek" id="atom">Start på nytt</button>
+      </div>`;
+    boks.innerHTML = h;
+
+    const slisser = $('#aslisser'), brikker = $('#abrikker');
+    for (let i = 0; i < antall; i++) {
+      const b = avsValgt[i] === undefined ? '' : bokstaver[avsValgt[i]];
+      slisser.appendChild(el('div', 'asliss' + (b ? ' fylt' : ''), esc(b)));
+    }
+    bokstaver.forEach((bok, i) => {
+      const brukt = avsValgt.indexOf(i) >= 0;
+      const b = el('button', 'abrikke' + (brukt ? ' brukt' : ''), esc(bok));
+      if (!brukt) b.onclick = () => {
+        avsValgt.push(i); avsAnagramFeil = false;
+        if (avsValgt.length === antall) {
+          const forsok = avsValgt.map(j => bokstaver[j]).join('');
+          if (forsok === normaliserSvar(a.losningsord)) {
+            try { localStorage.setItem('blatur-ordlost', 'ja'); } catch (e) {}
+            if (navigator.vibrate) navigator.vibrate([60, 80, 120]);
+            return tegnFasit(boks, a);
+          }
+          avsAnagramFeil = true; avsValgt = [];
+        }
+        tegnBokstavjakt(boks, a);
+      };
+      brikker.appendChild(b);
+    });
+    $('#atom').onclick = () => { avsValgt = []; avsAnagramFeil = false; tegnBokstavjakt(boks, a); };
+    return;
+  }
+
+  /* --- Spørsmålene --- */
+  let h = `<div class="avswrap">
+      <div class="avstit">${esc(k.tittel || 'Åtte spørsmål')}</div>
+      <div class="avsing">${esc(k.ingress || '')}</div>
+      <div class="avsteller">${lost} av ${antall} funnet</div>`;
+
+  rader.forEach((r, i) => {
+    const erLost = !!avsLost[i];
+    h += `<div class="avsrad${erLost ? ' lost' : ''}">
+        <div class="avsboks${erLost ? ' lost' : ''}">${erLost ? esc(avsBokstav(r)) : ''}</div>
+        <div class="avsinn">
+          <div class="avssp">${esc(r.sporsmal)}</div>`;
+    if (erLost) {
+      h += `<div class="avssvar">${esc(normaliserSvar(r.svar) ? r.svar.toUpperCase() : '')}</div>`;
+    } else {
+      h += `<div class="avsskriv">
+              <input class="avsfelt" type="text" inputmode="text" data-i="${i}"
+                     autocomplete="off" autocorrect="off" autocapitalize="characters"
+                     spellcheck="false" placeholder="Svar">
+              <button class="avsok" data-i="${i}">OK</button>
+            </div>
+            <div class="avsfeil" data-feil="${i}"></div>`;
+      if (avsBom[i]) h += `<button class="avshjelp" data-hjelp="${i}">Gi meg denne</button>`;
+    }
+    h += `</div></div>`;
+  });
+  h += `<button class="avshopp" id="avshopp">Hopp over — jeg vet hvor vi skal</button></div>`;
+  boks.innerHTML = h;
+
+  const prov = i => {
+    const felt = boks.querySelector('.avsfelt[data-i="' + i + '"]');
+    const feil = boks.querySelector('[data-feil="' + i + '"]');
+    const fasit = normaliserSvar(rader[i].svar);
+    if (fasit && normaliserSvar(felt.value) === fasit) {
+      avsLost[i] = true; avsLagre();
+      if (navigator.vibrate) navigator.vibrate(45);
+      tegnBokstavjakt(boks, a);
+    } else {
+      avsBom[i] = (avsBom[i] || 0) + 1;
+      feil.textContent = avsBom[i] > 1 ? 'Fortsatt ikke riktig.' : 'Ikke riktig — prøv igjen.';
+      felt.value = '';
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+      if (avsBom[i] === 1) tegnBokstavjakt(boks, a);
+    }
+  };
+  boks.querySelectorAll('.avsok').forEach(b => { b.onclick = () => prov(+b.dataset.i); });
+  boks.querySelectorAll('.avsfelt').forEach(f => {
+    f.onkeydown = e => { if (e.key === 'Enter') prov(+f.dataset.i); };
+  });
+  boks.querySelectorAll('[data-hjelp]').forEach(b => {
+    b.onclick = () => { avsLost[+b.dataset.hjelp] = true; avsLagre(); tegnBokstavjakt(boks, a); };
+  });
+  $('#avshopp').onclick = () => {
+    if (confirm('Hoppe over? Da er reisemålet røpet.')) {
+      rader.forEach((r, i) => avsLost[i] = true);
+      avsLagre(); tegnBokstavjakt(boks, a);
+    }
+  };
+}
+
+/* ---------- Selve avsløringen ---------- */
+function tegnFasit(boks, a) {
+  let mitt = null;
+  try { mitt = JSON.parse(localStorage.getItem('blatur-mittgjett') || 'null'); } catch (e) {}
+  boks.innerHTML =
+    `<div class="avswrap avsfasit">
+      <div style="font-size:52px;line-height:1">🇹🇷</div>
+      <div class="avstit" style="margin-top:10px">${esc(a.fasittittel || 'Der skal vi')}</div>
+      <div class="avsord">${esc(normaliserSvar(a.losningsord).split('').join(' '))}</div>
+      <div class="avsdato">${esc(a.fasittekst || '')}</div>
+      ${mitt ? `<div class="gkode" style="margin-top:18px">
+          <div class="gkodetit">Ditt gjett</div>
+          <div style="font-size:15px;color:#e4e9ee;margin:8px 0 2px">Du bommet med</div>
+          <div class="gkodeverdi" style="letter-spacing:0">${mitt.km} km</div>
+          <div style="font-size:12.5px;color:#7d8896;line-height:1.5">
+            Send koden <b>${esc(visKode(mitt.kode))}</b> til Henrik hvis du ikke alt har gjort det.
+            Han setter opp rangeringen.</div>
+        </div>` : ''}
+      <button class="knapp" id="avsapne" style="margin-top:22px">Åpne appen</button>
+    </div>`;
+  $('#avsapne').onclick = () => {
+    try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
+    boks.hidden = true;
+  };
+}
+
 /* ---------- Resultater og koder ----------
    Ett resultat = én quiz + ett lag + poengsum. Alt lagres slik, og
    personlige totaler regnes ut fra det. Da kan et helt resultat sendes
@@ -557,6 +900,11 @@ const IKKE_SPILT = 'Z';
 
 let resultater = {};
 try { resultater = JSON.parse(localStorage.getItem('blatur-res') || '{}'); } catch (e) {}
+let gjetninger = {};
+try { gjetninger = JSON.parse(localStorage.getItem('blatur-gjett') || '{}'); } catch (e) {}
+function lagreGjetninger() {
+  try { localStorage.setItem('blatur-gjett', JSON.stringify(gjetninger)); } catch (e) {}
+}
 let lbApen = true;
 
 const resNokkel = (quizId, lagIdx) => quizId + '|' + lagIdx;
@@ -587,6 +935,7 @@ function lagResultatkode(quizIdx, lagIdx, score) {
 function visKode(k) {
   return k[0] === 'Q'
     ? k.slice(0, 3) + '-' + k.slice(3, 5) + '-' + k.slice(5)
+    : k[0] === 'G' ? k.slice(0, 2) + '-' + k.slice(2, 5) + '-' + k.slice(5)
     : k[0] + '-' + k.slice(1, -1) + '-' + k.slice(-1);
 }
 function lagTavlekode() {
@@ -615,6 +964,17 @@ function lesKode(tekst) {
     if (!qz || !qz.lag[li]) return { feil: 'Koden peker på en quiz eller et lag som ikke finnes.' };
     if (sc > qz.sporsmal.length) return { feil: 'Poengsummen er høyere enn antall spørsmål.' };
     return { type: 'resultat', quizIdx: qi, lagIdx: li, score: sc, quiz: qz, lag: qz.lag[li] };
+  }
+
+  if (k[0] === 'G') {
+    if (k.length !== 6) return { feil: 'Gjettekoden skal ha formen GD-XKQ-M.' };
+    if (sjekkTegn(kropp) !== sjekk) return { feil: 'Gjettekoden stemmer ikke. Noe er tastet feil.' };
+    const pi = KODEBOK.indexOf(k[1]);
+    const navn = (DATA.deltakere || [])[pi];
+    if (!navn) return { feil: 'Koden peker på en person som ikke finnes i lista.' };
+    const s1 = KODEBOK.indexOf(k[2]), s2 = KODEBOK.indexOf(k[3]), s3 = KODEBOK.indexOf(k[4]);
+    if (s1 < 0 || s2 < 0 || s3 < 0) return { feil: 'Gjettekoden inneholder et ugyldig tegn.' };
+    return { type: 'gjett', navn: navn, km: s1 * 576 + s2 * 24 + s3 };
   }
 
   if (k[0] === 'T') {
@@ -758,10 +1118,34 @@ function tegnTavle() {
     else if (r === 'nei') alert('Tavlekode:\n\n' + visKode(kode));
   };
   $('#lbnull').onclick = () => {
-    if (confirm('Nullstille alle resultater? Dette kan ikke angres.')) {
-      resultater = {}; lagreResultater(); tegnTavle(); tegnQuiz();
+    if (confirm('Nullstille alle resultater og gjett? Dette kan ikke angres.')) {
+      resultater = {}; lagreResultater();
+      gjetninger = {}; lagreGjetninger();
+      tegnTavle(); tegnQuiz();
     }
   };
+}
+
+/* ---------- Gjettekonkurransen: hvem var nærmest ---------- */
+function gjettTavleHtml() {
+  const navn = Object.keys(gjetninger);
+  if (!navn.length) return '';
+  const rad = navn.map(n => ({ navn: n, km: gjetninger[n] }))
+                  .sort((a, b) => a.km - b.km || a.navn.localeCompare(b.navn, 'no'));
+  let forrige = null, plass = 0;
+  rad.forEach((r, i) => { if (forrige === null || r.km !== forrige) plass = i + 1; r.plass = plass; forrige = r.km; });
+  const medalje = p => p === 1 ? '🥇' : p === 2 ? '🥈' : p === 3 ? '🥉' : p;
+  return `<div class="kort" style="margin-top:12px">
+      <h2>📍 Hvem gjettet nærmest</h2>
+      <div style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:8px">
+        Avstand i luftlinje fra nålen til Istanbul.</div>` +
+    rad.map(r => `<div class="lbrad">
+        <div class="plass">${medalje(r.plass)}</div>
+        <div class="navn">${esc(r.navn)}</div>
+        <div class="po">${r.km}<small> km</small></div>
+      </div>`).join('') +
+    `<div style="font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center">
+      ${rad.length} av ${(DATA.deltakere || []).length} har levert.</div></div>`;
 }
 
 /* ---------- Quiz ---------- */
@@ -783,8 +1167,9 @@ function tegnQuiz() {
       `<div class="kort">
         <h2>Legg inn resultat</h2>
         <div style="font-size:14px;line-height:1.55;color:#39434f;margin-bottom:12px">
-          Lim inn koden laget sendte deg. Den ser slik ut: <b>Q13-08-N</b>.
-          En tavlekode fra en annen telefon begynner med <b>T</b> og virker her også.</div>
+          Lim inn koden du har fått. <b>Q13-08-N</b> er et quizresultat,
+          <b>GD-XKQ-M</b> er et gjett fra kartet, og en kode som begynner med <b>T</b>
+          er hele quizstillingen fra en annen telefon.</div>
         <input class="kodefelt" id="resfelt" type="text" inputmode="text" autocomplete="off"
                autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="Q13-08-N">
         <div class="kodefeil" id="resfeil"></div>
@@ -816,6 +1201,14 @@ function tegnQuiz() {
         if (confirm(tekst)) {
           settResultat(r.quiz.id, r.lagIdx, r.score);
           visStatus('✅ Lagt inn');
+          qVisning = 'liste'; tegnQuiz();
+        }
+      } else if (r.type === 'gjett') {
+        const gammel = gjetninger[r.navn];
+        if (confirm(`Gjett fra ${r.navn}\n${r.km} km unna` +
+            (gammel !== undefined ? `\n\nStår allerede med ${gammel} km. Overskrive?` : '\n\nLegge inn?'))) {
+          gjetninger[r.navn] = r.km; lagreGjetninger();
+          visStatus('✅ Gjett lagt inn');
           qVisning = 'liste'; tegnQuiz();
         }
       } else {
@@ -863,6 +1256,7 @@ function tegnQuiz() {
     const info = DATA.quizinfo;
     boks.innerHTML =
       `<button class="knapp" id="qinnlegg" style="margin-top:0">＋ Legg inn resultat</button>` +
+      gjettTavleHtml() +
       (info ? `<div class="kort" style="margin-top:12px"><h2>${esc(info.tittel)}</h2>
         <div style="font-size:14px;line-height:1.55;color:#39434f">${esc(info.tekst)}</div></div>` : '') +
       '<div id="qliste"></div>';
@@ -1154,6 +1548,7 @@ function tegnAlt() {
   if (!DATA) return;
   $('#datoer').textContent = (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '');
   document.title = DATA.tur?.tittel || 'Blåtur';
+  tegnAvsloring();
   tegnNedtelling();
   tegnProgram('fre');
   tegnProgram('lor');

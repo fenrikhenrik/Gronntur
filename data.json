@@ -1,6 +1,6 @@
 {
-  "versjon": 15,
-  "sistOppdatert": "5. september 08:35",
+  "versjon": 17,
+  "sistOppdatert": "5. september 09:25",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -1471,5 +1471,73 @@
   "arrangorer": [
     "Henrik",
     "Bruland"
-  ]
+  ],
+  "avsloring": {
+    "aktiv": true,
+    "losningsord": "ISTANBUL",
+    "gjett": {
+      "aktiv": true,
+      "tittel": "Hvor tror du turen går?",
+      "ingress": "Sett en nål der du tror vi skal. Du får ikke vite hvor nær du var før alt er avslørt — og du får bare ett forsøk. Nærmest vinner.",
+      "fasit": {
+        "lat": 41.0082,
+        "lon": 28.9784
+      },
+      "senter": [
+        50.0,
+        15.0
+      ],
+      "zoom": 4
+    },
+    "kryssord": {
+      "tittel": "Åtte spørsmål, åtte bokstaver",
+      "ingress": "Hvert riktig svar gir én bokstav. Når du har alle åtte, skal de settes sammen til ett ord.",
+      "fasittittel": "Åtte bokstaver",
+      "fasitingress": "Trykk deg fram til ordet. Tar du feil, får du prøve på nytt.",
+      "rader": [
+        {
+          "sporsmal": "Tre av dem må til hver gang elleve mann skal samme sted.",
+          "svar": "TAXI",
+          "pos": 0
+        },
+        {
+          "sporsmal": "Appen vi kommer til å bruke mer enn beina.",
+          "svar": "UBER",
+          "pos": 0
+        },
+        {
+          "sporsmal": "Man trenger alltid mer av dette enn man tror.",
+          "svar": "KONTANTER",
+          "pos": 2
+        },
+        {
+          "sporsmal": "Det første som blir bestilt når vi har landet.",
+          "svar": "PILS",
+          "pos": 1
+        },
+        {
+          "sporsmal": "Den ene tingen minst én av oss glemmer hjemme.",
+          "svar": "LADER",
+          "pos": 0
+        },
+        {
+          "sporsmal": "Det som skulle vært håndbagasje, men aldri blir det.",
+          "svar": "BAGASJE",
+          "pos": 1
+        },
+        {
+          "sporsmal": "Ligger i innerlomma, og gir bråk hvis det ikke gjør det.",
+          "svar": "PASS",
+          "pos": 2
+        },
+        {
+          "sporsmal": "Hva kaller vi denne typen tur?",
+          "svar": "BLÅTUR",
+          "pos": 0
+        }
+      ]
+    },
+    "fasittittel": "Der skal vi.",
+    "fasittekst": "11.–13. september 2026. Elleve mann. Pakk lett."
+  }
 }
