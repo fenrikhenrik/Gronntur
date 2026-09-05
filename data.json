@@ -1,6 +1,6 @@
 {
-  "versjon": 18,
-  "sistOppdatert": "5. september 09:45",
+  "versjon": 19,
+  "sistOppdatert": "5. september 14:55",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -14,6 +14,12 @@
     }
   },
   "oppslag": [
+    {
+      "type": "gøy",
+      "tid": "5. september",
+      "tekst": "Transporten er ordnet begge veier — €200 for hele gjengen, altså rundt 220 kroner hver tur/retur. Det er under det vi budsjetterte med. Ingen skal stå på et fortau og forhandle med en taxi, verken fredag eller søndag.",
+      "av": "Henrik"
+    },
     {
       "type": "info",
       "tid": "5. september",
@@ -61,7 +67,15 @@
           "tittel": "TK1748 Oslo → Istanbul",
           "sted": "Oslo lufthavn Gardermoen",
           "ikon": "✈️",
-          "detalj": "Lander i Istanbul 12:10. Vær på flyplassen i god tid — dette er turens mest sårbare punkt."
+          "detalj": "Lander i Istanbul 12:10. Vær på flyplassen i god tid. Erik reiser via København og kommer for seg selv — han møter oss på hotellet."
+        },
+        {
+          "tid": "12:30",
+          "tittel": "Transport til hotellet",
+          "sted": "Istanbul Havalimanı (IST)",
+          "ikon": "🚐",
+          "kart": "ist",
+          "detalj": "Forhåndsbestilt transport for gjengen, rett fra ankomsthallen til Karaköy. Ca. 50 minutter. Ingenting å ordne på stedet — bare finn sjåføren og sett dere inn. Erik ordner sin egen fra København-flyet."
         },
         {
           "tid": "14:15",
@@ -210,7 +224,7 @@
           "tittel": "Avreise fra hotellet",
           "sted": "Cheers Porthouse",
           "ikon": "🚐",
-          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen. Turens mest sårbare punkt — vær nede i tide."
+          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen, samme avtale som på veien inn. Vær nede i lobbyen 07:10 — bilen venter ikke, og dette er turens siste harde oppmøte. Erik reiser for seg selv til København."
         },
         {
           "tid": "11:15",
@@ -495,6 +509,10 @@
         [
           "Hvis skybaren er full",
           "The Bank Roof Bar, Bankalar Cd. 5, 8–10 min gange. Åpent 12:00–02:00. +90 212 283 00 55"
+        ],
+        [
+          "Flyplasstransport",
+          "Ordnet begge veier for gjengen — €200 totalt, ca. €20 pr. mann. Ingenting å betale på stedet."
         ]
       ]
     }
