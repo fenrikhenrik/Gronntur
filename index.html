@@ -246,8 +246,17 @@ nav .ni{font-size:21px;line-height:1}
 .gnavn button{padding:11px 15px;border-radius:11px;border:1.5px solid #333f4d;background:#182230;
   color:#e4e9ee;font-size:15px;font-family:inherit;font-weight:600;cursor:pointer}
 .gnavn button.valgt{background:var(--red);border-color:var(--red);color:#fff}
-#gkart{height:46vh;min-height:270px;border-radius:14px;border:2px solid #333f4d;
-  margin:16px 0 10px;background:#182230;z-index:1}
+#gkart{height:38vh;min-height:230px;max-height:340px;border-radius:14px;border:2px solid #333f4d;
+  margin:14px 0 10px;background:#182230;z-index:1}
+
+/* Låseknappen skal aldri kunne havne under skjermkanten. Kartet spiser
+   alle dragbevegelser over seg, så en knapp lenger ned blir uoppnåelig
+   på telefon. Derfor limes den fast nederst. */
+.glinje{position:sticky;bottom:0;z-index:20;margin:0 -18px;padding:12px 18px
+  calc(var(--safe-bot) + 12px);background:linear-gradient(180deg,rgba(15,23,32,0),
+  rgba(15,23,32,.96) 22%,rgba(15,23,32,1))}
+.glinje .knapp{margin-top:0}
+.glaas-av{background:#2b3644;color:#7d8896}
 .gnal{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
   background:var(--red);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
 .gstatus{font-size:13.5px;line-height:1.5;color:#aab4c0;text-align:center;min-height:20px;margin-bottom:12px}
@@ -671,15 +680,45 @@ function tegnGjett(boks, a, g) {
       <div style="font-size:13.5px;color:#aab4c0;text-align:center">Hvem gjetter?</div>
       <div class="gnavn" id="gnavn"></div>
       <div id="gkart"></div>
-      <div class="gstatus" id="gstatus">Velg navnet ditt, og trykk på kartet der du tror vi skal.</div>
-      <button class="knapp" id="glaas">Lås inn gjettet</button>
+      <div class="gstatus" id="gstatus"></div>
+      <div class="glinje">
+        <button class="knapp" id="glaas">Lås inn gjettet</button>
+      </div>
       <button class="avshopp" id="ghopp">Hopp over — jeg vet hvor vi skal</button>
     </div>`;
+
+  /* Knappen viser alltid hva som står igjen, så ingen trenger å lete. */
+  const oppdaterKnapp = () => {
+    const kn = $('#glaas'), st = $('#gstatus');
+    if (!kn) return;
+    if (!gjettNavn && !gjettPunkt) {
+      kn.textContent = '1. Velg navn  ·  2. Trykk på kartet';
+      kn.className = 'knapp glaas-av';
+      st.textContent = 'Velg navnet ditt over, og trykk så på kartet der du tror vi skal.';
+    } else if (!gjettNavn) {
+      kn.textContent = 'Velg navnet ditt over';
+      kn.className = 'knapp glaas-av';
+      st.textContent = 'Nålen står. Mangler bare navnet ditt.';
+    } else if (!gjettPunkt) {
+      kn.textContent = 'Trykk på kartet';
+      kn.className = 'knapp glaas-av';
+      st.textContent = 'Hei ' + gjettNavn + '. Trykk på kartet der du tror vi skal.';
+    } else {
+      kn.textContent = '🔒 Lås inn gjettet';
+      kn.className = 'knapp';
+      st.textContent = 'Klar. Flytt nålen så mye du vil — den teller først når du låser inn.';
+    }
+  };
 
   const navnBoks = $('#gnavn');
   folk.forEach(n => {
     const b = el('button', gjettNavn === n ? 'valgt' : '', esc(n));
-    b.onclick = () => { gjettNavn = n; tegnGjett(boks, a, g); };
+    b.onclick = () => {
+      gjettNavn = n;
+      navnBoks.querySelectorAll('button').forEach(x => x.classList.remove('valgt'));
+      b.classList.add('valgt');
+      oppdaterKnapp();
+    };
     navnBoks.appendChild(b);
   });
 
@@ -698,13 +737,13 @@ function tegnGjett(boks, a, g) {
     gjettPunkt = [ev.latlng.lat, ev.latlng.lng];
     if (gjettNal) gjettKart.removeLayer(gjettNal);
     gjettNal = L.marker(gjettPunkt, { icon: nalIkon }).addTo(gjettKart);
-    $('#gstatus').textContent = gjettNavn
-      ? 'Nålen står. Flytt den så mye du vil — den teller først når du låser inn.'
-      : 'Nålen står. Velg navnet ditt før du låser inn.';
+    oppdaterKnapp();
   });
 
+  oppdaterKnapp();
+
   $('#glaas').onclick = () => {
-    if (!gjettNavn) { $('#gstatus').textContent = 'Velg navnet ditt først.'; return; }
+    if (!gjettNavn) { $('#gstatus').textContent = 'Velg navnet ditt over først.'; return; }
     if (!gjettPunkt) { $('#gstatus').textContent = 'Trykk på kartet der du tror vi skal.'; return; }
     const f = (DATA.avsloring.gjett || {}).fasit || {};
     const km = gjettKart.distance(gjettPunkt, [f.lat, f.lon]) / 1000;
