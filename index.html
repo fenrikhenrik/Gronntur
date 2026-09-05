@@ -713,6 +713,7 @@ function tegnGjett(boks, a, g) {
     try {
       localStorage.setItem('blatur-mittgjett', JSON.stringify(
         { navn: gjettNavn, lat: gjettPunkt[0], lon: gjettPunkt[1], km: Math.round(km), kode: kode }));
+      localStorage.setItem('blatur-navn', gjettNavn);
     } catch (e) {}
     if (navigator.vibrate) navigator.vibrate(60);
     tegnGjettKvittert(boks, kode);
@@ -732,14 +733,20 @@ function tegnGjettKvittert(boks, kode) {
     `<div class="avswrap avsfasit">
       <div style="font-size:46px;line-height:1">📍</div>
       <div class="avstit" style="margin-top:10px">Gjettet er låst</div>
-      <div class="avsing">Du får ikke vite hvor nær du var før alt er avslørt.
-        Send koden til Henrik, så setter han opp rangeringen.</div>
+      <div class="avsing">Nålen står, og den kan ikke flyttes.
+        <b>Du får ikke vite hvor nær du var før alle har levert.</b></div>
       <div class="gkode">
-        <div class="gkodetit">Send denne til Henrik</div>
+        <div class="gkodetit">Steg 1 · send denne til Henrik</div>
         <div class="gkodeverdi">${esc(visKode(kode))}</div>
-        <button class="knapp" id="gsend">📤 Send gjettet</button>
+        <button class="knapp" id="gsend">📤 Send gjettet på SMS</button>
+        <div style="font-size:12.5px;color:#7d8896;line-height:1.5;margin-top:10px">
+          Koden sier hvem du er og hvor langt unna du var — men den er skrevet om,
+          så du kan ikke lese ditt eget resultat ut av den.</div>
       </div>
-      <button class="knapp sek" id="gvidere" style="margin-top:16px">Videre til neste oppgave</button>
+      <div class="avsing" style="margin-top:20px">
+        <b>Steg 2 kommer når Henrik gir klarsignal.</b><br>
+        Vent til alle ni har sendt inn.</div>
+      <button class="knapp sek" id="gvidere" style="margin-top:12px">Jeg har sendt — gå videre</button>
     </div>`;
   $('#gsend').onclick = async () => {
     const mitt = JSON.parse(localStorage.getItem('blatur-mittgjett') || '{}');
@@ -947,6 +954,18 @@ function lagTavlekode() {
     });
   });
   return kropp + sjekkTegn(kropp);
+}
+
+/* Plukker ut alle koder i en tekst. Da kan Henrik kopiere hele
+   meldingstråden og lime den inn i ett jafs, i stedet for kode for kode. */
+function lesAlleKoder(tekst) {
+  const ord = String(tekst || '').split(/[\s,;]+/).filter(Boolean);
+  const funn = [];
+  ord.forEach(o => {
+    const r = lesKode(o);
+    if (!r.feil) funn.push(r);
+  });
+  return funn;
 }
 
 /* Returnerer {type:'resultat'|'tavle', ...} eller {feil:'...'} */
@@ -1166,10 +1185,15 @@ function tegnQuiz() {
     boks.innerHTML =
       `<div class="kort">
         <h2>Legg inn resultat</h2>
-        <div style="font-size:14px;line-height:1.55;color:#39434f;margin-bottom:12px">
+        <div style="font-size:14px;line-height:1.55;color:#39434f;margin-bottom:6px">
           Lim inn koden du har fått. <b>Q13-08-N</b> er et quizresultat,
           <b>GD-XKQ-M</b> er et gjett fra kartet, og en kode som begynner med <b>T</b>
           er hele quizstillingen fra en annen telefon.</div>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--muted);margin-bottom:12px">
+          <b>Du kan lime inn flere om gangen.</b> Marker hele meldingstråden og lim den inn —
+          appen plukker ut kodene selv og hopper over alt annet.</div>
+        <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px">
+          ${Object.keys(gjetninger).length} av ${(DATA.deltakere || []).length} gjett levert</div>
         <input class="kodefelt" id="resfelt" type="text" inputmode="text" autocomplete="off"
                autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="Q13-08-N">
         <div class="kodefeil" id="resfeil"></div>
@@ -1186,11 +1210,33 @@ function tegnQuiz() {
           <label>Poeng<select id="mPoeng"></select></label>
         </div>
         <button class="knapp sek" id="mLagre">Lagre resultatet</button>
-      </div>
-      <button class="knapp sek" id="restilbake">Tilbake</button>`;
+      </div>` +
+      gjettTavleHtml() +
+      `<button class="knapp" id="restilbake">Ferdig</button>`;
 
     const felt = $('#resfelt'), feil = $('#resfeil');
+
     const les = () => {
+      /* Flere koder i samme innliming — vanligste tilfelle når han har
+         fått ni SMS-er og kopierer hele tråden. */
+      const flere = lesAlleKoder(felt.value);
+      if (flere.length > 1) {
+        const gj = flere.filter(x => x.type === 'gjett');
+        const res = flere.filter(x => x.type === 'resultat');
+        if (confirm(`Fant ${flere.length} koder:\n` +
+            (gj.length ? `· ${gj.length} gjett fra kartet\n` : '') +
+            (res.length ? `· ${res.length} quizresultater\n` : '') +
+            `\nLegge inn alle?`)) {
+          gj.forEach(x => { gjetninger[x.navn] = x.km; });
+          res.forEach(x => { settResultat(x.quiz.id, x.lagIdx, x.score); });
+          lagreGjetninger();
+          felt.value = ''; feil.textContent = '';
+          visStatus('✅ ' + flere.length + ' lagt inn');
+          tegnQuiz();
+        }
+        return;
+      }
+
       const r = lesKode(felt.value);
       if (r.feil) { feil.textContent = r.feil; return; }
       if (r.type === 'resultat') {
@@ -1200,22 +1246,25 @@ function tegnQuiz() {
           (gammel !== null ? `\n\nDette laget står allerede med ${gammel} poeng. Overskrive?` : '\n\nLegge inn?');
         if (confirm(tekst)) {
           settResultat(r.quiz.id, r.lagIdx, r.score);
+          felt.value = ''; feil.textContent = '';
           visStatus('✅ Lagt inn');
-          qVisning = 'liste'; tegnQuiz();
+          tegnQuiz();
         }
       } else if (r.type === 'gjett') {
         const gammel = gjetninger[r.navn];
         if (confirm(`Gjett fra ${r.navn}\n${r.km} km unna` +
             (gammel !== undefined ? `\n\nStår allerede med ${gammel} km. Overskrive?` : '\n\nLegge inn?'))) {
           gjetninger[r.navn] = r.km; lagreGjetninger();
+          felt.value = ''; feil.textContent = '';
           visStatus('✅ Gjett lagt inn');
-          qVisning = 'liste'; tegnQuiz();
+          tegnQuiz();
         }
       } else {
         if (confirm(`Tavlekode med ${r.antall} resultater.\n\nDette erstatter stillingen på denne telefonen. Fortsette?`)) {
           resultater = r.nye; lagreResultater();
+          felt.value = ''; feil.textContent = '';
           visStatus('✅ Stillingen oppdatert');
-          qVisning = 'liste'; tegnQuiz();
+          tegnQuiz();
         }
       }
     };
