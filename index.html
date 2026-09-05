@@ -156,6 +156,44 @@ nav .ni{font-size:21px;line-height:1}
 .lagkort b{font-size:14px}
 .lagkort div{font-size:13.5px;color:#39434f;margin-top:3px;line-height:1.45}
 .lagkort.ditt{border-color:var(--red);background:#fff6f6}
+.lagkort.spilt{border-color:#bfe3d0;background:#f6fcf9}
+.lagvelg{width:100%;text-align:left;font-family:inherit;cursor:pointer;color:var(--ink);background:var(--card)}
+
+/* ---- Leaderboard ---- */
+.lb{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 15px 12px;margin-bottom:12px}
+.lbtopp{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer}
+.lbtopp h2{margin:0;font-size:16px}
+.lbtopp .pil{font-size:13px;color:var(--muted);font-weight:600;flex:none}
+.lbnull{font-size:13px;color:var(--muted);line-height:1.5;margin-top:8px}
+
+.pall{display:flex;align-items:flex-end;gap:7px;margin:16px 0 6px}
+.pall .pl{flex:1;text-align:center}
+.pall .medalje{font-size:25px;line-height:1}
+.pall .pnavn{font-size:13px;font-weight:700;margin-top:2px;line-height:1.2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pall .ppo{font-size:11.5px;color:var(--muted);margin-bottom:5px}
+.pall .sokkel{border-radius:9px 9px 0 0;display:flex;align-items:flex-start;justify-content:center;
+  padding-top:6px;font-size:15px;font-weight:800;color:#fff}
+.pall .p1 .sokkel{height:62px;background:linear-gradient(180deg,#e0b544,#c8962e)}
+.pall .p2 .sokkel{height:46px;background:linear-gradient(180deg,#c3ccd4,#9aa6b1)}
+.pall .p3 .sokkel{height:36px;background:linear-gradient(180deg,#cd9b66,#b07d46)}
+
+.lbrad{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f2f5;font-size:14px}
+.lbrad:last-child{border-bottom:none}
+.lbrad .plass{width:22px;text-align:center;font-weight:700;color:var(--muted);font-size:13px;flex:none}
+.lbrad .navn{flex:1;font-weight:600}
+.lbrad .po{font-weight:700;font-size:14.5px;flex:none}
+.lbrad .po small{font-weight:500;color:var(--muted);font-size:12px}
+
+.lanterne{display:flex;align-items:center;gap:10px;margin-top:10px;padding:11px 12px;
+  border:1px solid #f0c9cc;background:#fffbfb;border-radius:12px}
+.lanterne .lykt{font-size:22px;line-height:1;flex:none}
+.lanterne .lt{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--red)}
+.lanterne .ln{font-size:14.5px;font-weight:700;margin-top:1px}
+.lanterne .lp{font-weight:700;font-size:14.5px;flex:none;color:var(--red)}
+.lbfot{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:11px;text-align:center}
+.lbnullstill{background:none;border:none;font-family:inherit;font-size:11.5px;color:var(--muted);
+  text-decoration:underline;cursor:pointer;padding:6px 0 0}
 </style>
 </head>
 <body>
@@ -191,6 +229,7 @@ nav .ni{font-size:21px;line-height:1}
 
   <!-- QUIZ -->
   <div class="tab" id="t-quiz">
+    <div id="leaderboard"></div>
     <div class="qwrap" id="quiz"></div>
   </div>
 
@@ -489,25 +528,147 @@ function startGps() {
   }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
 }
 
+/* ---------- Poengtavle ----------
+   Poengene et lag får, godskrives hvert medlem. Fordi lagene er ulike i
+   hver runde, blir totalen personlig selv om svarene er felles.
+   Alt ligger på denne telefonen — quizmaster-telefonen er fasit. */
+let poeng = {};
+try { poeng = JSON.parse(localStorage.getItem('blatur-poeng') || '{}'); } catch (e) {}
+let lbApen = true;
+
+function lagrePoeng() {
+  try { localStorage.setItem('blatur-poeng', JSON.stringify(poeng)); } catch (e) {}
+}
+function settPoeng(quizId, medlemmer, score) {
+  (medlemmer || []).forEach(n => {
+    poeng[n] = poeng[n] || {};
+    poeng[n][quizId] = score;
+  });
+  lagrePoeng();
+}
+function lagPoeng(quizId, medlemmer) {
+  const n = (medlemmer || [])[0];
+  const v = poeng[n] && poeng[n][quizId];
+  return v === undefined ? null : v;
+}
+function total(navn) {
+  return Object.values(poeng[navn] || {}).reduce((a, b) => a + b, 0);
+}
+function antallRunder(navn) {
+  return Object.keys(poeng[navn] || {}).length;
+}
+
+/* Standard konkurranserangering: lik sum gir delt plass. */
+function rangering() {
+  const folk = (DATA.deltakere || []).slice()
+    .map(n => ({ navn: n, sum: total(n), runder: antallRunder(n) }));
+  folk.sort((a, b) => b.sum - a.sum || a.navn.localeCompare(b.navn, 'no'));
+  let forrige = null, plass = 0;
+  folk.forEach((f, i) => {
+    if (forrige === null || f.sum !== forrige) plass = i + 1;
+    f.plass = plass;
+    forrige = f.sum;
+  });
+  return folk;
+}
+
+function tegnTavle() {
+  const boks = $('#leaderboard');
+  if (!boks) return;
+  const folk = rangering();
+  if (!folk.length) { boks.innerHTML = ''; return; }
+
+  const spilt = folk.some(f => f.runder > 0);
+  const pil = lbApen ? 'Skjul ▾' : 'Vis ▸';
+  let h = `<div class="lb"><div class="lbtopp" id="lbtopp">
+      <h2>🏆 Stillingen</h2><span class="pil">${pil}</span></div>`;
+
+  if (!lbApen) {
+    const l = folk[0];
+    h += `<div class="lbnull">Leder: <b>${esc(l.navn)}</b> med ${l.sum} poeng.</div></div>`;
+    boks.innerHTML = h;
+    $('#lbtopp').onclick = () => { lbApen = !lbApen; tegnTavle(); };
+    return;
+  }
+
+  if (!spilt) {
+    h += `<div class="lbnull">Ingen har spilt ennå. Tavlen fyller seg ut med én gang
+          første lag begynner å svare — dere trenger ikke gjøre noe.</div>`;
+  }
+
+  /* Pallen: 2. plass til venstre, 1. i midten, 3. til høyre. */
+  const pall = folk.slice(0, 3);
+  if (pall.length === 3) {
+    const kol = [
+      { f: pall[1], kl: 'p2', m: '🥈', n: 2 },
+      { f: pall[0], kl: 'p1', m: '🥇', n: 1 },
+      { f: pall[2], kl: 'p3', m: '🥉', n: 3 }
+    ];
+    h += '<div class="pall">' + kol.map(k =>
+      `<div class="pl ${k.kl}">
+         <div class="medalje">${k.m}</div>
+         <div class="pnavn">${esc(k.f.navn)}</div>
+         <div class="ppo">${k.f.sum} p</div>
+         <div class="sokkel">${k.f.plass}</div>
+       </div>`).join('') + '</div>';
+  }
+
+  /* Plass 4 til nest sist. */
+  const midt = folk.slice(3, Math.max(3, folk.length - 1));
+  if (midt.length) {
+    h += '<div>' + midt.map(f =>
+      `<div class="lbrad">
+         <div class="plass">${f.plass}</div>
+         <div class="navn">${esc(f.navn)}</div>
+         <div class="po">${f.sum}<small> p</small></div>
+       </div>`).join('') + '</div>';
+  }
+
+  /* Sisteplassen. */
+  if (folk.length > 3) {
+    const siste = folk[folk.length - 1];
+    h += `<div class="lanterne">
+        <div class="lykt">🏮</div>
+        <div style="flex:1">
+          <div class="lt">Lanterne Rouge · ${siste.plass}. plass</div>
+          <div class="ln">${esc(siste.navn)}</div>
+        </div>
+        <div class="lp">${siste.sum} p</div>
+      </div>`;
+  }
+
+  const maks = (DATA.quizer || []).reduce((a, q) => a + q.sporsmal.length, 0);
+  h += `<div class="lbfot">Poeng fra laget godskrives alle tre. Maks ${maks} poeng totalt.<br>
+        <button class="lbnullstill" id="lbnull">Nullstill alle poeng</button></div></div>`;
+
+  boks.innerHTML = h;
+  $('#lbtopp').onclick = () => { lbApen = !lbApen; tegnTavle(); };
+  const nb = $('#lbnull');
+  if (nb) nb.onclick = () => {
+    if (confirm('Nullstille poengene for alle ni? Dette kan ikke angres.')) {
+      poeng = {}; lagrePoeng();
+      try { (DATA.quizer || []).forEach(q => localStorage.removeItem('blatur-res-' + q.id)); } catch (e) {}
+      tegnTavle(); tegnQuiz();
+    }
+  };
+}
+
 /* ---------- Quiz ----------
-   Fem quizer, hver med egen kode og eget lagoppsett. Rekkefølgen er:
-   liste → kode → lagoppsett → spørsmål → resultat.
-   Poeng lagres pr. quiz, slik at laget kan lese opp sitt eget resultat. */
-let aktivQuiz = null, qIdx = 0, qScore = 0, qSvart = false, qVisning = 'liste';
+   Fem quizer, hver med egen kode og eget lagoppsett.
+   Rekkefølge: liste → kode → velg lag → spørsmål → resultat → neste lag. */
+let aktivQuiz = null, aktivtLag = null, qIdx = 0, qScore = 0, qSvart = false, qVisning = 'liste';
 
 const quizNokkel = id => 'quiz-' + id;
-const quizResultat = id => {
-  const v = localStorage.getItem('blatur-res-' + id);
-  return v === null ? null : parseInt(v, 10);
-};
 
 function tegnQuiz() {
   const boks = $('#quiz');
   const quizer = DATA.quizer || [];
+  tegnTavle();
   if (!quizer.length) { boks.innerHTML = '<div class="kort">Ingen quizer ennå.</div>'; return; }
 
-  /* --- Liste over quizene --- */
+  /* --- Oversikt --- */
   if (qVisning === 'liste') {
+    lbApen = true; tegnTavle();
     const info = DATA.quizinfo;
     boks.innerHTML =
       (info ? `<div class="kort"><h2>${esc(info.tittel)}</h2>
@@ -515,16 +676,16 @@ function tegnQuiz() {
       '<div id="qliste"></div>';
     const liste = $('#qliste');
     quizer.forEach(qz => {
-      const res = quizResultat(qz.id);
       const apen = erApnet(quizNokkel(qz.id));
-      const b = el('button', 'qkort' + (res !== null ? ' ferdig' : ''));
+      const ferdige = (qz.lag || []).filter(l => lagPoeng(qz.id, l.medlemmer) !== null).length;
+      const b = el('button', 'qkort' + (ferdige === (qz.lag || []).length ? ' ferdig' : ''));
       b.innerHTML =
         `<div class="qi">${apen ? (qz.ikon || '🎯') : '🔒'}</div>
          <div style="flex:1">
            <div class="qt">${esc(qz.tittel)}</div>
-           <div class="qm">${res !== null
-              ? 'Ferdig · ' + res + ' av ' + qz.sporsmal.length + ' riktige'
-              : (apen ? qz.sporsmal.length + ' spørsmål · klar' : 'Låst · krever kode')}</div>
+           <div class="qm">${!apen ? 'Låst · krever kode'
+              : ferdige ? ferdige + ' av ' + qz.lag.length + ' lag har spilt'
+              : qz.sporsmal.length + ' spørsmål · klar'}</div>
          </div>
          <div class="qs">›</div>`;
       b.onclick = () => { aktivQuiz = qz.id; qVisning = apen ? 'lag' : 'kode'; tegnQuiz(); };
@@ -550,23 +711,33 @@ function tegnQuiz() {
     return;
   }
 
-  /* --- Lagoppsett --- */
+  /* --- Velg lag --- */
   if (qVisning === 'lag') {
-    const lag = qz.lag || [];
+    lbApen = true; tegnTavle();
     boks.innerHTML =
-      `<div class="qframe">
-        <div style="font-size:46px">${qz.ikon || '🎯'}</div>
-        <h2 style="margin:8px 0 4px;font-size:21px">${esc(qz.tittel)}</h2>
-        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 4px">${esc(qz.ingress || '')}</p>
-        <p style="font-size:13.5px;color:var(--muted);margin:14px 0 8px"><b>Lagene for denne quizen</b><br>
-          Finn navnet ditt. Laget svarer sammen — bli enige før dere trykker.</p>
-        <div class="lagliste">${lag.map(l =>
-          `<div class="lagkort"><b>${esc(l.navn)}</b><div>${l.medlemmer.map(esc).join(' · ')}</div></div>`).join('')}</div>
-        <button class="knapp" id="qstart">Start quizen</button>
-        <button class="knapp sek" id="qtilbake">Tilbake</button>
-      </div>`;
-    $('#qstart').onclick = () => { qIdx = 0; qScore = 0; qSvart = false; qVisning = 'spill'; tegnQuiz(); };
-    $('#qtilbake').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+      `<div class="kort" style="text-align:center">
+        <div style="font-size:44px;line-height:1">${qz.ikon || '🎯'}</div>
+        <h2 style="margin:8px 0 4px;font-size:20px">${esc(qz.tittel)}</h2>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0">${esc(qz.ingress || '')}</p>
+        <p style="font-size:13.5px;color:var(--muted);margin:14px 0 0"><b>Hvilket lag svarer nå?</b><br>
+          Trykk på laget. Poengene går til alle tre.</p>
+      </div>
+      <div id="lagvalg"></div>`;
+    const boksL = $('#lagvalg');
+    (qz.lag || []).forEach(l => {
+      const p = lagPoeng(qz.id, l.medlemmer);
+      const b = el('button', 'lagkort lagvelg' + (p !== null ? ' spilt' : ''));
+      b.innerHTML = `<b>${esc(l.navn)}</b><div>${l.medlemmer.map(esc).join(' · ')}</div>` +
+        (p !== null ? `<div style="font-size:12.5px;color:var(--ok);font-weight:700;margin-top:5px">
+            ✓ Spilt · ${p} av ${qz.sporsmal.length} riktige — trykk for å spille om igjen</div>` : '');
+      b.onclick = () => {
+        aktivtLag = l; qIdx = 0; qScore = 0; qSvart = false; qVisning = 'spill'; tegnQuiz();
+      };
+      boksL.appendChild(b);
+    });
+    const tilbake = el('button', 'knapp sek', 'Til de andre quizene');
+    tilbake.onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+    boks.appendChild(tilbake);
     return;
   }
 
@@ -574,8 +745,8 @@ function tegnQuiz() {
 
   /* --- Resultat --- */
   if (qIdx >= sp.length) {
+    lbApen = true; tegnTavle();
     const pst = Math.round(qScore / sp.length * 100);
-    try { localStorage.setItem('blatur-res-' + qz.id, qScore); } catch (e) {}
     let dom = 'Godkjent — så vidt.';
     if (pst === 100) dom = 'Feilfritt. Ingen tror på dere.';
     else if (pst >= 80) dom = 'Sterkt. Laget kan noe.';
@@ -586,20 +757,20 @@ function tegnQuiz() {
         <div class="score">${qScore}/${sp.length}</div>
         <div class="stolpe"><i style="width:${pst}%"></i></div>
         <p style="font-size:16px;font-weight:600;margin:8px 0 2px">${dom}</p>
-        <p style="color:var(--muted);font-size:14px">${pst} % riktig i ${esc(qz.tittel)}</p>
-        <button class="knapp" id="qigjen">Prøv igjen</button>
+        <p style="color:var(--muted);font-size:14px">${esc(aktivtLag ? aktivtLag.navn : '')} · ${esc(qz.tittel)}</p>
+        <button class="knapp" id="qnestelag">Neste lag</button>
         <button class="knapp sek" id="qtillisten">Til de andre quizene</button>
       </div>`;
-    $('#qigjen').onclick = () => { qIdx = 0; qScore = 0; qSvart = false; tegnQuiz(); };
+    $('#qnestelag').onclick = () => { qVisning = 'lag'; tegnQuiz(); };
     $('#qtillisten').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
     return;
   }
 
-  /* --- Spørsmål --- */
+  /* --- Spørsmål. Tavlen legger seg sammen så spørsmålet får plass. --- */
   const q = sp[qIdx];
   boks.innerHTML =
     `<div class="qframe">
-      <div class="qkat">${esc(qz.tittel)}</div>
+      <div class="qkat">${esc(qz.tittel)}${aktivtLag ? ' · ' + esc(aktivtLag.navn) : ''}</div>
       <div class="qteller">Spørsmål ${qIdx + 1} av ${sp.length} · ${qScore} riktige</div>
       <div class="stolpe"><i style="width:${qIdx / sp.length * 100}%"></i></div>
       <div class="qsp">${esc(q.sporsmal)}</div>
@@ -628,6 +799,13 @@ function svar(i) {
   });
   if (i === q.riktig) { qScore++; if (navigator.vibrate) navigator.vibrate(40); }
   else if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+
+  /* Her skjer sanntidsoppdateringen: poengsummen skrives til laget med
+     én gang, og tavlen tegnes på nytt før neste spørsmål vises. */
+  if (aktivtLag) {
+    settPoeng(qz.id, aktivtLag.medlemmer, qScore);
+    tegnTavle();
+  }
 
   $('#qfork').innerHTML =
     `<div class="qfork">${i === q.riktig ? '✅ ' : '❌ '}${esc(q.forklaring || '')}</div>
@@ -780,7 +958,7 @@ function tegnAlt() {
   tegnInfo();
   if (DATA.vaer) tegnVaer($('#info'));
   tegnOppslag();
-  if (qVisning === 'liste') tegnQuiz();
+  if (qVisning === 'liste') tegnQuiz(); else tegnTavle();
   if ($('#t-kart').classList.contains('on')) tegnKart();
 }
 

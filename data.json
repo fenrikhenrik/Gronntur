@@ -1,6 +1,6 @@
 {
-  "versjon": 10,
-  "sistOppdatert": "5. september 07:45",
+  "versjon": 11,
+  "sistOppdatert": "5. september 08:05",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -480,11 +480,11 @@
   "gjengen": [
     {
       "navn": "Henrik",
-      "rolle": "Arrangør"
+      "rolle": "Arrangør · quizmaster"
     },
     {
       "navn": "Bruland",
-      "rolle": "Arrangør"
+      "rolle": "Arrangør · quizmaster"
     },
     {
       "navn": "Sødal",
@@ -739,32 +739,25 @@
         {
           "navn": "Lag 1 · Boğaziçi",
           "medlemmer": [
-            "Andy",
-            "Sondre",
-            "Lars"
+            "Johan",
+            "Jonsson",
+            "Sondre"
           ]
         },
         {
           "navn": "Lag 2 · Galata",
           "medlemmer": [
-            "Anders",
-            "Martin",
-            "Jonsson"
+            "Andy",
+            "Lars",
+            "Sødal"
           ]
         },
         {
           "navn": "Lag 3 · Kadıköy",
           "medlemmer": [
-            "Henrik",
             "Gunnar",
-            "Bruland"
-          ]
-        },
-        {
-          "navn": "Lag 4 · Karaköy",
-          "medlemmer": [
-            "Johan",
-            "Sødal"
+            "Martin",
+            "Anders"
           ]
         }
       ]
@@ -913,32 +906,25 @@
         {
           "navn": "Lag 1 · Boğaziçi",
           "medlemmer": [
-            "Anders",
             "Lars",
-            "Jonsson"
+            "Johan",
+            "Anders"
           ]
         },
         {
           "navn": "Lag 2 · Galata",
           "medlemmer": [
-            "Gunnar",
-            "Sødal",
-            "Sondre"
+            "Martin",
+            "Sondre",
+            "Andy"
           ]
         },
         {
           "navn": "Lag 3 · Kadıköy",
           "medlemmer": [
-            "Andy",
-            "Martin",
-            "Johan"
-          ]
-        },
-        {
-          "navn": "Lag 4 · Karaköy",
-          "medlemmer": [
-            "Bruland",
-            "Henrik"
+            "Jonsson",
+            "Sødal",
+            "Gunnar"
           ]
         }
       ]
@@ -1087,32 +1073,25 @@
         {
           "navn": "Lag 1 · Boğaziçi",
           "medlemmer": [
-            "Bruland",
-            "Martin",
-            "Andy"
+            "Sødal",
+            "Johan",
+            "Anders"
           ]
         },
         {
           "navn": "Lag 2 · Galata",
           "medlemmer": [
-            "Henrik",
-            "Lars",
-            "Gunnar"
+            "Jonsson",
+            "Martin",
+            "Lars"
           ]
         },
         {
           "navn": "Lag 3 · Kadıköy",
           "medlemmer": [
-            "Anders",
-            "Sødal",
+            "Andy",
+            "Gunnar",
             "Sondre"
-          ]
-        },
-        {
-          "navn": "Lag 4 · Karaköy",
-          "medlemmer": [
-            "Johan",
-            "Jonsson"
           ]
         }
       ]
@@ -1262,31 +1241,24 @@
           "navn": "Lag 1 · Boğaziçi",
           "medlemmer": [
             "Sødal",
-            "Martin",
-            "Anders"
+            "Lars",
+            "Andy"
           ]
         },
         {
           "navn": "Lag 2 · Galata",
           "medlemmer": [
-            "Johan",
-            "Henrik",
-            "Sondre"
+            "Anders",
+            "Sondre",
+            "Martin"
           ]
         },
         {
           "navn": "Lag 3 · Kadıköy",
           "medlemmer": [
-            "Lars",
-            "Andy",
-            "Bruland"
-          ]
-        },
-        {
-          "navn": "Lag 4 · Karaköy",
-          "medlemmer": [
             "Gunnar",
-            "Jonsson"
+            "Jonsson",
+            "Johan"
           ]
         }
       ]
@@ -1436,31 +1408,24 @@
           "navn": "Lag 1 · Boğaziçi",
           "medlemmer": [
             "Lars",
-            "Sødal",
-            "Sondre"
+            "Sondre",
+            "Gunnar"
           ]
         },
         {
           "navn": "Lag 2 · Galata",
           "medlemmer": [
             "Anders",
-            "Bruland",
-            "Jonsson"
+            "Jonsson",
+            "Andy"
           ]
         },
         {
           "navn": "Lag 3 · Kadıköy",
           "medlemmer": [
-            "Andy",
-            "Henrik",
+            "Johan",
+            "Sødal",
             "Martin"
-          ]
-        },
-        {
-          "navn": "Lag 4 · Karaköy",
-          "medlemmer": [
-            "Gunnar",
-            "Johan"
           ]
         }
       ]
@@ -1468,6 +1433,21 @@
   ],
   "quizinfo": {
     "tittel": "Slik fungerer quizen",
-    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Dere spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz, så du havner sammen med noen nye hver gang. Laget må bli enige om ett svar før dere trykker. Hver quiz åpnes med en kode dere får av Henrik eller Bruland."
-  }
+    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre. Lagene er trukket tilfeldig og er ulike fra quiz til quiz, så du havner sammen med nye folk hver runde. Laget blir enige om ett svar før dere trykker. Poengene laget får, går til alle tre på laget — og tavlen øverst oppdaterer seg med én gang. Henrik og Bruland spiller ikke; de holder quizmaster-telefonen og deler ut kodene."
+  },
+  "deltakere": [
+    "Sødal",
+    "Jonsson",
+    "Gunnar",
+    "Martin",
+    "Andy",
+    "Anders",
+    "Sondre",
+    "Johan",
+    "Lars"
+  ],
+  "arrangorer": [
+    "Henrik",
+    "Bruland"
+  ]
 }
