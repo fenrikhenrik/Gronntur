@@ -1,6 +1,6 @@
 {
-  "versjon": 24,
-  "sistOppdatert": "6. september 13:25",
+  "versjon": 26,
+  "sistOppdatert": "6. september 19:50",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -1539,12 +1539,12 @@
     },
     "kryssord": {
       "tittel": "Åtte spørsmål, åtte bokstaver",
-      "ingress": "Hvert riktig svar gir én bokstav. Når du har alle åtte, skal de settes sammen til ett ord.",
+      "ingress": "Hvert riktig svar gir deg den første bokstaven i svaret. Når du har alle åtte, skal de settes sammen til ett ord.",
       "fasittittel": "Åtte bokstaver",
       "fasitingress": "Trykk deg fram til ordet. Tar du feil, får du prøve på nytt.",
       "rader": [
         {
-          "sporsmal": "Tre av dem må til hver gang elleve mann skal samme sted.",
+          "sporsmal": "Tre av dem må til når elleve mann skal samme sted.",
           "svar": "TAXI",
           "pos": 0
         },
@@ -1554,14 +1554,9 @@
           "pos": 0
         },
         {
-          "sporsmal": "Man trenger alltid mer av dette enn man tror.",
-          "svar": "KONTANTER",
-          "pos": 2
-        },
-        {
-          "sporsmal": "Det første som blir bestilt når vi har landet.",
-          "svar": "PILS",
-          "pos": 1
+          "sporsmal": "Det som skulle vært håndbagasje, men aldri blir det.",
+          "svar": "BAGASJE",
+          "pos": 0
         },
         {
           "sporsmal": "Den ene tingen minst én av oss glemmer hjemme.",
@@ -1569,18 +1564,23 @@
           "pos": 0
         },
         {
-          "sporsmal": "Det som skulle vært håndbagasje, men aldri blir det.",
-          "svar": "BAGASJE",
-          "pos": 1
+          "sporsmal": "Står på skjermen på flyplassen, ved siden av klokkeslettet.",
+          "svar": "AVGANG",
+          "pos": 0
         },
         {
-          "sporsmal": "Ligger i innerlomma, og gir bråk hvis det ikke gjør det.",
-          "svar": "PASS",
-          "pos": 2
+          "sporsmal": "Han på rommet ved siden av kommer til å holde deg våken med dette.",
+          "svar": "SNORKING",
+          "pos": 0
         },
         {
-          "sporsmal": "Hva kaller vi denne typen tur?",
-          "svar": "BLÅTUR",
+          "sporsmal": "Det første du gjør når du kommer fram til hotellet.",
+          "svar": "INNSJEKK",
+          "pos": 0
+        },
+        {
+          "sporsmal": "Det du absolutt må ha i deg klokka tre om natta.",
+          "svar": "NATTMAT",
           "pos": 0
         }
       ]
@@ -1593,5 +1593,9 @@
     "tittel": "Legg meg på hjemskjermen",
     "ingress": "Denne skal ikke leses i en nettleserfane. Legg den på hjemskjermen først — det tar ti sekunder, og da virker den også uten dekning.",
     "fot": "Alt du trenger i helgen ligger her inne. Ikonet blir liggende på telefonen, så du finner det igjen når du trenger det."
+  },
+  "eskorte": {
+    "tekst": "Du trodde du skulle finne noe her ja, din lille grisegutt",
+    "under": "Gå tilbake til programmet. Det er nok der du hører hjemme."
   }
 }

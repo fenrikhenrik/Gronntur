@@ -14,7 +14,7 @@
 <style>
 :root{
   --red:#E30A17; --red-dark:#8f0710; --dark:#0f1720; --ink:#1c2530;
-  --muted:#6b7885; --line:#e4e8ec; --bg:#f5f7f9; --card:#fff;
+  --muted:#5c6874; --line:#e0e5ea; --bg:#f5f7f9; --card:#fff;
   --ok:#1f8a5b; --warn:#c8962e;
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bot:env(safe-area-inset-bottom,0px);
@@ -23,7 +23,7 @@
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-body{padding-bottom:calc(66px + var(--safe-bot))}
+body{padding-bottom:calc(74px + var(--safe-bot))}
 
 header{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 60%,#ff3b46 100%);
   color:#fff;padding:calc(14px + var(--safe-top)) 18px 16px;position:relative;overflow:hidden}
@@ -58,10 +58,11 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .post .inn{flex:1;min-width:0}
 .post .tit{font-weight:650;font-size:15px;line-height:1.3}
 .post .std{font-size:12.5px;color:var(--muted);margin-top:2px}
-.post .det{font-size:13.5px;line-height:1.5;margin-top:7px;color:#39434f}
+.post .det{font-size:14px;line-height:1.55;margin-top:7px;color:#2d3742}
 .post .ikon{font-size:19px;line-height:1}
-.kartlenke{display:inline-block;margin-top:8px;font-size:13px;color:var(--red);
-  text-decoration:none;font-weight:600}
+.kartlenke{display:inline-block;margin-top:9px;font-size:13.5px;color:var(--red);
+  text-decoration:none;font-weight:650;padding:9px 13px 9px 0;
+  -webkit-tap-highlight-color:transparent}
 
 .varsel{border-radius:14px;padding:12px 14px;margin-bottom:10px;font-size:14px;line-height:1.5}
 .v-viktig{background:#fff1f2;border:1px solid #f5c2c7}
@@ -94,7 +95,8 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .qalt{display:block;width:100%;padding:14px;margin-bottom:9px;border-radius:12px;
   border:1.5px solid var(--line);background:#fff;font-size:15.5px;text-align:left;
   cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
-.qalt:active{transform:scale(.985)}
+.qalt:active{transform:scale(.985);background:#f4f6f8}
+.qalt{-webkit-tap-highlight-color:transparent;min-height:52px}
 .qalt.riktig{background:#e8f5ee;border-color:var(--ok);color:#14603f;font-weight:600}
 .qalt.feil{background:#fdecee;border-color:var(--red);color:#8f0710}
 .qalt:disabled{cursor:default}
@@ -115,11 +117,14 @@ tr:last-child td{border-bottom:none}
 nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);
   backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;
   padding-bottom:var(--safe-bot);z-index:1000}
-nav button{flex:1;border:none;background:none;padding:9px 0 7px;font-family:inherit;
-  font-size:10.5px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;
-  align-items:center;gap:3px}
+nav button{flex:1;border:none;background:none;padding:9px 2px 7px;font-family:inherit;
+  font-size:10px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:3px;min-height:52px;justify-content:center;
+  -webkit-tap-highlight-color:transparent}
+nav button span.ni{pointer-events:none}
 nav button.on{color:var(--red);font-weight:650}
-nav .ni{font-size:21px;line-height:1}
+nav .ni{font-size:20px;line-height:1}
+nav button{letter-spacing:-.2px;white-space:nowrap}
 
 .status{position:fixed;top:calc(var(--safe-top) + 8px);right:12px;background:rgba(15,23,32,.82);
   color:#fff;font-size:11px;padding:5px 11px;border-radius:20px;z-index:2000;
@@ -142,7 +147,7 @@ nav .ni{font-size:21px;line-height:1}
 .kodefelt{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--line);
   font-size:17px;font-family:inherit;text-align:center;letter-spacing:1px;background:#fff;color:var(--ink)}
 .kodefeil{color:var(--red);font-size:13.5px;font-weight:600;margin-top:10px;min-height:18px}
-.kodefelt-stor{text-align:left;letter-spacing:0;font-size:15px;line-height:1.5;
+.kodefelt-stor{text-align:left;letter-spacing:0;font-size:16px;line-height:1.5;
   resize:vertical;min-height:88px;-webkit-appearance:none}
 
 .qkort{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--card);
@@ -210,8 +215,16 @@ nav .ni{font-size:21px;line-height:1}
 /* ---- Avsløringen: startskjermen før turen er røpet ---- */
 /* ---- Installasjonsvegg: vises når appen kjøres i nettleser ---- */
 #installer{position:fixed;inset:0;z-index:4000;background:var(--dark);color:#fff;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;align-items:center;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  display:flex;align-items:center;
   padding:calc(var(--safe-top) + 24px) 22px calc(var(--safe-bot) + 24px)}
+
+/* Mens et overlegg dekker skjermen skal kroppen stå bom stille. Uten dette
+   spretter siden på iPhone når man drar forbi kanten, og det som ligger bak
+   glimter fram et øyeblikk. */
+html.laast, body.laast{overflow:hidden;height:100%;overscroll-behavior:none;
+  background:var(--dark)}
+body.laast nav{display:none}
 #installer[hidden]{display:none}
 .inswrap{max-width:440px;margin:0 auto;text-align:center;width:100%}
 .insikon{width:96px;height:96px;border-radius:22px;margin:0 auto 20px;display:block;
@@ -233,8 +246,19 @@ nav .ni{font-size:21px;line-height:1}
 .insvidere{background:none;border:none;color:#55606e;font-size:12.5px;font-family:inherit;
   text-decoration:underline;cursor:pointer;padding:10px 0 0}
 
+/* ---- Fella ---- */
+@keyframes grisevipp{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+.gris{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:38px 22px;text-align:center;margin-top:6px}
+.gris .fjes{font-size:66px;line-height:1;display:inline-block;animation:grisevipp 1.6s ease-in-out infinite}
+.gris .dom{font-size:20px;font-weight:800;line-height:1.4;margin:20px 0 0;letter-spacing:-.3px}
+.gris .under{font-size:14px;line-height:1.6;color:var(--muted);margin:14px 0 0}
+.gris .teller{font-size:12.5px;color:var(--muted);margin-top:22px;padding-top:16px;
+  border-top:1px solid var(--line)}
+.gris .teller b{color:var(--red);font-size:15px}
+
 #avsloring{position:fixed;inset:0;z-index:3000;background:var(--dark);color:#fff;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
   padding:calc(var(--safe-top) + 26px) 18px calc(var(--safe-bot) + 26px)}
 #avsloring[hidden]{display:none}
 .avswrap{max-width:520px;margin:0 auto}
@@ -344,6 +368,11 @@ nav .ni{font-size:21px;line-height:1}
     <div class="qwrap" id="quiz"></div>
   </div>
 
+  <!-- RealEscort -->
+  <div class="tab" id="t-eskorte">
+    <div id="eskorte"></div>
+  </div>
+
   <!-- INFO -->
   <div class="tab" id="t-info">
     <div id="info"></div>
@@ -356,6 +385,7 @@ nav .ni{font-size:21px;line-height:1}
   <button data-t="lor"><span class="ni">🔒</span>Lør</button>
   <button data-t="kart"><span class="ni">🗺️</span>Kart</button>
   <button data-t="quiz"><span class="ni">🎯</span>Quiz</button>
+  <button data-t="eskorte"><span class="ni">💃</span>RealEscort</button>
   <button data-t="info"><span class="ni">ℹ️</span>Info</button>
 </nav>
 
@@ -438,8 +468,12 @@ async function hentData(forste) {
     if (forsteGang) window.scrollTo(0, 0);
     lagreLokalt(ny);
   } catch (e) {
-    const lagret = localStorage.getItem('blatur-data');
-    if (lagret && !DATA) { DATA = JSON.parse(lagret); tegnAlt(); visStatus('📴 Offline'); }
+    /* Nettet er borte. Fall tilbake på siste lagrede versjon — men bare
+       hvis lagringen i det hele tatt er tilgjengelig og innholdet er hel. */
+    try {
+      const lagret = localStorage.getItem('blatur-data');
+      if (lagret && !DATA) { DATA = JSON.parse(lagret); tegnAlt(); visStatus('📴 Offline'); }
+    } catch (e2) {}
   }
 }
 function lagreLokalt(d) { try { localStorage.setItem('blatur-data', JSON.stringify(d)); } catch(e){} }
@@ -652,6 +686,14 @@ function startGps() {
 
    iOS gir bare offline-lagring til apper som faktisk er installert, så
    dette er også det som gjør at programmet virker uten dekning. */
+/* Låser bakgrunnen mens et overlegg vises. */
+function laasKropp(paa) {
+  try {
+    document.documentElement.classList.toggle('laast', !!paa);
+    document.body.classList.toggle('laast', !!paa);
+  } catch (e) {}
+}
+
 function kjorerSomApp() {
   try {
     if (navigator.standalone === true) return true;
@@ -683,6 +725,7 @@ function tegnInstaller() {
 
   if (!cfg.aktiv || kjorerSomApp() || hoppet) { boks.hidden = true; return true; }
   boks.hidden = false;
+  laasKropp(true);
 
   const iChrome = erIOSChrome();
   const steg = iChrome
@@ -730,6 +773,7 @@ function tegnInstaller() {
     if (confirm('Appen virker best fra hjemskjermen, og bare da fungerer den uten dekning.\n\nFortsette i nettleseren likevel?')) {
       try { localStorage.setItem('blatur-nettleser', 'ja'); } catch (e) {}
       boks.hidden = true;
+      laasKropp(false);
       tegnAlt();
     }
   };
@@ -772,22 +816,26 @@ function lagGjettkode(personIdx, km) {
   return kropp + sjekkTegn(kropp);
 }
 
+/* Returnerer true når skjermen er fri, false når overlegget dekker den.
+   tegnAlt bruker svaret til å la være å tegne noe bak. */
 function tegnAvsloring(tvungen) {
   const boks = $('#avsloring');
-  if (!boks) return;
+  if (!boks) return true;
   const a = DATA && DATA.avsloring;
-  if (!a || !a.aktiv || avsFerdig()) { boks.hidden = true; return; }
+  if (!a || !a.aktiv || avsFerdig()) { boks.hidden = true; laasKropp(false); return true; }
   boks.hidden = false;
+  laasKropp(true);
 
   /* Appen henter data hvert 30. sekund. Uten denne sperren ville skjermen
      blitt tegnet på nytt midt i at noen skriver eller peker på kartet. */
-  if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart'))) return;
+  if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart'))) return false;
 
   const g = a.gjett || {};
   if (avsSteg === null) avsSteg = (g.aktiv && !gjettGjort()) ? 'gjett' : 'ord';
 
-  if (avsSteg === 'gjett') return tegnGjett(boks, a, g);
-  return tegnBokstavjakt(boks, a);
+  if (avsSteg === 'gjett') tegnGjett(boks, a, g);
+  else tegnBokstavjakt(boks, a);
+  return false;
 }
 
 /* ---------- Steg 1: hvor tror du turen går? ---------- */
@@ -843,6 +891,11 @@ function tegnGjett(boks, a, g) {
     navnBoks.appendChild(b);
   });
 
+  /* Leaflet nekter å initialisere samme element to ganger og kaster
+     «Map container is already initialized». Uten denne oppryddingen ville
+     avsløringen blitt hvit for den som går fram og tilbake. */
+  if (gjettKart) { try { gjettKart.remove(); } catch (e) {} gjettKart = null; gjettNal = null; }
+
   gjettKart = L.map('gkart', { zoomControl: true, worldCopyJump: false })
     .setView(g.senter || [50, 15], g.zoom || 4);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -883,12 +936,15 @@ function tegnGjett(boks, a, g) {
     if (confirm('Hoppe over? Da er reisemålet røpet.')) {
       try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
       boks.hidden = true;
+      laasKropp(false);
+      tegnAlt();
     }
   };
 }
 
 function tegnGjettKvittert(boks, kode) {
-  gjettKart = null;
+  if (gjettKart) { try { gjettKart.remove(); } catch (e) {} }
+  gjettKart = null; gjettNal = null;
   boks.innerHTML =
     `<div class="avswrap avsfasit">
       <div style="font-size:46px;line-height:1">📍</div>
@@ -909,8 +965,9 @@ function tegnGjettKvittert(boks, kode) {
       <button class="knapp sek" id="gvidere" style="margin-top:12px">Jeg har sendt — gå videre</button>
     </div>`;
   $('#gsend').onclick = async () => {
-    const mitt = JSON.parse(localStorage.getItem('blatur-mittgjett') || '{}');
-    const tekst = `Blåtur — mitt gjett\n${mitt.navn}\nKode: ${visKode(kode)}`;
+    let mitt = {};
+    try { mitt = JSON.parse(localStorage.getItem('blatur-mittgjett') || '{}'); } catch (e) {}
+    const tekst = `Blåtur — mitt gjett\n${mitt.navn || ''}\nKode: ${visKode(kode)}`;
     const r = await delTekst(tekst);
     if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i SMS');
     else if (r === 'nei') alert(tekst);
@@ -1049,6 +1106,7 @@ function tegnFasit(boks, a) {
   $('#avsapne').onclick = () => {
     try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
     boks.hidden = true;
+    laasKropp(false);
     tegnAlt();
     window.scrollTo(0, 0);
   };
@@ -1634,6 +1692,34 @@ function tegnOppslag() {
   });
 }
 
+/* ---------- RealEscort ----------
+   Fella. Teller hvor mange ganger man har trykket, så den som ikke
+   klarer å la være blir avslørt av sin egen telefon. */
+function tegnEskorte() {
+  const boks = $('#eskorte');
+  if (!boks) return;
+  const e = (DATA && DATA.eskorte) || {};
+
+  let n = 0;
+  try {
+    n = parseInt(localStorage.getItem('blatur-gris') || '0', 10) + 1;
+    localStorage.setItem('blatur-gris', n);
+  } catch (err) { n = 1; }
+
+  const gjentatt = n > 1
+    ? `<div class="teller">Du har vært innom her <b>${n}</b> ganger.<br>
+        ${n >= 5 ? 'Vi begynner å bli bekymret.' : n >= 3 ? 'Det begynner å bli et mønster.' : 'Én gang kan være et uhell.'}</div>`
+    : '';
+
+  boks.innerHTML =
+    `<div class="gris">
+      <div class="fjes">🐷</div>
+      <div class="dom">${esc(e.tekst || 'Du trodde du skulle finne noe her ja, din lille grisegutt')}</div>
+      ${e.under ? `<div class="under">${esc(e.under)}</div>` : ''}
+      ${gjentatt}
+    </div>`;
+}
+
 /* ---------- Info ---------- */
 function tegnInfo() {
   const boks = $('#info'); boks.innerHTML = '';
@@ -1746,6 +1832,7 @@ function bytt(navn) {
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === navn));
   if (navn === 'kart') tegnKart();
   if (navn === 'fre' || navn === 'lor') tegnProgram(navn);
+  if (navn === 'eskorte') tegnEskorte();
   window.scrollTo(0, 0);
 }
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => bytt(b.dataset.t));
@@ -1767,7 +1854,10 @@ function tegnAlt() {
     ? (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '')
     : 'Snart bærer det av gårde';
   document.title = ropt ? (DATA.tur?.tittel || 'Blåtur') : 'Blåtur';
-  tegnAvsloring();
+  /* Dekker avsløringen skjermen, skal ingenting tegnes bak den. Da finnes
+     det heller ikke noe å glimte fram ved et uhell. */
+  if (!tegnAvsloring()) return;
+
   tegnNedtelling();
   tegnProgram('fre');
   tegnProgram('lor');
@@ -1796,9 +1886,23 @@ tilTopp();
 window.addEventListener('load', tilTopp);
 
 hentData(true);
-setInterval(() => hentData(false), 30000);
-setInterval(tegnNedtelling, 30000);
-document.addEventListener('visibilitychange', () => { if (!document.hidden) hentData(false); });
+
+/* Henting hvert 30. sekund er riktig når appen er framme, men sløsing med
+   data og batteri når den ligger i bakgrunnen — særlig på roaming. */
+let puls = null;
+function startPuls() {
+  if (puls) return;
+  puls = setInterval(() => { hentData(false); tegnNedtelling(); }, 30000);
+}
+function stoppPuls() {
+  if (puls) { clearInterval(puls); puls = null; }
+}
+startPuls();
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { stoppPuls(); }
+  else { startPuls(); hentData(false); tegnNedtelling(); }
+});
 </script>
 </body>
 </html>
