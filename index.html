@@ -834,8 +834,11 @@ function tegnAvsloring(tvungen) {
   laasKropp(true);
 
   /* Appen henter data hvert 30. sekund. Uten denne sperren ville skjermen
-     blitt tegnet på nytt midt i at noen skriver eller peker på kartet. */
-  if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart'))) return false;
+     blitt tegnet på nytt midt i at noen skriver eller peker på kartet.
+     .avsfasit dekker både kodelåsen og selve avsløringen — begge skal bli
+     stående til brukeren selv trykker seg videre. */
+  if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart') ||
+                   boks.querySelector('.avsfasit'))) return false;
 
   const g = a.gjett || {};
   if (avsSteg === null) {
@@ -1126,7 +1129,7 @@ function tegnAppKode(boks, a) {
       apne('appkode');
       if (navigator.vibrate) navigator.vibrate([60, 80, 120]);
       if (a.kryssord && a.kryssord.aktiv) { avsSteg = 'ord'; tegnAvsloring(true); }
-      else tegnFasit(boks, a);
+      else { avsSteg = 'fasit'; tegnFasit(boks, a); }
     } else {
       feil.textContent = 'Feil kode. Spør Henrik eller Bruland.';
       felt.value = '';
