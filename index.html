@@ -405,9 +405,11 @@ async function hentData(forste) {
       visStatus('✨ Oppdatert');
       if (navigator.vibrate) navigator.vibrate(60);
     }
+    const forsteGang = sisteVersjon === null;
     sisteVersjon = ny.versjon;
     DATA = ny;
     tegnAlt();
+    if (forsteGang) window.scrollTo(0, 0);
     lagreLokalt(ny);
   } catch (e) {
     const lagret = localStorage.getItem('blatur-data');
@@ -931,6 +933,7 @@ function tegnFasit(boks, a) {
     try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
     boks.hidden = true;
     tegnAlt();
+    window.scrollTo(0, 0);
   };
 }
 
@@ -1666,7 +1669,14 @@ if ('serviceWorker' in navigator) {
 window.addEventListener('online',  () => { visStatus('📶 Tilbake på nett'); hentData(false); });
 window.addEventListener('offline', () => visStatus('📴 Offline — lagret versjon'));
 
-/* ---------- Start ---------- */
+/* ---------- Start ----------
+   Safari gjenoppretter rullestillingen når en app på hjemskjermen åpnes
+   igjen, så uten dette lander man midt i programmet i stedet for øverst. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+const tilTopp = () => window.scrollTo(0, 0);
+tilTopp();
+window.addEventListener('load', tilTopp);
+
 hentData(true);
 setInterval(() => hentData(false), 30000);
 setInterval(tegnNedtelling, 30000);

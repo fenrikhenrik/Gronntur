@@ -1,6 +1,6 @@
 {
-  "versjon": 21,
-  "sistOppdatert": "6. september 12:55",
+  "versjon": 22,
+  "sistOppdatert": "6. september 13:05",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -73,7 +73,7 @@
           "tittel": "TK1748 Oslo → Istanbul",
           "sted": "Oslo lufthavn Gardermoen",
           "ikon": "✈️",
-          "detalj": "Lander i Istanbul 12:10. Vær på flyplassen i god tid. Erik reiser via København og kommer for seg selv — han møter oss på hotellet."
+          "detalj": "Lander i Istanbul 12:10. Vær på flyplassen i god tid. Bruland reiser via København og kommer for seg selv — han møter oss på hotellet."
         },
         {
           "tid": "12:30",
@@ -81,7 +81,7 @@
           "sted": "Istanbul Havalimanı (IST)",
           "ikon": "🚐",
           "kart": "ist",
-          "detalj": "Forhåndsbestilt transport for gjengen, rett fra ankomsthallen til Karaköy. Ca. 50 minutter. Ingenting å ordne på stedet — bare finn sjåføren og sett dere inn. Erik ordner sin egen fra København-flyet."
+          "detalj": "Forhåndsbestilt transport rett fra ankomsthallen til Karaköy. Ca. 50 minutter. Ingenting å ordne på stedet — bare finn sjåføren og sett dere inn."
         },
         {
           "tid": "14:15",
@@ -97,7 +97,7 @@
           "sted": "Namlı Gurme — samme gate som hotellet",
           "ikon": "🥙",
           "kart": "namli",
-          "detalj": "Rask og lett. Vi har ca. 70 minutter, og kvelden er smaksprøver pluss sittende middag. Spar plass. Baklava hos Karaköy Güllüoğlu på veien tilbake for den som vil."
+          "detalj": "Rask og lett — vi har ca. 70 minutter. Ingen bordbestilling, vi går bare inn."
         },
         {
           "tid": "15:45",
@@ -120,7 +120,7 @@
           "tittel": "Dusj og skift på hotellet",
           "sted": "Cheers Porthouse",
           "ikon": "🚿",
-          "detalj": "Ta med jakke. Vi er på vannet 19:05, og september-kvelder på Bosporos er kjøligere enn dagen."
+          "detalj": "20 grader ute på vannet i kveld, så jakke trenger ingen. Meldingen viser derimot litt nedbør fredag — ta med et tynt ytterlag hvis du har, ikke ullgenser."
         },
         {
           "tid": "18:50",
@@ -168,7 +168,7 @@
           "sted": "Tahmis Cd., Kalçın Sk. 11, Eminönü",
           "ikon": "🍽️",
           "kart": "hamdi",
-          "detalj": "Vi spiser der guideturen slutter, rett ved Krydderbasaren. Kebab og kjøttretter, utsikt over Gyllne Horn, og de er vant til store selskaper — hotellet anbefaler stedet. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden."
+          "detalj": "Bordet er bestilt. Vi går rett hit når guideturen slutter ved Krydderbasaren."
         },
         {
           "tid": "16:45",
@@ -209,7 +209,7 @@
           "ikon": "🥩",
           "kart": "nusret",
           "uthevet": true,
-          "detalj": "ÅÅÅÅ CHAMBRE SEPARÉÉÉ! Crazy Feast-meny og fri drikke. Alt er gjort opp på forhånd — ingen regning å splitte, ingen som teller runder."
+          "detalj": "ÅÅÅÅ CHAMBRE SEPARÉÉÉ! Crazy Feast-meny og fri drikke."
         },
         {
           "tid": "00:00",
@@ -230,7 +230,7 @@
           "tittel": "Avreise fra hotellet",
           "sted": "Cheers Porthouse",
           "ikon": "🚐",
-          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen, samme avtale som på veien inn. Vær nede i lobbyen 07:10 — bilen venter ikke, og dette er turens siste harde oppmøte. Erik reiser for seg selv til København."
+          "detalj": "Forhåndsbestilt transport til Sabiha Gökçen, samme avtale som på veien inn. Vær nede i lobbyen 07:10 — bilen venter ikke, og dette er turens siste harde oppmøte. Bruland reiser for seg selv til København."
         },
         {
           "tid": "11:15",
