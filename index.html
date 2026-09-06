@@ -659,6 +659,17 @@ function kjorerSomApp() {
   } catch (e) { return false; }
 }
 const brukerAgent = () => { try { return navigator.userAgent || ''; } catch (e) { return ''; } };
+
+/* Chrome på Android varsler før den viser sin egen installasjonsknapp.
+   Vi fanger varselet og tilbyr knappen i vår egen skjerm i stedet — da
+   slipper man å lete i nettlesermenyen. iOS støtter ikke dette. */
+let installVarsel = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  installVarsel = e;
+  if (DATA) tegnInstaller();
+});
+window.addEventListener('appinstalled', () => { installVarsel = null; });
 const erIOS = () => /iPad|iPhone|iPod/.test(brukerAgent());
 const erIOSChrome = () => erIOS() && /CriOS|FxiOS|EdgiOS|OPiOS/.test(brukerAgent());
 
@@ -684,11 +695,15 @@ function tegnInstaller() {
            <li>Trykk <b>Legg til</b> øverst til høyre</li>
            <li>Lukk Safari og <b>åpne appen fra hjemskjermen</b></li>
          </ol></div>`
-      : `<div class="instrinn"><ol>
-           <li>Åpne menyen i nettleseren</li>
-           <li>Velg <b>«Installer app»</b> eller <b>«Legg til på startskjerm»</b></li>
-           <li>Åpne appen fra ikonet etterpå</li>
-         </ol></div>`;
+      : installVarsel
+        ? `<button class="knapp" id="insnaa">📲 Installer appen</button>
+           <div class="insfot" style="margin-top:12px">Ett trykk. Ikonet legger seg på startskjermen din.</div>`
+        : `<div class="instrinn"><ol>
+             <li>Åpne <b>⋮</b>-menyen øverst til høyre i Chrome</li>
+             <li>Velg <b>«Legg til på startsiden»</b> eller <b>«Installer app»</b></li>
+             <li>Bekreft med <b>Installer</b></li>
+             <li>Åpne appen fra <b>ikonet på startskjermen</b></li>
+           </ol></div>`;
 
   boks.innerHTML =
     `<div class="inswrap">
@@ -699,6 +714,15 @@ function tegnInstaller() {
       <div class="insfot">${esc(cfg.fot || '')}</div>
       <button class="insvidere" id="insvidere">Fortsett i nettleseren likevel</button>
     </div>`;
+
+  const naa = $('#insnaa');
+  if (naa) naa.onclick = async () => {
+    if (!installVarsel) return;
+    installVarsel.prompt();
+    try { await installVarsel.userChoice; } catch (e) {}
+    installVarsel = null;
+    tegnInstaller();
+  };
 
   /* Nødutgang. Skjult som en liten lenke, men den finnes — ingen skal
      stå fast på en flyplass fordi installeringen ikke vil. */

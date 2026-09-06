@@ -1,6 +1,6 @@
 {
-  "versjon": 23,
-  "sistOppdatert": "6. september 13:15",
+  "versjon": 24,
+  "sistOppdatert": "6. september 13:25",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -539,6 +539,10 @@
         [
           "Dørkontroll",
           "Hotellet advarer: elleve menn uten reservasjon kan bli avvist enkelte steder. Vi går aldri samlet inn uten å ha ringt først."
+        ],
+        [
+          "Android",
+          "Appen fungerer likt på Android. Chrome tilbyr en installer-knapp direkte — ellers ligger «Legg til på startsiden» i ⋮-menyen."
         ]
       ]
     }
