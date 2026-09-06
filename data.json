@@ -1,6 +1,6 @@
 {
-  "versjon": 22,
-  "sistOppdatert": "6. september 13:05",
+  "versjon": 23,
+  "sistOppdatert": "6. september 13:15",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -1583,5 +1583,11 @@
     },
     "fasittittel": "Der skal vi.",
     "fasittekst": "11.–13. september 2026. Elleve mann. Pakk lett."
+  },
+  "installer": {
+    "aktiv": true,
+    "tittel": "Legg meg på hjemskjermen",
+    "ingress": "Denne skal ikke leses i en nettleserfane. Legg den på hjemskjermen først — det tar ti sekunder, og da virker den også uten dekning.",
+    "fot": "Alt du trenger i helgen ligger her inne. Ikonet blir liggende på telefonen, så du finner det igjen når du trenger det."
   }
 }

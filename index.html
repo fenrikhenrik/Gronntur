@@ -208,6 +208,31 @@ nav .ni{font-size:21px;line-height:1}
   background:#fff;font-size:16px;font-family:inherit;color:var(--ink)}
 
 /* ---- Avsløringen: startskjermen før turen er røpet ---- */
+/* ---- Installasjonsvegg: vises når appen kjøres i nettleser ---- */
+#installer{position:fixed;inset:0;z-index:4000;background:var(--dark);color:#fff;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;align-items:center;
+  padding:calc(var(--safe-top) + 24px) 22px calc(var(--safe-bot) + 24px)}
+#installer[hidden]{display:none}
+.inswrap{max-width:440px;margin:0 auto;text-align:center;width:100%}
+.insikon{width:96px;height:96px;border-radius:22px;margin:0 auto 20px;display:block;
+  box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.instit{font-size:24px;font-weight:800;letter-spacing:-.5px;margin:0 0 10px}
+.insing{font-size:15px;line-height:1.6;color:#aab4c0;margin:0 0 26px}
+.instrinn{text-align:left;background:#182230;border:1px solid #333f4d;border-radius:14px;
+  padding:16px 18px;margin-bottom:14px}
+.instrinn ol{margin:0;padding-left:22px}
+.instrinn li{font-size:15px;line-height:1.65;color:#e4e9ee;margin-bottom:9px}
+.instrinn li:last-child{margin-bottom:0}
+.instrinn b{color:#fff}
+.insdel{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;
+  border-radius:5px;background:#0a84ff;color:#fff;font-size:14px;font-weight:700;
+  vertical-align:-5px;margin:0 2px}
+.insadvar{background:#2a1e1e;border:1px solid #6b3a3a;border-radius:12px;padding:13px 15px;
+  font-size:14px;line-height:1.55;color:#ffc9ce;margin-bottom:14px;text-align:left}
+.insfot{font-size:12.5px;color:#55606e;line-height:1.55;margin-top:20px}
+.insvidere{background:none;border:none;color:#55606e;font-size:12.5px;font-family:inherit;
+  text-decoration:underline;cursor:pointer;padding:10px 0 0}
+
 #avsloring{position:fixed;inset:0;z-index:3000;background:var(--dark);color:#fff;
   overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:calc(var(--safe-top) + 26px) 18px calc(var(--safe-bot) + 26px)}
@@ -283,6 +308,7 @@ nav .ni{font-size:21px;line-height:1}
 
 <div class="status" id="status"></div>
 
+<div id="installer" hidden></div>
 <div id="avsloring" hidden></div>
 
 <header>
@@ -617,6 +643,73 @@ function startGps() {
     knapp.textContent = '📍 Vis hvor jeg er';
     if (gpsVakt !== null) { navigator.geolocation.clearWatch(gpsVakt); gpsVakt = null; }
   }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
+}
+
+/* ---------- Installasjonsvegg ----------
+   Appen skal legges på hjemskjermen før noen ser innholdet. To grunner:
+   avsløringen hører hjemme i appen, ikke i en nettleserfane — og en fane
+   blir lukket ved et uhell, mens et ikon blir liggende.
+
+   iOS gir bare offline-lagring til apper som faktisk er installert, så
+   dette er også det som gjør at programmet virker uten dekning. */
+function kjorerSomApp() {
+  try {
+    if (navigator.standalone === true) return true;
+    return !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  } catch (e) { return false; }
+}
+const brukerAgent = () => { try { return navigator.userAgent || ''; } catch (e) { return ''; } };
+const erIOS = () => /iPad|iPhone|iPod/.test(brukerAgent());
+const erIOSChrome = () => erIOS() && /CriOS|FxiOS|EdgiOS|OPiOS/.test(brukerAgent());
+
+function tegnInstaller() {
+  const boks = $('#installer');
+  if (!boks) return true;
+  const cfg = (DATA && DATA.installer) || {};
+
+  let hoppet = false;
+  try { hoppet = localStorage.getItem('blatur-nettleser') === 'ja'; } catch (e) {}
+
+  if (!cfg.aktiv || kjorerSomApp() || hoppet) { boks.hidden = true; return true; }
+  boks.hidden = false;
+
+  const iChrome = erIOSChrome();
+  const steg = iChrome
+    ? `<div class="insadvar"><b>Du er i feil nettleser.</b> Dette virker bare i <b>Safari</b> på iPhone.
+         Kopier lenken, åpne Safari, og lim den inn der.</div>`
+    : erIOS()
+      ? `<div class="instrinn"><ol>
+           <li>Trykk <span class="insdel">↑</span> <b>Del</b>-knappen nederst på skjermen</li>
+           <li>Bla ned til <b>«Legg til på Hjem-skjerm»</b></li>
+           <li>Trykk <b>Legg til</b> øverst til høyre</li>
+           <li>Lukk Safari og <b>åpne appen fra hjemskjermen</b></li>
+         </ol></div>`
+      : `<div class="instrinn"><ol>
+           <li>Åpne menyen i nettleseren</li>
+           <li>Velg <b>«Installer app»</b> eller <b>«Legg til på startskjerm»</b></li>
+           <li>Åpne appen fra ikonet etterpå</li>
+         </ol></div>`;
+
+  boks.innerHTML =
+    `<div class="inswrap">
+      <img class="insikon" src="ikon.png" alt="">
+      <h1 class="instit">${esc(cfg.tittel || 'Legg meg på hjemskjermen')}</h1>
+      <p class="insing">${esc(cfg.ingress || '')}</p>
+      ${steg}
+      <div class="insfot">${esc(cfg.fot || '')}</div>
+      <button class="insvidere" id="insvidere">Fortsett i nettleseren likevel</button>
+    </div>`;
+
+  /* Nødutgang. Skjult som en liten lenke, men den finnes — ingen skal
+     stå fast på en flyplass fordi installeringen ikke vil. */
+  $('#insvidere').onclick = () => {
+    if (confirm('Appen virker best fra hjemskjermen, og bare da fungerer den uten dekning.\n\nFortsette i nettleseren likevel?')) {
+      try { localStorage.setItem('blatur-nettleser', 'ja'); } catch (e) {}
+      boks.hidden = true;
+      tegnAlt();
+    }
+  };
+  return false;
 }
 
 /* ---------- Avsløringen ----------
@@ -1641,6 +1734,7 @@ $('#gpsknapp').onclick = () => {
 /* ---------- Tegn alt ---------- */
 function tegnAlt() {
   if (!DATA) return;
+  if (!tegnInstaller()) return;
   /* Ingenting som røper reisemålet før avsløringen er gjennomført.
      Fanetittelen er synlig i app-veksleren selv når overlegget dekker skjermen. */
   const ropt = !(DATA.avsloring && DATA.avsloring.aktiv) || avsFerdig();
