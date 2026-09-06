@@ -158,7 +158,6 @@ nav button{letter-spacing:-.2px;white-space:nowrap}
 .qkort .qm{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
 .qkort .qs{font-size:19px;flex:none;opacity:.5}
 .qkort.ferdig{border-color:#bfe3d0;background:#f6fcf9}
-.lagliste{margin:4px 0 0}
 .lagkort{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:8px;text-align:left}
 .lagkort b{font-size:14px}
 .lagkort div{font-size:13.5px;color:#39434f;margin-top:3px;line-height:1.45}
@@ -326,6 +325,14 @@ body.laast nav{display:none}
   display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800;color:#fff}
 .asliss.fylt{border-style:solid;border-color:var(--red);background:#1c2530}
 .afeil .asliss.fylt{border-color:#ff8a95}
+
+/* ---- Kodelås inn til appen ---- */
+.akode{max-width:340px;margin:0 auto}
+.akodefelt{width:100%;padding:15px;border-radius:12px;border:1.5px solid #333f4d;
+  background:#0d151f;color:#fff;font-size:19px;font-family:inherit;text-align:center;
+  letter-spacing:2px;-webkit-appearance:none}
+.akodefelt::placeholder{color:#4a5665;letter-spacing:0}
+.akodefeil{color:#ff8a95;font-size:13.5px;font-weight:600;margin-top:11px;min-height:19px}
 </style>
 </head>
 <body>
@@ -831,21 +838,34 @@ function tegnAvsloring(tvungen) {
   if (!tvungen && (boks.querySelector('.avsfelt') || boks.querySelector('#gkart'))) return false;
 
   const g = a.gjett || {};
-  if (avsSteg === null) avsSteg = (g.aktiv && !gjettGjort()) ? 'gjett' : 'ord';
+  if (avsSteg === null) {
+    if (g.aktiv && !gjettGjort()) avsSteg = 'gjett';
+    else if (!erApnet('appkode')) avsSteg = 'kode';
+    else avsSteg = 'fasit';
+  }
 
   if (avsSteg === 'gjett') tegnGjett(boks, a, g);
-  else tegnBokstavjakt(boks, a);
+  else if (avsSteg === 'kode') tegnAppKode(boks, a);
+  else if (avsSteg === 'ord') tegnBokstavjakt(boks, a);
+  else tegnFasit(boks, a);
   return false;
 }
 
 /* ---------- Steg 1: hvor tror du turen går? ---------- */
 function tegnGjett(boks, a, g) {
   const folk = DATA.deltakere || [];
+  /* Har telefonen vært brukt før, husk hvem den tilhører. */
+  if (!gjettNavn) {
+    try {
+      const husket = localStorage.getItem('blatur-meg');
+      if (husket && folk.indexOf(husket) >= 0) gjettNavn = husket;
+    } catch (e) {}
+  }
   boks.innerHTML =
     `<div class="avswrap">
       <div class="avstit">${esc(g.tittel || 'Hvor tror du turen går?')}</div>
       <div class="avsing">${esc(g.ingress || '')}</div>
-      <div class="avsteller">Steg 1 av 2</div>
+      <div class="avsteller">Ett forsøk</div>
       <div style="font-size:13.5px;color:#aab4c0;text-align:center">Hvem gjetter?</div>
       <div class="gnavn" id="gnavn"></div>
       <div id="gkart"></div>
@@ -926,7 +946,7 @@ function tegnGjett(boks, a, g) {
     try {
       localStorage.setItem('blatur-mittgjett', JSON.stringify(
         { navn: gjettNavn, lat: gjettPunkt[0], lon: gjettPunkt[1], km: Math.round(km), kode: kode }));
-      localStorage.setItem('blatur-navn', gjettNavn);
+      localStorage.setItem('blatur-meg', gjettNavn);
     } catch (e) {}
     if (navigator.vibrate) navigator.vibrate(60);
     tegnGjettKvittert(boks, kode);
@@ -960,8 +980,8 @@ function tegnGjettKvittert(boks, kode) {
           så du kan ikke lese ditt eget resultat ut av den.</div>
       </div>
       <div class="avsing" style="margin-top:20px">
-        <b>Steg 2 kommer når Henrik gir klarsignal.</b><br>
-        Vent til alle ni har sendt inn.</div>
+        <b>Nå venter du på koden.</b><br>
+        Henrik gir den ut når alle ni har levert.</div>
       <button class="knapp sek" id="gvidere" style="margin-top:12px">Jeg har sendt — gå videre</button>
     </div>`;
   $('#gsend').onclick = async () => {
@@ -972,7 +992,7 @@ function tegnGjettKvittert(boks, kode) {
     if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i SMS');
     else if (r === 'nei') alert(tekst);
   };
-  $('#gvidere').onclick = () => { avsSteg = 'ord'; tegnAvsloring(true); };
+  $('#gvidere').onclick = () => { avsSteg = 'kode'; tegnAvsloring(true); };
 }
 
 /* ---------- Steg 2: åtte bokstaver som skal settes sammen ---------- */
@@ -1009,7 +1029,6 @@ function tegnBokstavjakt(boks, a) {
         if (avsValgt.length === antall) {
           const forsok = avsValgt.map(j => bokstaver[j]).join('');
           if (forsok === normaliserSvar(a.losningsord)) {
-            try { localStorage.setItem('blatur-ordlost', 'ja'); } catch (e) {}
             if (navigator.vibrate) navigator.vibrate([60, 80, 120]);
             return tegnFasit(boks, a);
           }
@@ -1081,6 +1100,41 @@ function tegnBokstavjakt(boks, a) {
       avsLagre(); tegnBokstavjakt(boks, a);
     }
   };
+}
+
+/* ---------- Koden inn til appen ----------
+   Siste sperre. Henrik gir koden når alle har levert gjettet sitt, og da
+   åpner reisemålet seg for hele gjengen samtidig. */
+function tegnAppKode(boks, a) {
+  boks.innerHTML =
+    `<div class="avswrap avsfasit">
+      <div style="font-size:52px;line-height:1">🔒</div>
+      <div class="avstit" style="margin-top:12px">${esc(a.kodetittel || 'Koden, takk')}</div>
+      <div class="avsing">${esc(a.kodetekst || '')}</div>
+      <div class="akode">
+        <input class="akodefelt" id="appkode" type="text" inputmode="text"
+               autocomplete="off" autocorrect="off" autocapitalize="none"
+               spellcheck="false" placeholder="Kode">
+        <div class="akodefeil" id="appkodefeil"></div>
+        <button class="knapp" id="appkodeok">Lås opp appen</button>
+      </div>
+    </div>`;
+
+  const felt = $('#appkode'), feil = $('#appkodefeil');
+  const prov = () => {
+    if (kodeOk(felt.value, a.kode)) {
+      apne('appkode');
+      if (navigator.vibrate) navigator.vibrate([60, 80, 120]);
+      if (a.kryssord && a.kryssord.aktiv) { avsSteg = 'ord'; tegnAvsloring(true); }
+      else tegnFasit(boks, a);
+    } else {
+      feil.textContent = 'Feil kode. Spør Henrik eller Bruland.';
+      felt.value = '';
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    }
+  };
+  $('#appkodeok').onclick = prov;
+  felt.onkeydown = e => { if (e.key === 'Enter') prov(); };
 }
 
 /* ---------- Selve avsløringen ---------- */

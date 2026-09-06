@@ -1,6 +1,6 @@
 {
-  "versjon": 26,
-  "sistOppdatert": "6. september 19:50",
+  "versjon": 30,
+  "sistOppdatert": "6. september 21:35",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -669,140 +669,140 @@
       "id": "tyrkisk-historie",
       "tittel": "Tyrkisk historie",
       "ikon": "🏛️",
-      "ingress": "Fra osmanerne til republikken. Tolv spørsmål, økende vanskelighetsgrad.",
+      "ingress": "Fra osmanerne til republikken. Tolv spørsmål.",
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvilket år ble Republikken Tyrkia opprettet?",
+          "sporsmal": "Hva er Tyrkias hovedstad?",
           "alternativer": [
-            "1908",
-            "1918",
-            "1923",
-            "1938"
+            "Ankara",
+            "Istanbul",
+            "Izmir",
+            "Antalya"
           ],
-          "riktig": 2,
-          "forklaring": "29. oktober 1923. Dagen er fortsatt nasjonaldag og heter Cumhuriyet Bayramı."
+          "riktig": 0,
+          "forklaring": "Ankara, valgt i 1923. Istanbul er største by, men har ikke vært hovedstad siden osmansk tid."
         },
         {
-          "sporsmal": "Hvem var republikkens første president?",
+          "sporsmal": "Hvem grunnla Republikken Tyrkia?",
           "alternativer": [
-            "İsmet İnönü",
             "Mustafa Kemal Atatürk",
-            "Enver Pasha",
-            "Celâl Bayar"
+            "Süleyman den store",
+            "Mehmed II",
+            "Recep Tayyip Erdoğan"
           ],
-          "riktig": 1,
-          "forklaring": "Atatürk — etternavnet ble tildelt ham i 1934 og betyr «tyrkernes far»."
+          "riktig": 0,
+          "forklaring": "Atatürk. Navnet ble tildelt ham i 1934 og betyr «tyrkernes far»."
         },
         {
           "sporsmal": "Hvilket rike gikk forut for republikken?",
           "alternativer": [
-            "Det bysantinske riket",
+            "Det romerske riket",
             "Det persiske riket",
             "Det osmanske riket",
-            "Det seljukkiske riket"
+            "Det habsburgske riket"
           ],
           "riktig": 2,
-          "forklaring": "Det osmanske riket varte i over 600 år, fra ca. 1299 til 1922."
+          "forklaring": "Det osmanske riket varte i over 600 år."
         },
         {
-          "sporsmal": "Hva er Tyrkias hovedstad?",
+          "sporsmal": "Hvilket kontinent ligger mesteparten av Tyrkia på?",
           "alternativer": [
-            "Istanbul",
-            "Izmir",
-            "Bursa",
-            "Ankara"
-          ],
-          "riktig": 3,
-          "forklaring": "Ankara, valgt i 1923. Istanbul er største by, men har ikke vært hovedstad siden osmansk tid."
-        },
-        {
-          "sporsmal": "Hvilket alfabet gikk Tyrkia over til i 1928?",
-          "alternativer": [
-            "Det latinske",
-            "Det kyrilliske",
-            "Det greske",
-            "Det arabiske"
-          ],
-          "riktig": 0,
-          "forklaring": "Fra arabisk til latinsk skrift. Atatürk reiste rundt med tavle og kritt for å lære folk det nye alfabetet."
-        },
-        {
-          "sporsmal": "Hvilken sultan erobret Konstantinopel i 1453?",
-          "alternativer": [
-            "Süleyman den store",
-            "Mehmed II",
-            "Selim I",
-            "Bayezid I"
+            "Europa",
+            "Asia",
+            "Afrika",
+            "Fordelt likt"
           ],
           "riktig": 1,
-          "forklaring": "Mehmed II, bare 21 år gammel. Han fikk tilnavnet Fatih — Erobreren."
+          "forklaring": "Rundt 97 prosent av landarealet ligger i Asia. Bare Thrakia er europeisk."
         },
         {
-          "sporsmal": "Hvilken sultan regnes som osmanernes storhetstid på 1500-tallet?",
+          "sporsmal": "Hvilken religion har flest tilhengere i Tyrkia?",
           "alternativer": [
-            "Osman I",
-            "Murad IV",
-            "Süleyman den store",
-            "Abdülhamid II"
+            "Kristendom",
+            "Jødedom",
+            "Buddhisme",
+            "Islam"
+          ],
+          "riktig": 3,
+          "forklaring": "Islam, men staten er formelt sekulær — et av Atatürks viktigste grep."
+        },
+        {
+          "sporsmal": "Hvilket alfabet bruker tyrkisk i dag?",
+          "alternativer": [
+            "Arabisk",
+            "Latinsk",
+            "Gresk",
+            "Kyrillisk"
+          ],
+          "riktig": 1,
+          "forklaring": "Latinsk, innført i 1928. Atatürk reiste rundt med tavle og kritt for å lære folk det."
+        },
+        {
+          "sporsmal": "Hvilket århundre ble republikken opprettet i?",
+          "alternativer": [
+            "1700-tallet",
+            "1800-tallet",
+            "1900-tallet",
+            "2000-tallet"
           ],
           "riktig": 2,
+          "forklaring": "29. oktober 1923. Dagen er nasjonaldag og heter Cumhuriyet Bayramı."
+        },
+        {
+          "sporsmal": "Hvilken side kjempet Det osmanske riket på under første verdenskrig?",
+          "alternativer": [
+            "De allierte",
+            "Nøytral",
+            "Sentralmaktene",
+            "Byttet side"
+          ],
+          "riktig": 2,
+          "forklaring": "Sammen med Tyskland og Østerrike-Ungarn. Nederlaget førte til rikets oppløsning."
+        },
+        {
+          "sporsmal": "Hvilket land har Tyrkia lengst grense mot?",
+          "alternativer": [
+            "Syria",
+            "Bulgaria",
+            "Hellas",
+            "Georgia"
+          ],
+          "riktig": 0,
+          "forklaring": "Syria, over 900 kilometer."
+        },
+        {
+          "sporsmal": "Hvilken sultan regnes som osmanernes største?",
+          "alternativer": [
+            "Osman I",
+            "Selim III",
+            "Abdülhamid II",
+            "Süleyman den store"
+          ],
+          "riktig": 3,
           "forklaring": "Süleyman regjerte 1520–1566. Tyrkerne kaller ham Kanuni — Lovgiveren."
         },
         {
-          "sporsmal": "Hvilket slag ga Atatürk hans militære gjennombrudd i 1915?",
+          "sporsmal": "Hvilket år fikk tyrkiske kvinner stemmerett?",
           "alternativer": [
-            "Gallipoli",
-            "Ankara",
-            "Manzikert",
-            "Lepanto"
+            "1934",
+            "1955",
+            "1971",
+            "1990"
           ],
           "riktig": 0,
-          "forklaring": "Gallipoli, på tyrkisk Çanakkale. Britene og ANZAC-styrkene ble slått tilbake."
-        },
-        {
-          "sporsmal": "Hvilken fredsavtale fastsatte republikkens grenser i 1923?",
-          "alternativer": [
-            "Sèvres",
-            "Lausanne",
-            "Versailles",
-            "Trianon"
-          ],
-          "riktig": 1,
-          "forklaring": "Lausanne-traktaten erstattet den langt hardere Sèvres-avtalen fra 1920."
-        },
-        {
-          "sporsmal": "Hva het det osmanske eliteinfanteriet?",
-          "alternativer": [
-            "Sipahiene",
-            "Mamelukkene",
-            "Janitsjarene",
-            "Bashi-bazouk"
-          ],
-          "riktig": 2,
-          "forklaring": "Janitsjarene var sultanens livgarde i nesten 500 år, til korpset ble oppløst i 1826."
-        },
-        {
-          "sporsmal": "Hvilket år fikk tyrkiske kvinner stemmerett ved nasjonale valg?",
-          "alternativer": [
-            "1918",
-            "1934",
-            "1946",
-            "1961"
-          ],
-          "riktig": 1,
           "forklaring": "1934 — før både Frankrike og Italia."
         },
         {
-          "sporsmal": "Hva var osmanernes hovedstad rett før Konstantinopel?",
+          "sporsmal": "Hva heter Tyrkias flagg-symboler?",
           "alternativer": [
-            "Bursa",
-            "Konya",
-            "Edirne",
-            "Söğüt"
+            "Ørn og stjerne",
+            "Halvmåne og stjerne",
+            "Sol og måne",
+            "Kors og stjerne"
           ],
-          "riktig": 2,
-          "forklaring": "Edirne, kjent i Europa som Adrianopel. Før det igjen var det Bursa."
+          "riktig": 1,
+          "forklaring": "Halvmåne og stjerne på rød bunn. Flagget kalles ay-yıldız."
         }
       ],
       "lag": [
@@ -840,136 +840,136 @@
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvilket sund deler Istanbul i to?",
+          "sporsmal": "Hvilke to verdensdeler ligger Istanbul i?",
           "alternativer": [
-            "Dardanellene",
-            "Bosporos",
-            "Gibraltarstredet",
-            "Øresund"
+            "Europa og Afrika",
+            "Europa og Asia",
+            "Asia og Afrika",
+            "Bare Europa"
           ],
           "riktig": 1,
-          "forklaring": "Bosporos skiller Europa fra Asia. Byen ligger på begge sider."
+          "forklaring": "Bosporos deler byen. Vi bor på europeisk side og spiser på asiatisk fredag kveld."
         },
         {
           "sporsmal": "Hva het byen før den het Istanbul?",
           "alternativer": [
-            "Smyrna",
-            "Antiokia",
-            "Konstantinopel",
-            "Trapezunt"
+            "Troja",
+            "Kartago",
+            "Aleksandria",
+            "Konstantinopel"
           ],
-          "riktig": 2,
+          "riktig": 3,
           "forklaring": "Konstantinopel, oppkalt etter keiser Konstantin."
         },
         {
-          "sporsmal": "Hvilket år falt Konstantinopel til osmanerne?",
+          "sporsmal": "Hva heter sundet som deler byen?",
           "alternativer": [
-            "1204",
-            "1326",
-            "1453",
-            "1492"
-          ],
-          "riktig": 2,
-          "forklaring": "29. mai 1453, etter 53 dagers beleiring."
-        },
-        {
-          "sporsmal": "Hva het byen i antikken, før Konstantinopel?",
-          "alternativer": [
-            "Byzantion",
-            "Troja",
-            "Efesos",
-            "Nikea"
+            "Bosporos",
+            "Suezkanalen",
+            "Gibraltarstredet",
+            "Øresund"
           ],
           "riktig": 0,
-          "forklaring": "Byzantion, grunnlagt av greske kolonister rundt 660 f.Kr."
-        },
-        {
-          "sporsmal": "Hvilken keiser gjorde byen til hovedstad i år 330?",
-          "alternativer": [
-            "Justinian I",
-            "Konstantin den store",
-            "Theodosius",
-            "Basileios II"
-          ],
-          "riktig": 1,
-          "forklaring": "Konstantin den store flyttet Romerrikets hovedstad hit."
+          "forklaring": "Bosporos, 31 kilometer langt. Vi skal på båt her lørdag ettermiddag."
         },
         {
           "sporsmal": "Hva ble Hagia Sofia opprinnelig bygget som?",
           "alternativer": [
             "Moské",
-            "Palass",
             "Kirke",
-            "Bibliotek"
+            "Palass",
+            "Marked"
           ],
-          "riktig": 2,
+          "riktig": 1,
           "forklaring": "Kirke. Den var verdens største katedral i nesten tusen år."
         },
         {
-          "sporsmal": "Hvilken keiser sto bak Hagia Sofia slik den står i dag?",
+          "sporsmal": "Omtrent hvor mange bor i Istanbul?",
           "alternativer": [
-            "Konstantin",
-            "Justinian I",
-            "Heraklios",
-            "Leo III"
-          ],
-          "riktig": 1,
-          "forklaring": "Justinian I, ferdig i 537. Han skal ha utbrutt: «Salomo, jeg har overgått deg.»"
-        },
-        {
-          "sporsmal": "Hva heter Storbasaren på tyrkisk?",
-          "alternativer": [
-            "Mısır Çarşısı",
-            "Kapalıçarşı",
-            "Beyazıt Meydanı",
-            "Sultanahmet"
-          ],
-          "riktig": 1,
-          "forklaring": "Kapalıçarşı — «den overdekte basaren». Rundt 4 000 butikker."
-        },
-        {
-          "sporsmal": "Hvem bygde Galatatårnet slik det står i dag?",
-          "alternativer": [
-            "Osmanerne",
-            "Venetianerne",
-            "Genoveserne",
-            "Korsfarerne"
+            "2 millioner",
+            "6 millioner",
+            "16 millioner",
+            "40 millioner"
           ],
           "riktig": 2,
-          "forklaring": "Genoveserne, i 1348. Det het da Kristustårnet."
+          "forklaring": "Rundt 16 millioner — Europas største by, og flere enn hele Norden til sammen."
         },
         {
-          "sporsmal": "Hva heter vika som skiller gamlebyen fra Galata?",
+          "sporsmal": "Hva heter det berømte tårnet i Galata-bydelen?",
+          "alternativer": [
+            "Det hvite tårn",
+            "Eiffeltårnet",
+            "Det skjeve tårn",
+            "Galatatårnet"
+          ],
+          "riktig": 3,
+          "forklaring": "Galatatårnet, bygget av genoveserne i 1348. Vi bor rett nedenfor."
+        },
+        {
+          "sporsmal": "Hvilket år erobret osmanerne byen?",
+          "alternativer": [
+            "1066",
+            "1453",
+            "1683",
+            "1789"
+          ],
+          "riktig": 1,
+          "forklaring": "29. mai 1453, etter 53 dagers beleiring. Mehmed II var 21 år gammel."
+        },
+        {
+          "sporsmal": "Hva heter den store overdekte basaren?",
+          "alternativer": [
+            "Krydderbasaren",
+            "Storbasaren",
+            "Fiskebasaren",
+            "Gullbasaren"
+          ],
+          "riktig": 1,
+          "forklaring": "Kapalıçarşı — Storbasaren. Rundt 4 000 butikker under ett tak."
+        },
+        {
+          "sporsmal": "Hva er Istanbul kjent for å ha mange av?",
+          "alternativer": [
+            "Moskeer",
+            "Vulkaner",
+            "Fossefall",
+            "Isbreer"
+          ],
+          "riktig": 0,
+          "forklaring": "Over 3 000 moskeer. Bønneropene høres over hele byen fem ganger om dagen."
+        },
+        {
+          "sporsmal": "Hva heter vika som deler den europeiske siden i to?",
           "alternativer": [
             "Det gyllne horn",
-            "Marmarabukta",
-            "Bosporosbukta",
-            "Kadıköybukta"
+            "Den blå lagune",
+            "Det røde hav",
+            "Den hvite bukt"
           ],
           "riktig": 0,
           "forklaring": "Det gyllne horn, på tyrkisk Haliç. Hotellet vårt ligger like ved."
         },
         {
-          "sporsmal": "Hvilket opprør nesten veltet keiser Justinian i år 532?",
+          "sporsmal": "Var Istanbul hovedstad i Det osmanske riket?",
           "alternativer": [
-            "Ikonoklasmen",
-            "Nika-opprøret",
-            "Janitsjaropprøret",
-            "Det fjerde korstog"
+            "Ja",
+            "Nei, det var Ankara",
+            "Nei, det var Izmir",
+            "Nei, det var Bursa"
           ],
-          "riktig": 1,
-          "forklaring": "Nika-opprøret. Halve byen brant — og Hagia Sofia ble bygget på ruinene etterpå."
+          "riktig": 0,
+          "forklaring": "Ja, fra 1453 til 1922. Ankara overtok først med republikken."
         },
         {
-          "sporsmal": "Hvilket år ble «Istanbul» det offisielle navnet i internasjonal post?",
+          "sporsmal": "Hva heter den blå moskeen egentlig?",
           "alternativer": [
-            "1453",
-            "1876",
-            "1930",
-            "1950"
+            "Süleymaniye",
+            "Ortaköy",
+            "Fatih-moskeen",
+            "Sultan Ahmet-moskeen"
           ],
-          "riktig": 2,
-          "forklaring": "1930. Postverket returnerte brev adressert til Konstantinopel."
+          "riktig": 3,
+          "forklaring": "Sultan Ahmet Camii. «Blå moské» kommer av de blå flisene inni."
         }
       ],
       "lag": [
@@ -1003,85 +1003,107 @@
       "id": "tyrkisk-fotball",
       "tittel": "Tyrkisk fotball",
       "ikon": "⚽",
-      "ingress": "Süper Lig, derbyer og VM 2002.",
+      "ingress": "Süper Lig, derbyer og VM 2002. Denne er ikke gratis.",
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvilke farger spiller Galatasaray i?",
+          "sporsmal": "Hvem scoret VMs raskeste mål noensinne, etter 11 sekunder i 2002?",
           "alternativer": [
-            "Svart og hvit",
-            "Gul og rød",
-            "Gul og blå",
-            "Rød og hvit"
+            "İlhan Mansız",
+            "Emre Belözoğlu",
+            "Rüştü Reçber",
+            "Hakan Şükür"
           ],
-          "riktig": 1,
-          "forklaring": "Gul og rød. Klubben ble stiftet i 1905 av elever ved Galatasaray-lyceet."
+          "riktig": 3,
+          "forklaring": "Hakan Şükür i bronsefinalen mot Sør-Korea. Rekorden står fortsatt."
         },
         {
-          "sporsmal": "Hvilke farger har Beşiktaş?",
+          "sporsmal": "Hvilken klubb vant UEFA-cupen i 2000 og ble første tyrkiske lag med europeisk trofé?",
           "alternativer": [
-            "Svart og hvit",
-            "Gul og rød",
-            "Blå og hvit",
-            "Grønn og hvit"
-          ],
-          "riktig": 0,
-          "forklaring": "Svart og hvit. Beşiktaş er Tyrkias eldste klubb, fra 1903."
-        },
-        {
-          "sporsmal": "På hvilken side av Bosporos ligger Fenerbahçe?",
-          "alternativer": [
-            "Europeisk side",
-            "Asiatisk side",
-            "Begge",
-            "På en øy"
-          ],
-          "riktig": 1,
-          "forklaring": "Asiatisk side, i Kadıköy — der vi er fredag kveld."
-        },
-        {
-          "sporsmal": "Hva heter Tyrkias øverste fotballiga?",
-          "alternativer": [
-            "Süper Lig",
-            "Türkiye Ligi",
-            "Primera Türk",
-            "Bundesliga TR"
-          ],
-          "riktig": 0,
-          "forklaring": "Süper Lig, grunnlagt i 1959."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk klubb vant UEFA-cupen i 2000?",
-          "alternativer": [
-            "Fenerbahçe",
-            "Beşiktaş",
             "Galatasaray",
+            "Beşiktaş",
+            "Fenerbahçe",
             "Trabzonspor"
           ],
-          "riktig": 2,
-          "forklaring": "Galatasaray slo Arsenal i finalen — den største bragden i tyrkisk klubbfotball."
+          "riktig": 0,
+          "forklaring": "Galatasaray slo Arsenal på straffer i København."
+        },
+        {
+          "sporsmal": "Hvem var Galatasarays trener da de vant UEFA-cupen i 2000?",
+          "alternativer": [
+            "Mircea Lucescu",
+            "Fatih Terim",
+            "Ersun Yanal",
+            "Şenol Güneş"
+          ],
+          "riktig": 1,
+          "forklaring": "Fatih Terim, kalt İmparator — Keiseren."
+        },
+        {
+          "sporsmal": "Hvilken klubb brøt Istanbul-hegemoniet og vant serien i 1976?",
+          "alternativer": [
+            "Bursaspor",
+            "Trabzonspor",
+            "Göztepe",
+            "Altay"
+          ],
+          "riktig": 1,
+          "forklaring": "Trabzonspor vant sitt første av seks mesterskap. Bursaspor gjentok bragden i 2010."
         },
         {
           "sporsmal": "Hvor endte Tyrkia i VM 2002?",
           "alternativer": [
             "Vant",
             "Andreplass",
-            "Tredjeplass",
-            "Kvartfinale"
+            "Kvartfinale",
+            "Tredjeplass"
           ],
-          "riktig": 2,
-          "forklaring": "Bronse — landets beste VM noen gang."
+          "riktig": 3,
+          "forklaring": "Bronse etter 3–2 mot Sør-Korea. Landets beste VM noensinne."
         },
         {
-          "sporsmal": "Hvem scoret VMs raskeste mål, etter 11 sekunder i 2002?",
+          "sporsmal": "Hva heter Fenerbahçes hjemmebane?",
           "alternativer": [
-            "Hakan Şükür",
-            "İlhan Mansız",
-            "Rüştü Reçber",
-            "Emre Belözoğlu"
+            "Şükrü Saracoğlu",
+            "Vodafone Park",
+            "Türk Telekom",
+            "Atatürk Olimpiyat"
           ],
           "riktig": 0,
-          "forklaring": "Hakan Şükür, i bronsefinalen mot Sør-Korea. Rekorden står fortsatt."
+          "forklaring": "Şükrü Saracoğlu i Kadıköy — der vi er fredag kveld."
+        },
+        {
+          "sporsmal": "Hvilken tysk-tyrkisk spiller vant VM med Tyskland i 2014 og spilte senere for Fenerbahçe?",
+          "alternativer": [
+            "Emre Can",
+            "Ilkay Gündoğan",
+            "Nuri Şahin",
+            "Mesut Özil"
+          ],
+          "riktig": 3,
+          "forklaring": "Mesut Özil kom til Fenerbahçe i 2021 etter årene i Arsenal."
+        },
+        {
+          "sporsmal": "Hvilken klubb har flest seriemesterskap i Tyrkia?",
+          "alternativer": [
+            "Fenerbahçe",
+            "Galatasaray",
+            "Beşiktaş",
+            "Trabzonspor"
+          ],
+          "riktig": 1,
+          "forklaring": "Galatasaray leder, tett fulgt av Fenerbahçe."
+        },
+        {
+          "sporsmal": "Hvem var Tyrkias landslagssjef under bronsen i 2002?",
+          "alternativer": [
+            "Fatih Terim",
+            "Guus Hiddink",
+            "Mustafa Denizli",
+            "Şenol Güneş"
+          ],
+          "riktig": 3,
+          "forklaring": "Şenol Güneş. Han vendte tilbake som landslagssjef i 2019."
         },
         {
           "sporsmal": "Hvilket stadion i Istanbul huset Champions League-finalen i 2005?",
@@ -1089,7 +1111,7 @@
             "Şükrü Saracoğlu",
             "Atatürk olympiastadion",
             "Ali Sami Yen",
-            "Tüpraş Stadyumu"
+            "Vodafone Park"
           ],
           "riktig": 1,
           "forklaring": "Atatürk olympiastadion — kvelden Liverpool snudde 0–3 mot Milan."
@@ -1098,45 +1120,23 @@
           "sporsmal": "Hva kalles derbyet mellom Galatasaray og Fenerbahçe?",
           "alternativer": [
             "Det evige derby",
-            "Det interkontinentale derby",
             "Bosporos-derbyet",
-            "Det gyllne derby"
-          ],
-          "riktig": 1,
-          "forklaring": "Kıtalar Arası Derbi — fordi klubbene ligger på hver sin verdensdel."
-        },
-        {
-          "sporsmal": "Hvem var Tyrkias keeper og profil i VM 2002?",
-          "alternativer": [
-            "Volkan Demirel",
-            "Rüştü Reçber",
-            "Sinan Bolat",
-            "Mert Günok"
-          ],
-          "riktig": 1,
-          "forklaring": "Rüştü Reçber, lett kjennelig på den svarte stripen under øynene."
-        },
-        {
-          "sporsmal": "Hvilken verdensmester fra 2014 med tyrkiske røtter spilte senere for Fenerbahçe?",
-          "alternativer": [
-            "Ilkay Gündoğan",
-            "Emre Can",
-            "Mesut Özil",
-            "Nuri Şahin"
+            "Det interkontinentale derby",
+            "Det gylne derby"
           ],
           "riktig": 2,
-          "forklaring": "Mesut Özil kom til Fenerbahçe i 2021 etter årene i Arsenal."
+          "forklaring": "Kıtalar Arası Derbi — klubbene ligger på hver sin verdensdel."
         },
         {
-          "sporsmal": "Hvilken klubb har flest seriemesterskap i Tyrkia?",
+          "sporsmal": "Hvilken tyrkisk klubb spilte Champions League-semifinale i 2025-sesongen?",
           "alternativer": [
+            "Galatasaray",
             "Fenerbahçe",
-            "Beşiktaş",
-            "Trabzonspor",
-            "Galatasaray"
+            "Ingen",
+            "Beşiktaş"
           ],
-          "riktig": 3,
-          "forklaring": "Galatasaray leder statistikken, tett fulgt av Fenerbahçe."
+          "riktig": 2,
+          "forklaring": "Ingen. Beste tyrkiske plassering er fortsatt Galatasarays semifinale i 1989."
         }
       ],
       "lag": [
@@ -1334,143 +1334,143 @@
       ]
     },
     {
-      "id": "kjente-tyrkere",
-      "tittel": "Kjente tyrkiske personer",
-      "ikon": "⭐",
-      "ingress": "Arkitekter, poeter, forskere — og en kokk vi skal besøke.",
+      "id": "tyrkisk-idrett",
+      "tittel": "Tyrkisk idrett",
+      "ikon": "🤼",
+      "ingress": "Bryting, vektløfting og basketball — alt utenom fotball.",
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvem grunnla Republikken Tyrkia?",
+          "sporsmal": "Hvilken idrett kalles Tyrkias nasjonalsport?",
           "alternativer": [
-            "Enver Pasha",
-            "Turgut Özal",
-            "Süleyman Demirel",
-            "Mustafa Kemal Atatürk"
-          ],
-          "riktig": 3,
-          "forklaring": "Atatürk. Portrettet hans henger i så godt som hvert eneste offentlige rom i landet."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk forfatter fikk Nobelprisen i litteratur i 2006?",
-          "alternativer": [
-            "Yaşar Kemal",
-            "Elif Şafak",
-            "Nâzım Hikmet",
-            "Orhan Pamuk"
-          ],
-          "riktig": 3,
-          "forklaring": "Orhan Pamuk. «Istanbul — minner og byen» er hans hyllest til hjembyen."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk kokk ble verdenskjent som «Salt Bae»?",
-          "alternativer": [
-            "Nusret Gökçe",
-            "Mehmet Gürs",
-            "Somer Sivrioğlu",
-            "Vedat Milor"
-          ],
-          "riktig": 0,
-          "forklaring": "Nusret Gökçe. Vi spiser på restauranten hans lørdag kveld."
-        },
-        {
-          "sporsmal": "Hvem er den osmanske arkitekten bak Süleymaniye-moskeen?",
-          "alternativer": [
-            "Mimar Sinan",
-            "Sedefkâr Mehmed Ağa",
-            "Davud Ağa",
-            "Kemaleddin Bey"
-          ],
-          "riktig": 0,
-          "forklaring": "Mimar Sinan, sjefsarkitekt under Süleyman. Han sto bak nesten 400 byggverk."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk sanger kalles ofte «tyrkisk pops dronning»?",
-          "alternativer": [
-            "Ajda Pekkan",
-            "Sezen Aksu",
-            "Tarkan",
-            "Barış Manço"
-          ],
-          "riktig": 1,
-          "forklaring": "Sezen Aksu, kalt Minik Serçe — den lille spurven."
-        },
-        {
-          "sporsmal": "Hvilken osmansk reisende skrev det store reiseverket Seyahatnâme på 1600-tallet?",
-          "alternativer": [
-            "Evliya Çelebi",
-            "Piri Reis",
-            "Kâtip Çelebi",
-            "İbn Battuta"
-          ],
-          "riktig": 0,
-          "forklaring": "Evliya Çelebi reiste i over 40 år og skrev ti bind om det han så."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk sjøfarer laget et berømt verdenskart i 1513?",
-          "alternativer": [
-            "Barbarossa",
-            "Seydi Ali Reis",
-            "Turgut Reis",
-            "Piri Reis"
-          ],
-          "riktig": 3,
-          "forklaring": "Piri Reis. Kartet viser Sør-Amerikas kyst med en nøyaktighet som fortsatt diskuteres."
-        },
-        {
-          "sporsmal": "Hvilken sufi-poet fra 1200-tallet er gravlagt i Konya?",
-          "alternativer": [
-            "Yunus Emre",
-            "Rumi",
-            "Hacı Bektaş",
-            "Nasreddin Hodja"
-          ],
-          "riktig": 1,
-          "forklaring": "Rumi, på tyrkisk Mevlânâ. De virvlende dervisjene følger hans orden."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk legende skal ha fløyet fra Galatatårnet på 1600-tallet?",
-          "alternativer": [
-            "Takiyüddin",
-            "Lagâri Hasan",
-            "Evliya Çelebi",
-            "Hezârfen Ahmed Çelebi"
-          ],
-          "riktig": 3,
-          "forklaring": "Hezârfen Ahmed Çelebi skal ha glidd over Bosporos med kunstige vinger. Historien er Evliya Çelebis."
-        },
-        {
-          "sporsmal": "Hvilken tyrkisk-tysk forsker var sentral i utviklingen av BioNTechs koronavaksine?",
-          "alternativer": [
-            "Feryal Özel",
-            "Aziz Sancar",
-            "Uğur Şahin",
-            "Ali Erdemir"
+            "Fotball",
+            "Svømming",
+            "Bryting",
+            "Sykling"
           ],
           "riktig": 2,
-          "forklaring": "Uğur Şahin, sammen med Özlem Türeci. Begge har tyrkisk bakgrunn."
+          "forklaring": "Bryting — güreş. Den regnes som forfedrenes idrett."
         },
         {
-          "sporsmal": "Hvilken tyrkisk forsker fikk Nobelprisen i kjemi i 2015?",
+          "sporsmal": "Hva er spesielt med tyrkisk oljebryting?",
           "alternativer": [
-            "Aziz Sancar",
-            "Uğur Şahin",
-            "Oktay Sinanoğlu",
-            "Cahit Arf"
+            "De bryter i vann",
+            "De bryter på is",
+            "De smøres inn i olivenolje",
+            "De bryter til hest"
           ],
-          "riktig": 0,
-          "forklaring": "Aziz Sancar, for arbeidet med hvordan celler reparerer DNA."
+          "riktig": 2,
+          "forklaring": "Yağlı güreş. Utøverne smøres inn i olivenolje, noe som gjør grepene nesten umulige."
         },
         {
-          "sporsmal": "Hvilken tyrkisk regissør vant Gullpalmen i Cannes i 2014?",
+          "sporsmal": "Hvilken idrett har gitt Tyrkia klart flest OL-medaljer?",
           "alternativer": [
-            "Fatih Akın",
-            "Nuri Bilge Ceylan",
-            "Ferzan Özpetek",
-            "Deniz Gamze Ergüven"
+            "Fotball",
+            "Friidrett",
+            "Bryting",
+            "Roing"
+          ],
+          "riktig": 2,
+          "forklaring": "Bryting står for 66 av Tyrkias vel 100 OL-medaljer, med 29 gull."
+        },
+        {
+          "sporsmal": "Hva ble vektløfteren Naim Süleymanoğlu kalt?",
+          "alternativer": [
+            "Jernmannen",
+            "Lomme-Herkules",
+            "Den tyrkiske bjørnen",
+            "Sultanen"
           ],
           "riktig": 1,
-          "forklaring": "Nuri Bilge Ceylan for «Kış Uykusu» — Vintersøvn."
+          "forklaring": "«Pocket Hercules». Han var 147 cm høy og løftet over tre ganger sin egen kroppsvekt."
+        },
+        {
+          "sporsmal": "Hvor mange OL-gull tok Süleymanoğlu?",
+          "alternativer": [
+            "Ett",
+            "To",
+            "Fem",
+            "Tre"
+          ],
+          "riktig": 3,
+          "forklaring": "Tre — 1988, 1992 og 1996. Han satte 51 verdensrekorder."
+        },
+        {
+          "sporsmal": "Hvilken by arrangerer den årlige Kırkpınar-turneringen i oljebryting?",
+          "alternativer": [
+            "Edirne",
+            "Istanbul",
+            "Konya",
+            "Bursa"
+          ],
+          "riktig": 0,
+          "forklaring": "Edirne. Turneringen har vært arrangert siden 1300-tallet og er en av verdens eldste."
+        },
+        {
+          "sporsmal": "Hva kalles det tyrkiske basketballandslaget?",
+          "alternativer": [
+            "De røde ulvene",
+            "Halvmånene",
+            "12 kjemper",
+            "Bosporos-guttene"
+          ],
+          "riktig": 2,
+          "forklaring": "12 Dev Adam — «12 kjempekarer»."
+        },
+        {
+          "sporsmal": "Hvilken medalje tok Tyrkia i basketball-EM i 2025?",
+          "alternativer": [
+            "Gull",
+            "Ingen",
+            "Bronse",
+            "Sølv"
+          ],
+          "riktig": 3,
+          "forklaring": "Sølv. Alperen Şengün ble kåret til turneringens mest verdifulle spiller."
+        },
+        {
+          "sporsmal": "I hvilken idrett tok Tyrkia sølv i verdensmesterskapet på hjemmebane i 2010?",
+          "alternativer": [
+            "Håndball",
+            "Vannpolo",
+            "Volleyball",
+            "Basketball"
+          ],
+          "riktig": 3,
+          "forklaring": "Basketball. Tapte finalen mot USA i Istanbul."
+        },
+        {
+          "sporsmal": "Hvilket tyrkisk landslag vant EM i volleyball for kvinner i 2023?",
+          "alternativer": [
+            "Kvinnelandslaget",
+            "De vant ikke",
+            "Herrelandslaget",
+            "Begge"
+          ],
+          "riktig": 0,
+          "forklaring": "Kvinnelandslaget, kalt Filenin Sultanları — «nettets sultaner»."
+        },
+        {
+          "sporsmal": "Hvilken norsk vintersport er Tyrkia kjent for å være svake i?",
+          "alternativer": [
+            "Skiskyting",
+            "Alle",
+            "Langrenn",
+            "Hopp"
+          ],
+          "riktig": 1,
+          "forklaring": "Tyrkia har aldri tatt en eneste vinter-OL-medalje, i noen gren."
+        },
+        {
+          "sporsmal": "Hvilken tyrkisk vektløfter tok også tre OL-gull, som Süleymanoğlu?",
+          "alternativer": [
+            "Ferdi Hardal",
+            "Taner Sağır",
+            "Mete Binay",
+            "Halil Mutlu"
+          ],
+          "riktig": 3,
+          "forklaring": "Halil Mutlu — 1996, 2000 og 2004. Tyrkia har to trippel-vinnere i vektløfting."
         }
       ],
       "lag": [
@@ -1516,17 +1516,13 @@
     "Johan",
     "Lars"
   ],
-  "arrangorer": [
-    "Henrik",
-    "Bruland"
-  ],
   "avsloring": {
     "aktiv": true,
     "losningsord": "ISTANBUL",
     "gjett": {
       "aktiv": true,
       "tittel": "Hvor tror du turen går?",
-      "ingress": "Sett en nål der du tror vi skal. Du får ikke vite hvor nær du var før alt er avslørt — og du får bare ett forsøk. Nærmest vinner.",
+      "ingress": "Sett en nål der du tror vi skal. Du får bare ett forsøk, og du får ikke vite hvor nær du var før alle har levert. Nærmest vinner.",
       "fasit": {
         "lat": 41.0082,
         "lon": 28.9784
@@ -1583,10 +1579,14 @@
           "svar": "NATTMAT",
           "pos": 0
         }
-      ]
+      ],
+      "aktiv": false
     },
     "fasittittel": "Der skal vi.",
-    "fasittekst": "11.–13. september 2026. Elleve mann. Pakk lett."
+    "fasittekst": "11.–13. september 2026. Elleve mann. Pakk lett.",
+    "kode": "Istanbul69",
+    "kodetittel": "Koden, takk",
+    "kodetekst": "Gjettet ditt er levert. Henrik gir ut koden når alle har sendt inn — og koden er selve svaret."
   },
   "installer": {
     "aktiv": true,
