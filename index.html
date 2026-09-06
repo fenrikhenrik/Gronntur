@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>Blåtur Istanbul</title>
+<title>Blåtur</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Blåtur">
@@ -286,7 +286,7 @@ nav .ni{font-size:21px;line-height:1}
 <div id="avsloring" hidden></div>
 
 <header>
-  <h1>🇹🇷 Blåtur Istanbul</h1>
+  <h1 id="tittel">Blåtur</h1>
   <p class="sub" id="datoer">11.–13. september 2026</p>
   <div class="nedtelling" id="nedtelling"></div>
 </header>
@@ -426,7 +426,7 @@ function tegnNedtelling() {
   if (!DATA?.tur?.avreise) return;
   const mal = new Date(DATA.tur.avreise), na = new Date();
   let d = Math.floor((mal - na) / 86400000);
-  if (d < 0) { boks.innerHTML = '<div class="nt" style="flex:1"><b>Vi er her! 🇹🇷</b></div>'; return; }
+  if (d < 0) { boks.innerHTML = '<div class="nt" style="flex:1"><b>Vi er her!</b></div>'; return; }
   const t = Math.floor((mal - na) / 3600000) % 24;
   const m = Math.floor((mal - na) / 60000) % 60;
   boks.innerHTML =
@@ -930,6 +930,7 @@ function tegnFasit(boks, a) {
   $('#avsapne').onclick = () => {
     try { localStorage.setItem('blatur-avslort', 'ja'); } catch (e) {}
     boks.hidden = true;
+    tegnAlt();
   };
 }
 
@@ -1637,8 +1638,14 @@ $('#gpsknapp').onclick = () => {
 /* ---------- Tegn alt ---------- */
 function tegnAlt() {
   if (!DATA) return;
-  $('#datoer').textContent = (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '');
-  document.title = DATA.tur?.tittel || 'Blåtur';
+  /* Ingenting som røper reisemålet før avsløringen er gjennomført.
+     Fanetittelen er synlig i app-veksleren selv når overlegget dekker skjermen. */
+  const ropt = !(DATA.avsloring && DATA.avsloring.aktiv) || avsFerdig();
+  $('#tittel').textContent = ropt ? (DATA.tur?.tittel || 'Blåtur') : 'Blåtur';
+  $('#datoer').textContent = ropt
+    ? (DATA.tur?.datoer || '') + ' · ' + (DATA.tur?.hotell?.adresse || '')
+    : 'Snart bærer det av gårde';
+  document.title = ropt ? (DATA.tur?.tittel || 'Blåtur') : 'Blåtur';
   tegnAvsloring();
   tegnNedtelling();
   tegnProgram('fre');

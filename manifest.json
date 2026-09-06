@@ -1,13 +1,13 @@
 {
-  "name": "Blåtur Istanbul",
+  "name": "Blåtur",
   "short_name": "Blåtur",
-  "description": "Program, kart og quiz for blåturen til Istanbul 11.–13. september 2026",
+  "description": "Program, kart og quiz for blåturen 11.–13. september 2026",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#E30A17",
-  "theme_color": "#E30A17",
+  "background_color": "#0f1720",
+  "theme_color": "#0f1720",
   "lang": "no",
   "icons": [
     { "src": "ikon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
