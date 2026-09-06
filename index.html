@@ -142,6 +142,8 @@ nav .ni{font-size:21px;line-height:1}
 .kodefelt{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--line);
   font-size:17px;font-family:inherit;text-align:center;letter-spacing:1px;background:#fff;color:var(--ink)}
 .kodefeil{color:var(--red);font-size:13.5px;font-weight:600;margin-top:10px;min-height:18px}
+.kodefelt-stor{text-align:left;letter-spacing:0;font-size:15px;line-height:1.5;
+  resize:vertical;min-height:88px;-webkit-appearance:none}
 
 .qkort{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--card);
   border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:10px;
@@ -1233,8 +1235,9 @@ function tegnQuiz() {
           appen plukker ut kodene selv og hopper over alt annet.</div>
         <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px">
           ${Object.keys(gjetninger).length} av ${(DATA.deltakere || []).length} gjett levert</div>
-        <input class="kodefelt" id="resfelt" type="text" inputmode="text" autocomplete="off"
-               autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="Q13-08-N">
+        <textarea class="kodefelt kodefelt-stor" id="resfelt" rows="4" autocomplete="off"
+               autocorrect="off" autocapitalize="characters" spellcheck="false"
+               placeholder="Lim inn her — én kode eller hele meldingstråden"></textarea>
         <div class="kodefeil" id="resfeil"></div>
         <button class="knapp" id="resles">Les inn koden</button>
       </div>

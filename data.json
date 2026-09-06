@@ -1,6 +1,6 @@
 {
-  "versjon": 19,
-  "sistOppdatert": "5. september 14:55",
+  "versjon": 20,
+  "sistOppdatert": "6. september 12:05",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -14,6 +14,12 @@
     }
   },
   "oppslag": [
+    {
+      "type": "info",
+      "tid": "6. september",
+      "tekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. Lørdagslunsjen er satt til Hamdi ved Eminønü — de anbefaler den varmt. De tipser også om Monkey Bar i Şişhane som alternativ takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted.",
+      "av": "Henrik"
+    },
     {
       "type": "gøy",
       "tid": "5. september",
@@ -158,11 +164,11 @@
         },
         {
           "tid": "13:30",
-          "tittel": "Lunsj ved basarene",
-          "sted": "Eminönü",
+          "tittel": "Lunsj — Hamdi Restaurant",
+          "sted": "Tahmis Cd., Kalçın Sk. 11, Eminönü",
           "ikon": "🍽️",
           "kart": "hamdi",
-          "detalj": "Vi spiser der guideturen slutter. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden."
+          "detalj": "Vi spiser der guideturen slutter, rett ved Krydderbasaren. Kebab og kjøttretter, utsikt over Gyllne Horn, og de er vant til store selskaper — hotellet anbefaler stedet. Ikke bruk for lang tid: vi skal være på kaia 16:45, ferdig kledd for kvelden."
         },
         {
           "tid": "16:45",
@@ -187,7 +193,7 @@
           "sted": "Sky Karaköy · Mumhane Cd. 26",
           "ikon": "🌆",
           "kart": "sky",
-          "detalj": "Rett fra båten — baren ligger 3–4 minutter fra kaia, så vi går opp med én gang i stedet for å vente. Sky Karaköy tar ikke bordbestilling; man bare møter opp. Åpent 17:00–24:00. VIKTIG: vi drar 20:20 uansett hvor vi står. Bestill bilene 20:10, og be om regningen samtidig med runden. Er det fullt: vi går til The Bank Roof Bar, 8–10 min unna. Er også den full, drar vi rett til middagen — drikken der er alt gjort opp, så vi taper ingenting på å komme litt før."
+          "detalj": "Rett fra båten — Sky Karaköy ligger 3–4 minutter fra kaia, så vi går opp med én gang. Ingen bordbestilling; man bare møter opp. Åpent 17:00–24:00. VIKTIG: vi drar 20:20 uansett hvor vi står. Bestill bilene 20:10, og be om regningen samtidig med runden. Fullt? The Bank Roof Bar ligger 8–10 min unna. Er også den full, drar vi rett til middagen — drikken der er alt gjort opp, så vi taper ingenting på å komme litt før."
         },
         {
           "tid": "20:20",
@@ -292,6 +298,14 @@
       "lat": 41.0225,
       "lon": 28.9722,
       "notat": "Plan B lørdag hvis Sky Karaköy er full. Bankalar Cd. 5, 8–10 min gange fra kaia. Åpent 12:00–02:00. Utsikt mot gamlebyen og Gyllne Horn."
+    },
+    {
+      "id": "monkey",
+      "navn": "Monkey Bar",
+      "kat": "Uteliv",
+      "lat": 41.0289,
+      "lon": 28.9744,
+      "notat": "Takbar i 7. etasje på IKSV-bygget i Şişhane. Anbefalt av hotellet — utsikt over Gyllne Horn. Åpent 18:00–02:00. MERK: 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56"
     },
     {
       "id": "ayasofya",
@@ -513,6 +527,18 @@
         [
           "Flyplasstransport",
           "Ordnet begge veier for gjengen — €200 totalt, ca. €20 pr. mann. Ingenting å betale på stedet."
+        ],
+        [
+          "Lunsj lørdag",
+          "Hamdi Restaurant, Kalçın Sk. 11, Eminönü. +90 212 528 03 90 / +90 533 658 80 11"
+        ],
+        [
+          "Monkey Bar",
+          "Takbar i Şişhane, anbefalt av hotellet. Åpent 18:00–02:00. 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56"
+        ],
+        [
+          "Dørkontroll",
+          "Hotellet advarer: elleve menn uten reservasjon kan bli avvist enkelte steder. Vi går aldri samlet inn uten å ha ringt først."
         ]
       ]
     }
