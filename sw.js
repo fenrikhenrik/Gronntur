@@ -2,11 +2,11 @@
    Gjør at appen åpner seg uten dekning.
    Strategi:
      · index.html og data.json → nett først, cache som reserve (så oppdateringer kommer fram)
-     · Leaflet, ikon, manifest → cache først (endres aldri)
+     · Leaflet, ikon, manifest, hilsenbildet → cache først (endres aldri)
      · kartfliser → egen cache med tak, så lagringen ikke vokser i det uendelige
    Øk CACHE-navnet hvis du endrer index.html, ellers kan gamle filer henge igjen. */
 
-const CACHE = 'blatur-v26';
+const CACHE = 'blatur-v27';
 const FLISER = 'blatur-fliser-v1';
 const MAKS_FLISER = 400;
 
@@ -18,7 +18,8 @@ const KRITISK = [
   './index.html',
   './manifest.json',
   './ikon.png',
-  './data.json'
+  './data.json',
+  './hilsen.jpg'
 ];
 
 /* Kartbiblioteket. Blokkeres unpkg av et hotellnett, skal appen fortsatt
@@ -118,7 +119,7 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  /* Alt annet — Leaflet, ikon, manifest: cache først.
+  /* Alt annet — Leaflet, ikon, manifest, hilsenbildet: cache først.
      Lagres også ved treff på nett, slik at appen reparerer seg selv hvis
      unpkg var utilgjengelig da service workeren ble installert. */
   e.respondWith(

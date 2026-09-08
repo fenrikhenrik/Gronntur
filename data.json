@@ -1,6 +1,6 @@
 {
-  "versjon": 31,
-  "sistOppdatert": "6. september 22:00",
+  "versjon": 34,
+  "sistOppdatert": "8. september 13:35",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -14,6 +14,30 @@
     }
   },
   "oppslag": [
+    {
+      "type": "gøy",
+      "tid": "8. september",
+      "tekst": "Erdogan selv har lagt igjen en hilsen i appen. Den spretter opp første gang du åpner den — les den, og ta den til deg.",
+      "av": "Henrik"
+    },
+    {
+      "type": "viktig",
+      "tid": "8. september",
+      "tekst": "Quizlagene heter nå Beşiktaş, Fenerbahçe og Galatasaray. Samme tre lag i alle fem quizene, men medlemmene er fortsatt trukket på nytt for hver quiz — sjekk hvilket lag du er på før dere starter.",
+      "av": "Henrik"
+    },
+    {
+      "type": "info",
+      "tid": "8. september",
+      "tekst": "Quizen «Istanbuls historie» er skrevet om. Sju spørsmål følger guideturen lørdag — Blå moské, Hagia Sofia, Hippodromen, Krydderbasaren — og fem handler om resten av byen: Galatatårnet over hotellet, fergen til Kadıköy, broene over Bosporos og palasset vi passerer med båten. Den deles ut i forkant, så ta den fredag.",
+      "av": "Henrik"
+    },
+    {
+      "type": "info",
+      "tid": "8. september",
+      "tekst": "Avklart i dag: lørdagslunsjen på Hamdi er bekreftet, depositumet på middagen er betalt, og fotballkampen dropper vi — den kolliderte uansett med matturnéen fredag. Presentasjonen på Nusr-Et utgår også; rommet har verken projektor eller eget lydanlegg.",
+      "av": "Henrik"
+    },
     {
       "type": "info",
       "tid": "6. september",
@@ -141,11 +165,16 @@
         },
         {
           "tid": "23:00",
-          "tittel": "Videre i Kadıköy",
+          "tittel": "Videre i Kadıköy — Stereogun",
           "sted": "Kadife Sokak",
           "ikon": "🍺",
           "kart": "kadife",
-          "detalj": "Bargata, 8–10 min gange fra markedet. Vi spør guiden hva hun anbefaler. Taxi hjem senere — tre biler."
+          "detalj": "Kadife Sokak, 8–10 min gange fra markedet. Planen er Stereogun i nr. 10 — andre etasje, over baren Trip. Både takterrasse og innendørs, så det funker uansett vær. Ingen bordbestilling, men gå opp i to puljer — elleve mann samlet i døra blir fort nei. Blir det fullt: Arkaoda, Karga og Bina ligger i samme gate. Spør guiden hva som er bra akkurat den kvelden."
+        },
+        {
+          "tid": "01:00",
+          "tittel": "Hjem til Karaköy",
+          "detalj": "Fergen fra Kadıköy går hver halvtime til rundt 01:00 og bruker 20 min — den legger til i Karaköy, fem minutters gange fra hotellet. Rekker vi den ikke, blir det taxi over brua: tre biler, 30–40 min. Sjekk avgangstavla på kaia før dere setter dere ned på siste bar."
         }
       ]
     },
@@ -160,7 +189,7 @@
           "ikon": "🕌",
           "kart": "blaa",
           "uthevet": true,
-          "detalj": "Real Istanbul Tours. Vi tar trikken sammen fra Karaköy. Blå moské først — den må vi rekke før middagsbønnen — deretter Hagia Sofia i ro og mak. Headset til alle, så alle hører guiden. Turen ender ved Krydderbasaren rundt 13:15."
+          "detalj": "Real Istanbul Tours. Vi tar trikken sammen fra Karaköy. Blå moské først — den må vi rekke før middagsbønnen — deretter Hagia Sofia i ro og mak. Headset til alle, så alle hører guiden. Turen ender ved Krydderbasaren rundt 13:15. Quizen «Istanbuls historie» i appen handler om akkurat det Yunus viser oss — ta den før vi går."
         },
         {
           "tid": "13:30",
@@ -168,7 +197,7 @@
           "sted": "Tahmis Cd., Kalçın Sk. 11, Eminönü",
           "ikon": "🍽️",
           "kart": "hamdi",
-          "detalj": "Bordet er bestilt. Vi går rett hit når guideturen slutter ved Krydderbasaren."
+          "detalj": "Bekreftet av restauranten. Guideturen slutter ved Krydderbasaren, og Hamdi ligger 170 meter unna — rundt 3 minutter å gå. Ut hovedutgangen mot Tahmis Caddesi, så første smug til høyre. Inngangen er en smal dør i gata, ta heisen til øverste etasje. Utsikt over Det gyldne horn fra toppen."
         },
         {
           "tid": "16:45",
@@ -193,7 +222,7 @@
           "sted": "Sky Karaköy · Mumhane Cd. 26",
           "ikon": "🌆",
           "kart": "sky",
-          "detalj": "Rett fra båten — Sky Karaköy ligger 3–4 minutter fra kaia, så vi går opp med én gang. Ingen bordbestilling; man bare møter opp. Åpent 17:00–24:00. VIKTIG: vi drar 20:20 uansett hvor vi står. Bestill bilene 20:10, og be om regningen samtidig med runden. Fullt? The Bank Roof Bar ligger 8–10 min unna. Er også den full, drar vi rett til middagen — drikken der er alt gjort opp, så vi taper ingenting på å komme litt før."
+          "detalj": "Rett fra båten — Sky Karaköy ligger 3–4 minutter fra kaia, så vi går opp med én gang. Ingen bordbestilling, men vi RINGER FØR VI GÅR OPP: elleve mann uten beskjed kan bli stoppet i døra. Åpent 17:00–24:00. VIKTIG: vi drar 20:20 uansett hvor vi står. Bestill bilene 20:10, og be om regningen samtidig med runden. Fullt? The Bank Roof Bar ligger 8–10 min unna. Er også den full, drar vi rett til middagen — drikken der er alt gjort opp, så vi taper ingenting på å komme litt før."
         },
         {
           "tid": "20:20",
@@ -209,7 +238,7 @@
           "ikon": "🥩",
           "kart": "nusret",
           "uthevet": true,
-          "detalj": "ÅÅÅÅ CHAMBRE SEPARÉÉÉ! Crazy Feast-meny og fri drikke."
+          "detalj": "ÅÅÅÅ CHAMBRE SEPARÉÉÉ! Crazy Feast-meny og fri drikke. Depositumet er betalt, bordet står. Resten gjøres opp på stedet. Ingen presentasjon — rommet har verken projektor eller egen lyd, så vi tar praten over bordet i stedet."
         },
         {
           "tid": "00:00",
@@ -273,7 +302,7 @@
       "kat": "Program",
       "lat": 40.9925,
       "lon": 29.0234,
-      "notat": "Guiden møter oss her fredag 19:35."
+      "notat": "Guiden møter oss her fredag 19:35. Herfra går også fergen hjem — siste avgang rundt 01:00."
     },
     {
       "id": "kadife",
@@ -281,7 +310,15 @@
       "kat": "Uteliv",
       "lat": 40.9895,
       "lon": 29.0275,
-      "notat": "Fredag etter middagen. Karga og Bina tar imot store gjenger."
+      "notat": "Fredag etter middagen. Stereogun ligger i nr. 10. Arkaoda, Karga og Bina i samme gate hvis det er fullt."
+    },
+    {
+      "id": "stereogun",
+      "navn": "Stereogun",
+      "kat": "Uteliv",
+      "lat": 40.98955,
+      "lon": 29.02745,
+      "notat": "Kadife Sokak 10, 2. etasje — over baren Trip. Takterrasse og innendørs scene. Fredagens forslag. Ingen bordbestilling, men gå opp i to puljer."
     },
     {
       "id": "sky",
@@ -396,12 +433,20 @@
       "notat": "5 min gange fra Asmalımescit. Meyhaner og fasıl-musikk. 13 min hjem."
     },
     {
+      "id": "krydderbasaren",
+      "navn": "Krydderbasaren (Mısır Çarşısı)",
+      "kat": "Sightseeing",
+      "lat": 41.01639,
+      "lon": 28.97056,
+      "notat": "Her slutter guideturen lørdag. Hamdi ligger 170 m unna — rundt 3 min å gå."
+    },
+    {
       "id": "hamdi",
       "navn": "Hamdi Restaurant",
       "kat": "Mat",
       "lat": 41.0175,
       "lon": 28.972,
-      "notat": "Lunsj lørdag ved Eminönü. Utsikt over Gyllne Horn."
+      "notat": "Lunsj lørdag 13:30. Kalçın Sokak 11, rett bak Krydderbasaren — 170 m fra der guiden slutter. Utsikt over Gyllne Horn."
     },
     {
       "id": "ist",
@@ -807,7 +852,7 @@
       ],
       "lag": [
         {
-          "navn": "Lag 1 · Boğaziçi",
+          "navn": "Lag 1 · Beşiktaş",
           "medlemmer": [
             "Johan",
             "Jonsson",
@@ -815,7 +860,7 @@
           ]
         },
         {
-          "navn": "Lag 2 · Galata",
+          "navn": "Lag 2 · Fenerbahçe",
           "medlemmer": [
             "Andy",
             "Lars",
@@ -823,7 +868,7 @@
           ]
         },
         {
-          "navn": "Lag 3 · Kadıköy",
+          "navn": "Lag 3 · Galatasaray",
           "medlemmer": [
             "Gunnar",
             "Martin",
@@ -836,41 +881,19 @@
       "id": "istanbuls-historie",
       "tittel": "Istanbuls historie",
       "ikon": "🕌",
-      "ingress": "Byen vi står i. Byzantion, Konstantinopel, Istanbul.",
+      "ingress": "Byen vi står i — ikke bare gamlebyen. Sju spørsmål følger guideturen lørdag, fem handler om resten av Istanbul: Karaköy, Kadıköy, Bosporos. Tolv i alt.",
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvilke to verdensdeler ligger Istanbul i?",
+          "sporsmal": "Hvor går turens aller første stopp lørdag?",
           "alternativer": [
-            "Europa og Afrika",
-            "Europa og Asia",
-            "Asia og Afrika",
-            "Bare Europa"
-          ],
-          "riktig": 1,
-          "forklaring": "Bosporos deler byen. Vi bor på europeisk side og spiser på asiatisk fredag kveld."
-        },
-        {
-          "sporsmal": "Hva het byen før den het Istanbul?",
-          "alternativer": [
-            "Troja",
-            "Kartago",
-            "Aleksandria",
-            "Konstantinopel"
-          ],
-          "riktig": 3,
-          "forklaring": "Konstantinopel, oppkalt etter keiser Konstantin."
-        },
-        {
-          "sporsmal": "Hva heter sundet som deler byen?",
-          "alternativer": [
-            "Bosporos",
-            "Suezkanalen",
-            "Gibraltarstredet",
-            "Øresund"
+            "Blå moské",
+            "Hagia Sofia",
+            "Topkapı-palasset",
+            "Galatatårnet"
           ],
           "riktig": 0,
-          "forklaring": "Bosporos, 31 kilometer langt. Vi skal på båt her lørdag ettermiddag."
+          "forklaring": "Blå moské først, med vilje. Middagsbønnen er 13:06 den lørdagen, og moskeen stenger for besøkende rundt bønnetidene. Hagia Sofia kan besøkes under bønn, så den tåler å ligge etterpå."
         },
         {
           "sporsmal": "Hva ble Hagia Sofia opprinnelig bygget som?",
@@ -881,100 +904,122 @@
             "Marked"
           ],
           "riktig": 1,
-          "forklaring": "Kirke. Den var verdens største katedral i nesten tusen år."
+          "forklaring": "Kirke, ferdig i år 537. Navnet betyr «Den hellige visdom». Den var kirke i nesten 900 år, moské i nesten 500, museum fra 1935 — og moské igjen fra 2020. Derfor er det teppe på gulvet og dekket skulder når vi går inn."
         },
         {
-          "sporsmal": "Omtrent hvor mange bor i Istanbul?",
+          "sporsmal": "Fredag kveld tar vi fergen over til Kadıköy. Hvilken verdensdel havner vi i?",
           "alternativer": [
-            "2 millioner",
-            "6 millioner",
-            "16 millioner",
-            "40 millioner"
+            "Europa",
+            "Asia",
+            "Afrika",
+            "Vi blir i Europa"
+          ],
+          "riktig": 1,
+          "forklaring": "Asia. Fergeturen tar rundt 20 minutter, og det er den billigste måten å krysse et kontinent på. Kadıköy er der lokalbefolkningen spiser og drikker — ikke turistene."
+        },
+        {
+          "sporsmal": "Vi tar trikken fra Karaköy over til gamlebyen. Hvilket farvann krysser vi?",
+          "alternativer": [
+            "Bosporos",
+            "Det gyldne horn",
+            "Marmarahavet",
+            "Svartehavet"
+          ],
+          "riktig": 1,
+          "forklaring": "Det gyldne horn — Haliç på tyrkisk. Bosporos er det store sundet mellom Europa og Asia; det tar vi på båten lørdag ettermiddag."
+        },
+        {
+          "sporsmal": "Hvorfor kalles Blå moské «blå»?",
+          "alternativer": [
+            "Blå kuppel utvendig",
+            "Blå fliser innvendig",
+            "Blått lys om kvelden",
+            "De blå teppene"
+          ],
+          "riktig": 1,
+          "forklaring": "Titusenvis av håndlagde İznik-fliser innvendig. Utvendig er den grå. Se opp i kuppelen når sola står inn gjennom vinduene. Den heter egentlig Sultanahmet Camii, etter sultan Ahmed I — og har seks minareter, uvanlig mange."
+        },
+        {
+          "sporsmal": "Tårnet som lyser rett over hotellet vårt — hvem bygde det?",
+          "alternativer": [
+            "Osmanerne",
+            "Genoveserne",
+            "Bysantinerne",
+            "Perserne"
+          ],
+          "riktig": 1,
+          "forklaring": "Galatatårnet, reist av genoveserne i 1348 som vakttårn i deres egen handelskoloni. 67 meter høyt, og fem minutters gange fra Cheers Porthouse. Karaköy het Galata den gangen."
+        },
+        {
+          "sporsmal": "Den åpne plassen rett utenfor Blå moské var noe annet i romersk tid. Hva?",
+          "alternativer": [
+            "Veddeløpsbane",
+            "Gravplass",
+            "Havn",
+            "Slaveleir"
+          ],
+          "riktig": 0,
+          "forklaring": "Hippodromen — vognbane med plass til titusener. Den lange, avlange formen på plassen er selve banen. Tyrkerne kaller den At Meydanı, Hesteplassen."
+        },
+        {
+          "sporsmal": "Hvor mange broer krysser Bosporos?",
+          "alternativer": [
+            "Én",
+            "To",
+            "Tre",
+            "Fem"
           ],
           "riktig": 2,
-          "forklaring": "Rundt 16 millioner — Europas største by, og flere enn hele Norden til sammen."
+          "forklaring": "Tre hengebroer: 15. juli-martyrenes bro fra 1973, Fatih Sultan Mehmet fra 1988 og Yavuz Sultan Selim fra 2016. I tillegg går Marmaray-togtunnelen under sundet. Vi ser den første fra båten lørdag."
         },
         {
-          "sporsmal": "Hva heter det berømte tårnet i Galata-bydelen?",
+          "sporsmal": "Turen slutter ved Krydderbasaren. Hva heter den på tyrkisk?",
           "alternativer": [
-            "Det hvite tårn",
-            "Eiffeltårnet",
-            "Det skjeve tårn",
-            "Galatatårnet"
-          ],
-          "riktig": 3,
-          "forklaring": "Galatatårnet, bygget av genoveserne i 1348. Vi bor rett nedenfor."
-        },
-        {
-          "sporsmal": "Hvilket år erobret osmanerne byen?",
-          "alternativer": [
-            "1066",
-            "1453",
-            "1683",
-            "1789"
+            "Kapalı Çarşı",
+            "Mısır Çarşısı",
+            "Arasta Çarşısı",
+            "Sahaflar Çarşısı"
           ],
           "riktig": 1,
-          "forklaring": "29. mai 1453, etter 53 dagers beleiring. Mehmed II var 21 år gammel."
+          "forklaring": "Mısır Çarşısı — «Egyptisk basar», ferdig i 1664 som del av Yeni Camii. Kapalı Çarşı er den store overdekte basaren, en helt annen og mye større. Hamdi, der vi spiser lunsj, ligger 170 meter unna."
         },
         {
-          "sporsmal": "Hva heter den store overdekte basaren?",
+          "sporsmal": "Kadıköy het Chalkedon i antikken. Hva kalte grekerne stedet, ifølge sagnet?",
           "alternativer": [
-            "Krydderbasaren",
-            "Storbasaren",
-            "Fiskebasaren",
-            "Gullbasaren"
-          ],
-          "riktig": 1,
-          "forklaring": "Kapalıçarşı — Storbasaren. Rundt 4 000 butikker under ett tak."
-        },
-        {
-          "sporsmal": "Hva er Istanbul kjent for å ha mange av?",
-          "alternativer": [
-            "Moskeer",
-            "Vulkaner",
-            "Fossefall",
-            "Isbreer"
+            "De blindes land",
+            "De rikes land",
+            "De modiges land",
+            "De glemtes land"
           ],
           "riktig": 0,
-          "forklaring": "Over 3 000 moskeer. Bønneropene høres over hele byen fem ganger om dagen."
+          "forklaring": "«De blindes land». Byzas spurte oraklet i Delfi hvor han skulle grunnlegge byen sin og fikk til svar: rett overfor de blindes land. Da han så at noen alt hadde slått seg ned på asiatisk side, mente han de måtte være blinde som ikke valgte den europeiske halvøya. Der la han Byzantion — som ble Konstantinopel, som ble Istanbul."
         },
         {
-          "sporsmal": "Hva heter vika som deler den europeiske siden i to?",
+          "sporsmal": "Palasset vi passerer med båten lørdag — hvem døde der i 1938?",
           "alternativer": [
-            "Det gyllne horn",
-            "Den blå lagune",
-            "Det røde hav",
-            "Den hvite bukt"
+            "Süleyman den store",
+            "Mehmed II",
+            "Atatürk",
+            "Abdülhamid II"
+          ],
+          "riktig": 2,
+          "forklaring": "Atatürk, i Dolmabahçe-palasset 10. november 1938 klokken 09:05. Alle klokkene i palasset står fortsatt på 09:05. Palasset ble bygget 1843–1853 for sultan Abdülmecid I, som syntes Topkapı var gammeldags."
+        },
+        {
+          "sporsmal": "Den vridde bronsesøylen på Hippodromen ble hentet fra et gresk tempel. Hvilket sted?",
+          "alternativer": [
+            "Delfi",
+            "Olympia",
+            "Efesos",
+            "Athen"
           ],
           "riktig": 0,
-          "forklaring": "Det gyllne horn, på tyrkisk Haliç. Hotellet vårt ligger like ved."
-        },
-        {
-          "sporsmal": "Var Istanbul hovedstad i Det osmanske riket?",
-          "alternativer": [
-            "Ja",
-            "Nei, det var Ankara",
-            "Nei, det var Izmir",
-            "Nei, det var Bursa"
-          ],
-          "riktig": 0,
-          "forklaring": "Ja, fra 1453 til 1922. Ankara overtok først med republikken."
-        },
-        {
-          "sporsmal": "Hva heter den blå moskeen egentlig?",
-          "alternativer": [
-            "Süleymaniye",
-            "Ortaköy",
-            "Fatih-moskeen",
-            "Sultan Ahmet-moskeen"
-          ],
-          "riktig": 3,
-          "forklaring": "Sultan Ahmet Camii. «Blå moské» kommer av de blå flisene inni."
+          "forklaring": "Delfi — samme sted Byzas spurte om råd. Slangesøylen ble støpt av perserens våpen etter grekernes seier ved Plataiai i 479 f.Kr., og flyttet hit av Konstantin den store i 324. De tre slangehodene er borte; ett ligger på arkeologisk museum et kvartal unna. Obelisken ved siden av er enda eldre: hugget for farao Thutmosis III rundt 1450 f.Kr. og reist her i år 390."
         }
       ],
       "lag": [
         {
-          "navn": "Lag 1 · Boğaziçi",
+          "navn": "Lag 1 · Beşiktaş",
           "medlemmer": [
             "Lars",
             "Johan",
@@ -982,7 +1027,7 @@
           ]
         },
         {
-          "navn": "Lag 2 · Galata",
+          "navn": "Lag 2 · Fenerbahçe",
           "medlemmer": [
             "Martin",
             "Sondre",
@@ -990,7 +1035,7 @@
           ]
         },
         {
-          "navn": "Lag 3 · Kadıköy",
+          "navn": "Lag 3 · Galatasaray",
           "medlemmer": [
             "Jonsson",
             "Sødal",
@@ -1141,7 +1186,7 @@
       ],
       "lag": [
         {
-          "navn": "Lag 1 · Boğaziçi",
+          "navn": "Lag 1 · Beşiktaş",
           "medlemmer": [
             "Sødal",
             "Johan",
@@ -1149,7 +1194,7 @@
           ]
         },
         {
-          "navn": "Lag 2 · Galata",
+          "navn": "Lag 2 · Fenerbahçe",
           "medlemmer": [
             "Jonsson",
             "Martin",
@@ -1157,7 +1202,7 @@
           ]
         },
         {
-          "navn": "Lag 3 · Kadıköy",
+          "navn": "Lag 3 · Galatasaray",
           "medlemmer": [
             "Andy",
             "Gunnar",
@@ -1308,7 +1353,7 @@
       ],
       "lag": [
         {
-          "navn": "Lag 1 · Boğaziçi",
+          "navn": "Lag 1 · Beşiktaş",
           "medlemmer": [
             "Sødal",
             "Lars",
@@ -1316,7 +1361,7 @@
           ]
         },
         {
-          "navn": "Lag 2 · Galata",
+          "navn": "Lag 2 · Fenerbahçe",
           "medlemmer": [
             "Anders",
             "Sondre",
@@ -1324,7 +1369,7 @@
           ]
         },
         {
-          "navn": "Lag 3 · Kadıköy",
+          "navn": "Lag 3 · Galatasaray",
           "medlemmer": [
             "Gunnar",
             "Jonsson",
@@ -1475,7 +1520,7 @@
       ],
       "lag": [
         {
-          "navn": "Lag 1 · Boğaziçi",
+          "navn": "Lag 1 · Beşiktaş",
           "medlemmer": [
             "Lars",
             "Sondre",
@@ -1483,7 +1528,7 @@
           ]
         },
         {
-          "navn": "Lag 2 · Galata",
+          "navn": "Lag 2 · Fenerbahçe",
           "medlemmer": [
             "Anders",
             "Jonsson",
@@ -1491,7 +1536,7 @@
           ]
         },
         {
-          "navn": "Lag 3 · Kadıköy",
+          "navn": "Lag 3 · Galatasaray",
           "medlemmer": [
             "Johan",
             "Sødal",
@@ -1597,5 +1642,16 @@
   "eskorte": {
     "tekst": "Du trodde du skulle finne noe her ja, din lille grisegutt",
     "under": "Gå tilbake til programmet. Det er nok der du hører hjemme."
+  },
+  "hilsen": {
+    "aktiv": true,
+    "nokkel": "erdogan-1",
+    "tittel": "Hej drenge!",
+    "undertittel": "En hilsen har landet i appen",
+    "bilde": "hilsen.jpg",
+    "tekst": "Hej drenge, en lille hilsen fra jeres kamerad og tyrker Erdogan. Pas godt på Erik og hygg jer!",
+    "signatur": "— Erdogan",
+    "ps": "PS: Man må godt ryge i Tyrkiet.",
+    "knapp": "Tak, Erdogan 🇹🇷"
   }
 }

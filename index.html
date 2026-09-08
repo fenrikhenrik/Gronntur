@@ -245,6 +245,33 @@ body.laast nav{display:none}
 .insvidere{background:none;border:none;color:#55606e;font-size:12.5px;font-family:inherit;
   text-decoration:underline;cursor:pointer;padding:10px 0 0}
 
+/* ---- Hilsenen: vises én gang, første gang appen åpnes ---- */
+#hilsen{position:fixed;inset:0;z-index:4200;background:rgba(10,14,20,.93);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  display:flex;align-items:center;
+  padding:calc(var(--safe-top) + 20px) 18px calc(var(--safe-bot) + 20px)}
+#hilsen[hidden]{display:none}
+@keyframes hilsopp{from{opacity:0;transform:translateY(16px) scale(.97)}
+  to{opacity:1;transform:none}}
+.hilwrap{max-width:420px;margin:0 auto;width:100%;background:var(--card);
+  border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.55);
+  animation:hilsopp .32s ease-out both}
+.hiltopp{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 60%,#ff3b46 100%);
+  color:#fff;padding:14px 18px}
+.hiltopp b{display:block;font-size:17px;letter-spacing:-.3px}
+.hiltopp span{display:block;font-size:12.5px;opacity:.92;margin-top:2px}
+.hilbilde{width:100%;display:block;background:#e9edf1}
+.hilkropp{padding:18px}
+.hiltekst{margin:0;font-size:16.5px;line-height:1.62;color:var(--ink)}
+.hilsign{margin:14px 0 0;font-size:13.5px;color:var(--muted);font-style:italic}
+.hilps{margin:12px 0 0;padding:11px 13px;background:#fff6e6;border:1px solid #f0dcb4;
+  border-radius:12px;font-size:14px;line-height:1.55;color:#6b5320}
+.hilknapp{display:block;width:100%;margin-top:16px;padding:15px;border:none;
+  border-radius:14px;background:var(--red);color:#fff;font-size:16px;font-weight:700;
+  font-family:inherit;cursor:pointer}
+.hilknapp:active{background:var(--red-dark)}
+
 /* ---- Fella ---- */
 @keyframes grisevipp{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
 .gris{background:var(--card);border:1px solid var(--line);border-radius:16px;
@@ -341,6 +368,7 @@ body.laast nav{display:none}
 
 <div id="installer" hidden></div>
 <div id="avsloring" hidden></div>
+<div id="hilsen" hidden></div>
 
 <header>
   <h1 id="tittel">Blåtur</h1>
@@ -783,6 +811,59 @@ function tegnInstaller() {
       laasKropp(false);
       tegnAlt();
     }
+  };
+  return false;
+}
+
+/* ---------- Hilsenen ----------
+   Vises én gang, første gang telefonen kommer inn i selve appen — altså
+   etter installasjonsveggen og etter at avsløringen er unnagjort, slik at
+   den ikke røper reisemålet.
+
+   Kvitteringen ligger i localStorage under nøkkelen fra data.json. Skal den
+   vises på nytt for alle, er det bare å endre «nokkel» der — da får hver
+   telefon den én gang til uten at noen trenger å installere appen på nytt. */
+let hilsenVist = false;
+
+function tegnHilsen() {
+  const boks = $('#hilsen');
+  if (!boks) return true;
+  const cfg = (DATA && DATA.hilsen) || {};
+  if (!cfg.aktiv) { boks.hidden = true; return true; }
+
+  const nokkel = 'blatur-hilsen-' + (cfg.nokkel || '1');
+  let sett = false;
+  try { sett = localStorage.getItem(nokkel) === 'ja'; } catch (e) {}
+  if (sett) { boks.hidden = true; return true; }
+
+  /* Allerede oppe: ikke tegn den på nytt hvert 30. sekund når data hentes,
+     ellers starter animasjonen forfra midt i lesingen. */
+  if (hilsenVist) return false;
+  hilsenVist = true;
+
+  boks.hidden = false;
+  laasKropp(true);
+
+  boks.innerHTML =
+    `<div class="hilwrap">
+      <div class="hiltopp">
+        <b>${esc(cfg.tittel || 'En hilsen')}</b>
+        ${cfg.undertittel ? `<span>${esc(cfg.undertittel)}</span>` : ''}
+      </div>
+      ${cfg.bilde ? `<img class="hilbilde" src="${esc(cfg.bilde)}" alt="">` : ''}
+      <div class="hilkropp">
+        <p class="hiltekst">${esc(cfg.tekst || '')}</p>
+        ${cfg.signatur ? `<p class="hilsign">${esc(cfg.signatur)}</p>` : ''}
+        ${cfg.ps ? `<div class="hilps">${esc(cfg.ps)}</div>` : ''}
+        <button class="hilknapp" id="hillukk">${esc(cfg.knapp || 'Takk, Erdogan')}</button>
+      </div>
+    </div>`;
+
+  $('#hillukk').onclick = () => {
+    try { localStorage.setItem(nokkel, 'ja'); } catch (e) {}
+    boks.hidden = true;
+    laasKropp(false);
+    tegnAlt();
   };
   return false;
 }
@@ -1923,6 +2004,9 @@ function tegnAlt() {
   tegnOppslag();
   if (qVisning === 'liste') tegnQuiz(); else tegnTavle();
   if ($('#t-kart').classList.contains('on')) tegnKart();
+
+  /* Til slutt, slik at appen ligger ferdig tegnet bak hilsenen. */
+  tegnHilsen();
 }
 
 /* ---------- Offline ---------- */
