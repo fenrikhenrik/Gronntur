@@ -60,6 +60,24 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .post .std{font-size:12.5px;color:var(--muted);margin-top:2px}
 .post .det{font-size:14px;line-height:1.55;margin-top:7px;color:#2d3742}
 .post .ikon{font-size:19px;line-height:1}
+
+/* ---- Tidskapsel: poster som ennå ikke har åpnet seg ---- */
+.post.seglet{background:repeating-linear-gradient(135deg,#f7f9fb,#f7f9fb 8px,#f2f5f8 8px,#f2f5f8 16px);
+  border-style:dashed;border-color:#d3dae1;color:var(--muted)}
+.post.seglet .tid{color:#a9b4bf;font-size:17px;min-width:52px;text-align:center}
+.post.seglet .tit{font-weight:600;font-size:14.5px;color:#7c8894}
+.post.seglet .naar{font-size:12.5px;color:#94a0ac;margin-top:2px}
+.post.nest{border-color:var(--red);border-style:dashed;background:#fffafa}
+.post.nest .tit{color:var(--red)}
+.post.nest .naar{color:#b3535c;font-weight:600}
+.kapsel{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:11px 14px;margin-bottom:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.kapsel b{color:var(--ink)}
+.kapsel .strek{height:5px;border-radius:3px;background:#e8edf2;margin:8px 0 0;overflow:hidden}
+.kapsel .strek i{display:block;height:100%;background:var(--red);border-radius:3px;
+  transition:width .6s ease}
+@keyframes nyapnet{0%{background:#fff4d6}100%{background:var(--card)}}
+.post.nyapnet{animation:nyapnet 2.4s ease-out}
 .kartlenke{display:inline-block;margin-top:9px;font-size:13.5px;color:var(--red);
   text-decoration:none;font-weight:650;padding:9px 13px 9px 0;
   -webkit-tap-highlight-color:transparent}
@@ -377,15 +395,11 @@ body.laast nav{display:none}
 </header>
 
 <main>
-  <!-- FREDAG -->
-  <div class="tab on" id="t-fre">
-    <div id="program-fre"></div>
+  <!-- PROGRAM — hele turen, poster åpner seg selv -->
+  <div class="tab on" id="t-prog">
+    <div id="kapsel"></div>
+    <div id="program"></div>
     <div class="fot" id="fot"></div>
-  </div>
-
-  <!-- LØRDAG OG SØNDAG -->
-  <div class="tab" id="t-lor">
-    <div id="program-lor"></div>
   </div>
 
   <!-- KART -->
@@ -416,8 +430,7 @@ body.laast nav{display:none}
 </main>
 
 <nav>
-  <button class="on" data-t="fre"><span class="ni">📋</span>Fre</button>
-  <button data-t="lor"><span class="ni">🔒</span>Lør</button>
+  <button class="on" data-t="prog"><span class="ni">📋</span>Program</button>
   <button data-t="kart"><span class="ni">🗺️</span>Kart</button>
   <button data-t="quiz"><span class="ni">🎯</span>Quiz</button>
   <button data-t="eskorte"><span class="ni">💃</span>RealEscort</button>
@@ -490,6 +503,7 @@ async function hentData(forste) {
   try {
     const r = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) throw new Error(r.status);
+    settServertid(r);
     const ny = await r.json();
 
     if (!forste && sisteVersjon !== null && ny.versjon !== sisteVersjon) {
@@ -521,7 +535,7 @@ function visStatus(t) {
 function tegnNedtelling() {
   const boks = $('#nedtelling');
   if (!DATA?.tur?.avreise) return;
-  const mal = new Date(DATA.tur.avreise), na = new Date();
+  const mal = new Date(DATA.tur.avreise), na = new Date(naa());
   let d = Math.floor((mal - na) / 86400000);
   if (d < 0) { boks.innerHTML = '<div class="nt" style="flex:1"><b>Vi er her!</b></div>'; return; }
   const t = Math.floor((mal - na) / 3600000) % 24;
@@ -532,39 +546,144 @@ function tegnNedtelling() {
     `<div class="nt"><b>${m}</b><span>min</span></div>`;
 }
 
-/* ---------- Program ----------
-   Programmet er delt i to bolker. «fre» er alltid åpen. «lor» ligger bak
-   kode, slik at ingen ser hele helgen med én gang.
+/* ---------- Program: tidskapselen ----------
+   Hele turen ligger i én fane. Hver post åpner seg selv to timer før den
+   skjer — ingen koder, ingen som må huske å låse opp noe.
+
+   To unntak styres fra data.json med feltet «apner»:
+     · guiden lørdag åpner ved midnatt natt til lørdag, ikke 08:15
+     · søndagen åpner 22:00 lørdag, så alle kan planlegge natta
+
+   Poster som ikke har åpnet vises som forseglede rader uten klokkeslett.
+   Antallet er synlig — det bygger forventning — men ikke hva eller når.
+   Den neste i køen viser nedtelling, så ingen blir stående og lure.
+
    Merk: verken pris eller bekreftet-status vises her — det er arrangørenes
    arbeidsdata og hører hjemme i planen, ikke i appen. */
-function tegnProgram(bolk) {
-  const boks = $('#program-' + bolk);
-  if (!boks) return;
-  const laas = (DATA.laas || {})[bolk];
 
-  if (laas && !erApnet('bolk-' + bolk)) {
-    /* Appen henter data hvert 30. sekund. Uten denne sperren ville
-       låseskjermen blitt tegnet på nytt midt i at noen taster koden,
-       og det de har skrevet ville forsvunnet. */
-    if (boks.querySelector('.kodefelt')) return;
-    tegnLaas(boks, laas, 'bolk-' + bolk, () => tegnProgram(bolk));
-    return;
+/* Telefonklokka er ikke til å stole på: den stilles om når vi lander i
+   Tyrkia, og noen kommer garantert til å prøve å jukse den fram. Derfor
+   styres kapselen etter serverens klokke, lest fra Date-headeren hver gang
+   data hentes. Uten nett brukes siste kjente avvik — da er vi like presise
+   som da vi sist var på nett, og aldri verre enn telefonen alene. */
+let klokkeavvik = 0;
+try {
+  const lagret = parseInt(localStorage.getItem('blatur-klokkeavvik') || '0', 10);
+  if (!isNaN(lagret) && Math.abs(lagret) < 86400000) klokkeavvik = lagret;
+} catch (e) {}
+
+function settServertid(svar) {
+  try {
+    const h = svar.headers.get('date');
+    if (!h) return;
+    const s = Date.parse(h);
+    if (isNaN(s)) return;
+    klokkeavvik = s - Date.now();
+    localStorage.setItem('blatur-klokkeavvik', String(klokkeavvik));
+  } catch (e) {}
+}
+const naa = () => Date.now() + klokkeavvik;
+
+const TIMER_FOR = () => ((DATA && DATA.tidskapsel && DATA.tidskapsel.timerFor) || 2);
+
+/* Når åpner posten seg? «apner» overstyrer, ellers to timer før start. */
+function apnerTid(p) {
+  if (p.apner) { const t = Date.parse(p.apner); if (!isNaN(t)) return t; }
+  if (p.start) { const t = Date.parse(p.start); if (!isNaN(t)) return t - TIMER_FOR() * 3600000; }
+  return 0;  /* Uten tidsstempel er posten alltid åpen. */
+}
+const erApen = p => !(DATA && DATA.tidskapsel && DATA.tidskapsel.aktiv) || naa() >= apnerTid(p);
+
+/* «om 1 t 12 min». Runder opp på minuttet, så det aldri står «om 0 min». */
+function omHvorLenge(ms) {
+  if (ms <= 0) return 'nå';
+  const min = Math.ceil(ms / 60000);
+  if (min < 60) return 'om ' + min + ' min';
+  const t = Math.floor(min / 60), m = min % 60;
+  if (t < 24) return 'om ' + t + ' t' + (m ? ' ' + m + ' min' : '');
+  const dg = Math.floor(t / 24);
+  return 'om ' + dg + (dg === 1 ? ' dag' : ' dager');
+}
+
+/* Hvilke poster som var åpne sist vi tegnet. Brukes bare til å markere det
+   som nettopp åpnet seg, slik at man ser at noe har skjedd. */
+let apneForrige = null;
+
+function tegnProgram() {
+  const boks = $('#program');
+  if (!boks) return;
+  const kapsel = $('#kapsel');
+  const na = naa();
+
+  const alle = [];
+  (DATA.program || []).forEach(dag => {
+    (dag.poster || []).forEach(p => alle.push({ dag: dag.dag, p: p, apner: apnerTid(p) }));
+  });
+
+  const apne = alle.filter(x => erApen(x.p));
+  const laste = alle.filter(x => !erApen(x.p)).sort((a, b) => a.apner - b.apner);
+  const neste = laste[0] || null;
+
+  /* Første tegning skal ikke blinke — da hadde alt sett nyåpnet ut. */
+  const nokkel = x => x.dag + '|' + x.p.tid + '|' + x.p.tittel;
+  const forrige = apneForrige;
+  const naapne = new Set(apne.map(nokkel));
+  apneForrige = naapne;
+
+  /* Toppkortet: hvor langt er kapselen kommet, og når skjer det neste. */
+  if (kapsel) {
+    if (!laste.length) {
+      kapsel.innerHTML = alle.length
+        ? `<div class="kapsel"><b>Hele programmet er åpnet.</b> Ingenting mer ligger forseglet.</div>` : '';
+    } else {
+      const pst = Math.round(apne.length / alle.length * 100);
+      kapsel.innerHTML =
+        `<div class="kapsel">` +
+          `<b>${apne.length} av ${alle.length}</b> poster er åpnet. ` +
+          `Neste åpner <b>${esc(omHvorLenge(neste.apner - na))}</b>.` +
+          `<div class="strek"><i style="width:${pst}%"></i></div>` +
+        `</div>`;
+    }
   }
 
   boks.innerHTML = '';
-  (DATA.program || []).filter(d => (d.bolk || 'fre') === bolk).forEach(dag => {
+  (DATA.program || []).forEach(dag => {
+    const poster = dag.poster || [];
+    if (!poster.length) return;
     boks.appendChild(el('div', 'dag', esc(dag.dag)));
-    (dag.poster || []).forEach(p => {
-      const d = el('div', 'post' + (p.uthevet ? ' uthevet' : ''));
-      const kart = p.kart
-        ? `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>` : '';
+
+    poster.forEach(p => {
+      const apen = erApen(p);
+      const id = dag.dag + '|' + p.tid + '|' + p.tittel;
+
+      if (apen) {
+        const ny = forrige && !forrige.has(id);
+        const d = el('div', 'post' + (p.uthevet ? ' uthevet' : '') + (ny ? ' nyapnet' : ''));
+        const kart = p.kart
+          ? `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>` : '';
+        d.innerHTML =
+          `<div class="tid">${esc(p.tid)}</div>` +
+          `<div class="inn">` +
+            `<div class="tit">${p.ikon ? p.ikon + ' ' : ''}${esc(p.tittel)}</div>` +
+            (p.sted ? `<div class="std">${esc(p.sted)}</div>` : '') +
+            (p.detalj ? `<div class="det">${esc(p.detalj)}</div>` : '') +
+            kart +
+          `</div>`;
+        boks.appendChild(d);
+        return;
+      }
+
+      /* Forseglet. Klokkeslett, tittel og sted holdes tilbake — ellers er
+         det ingen overraskelse igjen. Bare den neste i køen får nedtelling. */
+      const erNeste = neste && neste.p === p;
+      const d = el('div', 'post seglet' + (erNeste ? ' nest' : ''));
       d.innerHTML =
-        `<div class="tid">${esc(p.tid)}</div>` +
+        `<div class="tid">${erNeste ? '⏳' : '🔒'}</div>` +
         `<div class="inn">` +
-          `<div class="tit">${p.ikon ? p.ikon + ' ' : ''}${esc(p.tittel)}</div>` +
-          (p.sted ? `<div class="std">${esc(p.sted)}</div>` : '') +
-          (p.detalj ? `<div class="det">${esc(p.detalj)}</div>` : '') +
-          kart +
+          `<div class="tit">${esc((DATA.tidskapsel && DATA.tidskapsel.tittel) || 'Forseglet')}</div>` +
+          `<div class="naar">${erNeste
+              ? 'Åpner ' + esc(omHvorLenge(apnerTid(p) - na))
+              : 'Åpner av seg selv'}</div>` +
         `</div>`;
       boks.appendChild(d);
     });
@@ -585,10 +704,19 @@ function tegnProgram(bolk) {
     };
   });
 
-  if (bolk === 'fre') {
-    $('#fot').innerHTML =
-      `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
+  /* Noe åpnet seg mens appen sto framme: si fra, men bare når det faktisk
+     er nytt — ikke ved første tegning og ikke når data bare ble hentet. */
+  if (forrige) {
+    const nye = apne.filter(x => !forrige.has(nokkel(x)));
+    if (nye.length) {
+      visStatus(nye.length === 1 ? '🔓 Ny post åpnet' : '🔓 ' + nye.length + ' nye poster åpnet');
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    }
   }
+
+  $('#fot').innerHTML =
+    ((DATA.tidskapsel && DATA.tidskapsel.fot) ? esc(DATA.tidskapsel.fot) + '<br><br>' : '') +
+    `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
 }
 
 /* ---------- Kart ---------- */
@@ -1969,7 +2097,7 @@ function bytt(navn) {
   $('#t-' + navn).classList.add('on');
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === navn));
   if (navn === 'kart') tegnKart();
-  if (navn === 'fre' || navn === 'lor') tegnProgram(navn);
+  if (navn === 'prog') tegnProgram();
   if (navn === 'eskorte') tegnEskorte();
   window.scrollTo(0, 0);
 }
@@ -1997,8 +2125,7 @@ function tegnAlt() {
   if (!tegnAvsloring()) return;
 
   tegnNedtelling();
-  tegnProgram('fre');
-  tegnProgram('lor');
+  tegnProgram();
   tegnInfo();
   if (DATA.vaer) tegnVaer($('#info'));
   tegnOppslag();
@@ -2033,7 +2160,13 @@ hentData(true);
 let puls = null;
 function startPuls() {
   if (puls) return;
-  puls = setInterval(() => { hentData(false); tegnNedtelling(); }, 30000);
+  /* tegnProgram må kjøres her og ikke bare når data hentes: uten dekning
+     feiler hentData, og da ville kapselen stått stille resten av turen. */
+  puls = setInterval(() => {
+    hentData(false);
+    tegnNedtelling();
+    if (DATA) tegnProgram();
+  }, 30000);
 }
 function stoppPuls() {
   if (puls) { clearInterval(puls); puls = null; }
@@ -2042,7 +2175,7 @@ startPuls();
 
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { stoppPuls(); }
-  else { startPuls(); hentData(false); tegnNedtelling(); }
+  else { startPuls(); hentData(false); tegnNedtelling(); if (DATA) tegnProgram(); }
 });
 </script>
 </body>
