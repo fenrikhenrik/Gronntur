@@ -78,6 +78,25 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
   transition:width .6s ease}
 @keyframes nyapnet{0%{background:#fff4d6}100%{background:var(--card)}}
 .post.nyapnet{animation:nyapnet 2.4s ease-out}
+
+/* ---- Arrangørmodus: bare Henrik og Bruland ---- */
+.arrbar{background:var(--dark);color:#fff;border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.arrbar .tit{font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px}
+.arrbar .und{font-size:12.5px;color:#9fb0c0;margin-top:4px;line-height:1.5}
+.arrbar .rad{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.arrbar button{background:#243040;border:1px solid #38465a;color:#dce5ee;border-radius:9px;
+  padding:7px 11px;font-size:12.5px;font-family:inherit;cursor:pointer}
+.arrbar button.pa{background:var(--red);border-color:var(--red);color:#fff;font-weight:650}
+.arrbar .skille{height:1px;background:#2b3746;margin:11px 0 0}
+.arrbar .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#6f7f90;margin-top:10px}
+.simbar{background:#fff4d6;border:1px solid #e8cf94;border-radius:12px;padding:10px 13px;
+  margin-bottom:10px;font-size:13px;line-height:1.5;color:#6b5320}
+.simbar b{color:#4a3813}
+.simbar button{margin-top:8px;background:#6b5320;border:none;color:#fff;border-radius:8px;
+  padding:7px 12px;font-size:12.5px;font-family:inherit;cursor:pointer}
+.merke{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:650;
+  background:#fdeaec;color:#a3242f;border:1px solid #f2c4c9;border-radius:7px;padding:3px 8px}
+.post.skjult{border-style:dashed;border-color:#e6bcc1;background:#fffcfc}
 .kartlenke{display:inline-block;margin-top:9px;font-size:13.5px;color:var(--red);
   text-decoration:none;font-weight:650;padding:9px 13px 9px 0;
   -webkit-tap-highlight-color:transparent}
@@ -397,6 +416,7 @@ body.laast nav{display:none}
 <main>
   <!-- PROGRAM — hele turen, poster åpner seg selv -->
   <div class="tab on" id="t-prog">
+    <div id="arrpanel"></div>
     <div id="kapsel"></div>
     <div id="program"></div>
     <div class="fot" id="fot"></div>
@@ -582,7 +602,39 @@ function settServertid(svar) {
     localStorage.setItem('blatur-klokkeavvik', String(klokkeavvik));
   } catch (e) {}
 }
-const naa = () => Date.now() + klokkeavvik;
+/* ---------- Arrangørmodus ----------
+   Henrik og Bruland må se hele programmet for å kunne drive turen, mens
+   gjengen skal møte kapselen. Låses opp med fem trykk på versjonslinja
+   nederst og en kode — ingen knapp noen kan snuble inn i.
+
+   «Se som gjengen» og tidsreisen finnes for at de to skal kunne verifisere
+   hva de ni faktisk ser, uten å vente på at klokka blir riktig.
+
+   Ærlig begrensning: dette er en sperre i visningen, ikke kryptering. Hele
+   data.json ligger åpent på nettadressen, så den som vil grave i filen kan
+   lese alt. Kapselen holder programmet skjult for normal bruk — den tåler
+   ikke en som aktivt leter. */
+let simTid = null;        /* Tidsreise: null betyr sanntid. */
+let somGjengen = false;   /* Forhåndsvisning av deltakerens app. */
+
+const erArrangor = () => { try { return localStorage.getItem('blatur-arrangor') === 'ja'; } catch (e) { return false; } };
+function settArrangor(pa) {
+  try { pa ? localStorage.setItem('blatur-arrangor', 'ja') : localStorage.removeItem('blatur-arrangor'); } catch (e) {}
+}
+/* Ser vi alt akkurat nå? Arrangør, og ikke midt i en forhåndsvisning. */
+const seAlt = () => erArrangor() && !somGjengen;
+
+const naa = () => simTid !== null ? simTid : Date.now() + klokkeavvik;
+
+/* Alltid Istanbul-tid i arrangørpanelet. Telefonen står på norsk tid til vi
+   lander, og «åpner 16:50» må bety det samme for begge to. */
+function turtid(ms) {
+  try {
+    return new Intl.DateTimeFormat('nb-NO', {
+      timeZone: 'Europe/Istanbul', weekday: 'short', hour: '2-digit', minute: '2-digit'
+    }).format(new Date(ms));
+  } catch (e) { return new Date(ms).toLocaleString('nb-NO'); }
+}
 
 const TIMER_FOR = () => ((DATA && DATA.tidskapsel && DATA.tidskapsel.timerFor) || 2);
 
@@ -609,6 +661,91 @@ function omHvorLenge(ms) {
    som nettopp åpnet seg, slik at man ser at noe har skjedd. */
 let apneForrige = null;
 
+/* ---------- Arrangørpanelet ----------
+   Vises bare for de to som drifter turen. Gir tre ting: bekreftelse på at
+   man er i arrangørmodus, en knapp for å se appen slik gjengen ser den, og
+   en tidsreise som hopper til et valgt øyeblikk.
+
+   Tidsreisen er hele poenget med testingen: klokka leses fra serveren, så
+   det hjelper ikke å stille telefonen. Dette er veien inn. */
+function tegnArrPanel(antApne, antAlle, neste, na) {
+  const boks = $('#arrpanel');
+  if (!boks) return;
+  if (!erArrangor()) { boks.innerHTML = ''; return; }
+
+  const stopp = (DATA.arrangor && DATA.arrangor.tidsreise) || [];
+  const chips = stopp.map((s, i) =>
+    `<button data-hopp="${i}"${simTid !== null && simTid === Date.parse(s.tid) ? ' class="pa"' : ''}>${esc(s.merke)}</button>`
+  ).join('');
+
+  boks.innerHTML =
+    (simTid !== null
+      ? `<div class="simbar">⏱️ <b>Tidsreise:</b> du ser appen slik den er ${esc(turtid(simTid))} (Istanbul-tid).
+           Dette er ikke sanntid.<br><button id="simav">Tilbake til nå</button></div>`
+      : '') +
+    `<div class="arrbar">
+      <div class="tit">🎩 Arrangørmodus${somGjengen ? ' — ser som gjengen' : ''}</div>
+      <div class="und">${somGjengen
+        ? 'Du ser nå nøyaktig det de ni ser. Slå av for å få hele programmet tilbake.'
+        : 'Du ser hele programmet. Gjengen ser <b>' + antApne + ' av ' + antAlle + '</b> poster' +
+          (neste ? ', neste åpner ' + esc(turtid(neste.apner)) : '') + '.'}</div>
+      <div class="rad">
+        <button id="arrgjeng"${somGjengen ? ' class="pa"' : ''}>👥 ${somGjengen ? 'Vis meg alt igjen' : 'Se som gjengen'}</button>
+        <button id="arrav">Slå av arrangørmodus</button>
+      </div>
+      ${stopp.length ? `<div class="skille"></div><div class="lbl">Hopp til et tidspunkt</div>
+      <div class="rad">${chips}<button id="hoppna"${simTid === null ? ' class="pa"' : ''}>Nå</button></div>
+      <div class="rad"><button data-nudge="-120">− 2 t</button><button data-nudge="-30">− 30 min</button>
+        <button data-nudge="30">+ 30 min</button><button data-nudge="120">+ 2 t</button></div>` : ''}
+    </div>`;
+
+  const sim = $('#simav');
+  if (sim) sim.onclick = () => { simTid = null; tegnProgram(); };
+  $('#arrgjeng').onclick = () => { somGjengen = !somGjengen; apneForrige = null; tegnProgram(); };
+  $('#arrav').onclick = () => {
+    if (!confirm('Slå av arrangørmodus?\n\nDa ser appen ut som for gjengen. Du låser opp igjen med fem trykk på versjonslinja nederst.')) return;
+    settArrangor(false); somGjengen = false; simTid = null; apneForrige = null; tegnProgram();
+  };
+  boks.querySelectorAll('[data-hopp]').forEach(b => {
+    b.onclick = () => {
+      const s = stopp[parseInt(b.dataset.hopp, 10)];
+      const t = Date.parse(s.tid);
+      if (!isNaN(t)) { simTid = t; apneForrige = null; tegnProgram(); }
+    };
+  });
+  boks.querySelectorAll('[data-nudge]').forEach(b => {
+    b.onclick = () => {
+      const grunnlag = simTid !== null ? simTid : naa();
+      simTid = grunnlag + parseInt(b.dataset.nudge, 10) * 60000;
+      apneForrige = null;
+      tegnProgram();
+    };
+  });
+  const hn = $('#hoppna');
+  if (hn) hn.onclick = () => { simTid = null; apneForrige = null; tegnProgram(); };
+}
+
+/* Fem trykk på versjonslinja, så kode. Skjult med vilje: gjengen skal
+   aldri finne den ved et uhell, og den som leter er uansett en av de to. */
+let arrTrykk = 0, arrKlokke = null;
+function arrTrykket() {
+  clearTimeout(arrKlokke);
+  arrTrykk++;
+  if (arrTrykk < 5) { arrKlokke = setTimeout(() => { arrTrykk = 0; }, 1500); return; }
+  arrTrykk = 0;
+  const fasit = (DATA.arrangor && DATA.arrangor.kode) || '';
+  const gitt = prompt('Arrangørkode:');
+  if (gitt === null) return;
+  if (kodeOk(gitt, fasit)) {
+    settArrangor(true);
+    if (navigator.vibrate) navigator.vibrate(60);
+    visStatus('🎩 Arrangørmodus på');
+    tegnProgram();
+  } else {
+    visStatus('Feil kode');
+  }
+}
+
 function tegnProgram() {
   const boks = $('#program');
   if (!boks) return;
@@ -629,6 +766,8 @@ function tegnProgram() {
   const forrige = apneForrige;
   const naapne = new Set(apne.map(nokkel));
   apneForrige = naapne;
+
+  tegnArrPanel(apne.length, alle.length, neste, na);
 
   /* Toppkortet: hvor langt er kapselen kommet, og når skjer det neste. */
   if (kapsel) {
@@ -656,9 +795,11 @@ function tegnProgram() {
       const apen = erApen(p);
       const id = dag.dag + '|' + p.tid + '|' + p.tittel;
 
-      if (apen) {
-        const ny = forrige && !forrige.has(id);
-        const d = el('div', 'post' + (p.uthevet ? ' uthevet' : '') + (ny ? ' nyapnet' : ''));
+      /* Arrangøren ser alt, men får vite hva gjengen ennå ikke ser. */
+      if (apen || seAlt()) {
+        const ny = apen && forrige && !forrige.has(id);
+        const d = el('div', 'post' + (p.uthevet ? ' uthevet' : '') +
+                     (ny ? ' nyapnet' : '') + (!apen ? ' skjult' : ''));
         const kart = p.kart
           ? `<a class="kartlenke" href="#" data-kart="${esc(p.kart)}">📍 Vis på kart</a>` : '';
         d.innerHTML =
@@ -668,6 +809,7 @@ function tegnProgram() {
             (p.sted ? `<div class="std">${esc(p.sted)}</div>` : '') +
             (p.detalj ? `<div class="det">${esc(p.detalj)}</div>` : '') +
             kart +
+            (!apen ? `<div class="merke">🔒 Skjult for gjengen · åpner ${esc(turtid(apnerTid(p)))}</div>` : '') +
           `</div>`;
         boks.appendChild(d);
         return;
@@ -714,9 +856,13 @@ function tegnProgram() {
     }
   }
 
-  $('#fot').innerHTML =
+  const fot = $('#fot');
+  fot.innerHTML =
     ((DATA.tidskapsel && DATA.tidskapsel.fot) ? esc(DATA.tidskapsel.fot) + '<br><br>' : '') +
-    `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>Versjon ${esc(DATA.versjon)}`;
+    `Sist oppdatert ${esc(DATA.sistOppdatert || '')} av ${esc(DATA.oppdatertAv || '')}<br>` +
+    `<span id="versjonslinje">Versjon ${esc(DATA.versjon)}</span>`;
+  const vl = fot.querySelector('#versjonslinje');
+  if (vl) vl.onclick = arrTrykket;
 }
 
 /* ---------- Kart ---------- */

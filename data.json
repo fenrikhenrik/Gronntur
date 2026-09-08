@@ -1,6 +1,6 @@
 {
-  "versjon": 35,
-  "sistOppdatert": "8. september 19:30",
+  "versjon": 37,
+  "sistOppdatert": "8. september 20:15",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -1687,5 +1687,42 @@
     "timerFor": 2,
     "tittel": "Forseglet",
     "fot": "Programmet åpner seg selv, post for post, to timer før hver ting skjer. Du trenger ikke gjøre noe, og ingen kode."
+  },
+  "arrangor": {
+    "kode": "Anna69",
+    "tidsreise": [
+      {
+        "merke": "Fre 05:15 · Gardermoen",
+        "tid": "2026-09-11T05:15:00+02:00"
+      },
+      {
+        "merke": "Fre 14:20 · innsjekket",
+        "tid": "2026-09-11T14:20:00+03:00"
+      },
+      {
+        "merke": "Fre 18:45 · oppmøte",
+        "tid": "2026-09-11T18:45:00+03:00"
+      },
+      {
+        "merke": "Lør 00:01 · guiden",
+        "tid": "2026-09-12T00:01:00+03:00"
+      },
+      {
+        "merke": "Lør 11:00 · Hagia Sofia",
+        "tid": "2026-09-12T11:00:00+03:00"
+      },
+      {
+        "merke": "Lør 17:30 · båten",
+        "tid": "2026-09-12T17:30:00+03:00"
+      },
+      {
+        "merke": "Lør 22:01 · søndagen",
+        "tid": "2026-09-12T22:01:00+03:00"
+      },
+      {
+        "merke": "Søn 07:00 · hjem",
+        "tid": "2026-09-13T07:00:00+03:00"
+      }
+    ]
   }
 }

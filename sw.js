@@ -6,7 +6,7 @@
      · kartfliser → egen cache med tak, så lagringen ikke vokser i det uendelige
    Øk CACHE-navnet hvis du endrer index.html, ellers kan gamle filer henge igjen. */
 
-const CACHE = 'blatur-v28';
+const CACHE = 'blatur-v29';
 const FLISER = 'blatur-fliser-v1';
 const MAKS_FLISER = 400;
 
