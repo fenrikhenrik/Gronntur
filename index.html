@@ -119,6 +119,8 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
   border:1px solid var(--line);background:#fff;font:inherit;font-size:14.5px;font-weight:650;
   color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .gpsknapp.pa{background:var(--red);border-color:transparent;color:#fff}
+.kartlaas{font-size:12.5px;line-height:1.45;color:var(--muted);margin:-4px 0 10px}
+.holdt{font-size:11.5px;opacity:.8}
 .gpsmelding{font-size:12.5px;line-height:1.45;color:var(--muted);margin:-4px 0 10px}
 .gpsmelding.feil{color:var(--warn)}
 @keyframes gpspuls{0%{transform:scale(1);opacity:.85}70%{transform:scale(2.6);opacity:0}100%{opacity:0}}
@@ -428,6 +430,7 @@ body.laast nav{display:none}
   <!-- KART -->
   <div class="tab" id="t-kart">
     <div class="filtre" id="filtre"></div>
+    <div class="kartlaas" id="kartlaas" hidden></div>
     <button class="gpsknapp" id="gpsknapp" type="button">📍 Vis hvor jeg er</button>
     <div class="gpsmelding" id="gpsmelding" hidden></div>
     <div id="kart"></div>
@@ -471,7 +474,7 @@ body.laast nav{display:none}
 let DATA = null;
 let sisteVersjon = null;
 let kartLaget = false;
-let kartRef = null, markorer = [], aktiveKat = new Set();
+let kartRef = null, markorer = [], aktiveKat = new Set(), kjenteKat = new Set();
 let gpsVakt = null, gpsMarkor = null, gpsSirkel = null, gpsFulgt = true;
 
 const $ = s => document.querySelector(s);
@@ -648,6 +651,50 @@ function apnerTid(p) {
   return 0;  /* Uten tidsstempel er posten alltid åpen. */
 }
 const erApen = p => !(DATA && DATA.tidskapsel && DATA.tidskapsel.aktiv) || naa() >= apnerTid(p);
+
+/* ---------- Samme lås på kart, info og oppslag ----------
+   Kapselen holdt bare programfanen igjen. Kartet sto samtidig og viste
+   «Middag lørdag 21:00» på Nusr-Et-markøren, og infofanen hadde både
+   skybaren og lørdagslunsjen i klartekst — hele helgen lå åpen for den
+   som byttet fane. Derfor arver kart, info og oppslag samme klokke.
+
+   Tre måter å knytte innhold til kapselen på:
+     · «laas»: id-en en programpost peker på med «kart». Innholdet åpner
+       seg i samme sekund som posten, uten at tidspunktet står to steder.
+     · «apner»: eget tidsstempel, for det som ikke henger på én post.
+     · steder uten begge deler låses automatisk av postene som peker på
+       dem — nye steder er da skjermet fra dag én. «alltid: true» holder
+       hotellet, trikkestoppene og landemerkene synlige hele veien.
+   Uten treff er innholdet åpent, akkurat som før. */
+function postApnerTid(kartId) {
+  let t = null;
+  ((DATA && DATA.program) || []).forEach(dag => (dag.poster || []).forEach(p => {
+    if (p.kart === kartId) { const a = apnerTid(p); if (t === null || a < t) t = a; }
+  }));
+  return t;
+}
+function laasTid(o, egenId) {
+  if (!o || o.alltid) return 0;
+  if (o.apner) { const t = Date.parse(o.apner); if (!isNaN(t)) return t; }
+  if (o.laas) { const t = postApnerTid(o.laas); if (t !== null) return t; }
+  if (egenId) { const t = postApnerTid(egenId); if (t !== null) return t; }
+  return 0;
+}
+const erLaastOpp = (o, egenId) =>
+  !(DATA && DATA.tidskapsel && DATA.tidskapsel.aktiv) || naa() >= laasTid(o, egenId);
+
+/* En rad i info- eller klimakortet. [navn, verdi] som før, eller et objekt
+   med lås: { laas, rad, laastRad }. «laastRad» er den ufarlige varianten
+   som står der i mellomtiden — uten den holdes raden helt tilbake.
+   «holdt» betyr at arrangøren ser noe gjengen ennå ikke ser. */
+function infoRad(r) {
+  if (Array.isArray(r)) return { rad: r, holdt: false };
+  if (!r) return null;
+  if (erLaastOpp(r)) return r.rad ? { rad: r.rad, holdt: false } : null;
+  if (seAlt()) return r.rad ? { rad: r.rad, holdt: true } : null;
+  return r.laastRad ? { rad: r.laastRad, holdt: false } : null;
+}
+const holdtMerke = h => h ? ' <span class="holdt" title="Skjult for gjengen">🔒</span>' : '';
 
 /* «om 1 t 12 min». Runder opp på minuttet, så det aldri står «om 0 min». */
 function omHvorLenge(ms) {
@@ -881,9 +928,30 @@ function tegnKart() {
   markorer.forEach(m => kartRef.removeLayer(m));
   markorer = [];
 
-  const hotell = (DATA.steder || []).find(s => s.id === 'hotell') || { lat: 41.0246, lon: 28.9755 };
-  const kats = [...new Set((DATA.steder || []).map(s => s.kat))];
-  if (!aktiveKat.size) kats.forEach(k => aktiveKat.add(k));
+  const alleSteder = DATA.steder || [];
+  /* Et sted som hører til en forseglet post finnes ikke på kartet ennå —
+     verken markør, navn eller kategori. Arrangøren ser dem, dempet og
+     merket, slik at han kan sjekke at riktig sted ligger riktig plass. */
+  const apneSteder = alleSteder.filter(s => erLaastOpp(s, s.id));
+  const synlige = seAlt() ? alleSteder : apneSteder;
+  const skjulte = alleSteder.length - apneSteder.length;
+
+  const hotell = alleSteder.find(s => s.id === 'hotell') || { lat: 41.0246, lon: 28.9755 };
+  const kats = [...new Set(synlige.map(s => s.kat))];
+  /* Nye kategorier dukker opp underveis når poster åpner seg. De må slås
+     på idet vi ser dem første gang — ellers ville «Program» blitt liggende
+     avhuket, og markørene aldri kommet fram. */
+  kats.forEach(k => { if (!kjenteKat.has(k)) { kjenteKat.add(k); aktiveKat.add(k); } });
+
+  const laasboks = $('#kartlaas');
+  if (laasboks) {
+    laasboks.innerHTML = skjulte
+      ? (seAlt()
+          ? `🔒 <b>${skjulte}</b> ${skjulte === 1 ? 'sted er' : 'steder er'} skjult for gjengen akkurat nå — du ser dem dempet.`
+          : 'Flere steder dukker opp av seg selv når programmet åpner dem.')
+      : '';
+    laasboks.hidden = !skjulte;
+  }
 
   const f = $('#filtre'); f.innerHTML = '';
   kats.forEach(k => {
@@ -893,21 +961,24 @@ function tegnKart() {
     f.appendChild(c);
   });
 
-  (DATA.steder || []).filter(s => aktiveKat.has(s.kat)).forEach(s => {
+  synlige.filter(s => aktiveKat.has(s.kat)).forEach(s => {
+    const apen = erLaastOpp(s, s.id);
     const farge = FARGER[s.kat] || '#333';
     const stor = s.kat === 'Program' || s.kat === 'Base';
     const st = stor ? 20 : 14;
     const ikon = L.divIcon({
       className: '', iconSize: [st, st], iconAnchor: [st/2, st/2],
       html: `<div style="width:${st}px;height:${st}px;border-radius:50%;background:${farge};
-        border:${stor ? '3px solid #ffd24a' : '2px solid #fff'};box-shadow:0 1px 5px rgba(0,0,0,.4)"></div>`
+        border:${stor ? '3px solid #ffd24a' : '2px solid #fff'};box-shadow:0 1px 5px rgba(0,0,0,.4);
+        ${apen ? '' : 'opacity:.45'}"></div>`
     });
     const gmaps = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}`;
     const gange = `https://www.google.com/maps/dir/?api=1&origin=${hotell.lat},${hotell.lon}&destination=${s.lat},${s.lon}&travelmode=walking`;
-    const m = L.marker([s.lat, s.lon], { icon: ikon, title: s.navn }).bindPopup(
+    const m = L.marker([s.lat, s.lon], { icon: ikon, title: apen ? s.navn : '🔒 ' + s.navn }).bindPopup(
       `<div style="min-width:200px;font-family:-apple-system,sans-serif">
         <div style="font-weight:700;font-size:14.5px;margin-bottom:3px">${esc(s.navn)}</div>
         <div style="font-size:12.5px;line-height:1.45;margin-bottom:9px;color:#39434f">${esc(s.notat || '')}</div>
+        ${apen ? '' : `<div style="font-size:12px;color:#8a6d1f;margin-bottom:9px">🔒 Skjult for gjengen · åpner ${esc(turtid(laasTid(s, s.id)))}</div>`}
         <a href="${gmaps}" target="_blank" style="font-size:13px;color:#E30A17;font-weight:600">Åpne i Maps</a> &nbsp;·&nbsp;
         <a href="${gange}" target="_blank" style="font-size:13px;color:#E30A17;font-weight:600">Gå dit</a>
       </div>`);
@@ -2210,11 +2281,25 @@ function tegnOppslag() {
   const boks = $('#oppslag'); boks.innerHTML = '';
   const o = DATA.oppslag || [];
   if (!o.length) return;
+  /* Oppslagene lå i infofanen og fortalte i praksis hele programmet:
+     lunsjstedet lørdag, middagen, skybaren, bargata etter midnatt. De som
+     røper noe er nå knyttet til posten sin — enten med en ufarlig variant
+     som står der i mellomtiden («laastTekst»), eller holdt helt tilbake. */
+  const synlige = o.map(x => {
+    const apen = erLaastOpp(x);
+    if (apen) return { x: x, tekst: x.tekst, holdt: false };
+    if (seAlt()) return { x: x, tekst: x.tekst, holdt: true };
+    return x.laastTekst ? { x: x, tekst: x.laastTekst, holdt: false } : null;
+  }).filter(Boolean);
+  if (!synlige.length) return;
+
   boks.appendChild(el('div', 'dag', '📣 Nytt'));
-  o.forEach(x => {
+  synlige.forEach(s => {
+    const x = s.x;
     const kl = 'varsel v-' + (x.type === 'viktig' ? 'viktig' : x.type === 'gøy' ? 'gøy' : 'info');
     boks.appendChild(el('div', kl,
-      `<div>${esc(x.tekst)}</div><div class="meta">${esc(x.tid || '')}${x.av ? ' · ' + esc(x.av) : ''}</div>`));
+      `<div>${esc(s.tekst)}${holdtMerke(s.holdt)}</div>` +
+      `<div class="meta">${esc(x.tid || '')}${x.av ? ' · ' + esc(x.av) : ''}</div>`));
   });
 }
 
@@ -2250,10 +2335,15 @@ function tegnEskorte() {
 function tegnInfo() {
   const boks = $('#info'); boks.innerHTML = '';
   (DATA.info || []).forEach(gr => {
+    const grApen = erLaastOpp(gr);
+    if (!grApen && !seAlt()) return;
+    const rader = (gr.rader || []).map(infoRad).filter(r => r && r.rad);
+    if (!rader.length) return;   /* Tomt kort røper at noe er holdt tilbake. */
     const k = el('div', 'kort');
-    k.appendChild(el('h2', null, esc(gr.tittel)));
+    k.appendChild(el('h2', null, esc(gr.tittel) + (grApen ? '' : ' 🔒')));
     const t = el('table');
-    (gr.rader || []).forEach(r => t.appendChild(el('tr', null, `<td>${esc(r[0])}</td><td>${esc(r[1])}</td>`)));
+    rader.forEach(r => t.appendChild(el('tr', null,
+      `<td>${esc(r.rad[0])}</td><td>${esc(r.rad[1])}${holdtMerke(r.holdt)}</td>`)));
     k.appendChild(t);
     boks.appendChild(k);
   });
@@ -2266,6 +2356,14 @@ function tegnInfo() {
     DATA.gjengen.forEach(p => t.appendChild(el('tr', null, `<td>${esc(p.navn)}</td><td>${esc(p.rolle || '')}</td>`)));
     k.appendChild(t); boks.appendChild(k);
   }
+}
+
+/* Info + værmelding hører sammen: tegnes den ene alene, forsvinner den
+   andre. Værmeldingen har eget 30-minutters minne, så dette koster ingen
+   ekstra henting. */
+function tegnInfoAlt() {
+  tegnInfo();
+  if (DATA && DATA.vaer) tegnVaer($('#info'));
 }
 
 /* ---------- CO2 ---------- */
@@ -2285,7 +2383,12 @@ function tegnCo2(boks) {
     k.appendChild(h);
   }
   const t = el('table');
-  (c.rader || []).forEach(r => t.appendChild(el('tr', null, `<td>${esc(r[0])}</td><td>${esc(r[1])}</td>`)));
+  /* Klimaregnskapet røpet yachten i klartekst. Radene tåler derfor samme
+     lås som infokortene — og den som er låst har en nøytral variant, slik
+     at summen fortsatt går opp for den som regner etter. */
+  (c.rader || []).map(infoRad).filter(r => r && r.rad).forEach(r =>
+    t.appendChild(el('tr', null,
+      `<td>${esc(r.rad[0])}</td><td>${esc(r.rad[1])}${holdtMerke(r.holdt)}</td>`)));
   k.appendChild(t);
   if (c.fot) k.appendChild(el('div', null,
     `<div style="font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:10px">${esc(c.fot)}</div>`));
@@ -2357,6 +2460,7 @@ function bytt(navn) {
   $('#t-' + navn).classList.add('on');
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.t === navn));
   if (navn === 'kart') tegnKart();
+  if (navn === 'info') { tegnInfoAlt(); tegnOppslag(); }
   if (navn === 'prog') tegnProgram();
   /* Åpner man quizfanen skal tavla være fersk med én gang, ikke om
      opptil tretti sekunder. Det er her folk står og venter på tallene. */
@@ -2370,6 +2474,22 @@ $('#gpsknapp').onclick = () => {
   if (!kartLaget) tegnKart();
   gpsVakt !== null ? stoppGps() : startGps();
 };
+
+/* Kart, info og oppslag følger kapselen, og må derfor tegnes på nytt i det
+   sekundet en post åpner seg — ikke først når noen bytter fane. Uten nett
+   kjører ikke tegnAlt, så pulsen tar jobben. Vi tegner bare når fanen
+   faktisk er framme, og bare når antallet åpne poster har endret seg. */
+let sisteApneAntall = null;
+function tegnAvledede() {
+  if (!DATA) return;
+  let n = 0;
+  (DATA.program || []).forEach(dag => (dag.poster || []).forEach(p => { if (erApen(p)) n++; }));
+  if (seAlt()) n += 10000;
+  if (n === sisteApneAntall) return;
+  sisteApneAntall = n;
+  if ($('#t-kart').classList.contains('on')) tegnKart();
+  if ($('#t-info').classList.contains('on')) { tegnInfoAlt(); tegnOppslag(); }
+}
 
 /* ---------- Tegn alt ---------- */
 function tegnAlt() {
@@ -2389,8 +2509,7 @@ function tegnAlt() {
 
   tegnNedtelling();
   tegnProgram();
-  tegnInfo();
-  if (DATA.vaer) tegnVaer($('#info'));
+  tegnInfoAlt();
   tegnOppslag();
   if (qVisning === 'liste') tegnQuiz(); else tegnTavle();
   if ($('#t-kart').classList.contains('on')) tegnKart();
@@ -2428,7 +2547,7 @@ function startPuls() {
   puls = setInterval(() => {
     hentData(false);
     tegnNedtelling();
-    if (DATA) { tegnProgram(); skyHent(); }
+    if (DATA) { tegnProgram(); tegnAvledede(); skyHent(); }
   }, 30000);
 }
 function stoppPuls() {

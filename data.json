@@ -1,6 +1,6 @@
 {
-  "versjon": 39,
-  "sistOppdatert": "9. september 12:50",
+  "versjon": 40,
+  "sistOppdatert": "9. september 19:00",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -17,7 +17,7 @@
     {
       "type": "viktig",
       "tid": "8. september",
-      "tekst": "Programmet er nå én fane, og det åpner seg selv. Hver post dukker opp to timer før den skjer — ingen kode, ingenting du må gjøre. Det du ser forseglet, kommer av seg selv. To unntak: guiden lørdag slippes ved midnatt natt til lørdag, og søndagen slippes 22:00 lørdag så alle vet når vi drar.",
+      "tekst": "Programmet er nå én fane, og det åpner seg selv. Hver post dukker opp to timer før den skjer — ingen kode, ingenting du må gjøre. Det du ser forseglet, kommer av seg selv. Kartet og Info følger samme klokke, så det nytter ikke å lete der heller. To unntak: den første posten lørdag slippes ved midnatt natt til lørdag, og søndagen slippes 22:00 lørdag så alle vet når vi drar.",
       "av": "Henrik"
     },
     {
@@ -42,19 +42,25 @@
       "type": "info",
       "tid": "8. september",
       "tekst": "Quizen «Istanbuls historie» er skrevet om. Sju spørsmål følger guideturen lørdag — Blå moské, Hagia Sofia, Hippodromen, Krydderbasaren — og fem handler om resten av byen: Galatatårnet over hotellet, fergen til Kadıköy, broene over Bosporos og palasset vi passerer med båten. Den deles ut i forkant, så ta den fredag.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "blaa",
+      "laastTekst": "Quizen «Istanbuls historie» er skrevet om. Tolv spørsmål om byen vi skal til — sju av dem følger noe vi gjør, fem handler om resten av byen. Den deles ut i forkant, så ta den fredag."
     },
     {
       "type": "info",
       "tid": "8. september",
       "tekst": "Avklart i dag: lørdagslunsjen på Hamdi er bekreftet, depositumet på middagen er betalt, og fotballkampen dropper vi — den kolliderte uansett med matturnéen fredag. Presentasjonen på Nusr-Et utgår også; rommet har verken projektor eller eget lydanlegg.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "nusret",
+      "laastTekst": "Avklart i dag: de siste løse trådene er landet. Det som skulle bookes er booket og betalt, og én ting er strøket fordi den kolliderte med noe annet. Ingenting av det krever noe av deg."
     },
     {
       "type": "info",
       "tid": "6. september",
       "tekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. Lørdagslunsjen er satt til Hamdi ved Eminønü — de anbefaler den varmt. De tipser også om Monkey Bar i Şişhane som alternativ takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "hamdi",
+      "laastTekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. De tipser også om Monkey Bar i Şişhane som takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted."
     },
     {
       "type": "gøy",
@@ -66,25 +72,30 @@
       "type": "info",
       "tid": "5. september",
       "tekst": "Skybaren lørdag er avklart: Sky Karaköy tar ikke bordbestilling, vi bare går opp. Vi går rett fra båten ca. 19:10 i stedet for 19:30 — da får vi en drøy time i stedet for tre kvarter. Fullt? Da går vi til The Bank Roof Bar, 8–10 min unna. Er den også full, drar vi rett til middagen. Uansett hva som skjer: vi er i bilene 20:20.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "sky"
     },
     {
       "type": "info",
       "tid": "31. august",
       "tekst": "Lørdag etter middagen: tre biler til Asmalımescit ca. midnatt, så tar vi det derfra. Ingen dørkontroll, og hjem er 8 minutters gange — ingen trenger å ordne taxi.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "asmali"
     },
     {
       "type": "gøy",
       "tid": "31. august",
       "tekst": "Middagen lørdag er booket: eget rom, fast meny og fri drikke hele kvelden. Ingen regning å splitte på elleve. Spar litt plass.",
-      "av": "Henrik"
+      "av": "Henrik",
+      "laas": "nusret",
+      "laastTekst": "Én av kveldene er ordnet slik at ingen regning skal splittes på elleve — fast meny, fri drikke og eget rom. Spar litt plass."
     },
     {
       "type": "viktig",
       "tid": "31. august",
       "tekst": "Lørdag: vi forlater skybaren 20:20 for å rekke bordet 21:00. Ikke bestill en runde til 20:15.",
-      "av": "Bruland"
+      "av": "Bruland",
+      "laas": "nusret"
     },
     {
       "type": "info",
@@ -239,7 +250,7 @@
           "tittel": "Privat yacht på Bosporos",
           "sted": "Luma Yacht",
           "ikon": "🛥️",
-          "kart": "kaia",
+          "kart": "luma",
           "uthevet": true,
           "detalj": "To timer på vannet i ettermiddagslys. Solnedgang 19:18. Ingen skal bade — dette er drikke på dekk.",
           "start": "2026-09-12T17:00:00+03:00"
@@ -314,7 +325,8 @@
       "kat": "Base",
       "lat": 41.0246,
       "lon": 28.9755,
-      "notat": "Mumhane Cd. 31, Karaköy. Basen."
+      "notat": "Mumhane Cd. 31, Karaköy. Basen.",
+      "alltid": true
     },
     {
       "id": "hamam",
@@ -330,7 +342,7 @@
       "kat": "Program",
       "lat": 41.0217,
       "lon": 28.9767,
-      "notat": "Fergen til Kadıköy fredag 19:05. Båten lørdag 17:00."
+      "notat": "Fergene til Kadıköy går herfra — 3 min fra hotellet. Siste ferge hjem rundt 01:00."
     },
     {
       "id": "kadikoy",
@@ -338,7 +350,8 @@
       "kat": "Program",
       "lat": 40.9925,
       "lon": 29.0234,
-      "notat": "Guiden møter oss her fredag 19:35. Herfra går også fergen hjem — siste avgang rundt 01:00."
+      "notat": "Guiden møter oss her fredag 19:35. Herfra går også fergen hjem — siste avgang rundt 01:00.",
+      "laas": "kaia"
     },
     {
       "id": "kadife",
@@ -354,7 +367,8 @@
       "kat": "Uteliv",
       "lat": 40.98955,
       "lon": 29.02745,
-      "notat": "Kadife Sokak 10, 2. etasje — over baren Trip. Takterrasse og innendørs scene. Fredagens forslag. Ingen bordbestilling, men gå opp i to puljer."
+      "notat": "Kadife Sokak 10, 2. etasje — over baren Trip. Takterrasse og innendørs scene. Fredagens forslag. Ingen bordbestilling, men gå opp i to puljer.",
+      "laas": "kadife"
     },
     {
       "id": "sky",
@@ -370,7 +384,8 @@
       "kat": "Uteliv",
       "lat": 41.0225,
       "lon": 28.9722,
-      "notat": "Plan B lørdag hvis Sky Karaköy er full. Bankalar Cd. 5, 8–10 min gange fra kaia. Åpent 12:00–02:00. Utsikt mot gamlebyen og Gyllne Horn."
+      "notat": "Plan B lørdag hvis Sky Karaköy er full. Bankalar Cd. 5, 8–10 min gange fra kaia. Åpent 12:00–02:00. Utsikt mot gamlebyen og Gyllne Horn.",
+      "laas": "sky"
     },
     {
       "id": "monkey",
@@ -378,7 +393,8 @@
       "kat": "Uteliv",
       "lat": 41.0289,
       "lon": 28.9744,
-      "notat": "Takbar i 7. etasje på IKSV-bygget i Şişhane. Anbefalt av hotellet — utsikt over Gyllne Horn. Åpent 18:00–02:00. MERK: 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56"
+      "notat": "Takbar i 7. etasje på IKSV-bygget i Şişhane. Anbefalt av hotellet — utsikt over Gyllne Horn. Åpent 18:00–02:00. MERK: 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56",
+      "alltid": true
     },
     {
       "id": "ayasofya",
@@ -386,7 +402,8 @@
       "kat": "Sightseeing",
       "lat": 41.00833,
       "lon": 28.98,
-      "notat": "Lørdag formiddag."
+      "notat": "Sultanahmet. Dekk knær og skuldre inne i bygget.",
+      "alltid": true
     },
     {
       "id": "blaa",
@@ -394,7 +411,8 @@
       "kat": "Sightseeing",
       "lat": 41.0053851,
       "lon": 28.9768247,
-      "notat": "Lørdag formiddag. Dekk knær og skuldre."
+      "notat": "Sultanahmet. Dekk knær og skuldre.",
+      "alltid": true
     },
     {
       "id": "galata",
@@ -402,7 +420,8 @@
       "kat": "Sightseeing",
       "lat": 41.025658,
       "lon": 28.974155,
-      "notat": "7 min gange fra hotellet. Kveldsøkt til 23:00."
+      "notat": "7 min gange fra hotellet. Åpent til 23:00.",
+      "alltid": true
     },
     {
       "id": "namli",
@@ -418,7 +437,8 @@
       "kat": "Mat",
       "lat": 41.0225,
       "lon": 28.9743,
-      "notat": "Baklava. 1 min fra hotellet."
+      "notat": "Baklava. 1 min fra hotellet.",
+      "alltid": true
     },
     {
       "id": "tophane",
@@ -426,7 +446,8 @@
       "kat": "Transport",
       "lat": 41.0263,
       "lon": 28.98,
-      "notat": "3 min fra hotellet."
+      "notat": "3 min fra hotellet.",
+      "alltid": true
     },
     {
       "id": "karakoytrikk",
@@ -434,7 +455,8 @@
       "kat": "Transport",
       "lat": 41.0243,
       "lon": 28.9744,
-      "notat": "T1 mot Sultanahmet."
+      "notat": "T1 mot Sultanahmet.",
+      "alltid": true
     },
     {
       "id": "galatabro",
@@ -442,7 +464,8 @@
       "kat": "Transport",
       "lat": 41.02,
       "lon": 28.97306,
-      "notat": "15 min gange til gamlebyen."
+      "notat": "15 min gange til gamlebyen.",
+      "alltid": true
     },
     {
       "id": "nusret",
@@ -466,7 +489,8 @@
       "kat": "Uteliv",
       "lat": 41.0334,
       "lon": 28.9767,
-      "notat": "5 min gange fra Asmalımescit. Meyhaner og fasıl-musikk. 13 min hjem."
+      "notat": "5 min gange fra Asmalımescit. Meyhaner og fasıl-musikk. 13 min hjem.",
+      "laas": "asmali"
     },
     {
       "id": "krydderbasaren",
@@ -474,7 +498,8 @@
       "kat": "Sightseeing",
       "lat": 41.01639,
       "lon": 28.97056,
-      "notat": "Her slutter guideturen lørdag. Hamdi ligger 170 m unna — rundt 3 min å gå."
+      "notat": "Mısır Çarşısı — krydder, tørket frukt og lokum. Ved Eminönü, 15 min gange fra hotellet.",
+      "alltid": true
     },
     {
       "id": "hamdi",
@@ -490,7 +515,8 @@
       "kat": "Program",
       "lat": 41.2753,
       "lon": 28.7519,
-      "notat": "Landing fredag 12:10. Minibuss til hotellet, ca. 50 min."
+      "notat": "Landing fredag 12:10. Minibuss til hotellet, ca. 50 min.",
+      "alltid": true
     },
     {
       "id": "saw",
@@ -498,7 +524,8 @@
       "kat": "Program",
       "lat": 40.8986,
       "lon": 29.3092,
-      "notat": "Hjemreise søndag 11:15. Ut fra hotellet 07:15 — regn 60–90 min."
+      "notat": "Hjemreise søndag 11:15. Ut fra hotellet 07:15 — regn 60–90 min.",
+      "alltid": true
     },
     {
       "id": "luma",
@@ -597,22 +624,31 @@
           "Alkohol i butikk",
           "Selges ikke mellom 22:00 og 06:00. Barer serverer som normalt."
         ],
-        [
-          "Skybar lørdag",
-          "Sky Karaköy, Mumhane Cd. 26. Ingen bordbestilling — vi går bare opp. Åpent 17:00–24:00. +90 533 384 79 33"
-        ],
-        [
-          "Hvis skybaren er full",
-          "The Bank Roof Bar, Bankalar Cd. 5, 8–10 min gange. Åpent 12:00–02:00. +90 212 283 00 55"
-        ],
+        {
+          "laas": "sky",
+          "rad": [
+            "Skybar lørdag",
+            "Sky Karaköy, Mumhane Cd. 26. Ingen bordbestilling — vi går bare opp. Åpent 17:00–24:00. +90 533 384 79 33"
+          ]
+        },
+        {
+          "laas": "sky",
+          "rad": [
+            "Hvis skybaren er full",
+            "The Bank Roof Bar, Bankalar Cd. 5, 8–10 min gange. Åpent 12:00–02:00. +90 212 283 00 55"
+          ]
+        },
         [
           "Flyplasstransport",
           "Ordnet begge veier for gjengen — €200 totalt, ca. €20 pr. mann. Ingenting å betale på stedet."
         ],
-        [
-          "Lunsj lørdag",
-          "Hamdi Restaurant, Kalçın Sk. 11, Eminönü. +90 212 528 03 90 / +90 533 658 80 11"
-        ],
+        {
+          "laas": "hamdi",
+          "rad": [
+            "Lunsj lørdag",
+            "Hamdi Restaurant, Kalçın Sk. 11, Eminönü. +90 212 528 03 90 / +90 533 658 80 11"
+          ]
+        },
         [
           "Monkey Bar",
           "Takbar i Şişhane, anbefalt av hotellet. Åpent 18:00–02:00. 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56"
@@ -690,10 +726,17 @@
         "Hotell, 2 netter",
         "30 kg per mann"
       ],
-      [
-        "Yacht, 2 timer",
-        "7 kg per mann"
-      ],
+      {
+        "laas": "luma",
+        "rad": [
+          "Yacht, 2 timer",
+          "7 kg per mann"
+        ],
+        "laastRad": [
+          "Aktiviteter i Istanbul",
+          "7 kg per mann"
+        ]
+      },
       [
         "Taxi, minibuss og ferge",
         "5 kg per mann"
@@ -735,7 +778,7 @@
         "navn": "Lørdag"
       }
     ],
-    "notat": "Turens to hele dager. Meldingen hentes live fra Open-Meteo hver gang du åpner Info, så tallene er ferske uten at noen trenger å oppdatere noe. Søndag står ikke oppført — da reiser dere 07:15."
+    "notat": "Turens to hele dager. Meldingen hentes live fra Open-Meteo hver gang du åpner Info, så tallene er ferske uten at noen trenger å oppdatere noe. Søndag står ikke oppført — da er vi på vei hjem."
   },
   "quizer": [
     {
@@ -1686,7 +1729,7 @@
     "aktiv": true,
     "timerFor": 2,
     "tittel": "Forseglet",
-    "fot": "Programmet åpner seg selv, post for post, to timer før hver ting skjer. Du trenger ikke gjøre noe, og ingen kode."
+    "fot": "Programmet åpner seg selv, post for post, to timer før start. Kartet og Info følger samme klokke — steder og opplysninger dukker opp når posten de hører til åpner seg. Du trenger ikke gjøre noe, og ingen kode."
   },
   "arrangor": {
     "kode": "Anna69",
