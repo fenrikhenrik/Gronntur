@@ -1,6 +1,6 @@
 {
-  "versjon": 37,
-  "sistOppdatert": "8. september 20:15",
+  "versjon": 39,
+  "sistOppdatert": "9. september 12:50",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -1724,5 +1724,10 @@
         "tid": "2026-09-13T07:00:00+03:00"
       }
     ]
+  },
+  "sky": {
+    "aktiv": true,
+    "url": "https://gronntur.henrik061189.workers.dev/tavle",
+    "token": "2jzwA6BRk8OG7KCgapCm9QWCP9fs"
   }
 }

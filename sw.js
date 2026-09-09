@@ -6,7 +6,7 @@
      · kartfliser → egen cache med tak, så lagringen ikke vokser i det uendelige
    Øk CACHE-navnet hvis du endrer index.html, ellers kan gamle filer henge igjen. */
 
-const CACHE = 'blatur-v29';
+const CACHE = 'blatur-v30';
 const FLISER = 'blatur-fliser-v1';
 const MAKS_FLISER = 400;
 
@@ -81,6 +81,11 @@ self.addEventListener('fetch', e => {
   /* Værmeldingen skal ALDRI caches. Uten dette unntaket faller den ned i
      cache-først-grenen nederst og viser samme melding resten av turen. */
   if (url.hostname === 'api.open-meteo.com') return;
+
+  /* Samme felle for den delte poengtavla: den ligger på et annet domene og
+     ville derfor havnet i cache-først-grenen nederst. Da hadde stillingen
+     frosset på det første svaret og aldri oppdatert seg igjen. */
+  if (url.hostname.endsWith('.workers.dev') || url.pathname.endsWith('/tavle')) return;
 
   const egen = url.origin === self.location.origin;
   const erNavigasjon = req.mode === 'navigate';
