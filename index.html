@@ -94,9 +94,6 @@ main{padding:14px 14px 20px;max-width:760px;margin:0 auto}
 .simbar b{color:#4a3813}
 .simbar button{margin-top:8px;background:#6b5320;border:none;color:#fff;border-radius:8px;
   padding:7px 12px;font-size:12.5px;font-family:inherit;cursor:pointer}
-.skylinje{font-size:12px;padding:7px 12px;border-radius:9px;margin:0 0 10px;line-height:1.45}
-.skylinje.ok{background:#eef8f2;color:#1f6b48;border:1px solid #cfe8db}
-.skylinje.vent{background:#fff6e6;color:#6b5320;border:1px solid #f0dcb4}
 .merke{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:650;
   background:#fdeaec;color:#a3242f;border:1px solid #f2c4c9;border-radius:7px;padding:3px 8px}
 .post.skjult{border-style:dashed;border-color:#e6bcc1;background:#fffcfc}
@@ -1629,109 +1626,8 @@ function settResultat(quizId, lagIdx, score) {
   const n = resNokkel(quizId, lagIdx);
   resultater[n] = score;
   lagreResultater();
-  skyLeggIKo(n, score);
 }
 
-/* ---------- Delt poengtavle ----------
-   Stillingen ligger på et lite endepunkt så alle ser den samme tavla uten
-   at noen må sende koder. Tre regler holder dette trygt:
-
-   1. Skyen er fasit ved lesing. Ellers ville to telefoner dratt tavla fram
-      og tilbake mellom hver sin versjon.
-   2. Vi sender bare det brukeren faktisk har gjort — aldri hele det lokale
-      settet på klokke. Da kan en gammel telefon ikke overskrive nyere tall.
-   3. Alt som ikke kom fram legges i en kø som tømmes ved neste henting.
-      Uten dekning i Kadıköy blir resultatet liggende og går opp av seg selv
-      når nettet er tilbake.
-
-   Faller endepunktet bort, skjer ingenting dramatisk: kodesystemet står
-   urørt, og tavla oppfører seg som før. */
-let skyKo = {};
-try { skyKo = JSON.parse(localStorage.getItem('blatur-skyko') || '{}'); } catch (e) {}
-let skyStatus = null;     /* null = ikke i bruk, ellers {tid, feil} */
-let skySender = false;
-
-const skyPa = () => !!(DATA && DATA.sky && DATA.sky.aktiv && DATA.sky.url);
-function skyLagreKo() {
-  try { localStorage.setItem('blatur-skyko', JSON.stringify(skyKo)); } catch (e) {}
-}
-function skyLeggIKo(nokkel, verdi) {
-  if (!skyPa()) return;
-  skyKo[nokkel] = verdi;
-  skyLagreKo();
-  skySend();
-}
-
-/* Sender køen. Tømmer bare det som faktisk kom fram. */
-async function skySend() {
-  if (!skyPa() || skySender) return;
-  const nokler = Object.keys(skyKo);
-  if (!nokler.length) return;
-  skySender = true;
-  const sendt = { ...skyKo };
-  try {
-    /* text/plain gjør dette til en «enkel» forespørsel, så nettleseren
-       slipper en ekstra preflight-runde. Merkbart på treg roaming. */
-    const r = await fetch(DATA.sky.url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-      body: JSON.stringify({ token: DATA.sky.token, res: sendt, fra: minEnhet() })
-    });
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
-    if (!d.ok) throw new Error(d.feil || 'avvist');
-    Object.keys(sendt).forEach(k => { if (skyKo[k] === sendt[k]) delete skyKo[k]; });
-    skyLagreKo();
-    skyTaImot(d);
-  } catch (e) {
-    skyStatus = { tid: naa(), feil: true };
-  } finally {
-    skySender = false;
-  }
-}
-
-/* Henter stillingen. Køen vinner over skyen — den er nyere her. */
-async function skyHent() {
-  if (!skyPa()) return;
-  try {
-    const r = await fetch(DATA.sky.url + '?v=' + Date.now(), { cache: 'no-store' });
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
-    if (!d.ok) throw new Error('avvist');
-    skyTaImot(d);
-    if (Object.keys(skyKo).length) skySend();
-  } catch (e) {
-    skyStatus = { tid: skyStatus ? skyStatus.tid : null, feil: true };
-  }
-}
-
-function skyTaImot(d) {
-  let endret = false;
-  Object.entries(d.res || {}).forEach(([k, v]) => {
-    if (k in skyKo) return;                  /* vår egen, ennå ikke sendt */
-    if (resultater[k] === v) return;
-    resultater[k] = v;
-    endret = true;
-  });
-  skyStatus = { tid: naa(), feil: false };
-  if (endret) {
-    lagreResultater();
-    if (qVisning === 'liste') tegnQuiz(); else tegnTavle();
-    visStatus('🏆 Stillingen er oppdatert');
-  }
-}
-
-/* Hvem sendte inn. Bare til loggen, så en tabbe kan spores. */
-function minEnhet() {
-  try {
-    let n = localStorage.getItem('blatur-enhet');
-    if (!n) {
-      n = 'tlf-' + Math.random().toString(36).slice(2, 7);
-      localStorage.setItem('blatur-enhet', n);
-    }
-    return n;
-  } catch (e) { return 'ukjent'; }
-}
 function hentResultat(quizId, lagIdx) {
   const v = resultater[resNokkel(quizId, lagIdx)];
   return v === undefined ? null : v;
@@ -1824,6 +1720,58 @@ function lesKode(tekst) {
   return { feil: 'Ukjent kode. Den skal begynne med Q eller T.' };
 }
 
+/* ---------- Stillingen via data.json ----------
+   Telefonene kan ikke snakke med hverandre. Men alle henter data.json fra
+   nettadressen hvert 30. sekund uansett, og den fila kan arrangørene
+   redigere fra telefonen. Så der legger vi stillingen: Henrik trykker
+   «Kopier kode for data.json» på tavla, limer koden inn i feltet «tavle»,
+   og alle ni har den innen 30 sekunder uten å gjøre noe.
+
+   Én regel er viktigere enn resten: koden skal aldri kunne slette et
+   resultat noen nettopp har spilt inn. Tavlekoden har et eget tegn for
+   «ikke spilt», og de plassene hoppes over — vi setter bare de tallene
+   koden faktisk inneholder. Har et lag lagt inn en runde Henrik ennå ikke
+   har fått SMS om, blir den stående.
+
+   Koder som ikke går opp ignoreres i stillhet for gjengen. Arrangøren får
+   beskjed, én gang per kode, siden det er han som har tastet feil. */
+let sisteTavle = null, sisteTavleFeil = null, tavleForste = true;
+try { sisteTavle = localStorage.getItem('blatur-tavlekode'); } catch (e) {}
+
+function tavleFraData() {
+  const raa = DATA && DATA.tavle;
+  if (!raa || typeof raa !== 'string') return false;
+  const kode = normaliser(raa);
+  if (!kode || kode === sisteTavle) return false;
+
+  const r = lesKode(kode);
+  if (r.feil || r.type !== 'tavle') {
+    if (seAlt() && kode !== sisteTavleFeil) {
+      sisteTavleFeil = kode;
+      visStatus('⚠️ Tavlekoden i data.json går ikke opp');
+    }
+    return false;
+  }
+
+  sisteTavle = kode;
+  try { localStorage.setItem('blatur-tavlekode', kode); } catch (e) {}
+
+  let endret = 0;
+  Object.entries(r.nye).forEach(([n, v]) => {
+    if (resultater[n] === v) return;
+    resultater[n] = v;
+    endret++;
+  });
+  if (endret) lagreResultater();
+  return endret > 0;
+}
+
+/* Rett i utklippstavla, ikke via delingsarket — koden skal videre til et
+   tekstfelt i GitHub, ikke til en samtale. */
+async function kopierTekst(tekst) {
+  try { await navigator.clipboard.writeText(tekst); return 'kopiert'; } catch (e) { return 'nei'; }
+}
+
 async function delTekst(tekst) {
   try {
     if (navigator.share) { await navigator.share({ text: tekst }); return 'delt'; }
@@ -1881,15 +1829,6 @@ function tegnTavle() {
   const spilt = folk.some(f => f.runder > 0);
   let h = `<div class="lb"><div class="lbtopp" id="lbtopp">
       <h2>🏆 Stillingen</h2><span class="pil">${lbApen ? 'Skjul ▾' : 'Vis ▸'}</span></div>`;
-  if (lbApen && skyPa()) {
-    const kø = Object.keys(skyKo).length;
-    h += skyStatus && !skyStatus.feil && !kø
-      ? `<div class="skylinje ok">☁️ Delt tavle — alle ser det samme</div>`
-      : kø
-        ? `<div class="skylinje vent">☁️ ${kø} resultat${kø > 1 ? 'er' : ''} venter på nett — går opp av seg selv</div>`
-        : `<div class="skylinje vent">📴 Ikke kontakt med tavla — kodene virker som før</div>`;
-  }
-
   if (!lbApen) {
     h += `<div class="lbnull">Leder: <b>${esc(folk[0].navn)}</b> med ${folk[0].sum} poeng.</div></div>`;
     boks.innerHTML = h;
@@ -1941,8 +1880,11 @@ function tegnTavle() {
   }
 
   const maks = (DATA.quizer || []).reduce((a, q) => a + q.sporsmal.length, 0);
-  h += `<div class="lbfot">Maks ${maks} poeng totalt. Tavlen viser det som er lagt inn på denne telefonen.<br>
+  h += `<div class="lbfot">Maks ${maks} poeng totalt. ${DATA.tavle
+          ? 'Stillingen kommer av seg selv når arrangørene har lagt inn runden.'
+          : 'Tavlen viser det som er lagt inn på denne telefonen.'}<br>
         <button class="lbnullstill" id="lbdel">Del stillingen</button> ·
+        ${erArrangor() ? `<button class="lbnullstill" id="lbgit">📋 Kode for data.json</button> · ` : ''}
         <button class="lbnullstill" id="lbnull">Nullstill</button></div></div>`;
 
   boks.innerHTML = h;
@@ -1952,6 +1894,14 @@ function tegnTavle() {
     const r = await delTekst('Blåtur-quiz — stillingen så langt.\nLegg inn denne i appen under «Legg inn resultat»:\n' + visKode(kode));
     if (r === 'kopiert') visStatus('📋 Kopiert');
     else if (r === 'nei') alert('Tavlekode:\n\n' + visKode(kode));
+  };
+  /* Arrangørens vei ut til de ni: koden limes inn i «tavle» i data.json. */
+  const git = $('#lbgit');
+  if (git) git.onclick = async () => {
+    const kode = lagTavlekode();
+    const r = await kopierTekst(kode);
+    if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i «tavle» i data.json');
+    else alert('Lim denne inn i feltet «tavle» i data.json:\n\n' + kode);
   };
   $('#lbnull').onclick = () => {
     if (confirm('Nullstille alle resultater og gjett? Dette kan ikke angres.')) {
@@ -2465,9 +2415,6 @@ function bytt(navn) {
   if (navn === 'kart') tegnKart();
   if (navn === 'info') { tegnInfoAlt(); tegnOppslag(); }
   if (navn === 'prog') tegnProgram();
-  /* Åpner man quizfanen skal tavla være fersk med én gang, ikke om
-     opptil tretti sekunder. Det er her folk står og venter på tallene. */
-  if (navn === 'quiz') skyHent();
   if (navn === 'eskorte') tegnEskorte();
   window.scrollTo(0, 0);
 }
@@ -2514,7 +2461,15 @@ function tegnAlt() {
   tegnProgram();
   tegnInfoAlt();
   tegnOppslag();
+
+  /* Stillingen leses før quizen tegnes, ellers ville tavla blinket med
+     gamle tall i et halvsekund hver gang en ny runde kom inn. */
+  const nyStilling = tavleFraData();
   if (qVisning === 'liste') tegnQuiz(); else tegnTavle();
+  /* Ikke varsle på første tegning — da ville alle fått en gladmelding om
+     tall de aldri har sett noe annet enn. */
+  if (nyStilling && !tavleForste) visStatus('🏆 Stillingen er oppdatert');
+  tavleForste = false;
   if ($('#t-kart').classList.contains('on')) tegnKart();
 
   /* Til slutt, slik at appen ligger ferdig tegnet bak hilsenen. */
@@ -2550,7 +2505,7 @@ function startPuls() {
   puls = setInterval(() => {
     hentData(false);
     tegnNedtelling();
-    if (DATA) { tegnProgram(); tegnAvledede(); skyHent(); }
+    if (DATA) { tegnProgram(); tegnAvledede(); }
   }, 30000);
 }
 function stoppPuls() {
@@ -2560,7 +2515,7 @@ startPuls();
 
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { stoppPuls(); }
-  else { startPuls(); hentData(false); tegnNedtelling(); if (DATA) { tegnProgram(); skyHent(); } }
+  else { startPuls(); hentData(false); tegnNedtelling(); if (DATA) { tegnProgram(); } }
 });
 </script>
 </body>

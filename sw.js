@@ -82,11 +82,6 @@ self.addEventListener('fetch', e => {
      cache-først-grenen nederst og viser samme melding resten av turen. */
   if (url.hostname === 'api.open-meteo.com') return;
 
-  /* Samme felle for den delte poengtavla: den ligger på et annet domene og
-     ville derfor havnet i cache-først-grenen nederst. Da hadde stillingen
-     frosset på det første svaret og aldri oppdatert seg igjen. */
-  if (url.hostname.endsWith('.workers.dev') || url.pathname.endsWith('/tavle')) return;
-
   const egen = url.origin === self.location.origin;
   const erNavigasjon = req.mode === 'navigate';
   const ferskForst = egen && (

@@ -1,6 +1,6 @@
 {
-  "versjon": 41,
-  "sistOppdatert": "9. september 19:30",
+  "versjon": 43,
+  "sistOppdatert": "9. september 22:45",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -851,11 +851,11 @@
       "id": "istanbuls-historie",
       "tittel": "Istanbuls historie",
       "ikon": "🕌",
-      "ingress": "Byen vi står i — ikke bare gamlebyen. Sju spørsmål følger guideturen lørdag, fem handler om resten av Istanbul: Karaköy, Kadıköy, Bosporos. Tolv i alt.",
+      "ingress": "Byen vi står i — ikke bare gamlebyen. Tolv spørsmål fra begge sider av sundet: Karaköy, Kadıköy, Bosporos og Sultanahmet.",
       "kode": "Anna69",
       "sporsmal": [
         {
-          "sporsmal": "Hvor går turens aller første stopp lørdag?",
+          "sporsmal": "Hvilken av disse må du time besøket til, fordi den stenger for besøkende rundt bønnetidene?",
           "alternativer": [
             "Blå moské",
             "Hagia Sofia",
@@ -863,7 +863,7 @@
             "Galatatårnet"
           ],
           "riktig": 0,
-          "forklaring": "Blå moské først, med vilje. Middagsbønnen er 13:06 den lørdagen, og moskeen stenger for besøkende rundt bønnetidene. Hagia Sofia kan besøkes under bønn, så den tåler å ligge etterpå."
+          "forklaring": "Blå moské. Den stenger for besøkende rundt hver bønnetid, og middagsbønnen faller midt på dagen. Hagia Sofia kan besøkes under bønn og er dermed lettere å få til."
         },
         {
           "sporsmal": "Hva ble Hagia Sofia opprinnelig bygget som?",
@@ -874,10 +874,10 @@
             "Marked"
           ],
           "riktig": 1,
-          "forklaring": "Kirke, ferdig i år 537. Navnet betyr «Den hellige visdom». Den var kirke i nesten 900 år, moské i nesten 500, museum fra 1935 — og moské igjen fra 2020. Derfor er det teppe på gulvet og dekket skulder når vi går inn."
+          "forklaring": "Kirke, ferdig i år 537. Navnet betyr «Den hellige visdom». Den var kirke i nesten 900 år, moské i nesten 500, museum fra 1935 — og moské igjen fra 2020. Derfor er det teppe på gulvet, og skuldre og knær må være dekket for å slippe inn."
         },
         {
-          "sporsmal": "Fredag kveld tar vi fergen over til Kadıköy. Hvilken verdensdel havner vi i?",
+          "sporsmal": "Fergen fra Karaköy til Kadıköy tar deg til en annen verdensdel. Hvilken?",
           "alternativer": [
             "Europa",
             "Asia",
@@ -888,7 +888,7 @@
           "forklaring": "Asia. Fergeturen tar rundt 20 minutter, og det er den billigste måten å krysse et kontinent på. Kadıköy er der lokalbefolkningen spiser og drikker — ikke turistene."
         },
         {
-          "sporsmal": "Vi tar trikken fra Karaköy over til gamlebyen. Hvilket farvann krysser vi?",
+          "sporsmal": "Trikken fra Karaköy til gamlebyen krysser ett farvann. Hvilket?",
           "alternativer": [
             "Bosporos",
             "Det gyldne horn",
@@ -896,7 +896,7 @@
             "Svartehavet"
           ],
           "riktig": 1,
-          "forklaring": "Det gyldne horn — Haliç på tyrkisk. Bosporos er det store sundet mellom Europa og Asia; det tar vi på båten lørdag ettermiddag."
+          "forklaring": "Det gyldne horn — Haliç på tyrkisk. Bosporos er det store sundet mellom Europa og Asia, og et helt annet vann."
         },
         {
           "sporsmal": "Hvorfor kalles Blå moské «blå»?",
@@ -910,7 +910,7 @@
           "forklaring": "Titusenvis av håndlagde İznik-fliser innvendig. Utvendig er den grå. Se opp i kuppelen når sola står inn gjennom vinduene. Den heter egentlig Sultanahmet Camii, etter sultan Ahmed I — og har seks minareter, uvanlig mange."
         },
         {
-          "sporsmal": "Tårnet som lyser rett over hotellet vårt — hvem bygde det?",
+          "sporsmal": "Tårnet som lyser over Karaköy — hvem bygde det?",
           "alternativer": [
             "Osmanerne",
             "Genoveserne",
@@ -940,10 +940,10 @@
             "Fem"
           ],
           "riktig": 2,
-          "forklaring": "Tre hengebroer: 15. juli-martyrenes bro fra 1973, Fatih Sultan Mehmet fra 1988 og Yavuz Sultan Selim fra 2016. I tillegg går Marmaray-togtunnelen under sundet. Vi ser den første fra båten lørdag."
+          "forklaring": "Tre hengebroer: 15. juli-martyrenes bro fra 1973, Fatih Sultan Mehmet fra 1988 og Yavuz Sultan Selim fra 2016. I tillegg går Marmaray-togtunnelen under sundet."
         },
         {
-          "sporsmal": "Turen slutter ved Krydderbasaren. Hva heter den på tyrkisk?",
+          "sporsmal": "Krydderbasaren ved Eminönü — hva heter den på tyrkisk?",
           "alternativer": [
             "Kapalı Çarşı",
             "Mısır Çarşısı",
@@ -951,7 +951,7 @@
             "Sahaflar Çarşısı"
           ],
           "riktig": 1,
-          "forklaring": "Mısır Çarşısı — «Egyptisk basar», ferdig i 1664 som del av Yeni Camii. Kapalı Çarşı er den store overdekte basaren, en helt annen og mye større. Hamdi, der vi spiser lunsj, ligger 170 meter unna."
+          "forklaring": "Mısır Çarşısı — «Egyptisk basar», ferdig i 1664 som del av Yeni Camii. Kapalı Çarşı er den store overdekte basaren, en helt annen og mye større."
         },
         {
           "sporsmal": "Kadıköy het Chalkedon i antikken. Hva kalte grekerne stedet, ifølge sagnet?",
@@ -965,7 +965,7 @@
           "forklaring": "«De blindes land». Byzas spurte oraklet i Delfi hvor han skulle grunnlegge byen sin og fikk til svar: rett overfor de blindes land. Da han så at noen alt hadde slått seg ned på asiatisk side, mente han de måtte være blinde som ikke valgte den europeiske halvøya. Der la han Byzantion — som ble Konstantinopel, som ble Istanbul."
         },
         {
-          "sporsmal": "Palasset vi passerer med båten lørdag — hvem døde der i 1938?",
+          "sporsmal": "Dolmabahçe-palasset ved Bosporos — hvem døde der i 1938?",
           "alternativer": [
             "Süleyman den store",
             "Mehmed II",
@@ -973,7 +973,7 @@
             "Abdülhamid II"
           ],
           "riktig": 2,
-          "forklaring": "Atatürk, i Dolmabahçe-palasset 10. november 1938 klokken 09:05. Alle klokkene i palasset står fortsatt på 09:05. Palasset ble bygget 1843–1853 for sultan Abdülmecid I, som syntes Topkapı var gammeldags."
+          "forklaring": "Atatürk, 10. november 1938 klokken 09:05. Alle klokkene i palasset står fortsatt på 09:05. Palasset ble bygget 1843–1853 for sultan Abdülmecid I, som syntes Topkapı var gammeldags."
         },
         {
           "sporsmal": "Den vridde bronsesøylen på Hippodromen ble hentet fra et gresk tempel. Hvilket sted?",
@@ -1085,7 +1085,7 @@
             "Atatürk Olimpiyat"
           ],
           "riktig": 0,
-          "forklaring": "Şükrü Saracoğlu i Kadıköy — der vi er fredag kveld."
+          "forklaring": "Şükrü Saracoğlu i Kadıköy, på asiatisk side. En av de mest beryktede borteturene i Europa."
         },
         {
           "sporsmal": "Hvilken tysk-tyrkisk spiller vant VM med Tyskland i 2014 og spilte senere for Fenerbahçe?",
@@ -1518,8 +1518,9 @@
   ],
   "quizinfo": {
     "tittel": "Slik fungerer quizen",
-    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz. Laget spiller på én telefon og blir enige om ett svar før dere trykker. Når runden er ferdig får dere en kort kode. Send den til Henrik på SMS, så legger han den inn og stillingen oppdaterer seg. Poengene deles av alle tre på laget."
+    "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz. Laget spiller på én telefon og blir enige om ett svar før dere trykker. Når runden er ferdig får dere en kort kode. Send den til Henrik, så legger han den inn — og da oppdaterer stillingen seg av seg selv på alle telefonene. Poengene deles av alle tre på laget."
   },
+  "tavle": "",
   "deltakere": [
     "Sødal",
     "Jonsson",
@@ -1666,107 +1667,5 @@
         "tid": "2026-09-13T07:00:00+03:00"
       }
     ]
-  },
-  "sky": {
-    "aktiv": true,
-    "url": "https://gronntur.henrik061189.workers.dev/tavle",
-    "token": "2jzwA6BRk8OG7KCgapCm9QWCP9fs"
-  },
-  "oppslagArkiv": [
-    {
-      "type": "viktig",
-      "tid": "8. september",
-      "tekst": "Programmet er nå én fane, og det åpner seg selv. Hver post dukker opp to timer før den skjer — ingen kode, ingenting du må gjøre. Det du ser forseglet, kommer av seg selv. Kartet og Info følger samme klokke, så det nytter ikke å lete der heller. To unntak: den første posten lørdag slippes ved midnatt natt til lørdag, og søndagen slippes 22:00 lørdag så alle vet når vi drar.",
-      "av": "Henrik"
-    },
-    {
-      "type": "gøy",
-      "tid": "8. september",
-      "tekst": "Nei, du kan ikke jukse fram programmet ved å stille telefonklokka. Appen spør serveren hva klokka er. God tur med forsøket.",
-      "av": "Henrik"
-    },
-    {
-      "type": "gøy",
-      "tid": "8. september",
-      "tekst": "Erdogan selv har lagt igjen en hilsen i appen. Den spretter opp første gang du åpner den — les den, og ta den til deg.",
-      "av": "Henrik"
-    },
-    {
-      "type": "viktig",
-      "tid": "8. september",
-      "tekst": "Quizlagene heter nå Beşiktaş, Fenerbahçe og Galatasaray. Samme tre lag i alle fem quizene, men medlemmene er fortsatt trukket på nytt for hver quiz — sjekk hvilket lag du er på før dere starter.",
-      "av": "Henrik"
-    },
-    {
-      "type": "info",
-      "tid": "8. september",
-      "tekst": "Quizen «Istanbuls historie» er skrevet om. Sju spørsmål følger guideturen lørdag — Blå moské, Hagia Sofia, Hippodromen, Krydderbasaren — og fem handler om resten av byen: Galatatårnet over hotellet, fergen til Kadıköy, broene over Bosporos og palasset vi passerer med båten. Den deles ut i forkant, så ta den fredag.",
-      "av": "Henrik",
-      "laas": "blaa",
-      "laastTekst": "Quizen «Istanbuls historie» er skrevet om. Tolv spørsmål om byen vi skal til — sju av dem følger noe vi gjør, fem handler om resten av byen. Den deles ut i forkant, så ta den fredag."
-    },
-    {
-      "type": "info",
-      "tid": "8. september",
-      "tekst": "Avklart i dag: lørdagslunsjen på Hamdi er bekreftet, depositumet på middagen er betalt, og fotballkampen dropper vi — den kolliderte uansett med matturnéen fredag. Presentasjonen på Nusr-Et utgår også; rommet har verken projektor eller eget lydanlegg.",
-      "av": "Henrik",
-      "laas": "nusret",
-      "laastTekst": "Avklart i dag: de siste løse trådene er landet. Det som skulle bookes er booket og betalt, og én ting er strøket fordi den kolliderte med noe annet. Ingenting av det krever noe av deg."
-    },
-    {
-      "type": "info",
-      "tid": "6. september",
-      "tekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. Lørdagslunsjen er satt til Hamdi ved Eminønü — de anbefaler den varmt. De tipser også om Monkey Bar i Şişhane som alternativ takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted.",
-      "av": "Henrik",
-      "laas": "hamdi",
-      "laastTekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. De tipser også om Monkey Bar i Şişhane som takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted."
-    },
-    {
-      "type": "gøy",
-      "tid": "5. september",
-      "tekst": "Transporten er ordnet begge veier — €200 for hele gjengen, altså rundt 220 kroner hver tur/retur. Det er under det vi budsjetterte med. Ingen skal stå på et fortau og forhandle med en taxi, verken fredag eller søndag.",
-      "av": "Henrik"
-    },
-    {
-      "type": "info",
-      "tid": "5. september",
-      "tekst": "Skybaren lørdag er avklart: Sky Karaköy tar ikke bordbestilling, vi bare går opp. Vi går rett fra båten ca. 19:10 i stedet for 19:30 — da får vi en drøy time i stedet for tre kvarter. Fullt? Da går vi til The Bank Roof Bar, 8–10 min unna. Er den også full, drar vi rett til middagen. Uansett hva som skjer: vi er i bilene 20:20.",
-      "av": "Henrik",
-      "laas": "sky"
-    },
-    {
-      "type": "info",
-      "tid": "31. august",
-      "tekst": "Lørdag etter middagen: tre biler til Asmalımescit ca. midnatt, så tar vi det derfra. Ingen dørkontroll, og hjem er 8 minutters gange — ingen trenger å ordne taxi.",
-      "av": "Henrik",
-      "laas": "asmali"
-    },
-    {
-      "type": "gøy",
-      "tid": "31. august",
-      "tekst": "Middagen lørdag er booket: eget rom, fast meny og fri drikke hele kvelden. Ingen regning å splitte på elleve. Spar litt plass.",
-      "av": "Henrik",
-      "laas": "nusret",
-      "laastTekst": "Én av kveldene er ordnet slik at ingen regning skal splittes på elleve — fast meny, fri drikke og eget rom. Spar litt plass."
-    },
-    {
-      "type": "viktig",
-      "tid": "31. august",
-      "tekst": "Lørdag: vi forlater skybaren 20:20 for å rekke bordet 21:00. Ikke bestill en runde til 20:15.",
-      "av": "Bruland",
-      "laas": "nusret"
-    },
-    {
-      "type": "info",
-      "tid": "31. august",
-      "tekst": "Mobildata er ordnet — du får en QR-kode av oss på flyplassen. Du trenger ikke gjøre noe på forhånd.",
-      "av": "Henrik"
-    },
-    {
-      "type": "viktig",
-      "tid": "18. august",
-      "tekst": "Appen er live. Legg den på hjemskjermen: Del-knappen i Safari → «Legg til på Hjem-skjerm». Da slipper du å lete etter lenken.",
-      "av": "Henrik"
-    }
-  ]
+  }
 }
