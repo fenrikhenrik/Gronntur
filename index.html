@@ -2351,9 +2351,12 @@ function tegnInfo() {
 
   if ((DATA.gjengen || []).length) {
     const k = el('div', 'kort');
-    k.appendChild(el('h2', null, 'Gjengen'));
+    k.appendChild(el('h2', null, 'GUTTANE'));
     const t = el('table');
-    DATA.gjengen.forEach(p => t.appendChild(el('tr', null, `<td>${esc(p.navn)}</td><td>${esc(p.rolle || '')}</td>`)));
+    /* Sorteres her og ikke i data.json, så rekkefølgen holder seg uansett
+       hvem som legges til senere. Norsk sortering: æ, ø og å bakerst. */
+    [...DATA.gjengen].sort((a, b) => (a.navn || '').localeCompare(b.navn || '', 'nb'))
+      .forEach(p => t.appendChild(el('tr', null, `<td>${esc(p.navn)}</td><td>${esc(p.rolle || '')}</td>`)));
     k.appendChild(t); boks.appendChild(k);
   }
 }

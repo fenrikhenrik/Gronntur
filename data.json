@@ -1,6 +1,6 @@
 {
-  "versjon": 40,
-  "sistOppdatert": "9. september 19:00",
+  "versjon": 41,
+  "sistOppdatert": "9. september 19:30",
   "oppdatertAv": "Henrik",
   "tur": {
     "tittel": "Blåtur Istanbul",
@@ -13,103 +13,6 @@
       "lon": 28.9755
     }
   },
-  "oppslag": [
-    {
-      "type": "viktig",
-      "tid": "8. september",
-      "tekst": "Programmet er nå én fane, og det åpner seg selv. Hver post dukker opp to timer før den skjer — ingen kode, ingenting du må gjøre. Det du ser forseglet, kommer av seg selv. Kartet og Info følger samme klokke, så det nytter ikke å lete der heller. To unntak: den første posten lørdag slippes ved midnatt natt til lørdag, og søndagen slippes 22:00 lørdag så alle vet når vi drar.",
-      "av": "Henrik"
-    },
-    {
-      "type": "gøy",
-      "tid": "8. september",
-      "tekst": "Nei, du kan ikke jukse fram programmet ved å stille telefonklokka. Appen spør serveren hva klokka er. God tur med forsøket.",
-      "av": "Henrik"
-    },
-    {
-      "type": "gøy",
-      "tid": "8. september",
-      "tekst": "Erdogan selv har lagt igjen en hilsen i appen. Den spretter opp første gang du åpner den — les den, og ta den til deg.",
-      "av": "Henrik"
-    },
-    {
-      "type": "viktig",
-      "tid": "8. september",
-      "tekst": "Quizlagene heter nå Beşiktaş, Fenerbahçe og Galatasaray. Samme tre lag i alle fem quizene, men medlemmene er fortsatt trukket på nytt for hver quiz — sjekk hvilket lag du er på før dere starter.",
-      "av": "Henrik"
-    },
-    {
-      "type": "info",
-      "tid": "8. september",
-      "tekst": "Quizen «Istanbuls historie» er skrevet om. Sju spørsmål følger guideturen lørdag — Blå moské, Hagia Sofia, Hippodromen, Krydderbasaren — og fem handler om resten av byen: Galatatårnet over hotellet, fergen til Kadıköy, broene over Bosporos og palasset vi passerer med båten. Den deles ut i forkant, så ta den fredag.",
-      "av": "Henrik",
-      "laas": "blaa",
-      "laastTekst": "Quizen «Istanbuls historie» er skrevet om. Tolv spørsmål om byen vi skal til — sju av dem følger noe vi gjør, fem handler om resten av byen. Den deles ut i forkant, så ta den fredag."
-    },
-    {
-      "type": "info",
-      "tid": "8. september",
-      "tekst": "Avklart i dag: lørdagslunsjen på Hamdi er bekreftet, depositumet på middagen er betalt, og fotballkampen dropper vi — den kolliderte uansett med matturnéen fredag. Presentasjonen på Nusr-Et utgår også; rommet har verken projektor eller eget lydanlegg.",
-      "av": "Henrik",
-      "laas": "nusret",
-      "laastTekst": "Avklart i dag: de siste løse trådene er landet. Det som skulle bookes er booket og betalt, og én ting er strøket fordi den kolliderte med noe annet. Ingenting av det krever noe av deg."
-    },
-    {
-      "type": "info",
-      "tid": "6. september",
-      "tekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. Lørdagslunsjen er satt til Hamdi ved Eminønü — de anbefaler den varmt. De tipser også om Monkey Bar i Şişhane som alternativ takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted.",
-      "av": "Henrik",
-      "laas": "hamdi",
-      "laastTekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. De tipser også om Monkey Bar i Şişhane som takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted."
-    },
-    {
-      "type": "gøy",
-      "tid": "5. september",
-      "tekst": "Transporten er ordnet begge veier — €200 for hele gjengen, altså rundt 220 kroner hver tur/retur. Det er under det vi budsjetterte med. Ingen skal stå på et fortau og forhandle med en taxi, verken fredag eller søndag.",
-      "av": "Henrik"
-    },
-    {
-      "type": "info",
-      "tid": "5. september",
-      "tekst": "Skybaren lørdag er avklart: Sky Karaköy tar ikke bordbestilling, vi bare går opp. Vi går rett fra båten ca. 19:10 i stedet for 19:30 — da får vi en drøy time i stedet for tre kvarter. Fullt? Da går vi til The Bank Roof Bar, 8–10 min unna. Er den også full, drar vi rett til middagen. Uansett hva som skjer: vi er i bilene 20:20.",
-      "av": "Henrik",
-      "laas": "sky"
-    },
-    {
-      "type": "info",
-      "tid": "31. august",
-      "tekst": "Lørdag etter middagen: tre biler til Asmalımescit ca. midnatt, så tar vi det derfra. Ingen dørkontroll, og hjem er 8 minutters gange — ingen trenger å ordne taxi.",
-      "av": "Henrik",
-      "laas": "asmali"
-    },
-    {
-      "type": "gøy",
-      "tid": "31. august",
-      "tekst": "Middagen lørdag er booket: eget rom, fast meny og fri drikke hele kvelden. Ingen regning å splitte på elleve. Spar litt plass.",
-      "av": "Henrik",
-      "laas": "nusret",
-      "laastTekst": "Én av kveldene er ordnet slik at ingen regning skal splittes på elleve — fast meny, fri drikke og eget rom. Spar litt plass."
-    },
-    {
-      "type": "viktig",
-      "tid": "31. august",
-      "tekst": "Lørdag: vi forlater skybaren 20:20 for å rekke bordet 21:00. Ikke bestill en runde til 20:15.",
-      "av": "Bruland",
-      "laas": "nusret"
-    },
-    {
-      "type": "info",
-      "tid": "31. august",
-      "tekst": "Mobildata er ordnet — du får en QR-kode av oss på flyplassen. Du trenger ikke gjøre noe på forhånd.",
-      "av": "Henrik"
-    },
-    {
-      "type": "viktig",
-      "tid": "18. august",
-      "tekst": "Appen er live. Legg den på hjemskjermen: Del-knappen i Safari → «Legg til på Hjem-skjerm». Da slipper du å lete etter lenken.",
-      "av": "Henrik"
-    }
-  ],
   "program": [
     {
       "dag": "Fredag 11. september",
@@ -563,7 +466,7 @@
         ],
         [
           "Hjem",
-          "SAW 11:15 · søndag"
+          "SAW 11:15 → OSL 14:10 · søndag"
         ]
       ]
     },
@@ -617,10 +520,6 @@
           "Dekk knær og skuldre. Det håndheves."
         ],
         [
-          "Data",
-          "Skaff eSIM eller roaming før avreise."
-        ],
-        [
           "Alkohol i butikk",
           "Selges ikke mellom 22:00 og 06:00. Barer serverer som normalt."
         ],
@@ -650,10 +549,6 @@
           ]
         },
         [
-          "Monkey Bar",
-          "Takbar i Şişhane, anbefalt av hotellet. Åpent 18:00–02:00. 12–15 min bratt oppoverbakke fra kaia. +90 532 605 81 56"
-        ],
-        [
           "Dørkontroll",
           "Hotellet advarer: elleve menn uten reservasjon kan bli avvist enkelte steder. Vi går aldri samlet inn uten å ha ringt først."
         ],
@@ -666,27 +561,7 @@
   ],
   "gjengen": [
     {
-      "navn": "Henrik",
-      "rolle": "Arrangør · quizmaster"
-    },
-    {
-      "navn": "Bruland",
-      "rolle": "Arrangør · quizmaster"
-    },
-    {
-      "navn": "Sødal",
-      "rolle": ""
-    },
-    {
-      "navn": "Jonsson",
-      "rolle": ""
-    },
-    {
-      "navn": "Gunnar",
-      "rolle": ""
-    },
-    {
-      "navn": "Martin",
+      "navn": "Anders",
       "rolle": ""
     },
     {
@@ -694,7 +569,31 @@
       "rolle": ""
     },
     {
-      "navn": "Anders",
+      "navn": "Bruland",
+      "rolle": "Tidenes ArrKom (Lenge leve)"
+    },
+    {
+      "navn": "Gunnar",
+      "rolle": ""
+    },
+    {
+      "navn": "Henrik",
+      "rolle": "Tidenes ArrKom (Lenge leve)"
+    },
+    {
+      "navn": "Johan",
+      "rolle": ""
+    },
+    {
+      "navn": "Jonsson",
+      "rolle": ""
+    },
+    {
+      "navn": "Lars",
+      "rolle": ""
+    },
+    {
+      "navn": "Martin",
       "rolle": ""
     },
     {
@@ -702,25 +601,21 @@
       "rolle": ""
     },
     {
-      "navn": "Johan",
-      "rolle": ""
-    },
-    {
-      "navn": "Lars",
+      "navn": "Sødal",
       "rolle": ""
     }
   ],
   "co2": {
     "tittel": "Klimaavtrykk 🌍",
-    "ingress": "Et ærlig estimat for hele turen, med høydeeffekten regnet inn — altså at utslipp sluppet ut i 10 kilometers høyde varmer nesten dobbelt så mye som de samme utslippene på bakken. Flyet er 96 % av regnestykket. Alt vi gjør nede i Istanbul er marginalt i sammenligning.",
+    "ingress": "Et ærlig estimat for hele turen, med høydeeffekten regnet inn — altså at utslipp sluppet ut i 10 kilometers høyde varmer omtrent dobbelt så mye som de samme utslippene på bakken. Flyet er 93 % av regnestykket. Alt vi gjør nede i Istanbul er marginalt i sammenligning — bortsett fra det vi spiser.",
     "hoved": {
-      "tall": "1 215 kg",
-      "tekst": "CO₂e per mann · 13,4 tonn for gjengen"
+      "tall": "1 337 kg",
+      "tekst": "CO₂e per mann · 14,7 tonn for gjengen"
     },
     "rader": [
       [
         "Fly Oslo–Istanbul t/r",
-        "1 173 kg per mann · 12,9 tonn for gjengen"
+        "1 237 kg per mann · 13,6 tonn for gjengen"
       ],
       [
         "Hotell, 2 netter",
@@ -742,27 +637,31 @@
         "5 kg per mann"
       ],
       [
+        "Mat og drikke i Istanbul",
+        "58 kg per mann — to biffmiddager og litt til"
+      ],
+      [
         "Tilsvarer i bensinbil",
-        "7 100 km per mann — Oslo–Roma tur/retur, og et godt stykke til"
+        "7 900 km per mann — Oslo–Roma tur/retur, og et godt stykke til"
       ],
       [
         "For gjengen samlet",
-        "78 600 km — nesten to ganger rundt jorda"
+        "86 500 km — mer enn to ganger rundt jorda"
       ],
       [
         "Tilsvarer i storfekjøtt",
-        "12 kg per mann · 134 kg for gjengen"
+        "13 kg per mann · 148 kg for gjengen"
       ],
       [
         "Sagt på en annen måte",
-        "Én biffmiddag på 300 g er ca. 30 kg CO₂e. Turen tilsvarer 41 slike per mann."
+        "Én biffmiddag på 300 g er ca. 30 kg CO₂e. Turen tilsvarer 45 slike per mann."
       ],
       [
         "Andel av et årsforbruk",
-        "Ca. 17 % av det en nordmann slipper ut på et helt år — på 48 timer"
+        "Ca. 19 % av det en nordmann slipper ut på et helt år — på 48 timer"
       ]
     ],
-    "fot": "Faktorer: fly 0,126 kg CO₂e per personkilometer (DEFRA 2026, kortdistanse økonomi) ganget med 1,9 for høydeeffekt, i tråd med DEFRAs egen praksis. Bensinbil 0,17 kg/km. Storfekjøtt 99,5 kg CO₂e/kg (Poore & Nemecek 2018). Flydistanse 4 909 km tur/retur per mann. Estimat, ikke fasit — men størrelsesordenen stemmer."
+    "fot": "Faktorer: fly 0,126 kg CO₂e per personkilometer (DEFRA 2026, kortdistanse økonomi) ganget med 2,0 for høydeeffekt — DEFRA selv bruker 1,9, og litteraturen spenner fra 1,7 til 3. Bensinbil 0,17 kg/km. Storfekjøtt 99,5 kg CO₂e/kg (Poore & Nemecek 2018); mat og drikke er regnet som to biffmiddager pluss resten av helgen. Flydistanse 4 909 km tur/retur per mann. Estimat, ikke fasit — men størrelsesordenen stemmer."
   },
   "vaer": {
     "tittel": "Værmelding",
@@ -1772,5 +1671,102 @@
     "aktiv": true,
     "url": "https://gronntur.henrik061189.workers.dev/tavle",
     "token": "2jzwA6BRk8OG7KCgapCm9QWCP9fs"
-  }
+  },
+  "oppslagArkiv": [
+    {
+      "type": "viktig",
+      "tid": "8. september",
+      "tekst": "Programmet er nå én fane, og det åpner seg selv. Hver post dukker opp to timer før den skjer — ingen kode, ingenting du må gjøre. Det du ser forseglet, kommer av seg selv. Kartet og Info følger samme klokke, så det nytter ikke å lete der heller. To unntak: den første posten lørdag slippes ved midnatt natt til lørdag, og søndagen slippes 22:00 lørdag så alle vet når vi drar.",
+      "av": "Henrik"
+    },
+    {
+      "type": "gøy",
+      "tid": "8. september",
+      "tekst": "Nei, du kan ikke jukse fram programmet ved å stille telefonklokka. Appen spør serveren hva klokka er. God tur med forsøket.",
+      "av": "Henrik"
+    },
+    {
+      "type": "gøy",
+      "tid": "8. september",
+      "tekst": "Erdogan selv har lagt igjen en hilsen i appen. Den spretter opp første gang du åpner den — les den, og ta den til deg.",
+      "av": "Henrik"
+    },
+    {
+      "type": "viktig",
+      "tid": "8. september",
+      "tekst": "Quizlagene heter nå Beşiktaş, Fenerbahçe og Galatasaray. Samme tre lag i alle fem quizene, men medlemmene er fortsatt trukket på nytt for hver quiz — sjekk hvilket lag du er på før dere starter.",
+      "av": "Henrik"
+    },
+    {
+      "type": "info",
+      "tid": "8. september",
+      "tekst": "Quizen «Istanbuls historie» er skrevet om. Sju spørsmål følger guideturen lørdag — Blå moské, Hagia Sofia, Hippodromen, Krydderbasaren — og fem handler om resten av byen: Galatatårnet over hotellet, fergen til Kadıköy, broene over Bosporos og palasset vi passerer med båten. Den deles ut i forkant, så ta den fredag.",
+      "av": "Henrik",
+      "laas": "blaa",
+      "laastTekst": "Quizen «Istanbuls historie» er skrevet om. Tolv spørsmål om byen vi skal til — sju av dem følger noe vi gjør, fem handler om resten av byen. Den deles ut i forkant, så ta den fredag."
+    },
+    {
+      "type": "info",
+      "tid": "8. september",
+      "tekst": "Avklart i dag: lørdagslunsjen på Hamdi er bekreftet, depositumet på middagen er betalt, og fotballkampen dropper vi — den kolliderte uansett med matturnéen fredag. Presentasjonen på Nusr-Et utgår også; rommet har verken projektor eller eget lydanlegg.",
+      "av": "Henrik",
+      "laas": "nusret",
+      "laastTekst": "Avklart i dag: de siste løse trådene er landet. Det som skulle bookes er booket og betalt, og én ting er strøket fordi den kolliderte med noe annet. Ingenting av det krever noe av deg."
+    },
+    {
+      "type": "info",
+      "tid": "6. september",
+      "tekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. Lørdagslunsjen er satt til Hamdi ved Eminønü — de anbefaler den varmt. De tipser også om Monkey Bar i Şişhane som alternativ takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted.",
+      "av": "Henrik",
+      "laas": "hamdi",
+      "laastTekst": "Hotellet har sett gjennom hele programmet og gir tommel opp. De tipser også om Monkey Bar i Şişhane som takbar. Én advarsel derfra: elleve menn uten reservasjon kan bli avvist i døra noen steder, så vi ringer før vi går samlet inn et sted."
+    },
+    {
+      "type": "gøy",
+      "tid": "5. september",
+      "tekst": "Transporten er ordnet begge veier — €200 for hele gjengen, altså rundt 220 kroner hver tur/retur. Det er under det vi budsjetterte med. Ingen skal stå på et fortau og forhandle med en taxi, verken fredag eller søndag.",
+      "av": "Henrik"
+    },
+    {
+      "type": "info",
+      "tid": "5. september",
+      "tekst": "Skybaren lørdag er avklart: Sky Karaköy tar ikke bordbestilling, vi bare går opp. Vi går rett fra båten ca. 19:10 i stedet for 19:30 — da får vi en drøy time i stedet for tre kvarter. Fullt? Da går vi til The Bank Roof Bar, 8–10 min unna. Er den også full, drar vi rett til middagen. Uansett hva som skjer: vi er i bilene 20:20.",
+      "av": "Henrik",
+      "laas": "sky"
+    },
+    {
+      "type": "info",
+      "tid": "31. august",
+      "tekst": "Lørdag etter middagen: tre biler til Asmalımescit ca. midnatt, så tar vi det derfra. Ingen dørkontroll, og hjem er 8 minutters gange — ingen trenger å ordne taxi.",
+      "av": "Henrik",
+      "laas": "asmali"
+    },
+    {
+      "type": "gøy",
+      "tid": "31. august",
+      "tekst": "Middagen lørdag er booket: eget rom, fast meny og fri drikke hele kvelden. Ingen regning å splitte på elleve. Spar litt plass.",
+      "av": "Henrik",
+      "laas": "nusret",
+      "laastTekst": "Én av kveldene er ordnet slik at ingen regning skal splittes på elleve — fast meny, fri drikke og eget rom. Spar litt plass."
+    },
+    {
+      "type": "viktig",
+      "tid": "31. august",
+      "tekst": "Lørdag: vi forlater skybaren 20:20 for å rekke bordet 21:00. Ikke bestill en runde til 20:15.",
+      "av": "Bruland",
+      "laas": "nusret"
+    },
+    {
+      "type": "info",
+      "tid": "31. august",
+      "tekst": "Mobildata er ordnet — du får en QR-kode av oss på flyplassen. Du trenger ikke gjøre noe på forhånd.",
+      "av": "Henrik"
+    },
+    {
+      "type": "viktig",
+      "tid": "18. august",
+      "tekst": "Appen er live. Legg den på hjemskjermen: Del-knappen i Safari → «Legg til på Hjem-skjerm». Da slipper du å lete etter lenken.",
+      "av": "Henrik"
+    }
+  ]
 }
