@@ -1,7 +1,7 @@
 {
   "tavle": "",
-  "versjon": 45,
-  "sistOppdatert": "10. september 21:55",
+  "versjon": 46,
+  "sistOppdatert": "10. september 22:20",
   "oppdatertAv": "Henrik",
   "gjett": "",
   "oppslag": [],
@@ -688,7 +688,7 @@
       "tittel": "Tyrkisk historie",
       "ikon": "🏛️",
       "ingress": "Fra osmanerne til republikken. Tolv spørsmål.",
-      "kode": "Anna69",
+      "kode": "Lise69",
       "sporsmal": [
         {
           "sporsmal": "Hva er Tyrkias hovedstad?",
@@ -855,7 +855,7 @@
       "tittel": "Istanbuls historie",
       "ikon": "🕌",
       "ingress": "Byen vi står i — ikke bare gamlebyen. Tolv spørsmål fra begge sider av sundet: Karaköy, Kadıköy, Bosporos og Sultanahmet.",
-      "kode": "Anna69",
+      "kode": "Friberg69",
       "sporsmal": [
         {
           "sporsmal": "Hvilken av disse må du time besøket til, fordi den stenger for besøkende rundt bønnetidene?",
@@ -1022,7 +1022,7 @@
       "tittel": "Tyrkisk fotball",
       "ikon": "⚽",
       "ingress": "Süper Lig, derbyer og VM 2002. Denne er ikke gratis.",
-      "kode": "Anna69",
+      "kode": "Kosberg69",
       "sporsmal": [
         {
           "sporsmal": "Hvem scoret VMs raskeste mål noensinne, etter 11 sekunder i 2002?",
@@ -1189,7 +1189,7 @@
       "tittel": "Tyrkisk økonomi",
       "ikon": "📈",
       "ingress": "Lira, hasselnøtter og seks nuller som forsvant.",
-      "kode": "Anna69",
+      "kode": "Nicole69",
       "sporsmal": [
         {
           "sporsmal": "Hva heter Tyrkias valuta?",
@@ -1356,7 +1356,7 @@
       "tittel": "Tyrkisk idrett",
       "ikon": "🤼",
       "ingress": "Bryting, vektløfting og basketball — alt utenom fotball.",
-      "kode": "Anna69",
+      "kode": "Lena69",
       "sporsmal": [
         {
           "sporsmal": "Hvilken idrett kalles Tyrkias nasjonalsport?",
