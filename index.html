@@ -1823,11 +1823,40 @@ async function delTekst(tekst) {
   } catch (e) { return 'nei'; }
 }
 
+/* ---------- GeoGuessr-poeng ----------
+   Nålen på kartet er en konkurranse på linje med quizene, og teller derfor
+   inn i samme tavle. Nærmest får like mange poeng som det er deltakere —
+   ni — og så nedover til én. Lik avstand gir delt plass og like mange
+   poeng, akkurat som i den vanlige rangeringen.
+
+   Toppoenget er alltid ni, også før alle har levert. Da vet den som
+   ligger først at plassen er verdt ni poeng, og tallet endrer seg ikke
+   bakover når resten kommer inn — det er bare rekkefølgen som kan flytte
+   seg. Maks total blir 60 fra quizene + 9 herfra = 69. */
+function gjettPoengTabell() {
+  const alle = alleGjett();
+  const navn = Object.keys(alle);
+  if (!navn.length) return {};
+  const topp = (DATA.deltakere || []).length;
+  const rad = navn.map(n => ({ navn: n, km: alle[n] }))
+                  .sort((a, b) => a.km - b.km || a.navn.localeCompare(b.navn, 'no'));
+  const ut = {};
+  let forrige = null, plass = 0;
+  rad.forEach((r, i) => {
+    if (forrige === null || r.km !== forrige) plass = i + 1;
+    forrige = r.km;
+    ut[r.navn] = Math.max(0, topp + 1 - plass);
+  });
+  return ut;
+}
+const gjettPoeng = navn => gjettPoengTabell()[navn] || 0;
+const gjettMaks = () => Object.keys(alleGjett()).length ? (DATA.deltakere || []).length : 0;
+
 /* ---------- Poengtavle ----------
    Poengene et lag får, godskrives hvert medlem. Fordi lagene er ulike i
    hver runde, blir totalen personlig selv om svarene er felles. */
 function total(navn) {
-  let sum = 0;
+  let sum = gjettPoeng(navn);
   (DATA.quizer || []).forEach(qz => {
     (qz.lag || []).forEach((l, j) => {
       if (l.medlemmer.includes(navn)) {
@@ -1845,6 +1874,7 @@ function antallRunder(navn) {
       if (l.medlemmer.includes(navn) && hentResultat(qz.id, j) !== null) n++;
     });
   });
+  if (gjettPoengTabell()[navn] !== undefined) n++;
   return n;
 }
 
@@ -1920,8 +1950,10 @@ function tegnTavle() {
       </div>`;
   }
 
-  const maks = (DATA.quizer || []).reduce((a, q) => a + q.sporsmal.length, 0);
-  h += `<div class="lbfot">Maks ${maks} poeng totalt. ${DATA.tavle
+  const maksQuiz = (DATA.quizer || []).reduce((a, q) => a + q.sporsmal.length, 0);
+  const maks = maksQuiz + gjettMaks();
+  h += `<div class="lbfot">Maks ${maks} poeng totalt${gjettMaks()
+          ? ` — ${maksQuiz} fra quizene og ${gjettMaks()} for gjettet på kartet` : ''}. ${DATA.tavle
           ? 'Stillingen kommer av seg selv når arrangørene har lagt inn runden.'
           : 'Tavlen viser det som er lagt inn på denne telefonen.'}<br>
         <button class="lbnullstill" id="lbdel">Del stillingen</button> ·
@@ -1963,14 +1995,16 @@ function gjettTavleHtml() {
   let forrige = null, plass = 0;
   rad.forEach((r, i) => { if (forrige === null || r.km !== forrige) plass = i + 1; r.plass = plass; forrige = r.km; });
   const medalje = p => p === 1 ? '🥇' : p === 2 ? '🥈' : p === 3 ? '🥉' : p;
+  const poeng = gjettPoengTabell();
   return `<div class="kort" style="margin-top:12px">
       <h2>📍 Hvem gjettet nærmest</h2>
       <div style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:8px">
-        Avstand i luftlinje fra nålen til Istanbul.</div>` +
+        Avstand i luftlinje fra nålen til Istanbul. Nærmest får ${(DATA.deltakere || []).length}
+        poeng, nestemann én mindre — og poengene teller på stillingen.</div>` +
     rad.map(r => `<div class="lbrad">
         <div class="plass">${medalje(r.plass)}</div>
         <div class="navn">${esc(r.navn)}</div>
-        <div class="po">${r.km}<small> km</small></div>
+        <div class="po">${r.km}<small> km</small> · ${poeng[r.navn]}<small> p</small></div>
       </div>`).join('') +
     `<div style="font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center">
       ${rad.length} av ${(DATA.deltakere || []).length} har levert.${erArrangor()
