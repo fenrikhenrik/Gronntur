@@ -1615,6 +1615,47 @@ try { gjetninger = JSON.parse(localStorage.getItem('blatur-gjett') || '{}'); } c
 function lagreGjetninger() {
   try { localStorage.setItem('blatur-gjett', JSON.stringify(gjetninger)); } catch (e) {}
 }
+
+/* ---------- Gjettene via data.json ----------
+   Samme prinsipp som stillingen: telefonene kan ikke snakke sammen, men
+   alle henter data.json hvert 30. sekund. G-kodene legges derfor i feltet
+   «gjett» i data.json — som ren tekst, adskilt med mellomrom — og alle ni
+   ser rangeringen uten at noen gjør noe.
+
+   Kodene arrangøren har lagt inn lokalt vinner ved konflikt: de er de
+   nyeste, og de er tastet inn av ham selv. */
+function gjettFraData() {
+  const raa = DATA && DATA.gjett;
+  if (!raa || typeof raa !== 'string') return {};
+  const ut = {};
+  lesAlleKoder(raa).forEach(r => { if (r.type === 'gjett') ut[r.navn] = r.km; });
+  return ut;
+}
+const alleGjett = () => Object.assign({}, gjettFraData(), gjetninger);
+
+/* Alle kjente gjett som én streng med G-koder, klar til å limes inn i
+   «gjett» i data.json. Koden regnes ut på nytt fra navn og avstand, så
+   den er den samme uansett hvilken telefon den ble tastet inn på. */
+function gjettKodeStreng() {
+  const folk = DATA.deltakere || [];
+  const alle = alleGjett();
+  return folk.map((n, i) => alle[n] === undefined ? null : lagGjettkode(i, alle[n]))
+             .filter(Boolean).join(' ');
+}
+
+/* Knappen ligger inne i gjettetavla, som settes inn som ren HTML to
+   steder. Derfor bindes den for seg etter hver tegning. */
+function bindGjettTavle() {
+  const b = document.getElementById('gjgit');
+  if (!b) return;
+  b.onclick = async () => {
+    const kode = gjettKodeStreng();
+    if (!kode) { alert('Ingen gjett lagt inn ennå.'); return; }
+    const r = await kopierTekst(kode);
+    if (r === 'kopiert') visStatus('📋 Kopiert — lim inn i «gjett» i data.json');
+    else alert('Lim denne inn i feltet «gjett» i data.json:\n\n' + kode);
+  };
+}
 let lbApen = true;
 
 const resNokkel = (quizId, lagIdx) => quizId + '|' + lagIdx;
@@ -1914,9 +1955,10 @@ function tegnTavle() {
 
 /* ---------- Gjettekonkurransen: hvem var nærmest ---------- */
 function gjettTavleHtml() {
-  const navn = Object.keys(gjetninger);
+  const alle = alleGjett();
+  const navn = Object.keys(alle);
   if (!navn.length) return '';
-  const rad = navn.map(n => ({ navn: n, km: gjetninger[n] }))
+  const rad = navn.map(n => ({ navn: n, km: alle[n] }))
                   .sort((a, b) => a.km - b.km || a.navn.localeCompare(b.navn, 'no'));
   let forrige = null, plass = 0;
   rad.forEach((r, i) => { if (forrige === null || r.km !== forrige) plass = i + 1; r.plass = plass; forrige = r.km; });
@@ -1931,7 +1973,8 @@ function gjettTavleHtml() {
         <div class="po">${r.km}<small> km</small></div>
       </div>`).join('') +
     `<div style="font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center">
-      ${rad.length} av ${(DATA.deltakere || []).length} har levert.</div></div>`;
+      ${rad.length} av ${(DATA.deltakere || []).length} har levert.${erArrangor()
+        ? `<br><button class="lbnullstill" id="gjgit">📋 Kode for data.json</button>` : ''}</div></div>`;
 }
 
 /* ---------- Quiz ---------- */
@@ -1960,7 +2003,7 @@ function tegnQuiz() {
           <b>Du kan lime inn flere om gangen.</b> Marker hele meldingstråden og lim den inn —
           appen plukker ut kodene selv og hopper over alt annet.</div>
         <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px">
-          ${Object.keys(gjetninger).length} av ${(DATA.deltakere || []).length} gjett levert</div>
+          ${Object.keys(alleGjett()).length} av ${(DATA.deltakere || []).length} gjett levert</div>
         <textarea class="kodefelt kodefelt-stor" id="resfelt" rows="4" autocomplete="off"
                autocorrect="off" autocapitalize="characters" spellcheck="false"
                placeholder="Lim inn her — én kode eller hele meldingstråden"></textarea>
@@ -2064,6 +2107,7 @@ function tegnQuiz() {
       }
     };
     $('#restilbake').onclick = () => { qVisning = 'liste'; tegnQuiz(); };
+    bindGjettTavle();
     return;
   }
 
@@ -2078,6 +2122,7 @@ function tegnQuiz() {
         <div style="font-size:14px;line-height:1.55;color:#39434f">${esc(info.tekst)}</div></div>` : '') +
       '<div id="qliste"></div>';
     $('#qinnlegg').onclick = () => { qVisning = 'innlegg'; tegnQuiz(); };
+    bindGjettTavle();
     const liste = $('#qliste');
     quizer.forEach(qz => {
       const apen = erApnet(quizNokkel(qz.id));

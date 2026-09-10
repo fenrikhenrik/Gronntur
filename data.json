@@ -1,7 +1,10 @@
 {
-  "versjon": 43,
-  "sistOppdatert": "9. september 22:45",
+  "tavle": "",
+  "versjon": 45,
+  "sistOppdatert": "10. september 21:55",
   "oppdatertAv": "Henrik",
+  "gjett": "",
+  "oppslag": [],
   "tur": {
     "tittel": "Blåtur Istanbul",
     "datoer": "11.–13. september 2026",
@@ -1520,7 +1523,6 @@
     "tittel": "Slik fungerer quizen",
     "tekst": "Fem quizer, tolv spørsmål i hver, og spørsmålene blir vanskeligere utover. Ni mann spiller i lag på tre — lagene er trukket tilfeldig og er ulike fra quiz til quiz. Laget spiller på én telefon og blir enige om ett svar før dere trykker. Når runden er ferdig får dere en kort kode. Send den til Henrik, så legger han den inn — og da oppdaterer stillingen seg av seg selv på alle telefonene. Poengene deles av alle tre på laget."
   },
-  "tavle": "",
   "deltakere": [
     "Sødal",
     "Jonsson",
